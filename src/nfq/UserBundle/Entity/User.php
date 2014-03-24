@@ -1,14 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: MDSKLLZ
- * Date: 14.3.24
- * Time: 04.05
- */
+
 
 namespace nfq\UserBundle\Entity;
 
+use FOS\UserBundle\Model\User as BaseUser;
 
-class User {
-
-} 
+/**
+ * User
+ */
+class User extends BaseUser
+{
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
+}
