@@ -1,4 +1,2 @@
-vaiva_vaiva:
-    resource: "@VaivaVaivaBundle/Resources/config/routing.yml"
-    prefix:   /
+
 
