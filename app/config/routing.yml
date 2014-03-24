@@ -1,2 +1,6 @@
+nfq_nom_nom:
+    resource: "@nfqNomNomBundle/Resources/config/routing.yml"
+    prefix:   /
+
 
 
