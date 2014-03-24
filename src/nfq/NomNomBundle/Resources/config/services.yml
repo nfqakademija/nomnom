@@ -1,7 +1,7 @@
 parameters:
-#    nfq_nom_nom.example.class: nfq\NomNomBundle\Example
+#    Nfq_nom_nom.example.class: Nfq\NomNomBundle\Example
 
 services:
-#    nfq_nom_nom.example:
-#        class: %nfq_nom_nom.example.class%
+#    Nfq_nom_nom.example:
+#        class: %Nfq_nom_nom.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]

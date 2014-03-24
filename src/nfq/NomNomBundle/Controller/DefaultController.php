@@ -1,6 +1,6 @@
 <?php
 
-namespace nfq\NomNomBundle\Controller;
+namespace Nfq\NomNomBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -8,6 +8,6 @@ class DefaultController extends Controller
 {
     public function indexAction($name)
     {
-        return $this->render('nfqNomNomBundle:Default:index.html.twig', array('name' => $name));
+        return $this->render('NfqNomNomBundle:Default:index.html.twig', array('name' => $name));
     }
 }

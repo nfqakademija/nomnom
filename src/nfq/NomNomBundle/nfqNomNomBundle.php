@@ -1,9 +1,9 @@
 <?php
 
-namespace nfq\NomNomBundle;
+namespace Nfq\NomNomBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class nfqNomNomBundle extends Bundle
+class NfqNomNomBundle extends Bundle
 {
 }
