@@ -39,9 +39,13 @@ class LoadMyRights extends AbstractFixture implements OrderedFixtureInterface
         $this->addReference('sendIvitations', $sendInvitationsRight);
     }
 
-
+    /**
+     * Get the order of this fixture
+     *
+     * @return integer
+     */
     public function getOrder()
     {
-        return 1; // the order in which fixtures will be loaded
+        return 2; // the order in which fixtures will be loaded
     }
 }

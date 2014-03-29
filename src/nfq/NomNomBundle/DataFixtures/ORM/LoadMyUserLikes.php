@@ -37,8 +37,13 @@ class LoadMyUserLikes extends AbstractFixture implements OrderedFixtureInterface
         $this->addReference("fishDislikes",$fishDislike);
     }
 
+    /**
+     * Get the order of this fixture
+     *
+     * @return integer
+     */
     public function getOrder()
     {
-        return 2; // the order in which fixtures will be loaded
+        return 6; // the order in which fixtures will be loaded
     }
 }
