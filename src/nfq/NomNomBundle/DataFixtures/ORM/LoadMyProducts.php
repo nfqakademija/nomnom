@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: kodvin
  * Date: 3/29/14
- * Time: 10:02 PM
+ * Time: 11:40 PM
  */
 
 namespace Nfq\NomNomBundle\DataFixtures\ORM;
@@ -12,10 +12,9 @@ use Doctrine\Common\DataFixtures\Doctrine;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Nfq\NomnomBundle\Entity\myRoles;
+use Nfq\NomnomBundle\Entity\myProducts;
 
-class LoadMyRoles extends AbstractFixture implements OrderedFixtureInterface
-{
+class LoadMyProducts extends AbstractFixture implements OrderedFixtureInterface{
 
     /**
      * Load data fixtures with the passed EntityManager
@@ -24,18 +23,18 @@ class LoadMyRoles extends AbstractFixture implements OrderedFixtureInterface
      */
     function load(ObjectManager $manager)
     {
-        $registeredUser = new myRoles();
-        $registeredUser->setRoleName("registeredUser");
+        $banana = new myProducts();
+        $banana->setProductName('banana');
 
-        $guest = new myRoles();
-        $guest->setRoleName("guest");
+        $fish = new myProducts();
+        $fish->setProductName('fish');
 
-        $manager->persist($guest);
-        $manager->persist($registeredUser);
+        $manager->persist($banana);
+        $manager->persist($fish);
         $manager->flush();
 
-        $this->addReference("registeredUser",$registeredUser);
-        $this->addReference("guest",$guest);
+        $this->addReference('fish',$fish);
+        $this->addReference('banana',$banana);
     }
 
     /**
@@ -45,6 +44,6 @@ class LoadMyRoles extends AbstractFixture implements OrderedFixtureInterface
      */
     function getOrder()
     {
-        return 1;
+        return 7;
     }
 }

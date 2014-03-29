@@ -41,6 +41,7 @@ class myUserProducts
 
     /**
      * @var integer
+     * quantity will be number coded
      *
      * @ORM\Column(name="quantityMeasure", type="smallint")
      */
