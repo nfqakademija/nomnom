@@ -22,12 +22,10 @@ class myUserEvents
     private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="userProductId", type="integer")
+     * @ORM\ManyToOne(targetEntity="myUserProducts", inversedBy="myuserevents")
+     * @ORM\JoinColumn(name="myuserproducts_id", referencedColumnName="id")
      */
-    private $userProductId;
-
+    private $myuserproducts;
     /**
      * @var integer
      *
@@ -63,7 +61,6 @@ class myUserEvents
      */
     private $recipeVoteId;
 
-
     /**
      * Get id
      *
@@ -72,29 +69,6 @@ class myUserEvents
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set userProductId
-     *
-     * @param integer $userProductId
-     * @return myUserEvents
-     */
-    public function setUserProductId($userProductId)
-    {
-        $this->userProductId = $userProductId;
-
-        return $this;
-    }
-
-    /**
-     * Get userProductId
-     *
-     * @return integer 
-     */
-    public function getUserProductId()
-    {
-        return $this->userProductId;
     }
 
     /**
@@ -210,5 +184,28 @@ class myUserEvents
     public function getRecipeVoteId()
     {
         return $this->recipeVoteId;
+    }
+
+    /**
+     * Set myuserproducts
+     *
+     * @param \Nfq\NomNomBundle\Entity\myUserProducts $myuserproducts
+     * @return myUserEvents
+     */
+    public function setMyuserproducts(\Nfq\NomNomBundle\Entity\myUserProducts $myuserproducts = null)
+    {
+        $this->myuserproducts = $myuserproducts;
+
+        return $this;
+    }
+
+    /**
+     * Get myuserproducts
+     *
+     * @return \Nfq\NomNomBundle\Entity\myUserProducts 
+     */
+    public function getMyuserproducts()
+    {
+        return $this->myuserproducts;
     }
 }

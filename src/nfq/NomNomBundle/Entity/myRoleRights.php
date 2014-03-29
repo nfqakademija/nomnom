@@ -22,19 +22,16 @@ class myRoleRights
     private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="roleId", type="integer")
+     * @ORM\ManyToOne(targetEntity="myRoles", inversedBy="myrolerights")
+     * @ORM\JoinColumn(name="myroles_id", referencedColumnName="id")
      */
-    private $roleId;
+    private $myroles;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="rightId", type="integer")
+     * @ORM\ManyToOne(targetEntity="myRights", inversedBy="myrolerights")
+     * @ORM\JoinColumn(name="myrights_id", referencedColumnName="id")
      */
-    private $rightId;
-
+    private $myrights;
 
     /**
      * Get id
@@ -47,48 +44,48 @@ class myRoleRights
     }
 
     /**
-     * Set roleId
+     * Set myroles
      *
-     * @param integer $roleId
+     * @param \Nfq\NomNomBundle\Entity\myRoles $myroles
      * @return myRoleRights
      */
-    public function setRoleId($roleId)
+    public function setMyroles(\Nfq\NomNomBundle\Entity\myRoles $myroles = null)
     {
-        $this->roleId = $roleId;
+        $this->myroles = $myroles;
 
         return $this;
     }
 
     /**
-     * Get roleId
+     * Get myroles
      *
-     * @return integer 
+     * @return \Nfq\NomNomBundle\Entity\myRoles 
      */
-    public function getRoleId()
+    public function getMyroles()
     {
-        return $this->roleId;
+        return $this->myroles;
     }
 
     /**
-     * Set rightId
+     * Set myrights
      *
-     * @param integer $rightId
+     * @param \Nfq\NomNomBundle\Entity\myRights $myrights
      * @return myRoleRights
      */
-    public function setRightId($rightId)
+    public function setMyrights(\Nfq\NomNomBundle\Entity\myRights $myrights = null)
     {
-        $this->rightId = $rightId;
+        $this->myrights = $myrights;
 
         return $this;
     }
 
     /**
-     * Get rightId
+     * Get myrights
      *
-     * @return integer 
+     * @return \Nfq\NomNomBundle\Entity\myRights 
      */
-    public function getRightId()
+    public function getMyrights()
     {
-        return $this->rightId;
+        return $this->myrights;
     }
 }

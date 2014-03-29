@@ -2,6 +2,7 @@
 
 namespace Nfq\NomNomBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,13 +23,21 @@ class myProducts
     private $id;
 
     /**
+     * @ORM\OneToMany(targetEntity="myUserProducts",mappedBy="myproducts")
+     */
+    private $myuserproducts;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="productName", type="string", length=50)
      */
     private $productName;
 
-
+    public function __construct()
+    {
+        $this->myuserproducts = new ArrayCollection();
+    }
     /**
      * Get id
      *
@@ -60,5 +69,38 @@ class myProducts
     public function getProductName()
     {
         return $this->productName;
+    }
+
+    /**
+     * Add myuserproducts
+     *
+     * @param \Nfq\NomNomBundle\Entity\myUserProducts $myuserproducts
+     * @return myProducts
+     */
+    public function addMyuserproduct(\Nfq\NomNomBundle\Entity\myUserProducts $myuserproducts)
+    {
+        $this->myuserproducts[] = $myuserproducts;
+
+        return $this;
+    }
+
+    /**
+     * Remove myuserproducts
+     *
+     * @param \Nfq\NomNomBundle\Entity\myUserProducts $myuserproducts
+     */
+    public function removeMyuserproduct(\Nfq\NomNomBundle\Entity\myUserProducts $myuserproducts)
+    {
+        $this->myuserproducts->removeElement($myuserproducts);
+    }
+
+    /**
+     * Get myuserproducts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMyuserproducts()
+    {
+        return $this->myuserproducts;
     }
 }

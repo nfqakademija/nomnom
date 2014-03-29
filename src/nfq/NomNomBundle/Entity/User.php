@@ -20,9 +20,46 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @ORM\OneToOne(targetEntity="myUserLikes", inversedBy="user")
+     */
+    private $myuserlikes;
+
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set myuserlikes
+     *
+     * @param \Nfq\NomNomBundle\Entity\myUserLikes $myuserlikes
+     * @return User
+     */
+    public function setMyuserlikes(\Nfq\NomNomBundle\Entity\myUserLikes $myuserlikes = null)
+    {
+        $this->myuserlikes = $myuserlikes;
+
+        return $this;
+    }
+
+    /**
+     * Get myuserlikes
+     *
+     * @return \Nfq\NomNomBundle\Entity\myUserLikes 
+     */
+    public function getMyuserlikes()
+    {
+        return $this->myuserlikes;
     }
 }

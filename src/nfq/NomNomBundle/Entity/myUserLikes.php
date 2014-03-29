@@ -37,6 +37,12 @@ class myUserLikes
 
 
     /**
+     * @ORM\ManyToOne(targetEntity="myUserProfile",inversedBy="myuserlikes")
+     * @ORM\JoinColumn(name="myuserprofile_id",referencedColumnName="id")
+     */
+    private $myuserprofile;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -90,5 +96,28 @@ class myUserLikes
     public function getLikeOrDislike()
     {
         return $this->likeOrDislike;
+    }
+
+    /**
+     * Set myuserprofile
+     *
+     * @param \Nfq\NomNomBundle\Entity\myUserProfile $myuserprofile
+     * @return myUserLikes
+     */
+    public function setMyuserprofile(\Nfq\NomNomBundle\Entity\myUserProfile $myuserprofile = null)
+    {
+        $this->myuserprofile = $myuserprofile;
+
+        return $this;
+    }
+
+    /**
+     * Get myuserprofile
+     *
+     * @return \Nfq\NomNomBundle\Entity\myUserProfile 
+     */
+    public function getMyuserprofile()
+    {
+        return $this->myuserprofile;
     }
 }

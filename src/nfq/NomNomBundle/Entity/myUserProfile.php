@@ -2,6 +2,7 @@
 
 namespace Nfq\NomNomBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,18 +23,9 @@ class myUserProfile
     private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="userId", type="integer")
+     * @ORM\OneToOne(targetEntity="User", mappedBy="myuserprofile")
      */
-    private $userId;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="userLikesId", type="integer")
-     */
-    private $userLikesId;
+    private $user;
 
     /**
      * @var string
@@ -42,6 +34,15 @@ class myUserProfile
      */
     private $avatar;
 
+    /**
+     * @ORM\OneToMany(targetEntity="myUserLikes", mappedBy="myuserprofile")
+     */
+    private $myuserlikes;
+
+    public function __construct()
+    {
+        $this->myuserlikes = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -51,52 +52,6 @@ class myUserProfile
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set userId
-     *
-     * @param integer $userId
-     * @return myUserProfile
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return integer 
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
-     * Set userLikesId
-     *
-     * @param integer $userLikesId
-     * @return myUserProfile
-     */
-    public function setUserLikesId($userLikesId)
-    {
-        $this->userLikesId = $userLikesId;
-
-        return $this;
-    }
-
-    /**
-     * Get userLikesId
-     *
-     * @return integer 
-     */
-    public function getUserLikesId()
-    {
-        return $this->userLikesId;
     }
 
     /**
@@ -120,5 +75,61 @@ class myUserProfile
     public function getAvatar()
     {
         return $this->avatar;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Nfq\NomNomBundle\Entity\User $user
+     * @return myUserProfile
+     */
+    public function setUser(\Nfq\NomNomBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Nfq\NomNomBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Add myuserlikes
+     *
+     * @param \Nfq\NomNomBundle\Entity\myUserLikes $myuserlikes
+     * @return myUserProfile
+     */
+    public function addMyuserlike(\Nfq\NomNomBundle\Entity\myUserLikes $myuserlikes)
+    {
+        $this->myuserlikes[] = $myuserlikes;
+
+        return $this;
+    }
+
+    /**
+     * Remove myuserlikes
+     *
+     * @param \Nfq\NomNomBundle\Entity\myUserLikes $myuserlikes
+     */
+    public function removeMyuserlike(\Nfq\NomNomBundle\Entity\myUserLikes $myuserlikes)
+    {
+        $this->myuserlikes->removeElement($myuserlikes);
+    }
+
+    /**
+     * Get myuserlikes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMyuserlikes()
+    {
+        return $this->myuserlikes;
     }
 }

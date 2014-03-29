@@ -49,7 +49,6 @@ class myEvents
      */
     private $evenPhase;
 
-
     /**
      * Get id
      *
