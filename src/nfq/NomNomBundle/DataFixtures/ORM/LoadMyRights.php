@@ -9,11 +9,12 @@
 namespace Nfq\NomNomBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\Doctrine;
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Nfq\NomnomBundle\Entity\myRights;
 
-class LoadMyRights implements FixtureInterface
+class LoadMyRights extends AbstractFixture implements OrderedFixtureInterface
 {
 
     /**
@@ -22,21 +23,23 @@ class LoadMyRights implements FixtureInterface
      * @param ObjectManager $manager
      */
     function load(ObjectManager $manager)
+
     {
-       $createEventRight = new myRights();
-       $createEventRight->setRightName("createEvent");
+        $createEventRight = new myRights();
+        $createEventRight->setRightName("createEvent");
 
-       $sendInvitationsRight = new myRights();
-       $sendInvitationsRight->setRightName("sendIvitations");
+        $sendInvitationsRight = new myRights();
+        $sendInvitationsRight->setRightName("sendIvitations");
 
-       $manager->persist($sendInvitationsRight);
-       $manager->persist($createEventRight);
-       $manager->flush();
+        $manager->persist($sendInvitationsRight);
+        $manager->persist($createEventRight);
+        $manager->flush();
+
+        $this->addReference('createEvent', $createEventRight);
+        $this->addReference('sendIvitations', $sendInvitationsRight);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+
     public function getOrder()
     {
         return 1; // the order in which fixtures will be loaded

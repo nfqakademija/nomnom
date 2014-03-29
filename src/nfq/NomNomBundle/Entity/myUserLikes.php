@@ -29,6 +29,7 @@ class myUserLikes
     private $food;
 
     /**
+     * Zero for dislikes and one for likes
      * @var boolean
      *
      * @ORM\Column(name="LikeOrDislike", type="boolean")
