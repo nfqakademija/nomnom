@@ -42,7 +42,6 @@ class myEventRecipes
      */
     private $totalUpvote;
 
-
     /**
      * Get id
      *
