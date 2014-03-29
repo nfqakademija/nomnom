@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Pimpackiukas
+ * User: kodvin
  * Date: 3/29/14
  * Time: 9:06 PM
  */
@@ -29,14 +29,14 @@ class LoadMyRights extends AbstractFixture implements OrderedFixtureInterface
         $createEventRight->setRightName("createEvent");
 
         $sendInvitationsRight = new myRights();
-        $sendInvitationsRight->setRightName("sendIvitations");
+        $sendInvitationsRight->setRightName("sendInvitations");
 
         $manager->persist($sendInvitationsRight);
         $manager->persist($createEventRight);
         $manager->flush();
 
         $this->addReference('createEvent', $createEventRight);
-        $this->addReference('sendIvitations', $sendInvitationsRight);
+        $this->addReference('sendInvitations', $sendInvitationsRight);
     }
 
     /**

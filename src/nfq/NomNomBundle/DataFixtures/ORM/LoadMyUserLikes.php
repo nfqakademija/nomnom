@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Pimpackiukas
+ * User: kodvin
  * Date: 3/29/14
  * Time: 9:27 PM
  */
@@ -24,10 +24,12 @@ class LoadMyUserLikes extends AbstractFixture implements OrderedFixtureInterface
     function load(ObjectManager $manager)
     {
         $bananaLike = new myUserLikes();
-        $fishDislike = new myUserLikes();
-
         $bananaLike->setFood("banana")->setLikeOrDislike(1);
+        $bananaLike->setMyuserprofile($this->getReference('userProfile'));
+
+        $fishDislike = new myUserLikes();
         $fishDislike->setFood("fish")->setLikeOrDislike(0);
+        $fishDislike->setMyuserprofile($this->getReference('userProfile2'));
 
         $manager->persist($bananaLike);
         $manager->persist($fishDislike);

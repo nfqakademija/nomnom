@@ -39,6 +39,11 @@ class myUserProfile
      */
     private $myuserlikes;
 
+    /**
+     * @ORM\OneToOne(targetEntity="User", mappedBy="myuserprofile")
+     */
+    private $users;
+
     public function __construct()
     {
         $this->myuserlikes = new ArrayCollection();
@@ -131,5 +136,28 @@ class myUserProfile
     public function getMyuserlikes()
     {
         return $this->myuserlikes;
+    }
+
+    /**
+     * Set users
+     *
+     * @param \Nfq\NomNomBundle\Entity\User $users
+     * @return myUserProfile
+     */
+    public function setUsers(\Nfq\NomNomBundle\Entity\User $users = null)
+    {
+        $this->users = $users;
+
+        return $this;
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Nfq\NomNomBundle\Entity\User 
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

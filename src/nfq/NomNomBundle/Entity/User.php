@@ -21,9 +21,9 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="myUserLikes", inversedBy="user")
+     * @ORM\OneToOne(targetEntity="myUserProfile", inversedBy="users")
      */
-    private $myuserlikes;
+    private $myuserprofile;
 
     public function __construct()
     {
@@ -40,26 +40,27 @@ class User extends BaseUser
         return $this->id;
     }
 
+
     /**
-     * Set myuserlikes
+     * Set myuserprofile
      *
-     * @param \Nfq\NomNomBundle\Entity\myUserLikes $myuserlikes
+     * @param \Nfq\NomNomBundle\Entity\myUserProfile $myuserprofile
      * @return User
      */
-    public function setMyuserlikes(\Nfq\NomNomBundle\Entity\myUserLikes $myuserlikes = null)
+    public function setMyuserprofile(\Nfq\NomNomBundle\Entity\myUserProfile $myuserprofile = null)
     {
-        $this->myuserlikes = $myuserlikes;
+        $this->myuserprofile = $myuserprofile;
 
         return $this;
     }
 
     /**
-     * Get myuserlikes
+     * Get myuserprofile
      *
-     * @return \Nfq\NomNomBundle\Entity\myUserLikes 
+     * @return \Nfq\NomNomBundle\Entity\myUserProfile 
      */
-    public function getMyuserlikes()
+    public function getMyuserprofile()
     {
-        return $this->myuserlikes;
+        return $this->myuserprofile;
     }
 }
