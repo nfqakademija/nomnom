@@ -18,8 +18,19 @@ class myEvents
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\OneToMany(targetEntity="myEventRecipes", mappedBy="myEvents")
      */
     private $id;
+
+    /**
+     * @ORM\OneToMany(targetEntity="myUserEvents", mappedBy="myEvents")
+     */
+    private $myrolerights;
+
+    /**
+     * @ORM\OneToMany(targetEntity="myEventRecipes", mappedBy="myEvents")
+     */
+    private $myEventRecipes;
 
     /**
      * @var \DateTime
