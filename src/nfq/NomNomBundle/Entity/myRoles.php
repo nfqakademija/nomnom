@@ -31,9 +31,14 @@ class myRoles
     private $roleName;
 
     /**
-     * @ORM\OneToMany(targetEntity="myRoleRights", mappedBy="myroles")
+     * @ORM\OneToMany(targetEntity="myRoleRights", mappedBy="myRoles")
      */
     private $myrolerights;
+
+    /**
+     * @ORM\OneToMany(targetEntity="myUserEvents", mappedBy="myRoles")
+     */
+    protected $myRoles;
 
     public function __construct()
     {

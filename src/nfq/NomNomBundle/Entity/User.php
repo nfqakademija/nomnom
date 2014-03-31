@@ -17,8 +17,14 @@ class User extends BaseUser
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\OneToMany(targetEntity="myUserEvents", mappedBy="myroles")
      */
     protected $id;
+
+    /**
+     * @ORM\OneToMany(targetEntity="myUserEvents", mappedBy="myUser")
+     */
+    protected $myUser;
 
     /**
      * @ORM\OneToOne(targetEntity="myUserProfile", inversedBy="users")

@@ -24,7 +24,8 @@ class myEventRecipes
     /**
      * @var integer
      *
-     * @ORM\Column(name="eventId", type="integer")
+     * @ORM\ManyToOne(targetEntity="myEvents", inversedBy="myEventRecipes")
+     * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
      */
     private $eventId;
 

@@ -22,28 +22,33 @@ class myUserEvents
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="myUserProducts", inversedBy="myuserevents")
+     * @ORM\ManyToOne(targetEntity="myUserProducts", inversedBy="myUserEvents")
      * @ORM\JoinColumn(name="myuserproducts_id", referencedColumnName="id")
      */
     private $myuserproducts;
+
+
     /**
      * @var integer
      *
-     * @ORM\Column(name="roleId", type="integer")
+     * @ORM\ManyToOne(targetEntity="myRoles", inversedBy="myUserEvents")
+     * @ORM\JoinColumn(name="role_id", referencedColumnName="id")
      */
     private $roleId;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="userId", type="integer")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="myUserEvents")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $userId;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="eventId", type="integer")
+     * @ORM\ManyToOne(targetEntity="myEvents", inversedBy="myUserEvents")
+     * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
      */
     private $eventId;
 
@@ -57,7 +62,8 @@ class myUserEvents
     /**
      * @var integer
      *
-     * @ORM\Column(name="recipeVoteId", type="integer")
+     * @ORM\ManyToOne(targetEntity="myRecipeVotes", inversedBy="myUserEvents")
+     * @ORM\JoinColumn(name="recipeVote_id", referencedColumnName="id")
      */
     private $recipeVoteId;
 
