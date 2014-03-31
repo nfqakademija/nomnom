@@ -5,3 +5,11 @@ Nfq_nom_nom_homepage:
 Nfq_nom_nom_avatar_display:
     pattern:  /a/{avatarId}
     defaults: { _controller: NfqNomNomBundle:Default:getAvatar }
+
+Nfq_nom_nom_event_manager:
+    pattern:  /eventmanager/
+    defaults: { _controller: NfqNomNomBundle:Default:eventManager }
+
+Nfq_nom_nom_events:
+    pattern: /event/{eventId}
+    defaults: { _controller: NfqNomNomBundle:Default:event}

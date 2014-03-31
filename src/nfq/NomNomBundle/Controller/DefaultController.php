@@ -28,4 +28,14 @@ class DefaultController extends Controller
         );
         return $response;
     }
+
+    public function eventAction($eventId)
+    {
+
+    }
+
+    public function eventManagerAction()
+    {
+
+    }
 }

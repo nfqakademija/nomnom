@@ -44,18 +44,18 @@ class LoadUser extends AbstractFixture implements  ContainerAwareInterface, Orde
 
         // Create a new user
         $user = $userManager->createUser();
-        $user->setUsername('user');
-        $user->setEmail('user@domain.com');
-        $user->setPlainPassword('user_password');
+        $user->setUsername('admin');
+        $user->setEmail('admin@domain.com');
+        $user->setPlainPassword('admin_password');
         $user->setEnabled(true);
         $user->setMyuserprofile($this->getReference('userProfile'));
         $userManager->updateUser($user);
 
         // Create a new user
         $user2 = $userManager->createUser();
-        $user2->setUsername('user2');
-        $user2->setEmail('user2@domain.com');
-        $user2->setPlainPassword('user_password2');
+        $user2->setUsername('user');
+        $user2->setEmail('user@domain.com');
+        $user2->setPlainPassword('user_password');
         $user2->setEnabled(true);
         $user2->setMyuserprofile($this->getReference('userProfile2'));
 

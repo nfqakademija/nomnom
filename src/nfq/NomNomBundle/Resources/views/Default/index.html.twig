@@ -1,6 +1,18 @@
 {%  extends "base.html.twig" %}
 {% block body %}
+    {% block header %}
+        <a href=" {{ path('Nfq_nom_nom_homepage') }}">Home</a> |
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <a href=" {{ path('Nfq_nom_nom_event_manager') }}">Events</a> |
+            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+            <a href="{{ path('fos_user_security_logout') }}">
+                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+            </a>
+        {% else %}
+            <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+            <a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+        {% endif %}
+    {% endblock %}
     {% block content %}
-        <div>Hello lalala!</div>
     {% endblock %}
 {% endblock %}
