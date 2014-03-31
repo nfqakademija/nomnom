@@ -9,7 +9,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('NfqNomNomBundle:Default:index.html.twig');
+        return $this->render('NfqNomNomBundle:Default:index.html.twig',array('error'=> ''));
     }
 
     public function getAvatarAction($avatarId)
@@ -31,11 +31,23 @@ class DefaultController extends Controller
 
     public function eventAction($eventId)
     {
-
+        $user = $this->getUser();
+        if($user != ''){
+            return $this->render('NfqNomNomBundle:Default:event.html.twig');
+        }
+        else{
+            return $this->render('NfqNomNomBundle:Default:index.html.twig',array('error'=> 'log  in first'));
+        }
     }
 
     public function eventManagerAction()
     {
-
+        $user = $this->getUser();
+        if($user != ''){
+            return $this->render('NfqNomNomBundle:Default:eventmanager.html.twig',array('error'=> ''));
+        }
+        else{
+            return $this->render('NfqNomNomBundle:Default:index.html.twig',array('error'=> 'log in  first'));
+        }
     }
 }

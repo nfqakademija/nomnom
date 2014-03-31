@@ -12,4 +12,4 @@ Nfq_nom_nom_event_manager:
 
 Nfq_nom_nom_events:
     pattern: /event/{eventId}
-    defaults: { _controller: NfqNomNomBundle:Default:event}
+    defaults: { _controller: NfqNomNomBundle:Default:event , eventId: 0}
