@@ -24,14 +24,6 @@ class myEventRecipes
     /**
      * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="myEvents", inversedBy="myEventRecipes")
-     * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
-     */
-    private $eventId;
-
-    /**
-     * @var integer
-     *
      * @ORM\Column(name="recipeId", type="integer")
      */
     private $recipeId;
@@ -44,6 +36,15 @@ class myEventRecipes
     private $totalUpvote;
 
     /**
+     * @var integer
+     *
+     * @ORM\ManyToOne(targetEntity="myEvents", inversedBy="myEventRecipes")
+     * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
+     */
+    private $myEvent;
+
+
+    /**
      * Get id
      *
      * @return integer 
@@ -51,29 +52,6 @@ class myEventRecipes
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set eventId
-     *
-     * @param integer $eventId
-     * @return myEventRecipes
-     */
-    public function setEventId($eventId)
-    {
-        $this->eventId = $eventId;
-
-        return $this;
-    }
-
-    /**
-     * Get eventId
-     *
-     * @return integer 
-     */
-    public function getEventId()
-    {
-        return $this->eventId;
     }
 
     /**
@@ -120,5 +98,28 @@ class myEventRecipes
     public function getTotalUpvote()
     {
         return $this->totalUpvote;
+    }
+
+    /**
+     * Set myEvent
+     *
+     * @param \Nfq\NomNomBundle\Entity\myEvents $myEvent
+     * @return myEventRecipes
+     */
+    public function setMyEvent(\Nfq\NomNomBundle\Entity\myEvents $myEvent = null)
+    {
+        $this->myEvent = $myEvent;
+
+        return $this;
+    }
+
+    /**
+     * Get myEvent
+     *
+     * @return \Nfq\NomNomBundle\Entity\myEvents 
+     */
+    public function getMyEvent()
+    {
+        return $this->myEvent;
     }
 }

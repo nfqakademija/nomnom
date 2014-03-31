@@ -34,15 +34,7 @@ class myUserEvents
      * @ORM\ManyToOne(targetEntity="myRoles", inversedBy="myUserEvents")
      * @ORM\JoinColumn(name="role_id", referencedColumnName="id")
      */
-    private $roleId;
-
-    /**
-     * @var integer
-     *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="myUserEvents")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    private $userId;
+    private $myRole;
 
     /**
      * @var integer
@@ -50,7 +42,7 @@ class myUserEvents
      * @ORM\ManyToOne(targetEntity="myEvents", inversedBy="myUserEvents")
      * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
      */
-    private $eventId;
+    private $myEvent;
 
     /**
      * @var integer
@@ -65,7 +57,16 @@ class myUserEvents
      * @ORM\ManyToOne(targetEntity="myRecipeVotes", inversedBy="myUserEvents")
      * @ORM\JoinColumn(name="recipeVote_id", referencedColumnName="id")
      */
-    private $recipeVoteId;
+    private $myRecipeVote;
+
+    /**
+     * @var integer
+     *
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="myUserEvents")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $myUser;
+
 
     /**
      * Get id
@@ -75,75 +76,6 @@ class myUserEvents
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set roleId
-     *
-     * @param integer $roleId
-     * @return myUserEvents
-     */
-    public function setRoleId($roleId)
-    {
-        $this->roleId = $roleId;
-
-        return $this;
-    }
-
-    /**
-     * Get roleId
-     *
-     * @return integer 
-     */
-    public function getRoleId()
-    {
-        return $this->roleId;
-    }
-
-    /**
-     * Set userId
-     *
-     * @param integer $userId
-     * @return myUserEvents
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return integer 
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
-     * Set eventId
-     *
-     * @param integer $eventId
-     * @return myUserEvents
-     */
-    public function setEventId($eventId)
-    {
-        $this->eventId = $eventId;
-
-        return $this;
-    }
-
-    /**
-     * Get eventId
-     *
-     * @return integer 
-     */
-    public function getEventId()
-    {
-        return $this->eventId;
     }
 
     /**
@@ -170,29 +102,6 @@ class myUserEvents
     }
 
     /**
-     * Set recipeVoteId
-     *
-     * @param integer $recipeVoteId
-     * @return myUserEvents
-     */
-    public function setRecipeVoteId($recipeVoteId)
-    {
-        $this->recipeVoteId = $recipeVoteId;
-
-        return $this;
-    }
-
-    /**
-     * Get recipeVoteId
-     *
-     * @return integer 
-     */
-    public function getRecipeVoteId()
-    {
-        return $this->recipeVoteId;
-    }
-
-    /**
      * Set myuserproducts
      *
      * @param \Nfq\NomNomBundle\Entity\myUserProducts $myuserproducts
@@ -213,5 +122,97 @@ class myUserEvents
     public function getMyuserproducts()
     {
         return $this->myuserproducts;
+    }
+
+    /**
+     * Set myRole
+     *
+     * @param \Nfq\NomNomBundle\Entity\myRoles $myRole
+     * @return myUserEvents
+     */
+    public function setMyRole(\Nfq\NomNomBundle\Entity\myRoles $myRole = null)
+    {
+        $this->myRole = $myRole;
+
+        return $this;
+    }
+
+    /**
+     * Get myRole
+     *
+     * @return \Nfq\NomNomBundle\Entity\myRoles 
+     */
+    public function getMyRole()
+    {
+        return $this->myRole;
+    }
+
+    /**
+     * Set myEvent
+     *
+     * @param \Nfq\NomNomBundle\Entity\myEvents $myEvent
+     * @return myUserEvents
+     */
+    public function setMyEvent(\Nfq\NomNomBundle\Entity\myEvents $myEvent = null)
+    {
+        $this->myEvent = $myEvent;
+
+        return $this;
+    }
+
+    /**
+     * Get myEvent
+     *
+     * @return \Nfq\NomNomBundle\Entity\myEvents 
+     */
+    public function getMyEvent()
+    {
+        return $this->myEvent;
+    }
+
+    /**
+     * Set myRecipeVote
+     *
+     * @param \Nfq\NomNomBundle\Entity\myRecipeVotes $myRecipeVote
+     * @return myUserEvents
+     */
+    public function setMyRecipeVote(\Nfq\NomNomBundle\Entity\myRecipeVotes $myRecipeVote = null)
+    {
+        $this->myRecipeVote = $myRecipeVote;
+
+        return $this;
+    }
+
+    /**
+     * Get myRecipeVote
+     *
+     * @return \Nfq\NomNomBundle\Entity\myRecipeVotes 
+     */
+    public function getMyRecipeVote()
+    {
+        return $this->myRecipeVote;
+    }
+
+    /**
+     * Set myUser
+     *
+     * @param \Nfq\NomNomBundle\Entity\User $myUser
+     * @return myUserEvents
+     */
+    public function setMyUser(\Nfq\NomNomBundle\Entity\User $myUser = null)
+    {
+        $this->myUser = $myUser;
+
+        return $this;
+    }
+
+    /**
+     * Get myUser
+     *
+     * @return \Nfq\NomNomBundle\Entity\User 
+     */
+    public function getMyUser()
+    {
+        return $this->myUser;
     }
 }

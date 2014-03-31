@@ -47,6 +47,8 @@ class myUserProducts
      */
     private $quantityMeasure;
 
+    private $myUserProducts;
+
 
     public function __construct()
     {

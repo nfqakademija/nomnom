@@ -18,16 +18,9 @@ class myRecipeVotes
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\OneToMany(targetEntity="myUserEvents", mappedBy="myERecipeVotes")
      */
-
     private $id;
 
-
-    /**
-     * @ORM\OneToMany(targetEntity="myUserEvents", mappedBy="myERecipeVotes")
-     */
-    private $recipeVoteId;
 
     /**
      * @var integer
@@ -43,6 +36,18 @@ class myRecipeVotes
      */
     private $vote;
 
+    /**
+     * @ORM\OneToMany(targetEntity="myUserEvents", mappedBy="myRecipeVote")
+     */
+    private $myUserEvents;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->myUserEvents = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -98,5 +103,38 @@ class myRecipeVotes
     public function getVote()
     {
         return $this->vote;
+    }
+
+    /**
+     * Add myUserEvents
+     *
+     * @param \Nfq\NomNomBundle\Entity\myUserEvents $myUserEvents
+     * @return myRecipeVotes
+     */
+    public function addMyUserEvent(\Nfq\NomNomBundle\Entity\myUserEvents $myUserEvents)
+    {
+        $this->myUserEvents[] = $myUserEvents;
+
+        return $this;
+    }
+
+    /**
+     * Remove myUserEvents
+     *
+     * @param \Nfq\NomNomBundle\Entity\myUserEvents $myUserEvents
+     */
+    public function removeMyUserEvent(\Nfq\NomNomBundle\Entity\myUserEvents $myUserEvents)
+    {
+        $this->myUserEvents->removeElement($myUserEvents);
+    }
+
+    /**
+     * Get myUserEvents
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMyUserEvents()
+    {
+        return $this->myUserEvents;
     }
 }

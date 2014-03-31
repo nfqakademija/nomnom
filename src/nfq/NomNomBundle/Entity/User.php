@@ -22,18 +22,21 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="myUserEvents", mappedBy="myUser")
-     */
-    protected $myUser;
-
-    /**
      * @ORM\OneToOne(targetEntity="myUserProfile", inversedBy="users")
      */
     private $myuserprofile;
 
+    /**
+     * @ORM\OneToMany(targetEntity="myUserEvents", mappedBy="myUser")
+     */
+    protected $myUserEvents;
+
+    /**
+     * Constructor
+     */
     public function __construct()
     {
-        parent::__construct();
+        $this->myUserEvents = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -45,7 +48,6 @@ class User extends BaseUser
     {
         return $this->id;
     }
-
 
     /**
      * Set myuserprofile
@@ -68,5 +70,38 @@ class User extends BaseUser
     public function getMyuserprofile()
     {
         return $this->myuserprofile;
+    }
+
+    /**
+     * Add myUserEvents
+     *
+     * @param \Nfq\NomNomBundle\Entity\myUserEvents $myUserEvents
+     * @return User
+     */
+    public function addMyUserEvent(\Nfq\NomNomBundle\Entity\myUserEvents $myUserEvents)
+    {
+        $this->myUserEvents[] = $myUserEvents;
+
+        return $this;
+    }
+
+    /**
+     * Remove myUserEvents
+     *
+     * @param \Nfq\NomNomBundle\Entity\myUserEvents $myUserEvents
+     */
+    public function removeMyUserEvent(\Nfq\NomNomBundle\Entity\myUserEvents $myUserEvents)
+    {
+        $this->myUserEvents->removeElement($myUserEvents);
+    }
+
+    /**
+     * Get myUserEvents
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMyUserEvents()
+    {
+        return $this->myUserEvents;
     }
 }

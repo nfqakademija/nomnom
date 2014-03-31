@@ -18,7 +18,6 @@ class myEvents
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\OneToMany(targetEntity="myEventRecipes", mappedBy="myEvents")
      */
     private $id;
 
@@ -26,11 +25,6 @@ class myEvents
      * @ORM\OneToMany(targetEntity="myUserEvents", mappedBy="myEvents")
      */
     private $myrolerights;
-
-    /**
-     * @ORM\OneToMany(targetEntity="myEventRecipes", mappedBy="myEvents")
-     */
-    private $myEventRecipes;
 
     /**
      * @var \DateTime
@@ -59,6 +53,26 @@ class myEvents
      * @ORM\Column(name="evenPhase", type="smallint")
      */
     private $evenPhase;
+
+    /**
+     * @ORM\OneToMany(targetEntity="myUserEvents", mappedBy="myEvent")
+     */
+    private $myUserEvents;
+
+    /**
+     * @ORM\OneToMany(targetEntity="myEventRecipes", mappedBy="myEvent")
+     */
+    private $myEventRecipes;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->myrolerights = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->myUserEvents = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->myEventRecipes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -160,5 +174,104 @@ class myEvents
     public function getEvenPhase()
     {
         return $this->evenPhase;
+    }
+
+    /**
+     * Add myrolerights
+     *
+     * @param \Nfq\NomNomBundle\Entity\myUserEvents $myrolerights
+     * @return myEvents
+     */
+    public function addMyroleright(\Nfq\NomNomBundle\Entity\myUserEvents $myrolerights)
+    {
+        $this->myrolerights[] = $myrolerights;
+
+        return $this;
+    }
+
+    /**
+     * Remove myrolerights
+     *
+     * @param \Nfq\NomNomBundle\Entity\myUserEvents $myrolerights
+     */
+    public function removeMyroleright(\Nfq\NomNomBundle\Entity\myUserEvents $myrolerights)
+    {
+        $this->myrolerights->removeElement($myrolerights);
+    }
+
+    /**
+     * Get myrolerights
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMyrolerights()
+    {
+        return $this->myrolerights;
+    }
+
+    /**
+     * Add myUserEvents
+     *
+     * @param \Nfq\NomNomBundle\Entity\myUserEvents $myUserEvents
+     * @return myEvents
+     */
+    public function addMyUserEvent(\Nfq\NomNomBundle\Entity\myUserEvents $myUserEvents)
+    {
+        $this->myUserEvents[] = $myUserEvents;
+
+        return $this;
+    }
+
+    /**
+     * Remove myUserEvents
+     *
+     * @param \Nfq\NomNomBundle\Entity\myUserEvents $myUserEvents
+     */
+    public function removeMyUserEvent(\Nfq\NomNomBundle\Entity\myUserEvents $myUserEvents)
+    {
+        $this->myUserEvents->removeElement($myUserEvents);
+    }
+
+    /**
+     * Get myUserEvents
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMyUserEvents()
+    {
+        return $this->myUserEvents;
+    }
+
+    /**
+     * Add myEventRecipes
+     *
+     * @param \Nfq\NomNomBundle\Entity\myEventRecipes $myEventRecipes
+     * @return myEvents
+     */
+    public function addMyEventRecipe(\Nfq\NomNomBundle\Entity\myEventRecipes $myEventRecipes)
+    {
+        $this->myEventRecipes[] = $myEventRecipes;
+
+        return $this;
+    }
+
+    /**
+     * Remove myEventRecipes
+     *
+     * @param \Nfq\NomNomBundle\Entity\myEventRecipes $myEventRecipes
+     */
+    public function removeMyEventRecipe(\Nfq\NomNomBundle\Entity\myEventRecipes $myEventRecipes)
+    {
+        $this->myEventRecipes->removeElement($myEventRecipes);
+    }
+
+    /**
+     * Get myEventRecipes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMyEventRecipes()
+    {
+        return $this->myEventRecipes;
     }
 }

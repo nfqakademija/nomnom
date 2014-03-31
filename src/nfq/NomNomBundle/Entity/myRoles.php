@@ -31,20 +31,23 @@ class myRoles
     private $roleName;
 
     /**
-     * @ORM\OneToMany(targetEntity="myRoleRights", mappedBy="myRoles")
+     * @ORM\OneToMany(targetEntity="myRoleRights", mappedBy="myroles")
      */
     private $myrolerights;
 
     /**
-     * @ORM\OneToMany(targetEntity="myUserEvents", mappedBy="myRoles")
+     * @ORM\OneToMany(targetEntity="myUserEvents", mappedBy="myRole")
      */
-    protected $myRoles;
+    protected $myUserEvents;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
-        $this->myrolerights = new ArrayCollection();
+        $this->myrolerights = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->myUserEvents = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
 
     /**
      * Get id
@@ -110,5 +113,38 @@ class myRoles
     public function getMyrolerights()
     {
         return $this->myrolerights;
+    }
+
+    /**
+     * Add myUserEvents
+     *
+     * @param \Nfq\NomNomBundle\Entity\myUserEvents $myUserEvents
+     * @return myRoles
+     */
+    public function addMyUserEvent(\Nfq\NomNomBundle\Entity\myUserEvents $myUserEvents)
+    {
+        $this->myUserEvents[] = $myUserEvents;
+
+        return $this;
+    }
+
+    /**
+     * Remove myUserEvents
+     *
+     * @param \Nfq\NomNomBundle\Entity\myUserEvents $myUserEvents
+     */
+    public function removeMyUserEvent(\Nfq\NomNomBundle\Entity\myUserEvents $myUserEvents)
+    {
+        $this->myUserEvents->removeElement($myUserEvents);
+    }
+
+    /**
+     * Get myUserEvents
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMyUserEvents()
+    {
+        return $this->myUserEvents;
     }
 }
