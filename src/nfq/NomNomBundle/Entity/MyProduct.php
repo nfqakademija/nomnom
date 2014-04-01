@@ -46,4 +46,103 @@ class MyProduct
         $this->myRecipeProducts = new \Doctrine\Common\Collections\ArrayCollection();
         $this->myUserProducts = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set productName
+     *
+     * @param string $productName
+     * @return MyProduct
+     */
+    public function setProductName($productName)
+    {
+        $this->productName = $productName;
+
+        return $this;
+    }
+
+    /**
+     * Get productName
+     *
+     * @return string 
+     */
+    public function getProductName()
+    {
+        return $this->productName;
+    }
+
+    /**
+     * Add myRecipeProducts
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyRecipeProduct $myRecipeProducts
+     * @return MyProduct
+     */
+    public function addMyRecipeProduct(\Nfq\NomNomBundle\Entity\MyRecipeProduct $myRecipeProducts)
+    {
+        $this->myRecipeProducts[] = $myRecipeProducts;
+
+        return $this;
+    }
+
+    /**
+     * Remove myRecipeProducts
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyRecipeProduct $myRecipeProducts
+     */
+    public function removeMyRecipeProduct(\Nfq\NomNomBundle\Entity\MyRecipeProduct $myRecipeProducts)
+    {
+        $this->myRecipeProducts->removeElement($myRecipeProducts);
+    }
+
+    /**
+     * Get myRecipeProducts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMyRecipeProducts()
+    {
+        return $this->myRecipeProducts;
+    }
+
+    /**
+     * Add myUserProducts
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyUserProduct $myUserProducts
+     * @return MyProduct
+     */
+    public function addMyUserProduct(\Nfq\NomNomBundle\Entity\MyUserProduct $myUserProducts)
+    {
+        $this->myUserProducts[] = $myUserProducts;
+
+        return $this;
+    }
+
+    /**
+     * Remove myUserProducts
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyUserProduct $myUserProducts
+     */
+    public function removeMyUserProduct(\Nfq\NomNomBundle\Entity\MyUserProduct $myUserProducts)
+    {
+        $this->myUserProducts->removeElement($myUserProducts);
+    }
+
+    /**
+     * Get myUserProducts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMyUserProducts()
+    {
+        return $this->myUserProducts;
+    }
 }
