@@ -24,12 +24,12 @@ class LoadMyRoleRights extends AbstractFixture implements OrderedFixtureInterfac
     function load(ObjectManager $manager)
     {
         $firstRR = new MyRoleRight();
-        $firstRR->setMyrights($this->getReference('createEvent'));
-        $firstRR->setMyroles($this->getReference('registeredUser'));
+        $firstRR->setMyRight($this->getReference('createEvent'));
+        $firstRR->setMyRole($this->getReference('registeredUser'));
 
         $secondRR = new MyRoleRight();
-        $secondRR->setMyrights($this->getReference('sendInvitations'));
-        $secondRR->setMyroles($this->getReference('guest'));
+        $secondRR->setMyRight($this->getReference('sendInvitations'));
+        $secondRR->setMyRole($this->getReference('guest'));
 
         $manager->persist($secondRR);
         $manager->persist($firstRR);

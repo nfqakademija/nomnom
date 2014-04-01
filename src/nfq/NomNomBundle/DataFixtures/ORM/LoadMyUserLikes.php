@@ -25,11 +25,11 @@ class LoadMyUserLikes extends AbstractFixture implements OrderedFixtureInterface
     {
         $bananaLike = new MyUserLike();
         $bananaLike->setFood("banana")->setLikeOrDislike(1);
-        $bananaLike->setMyuserprofile($this->getReference('userProfile'));
+        $bananaLike->setMyUserProfile($this->getReference('userProfile'));
 
         $fishDislike = new MyUserLike();
         $fishDislike->setFood("fish")->setLikeOrDislike(0);
-        $fishDislike->setMyuserprofile($this->getReference('userProfile2'));
+        $fishDislike->setMyUserProfile($this->getReference('userProfile2'));
 
         $manager->persist($bananaLike);
         $manager->persist($fishDislike);
