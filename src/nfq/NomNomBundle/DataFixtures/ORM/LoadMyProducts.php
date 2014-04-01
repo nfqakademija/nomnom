@@ -12,7 +12,7 @@ use Doctrine\Common\DataFixtures\Doctrine;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Nfq\NomnomBundle\Entity\myProducts;
+use Nfq\NomnomBundle\Entity\MyProduct;
 
 class LoadMyProducts extends AbstractFixture implements OrderedFixtureInterface{
 
@@ -23,10 +23,10 @@ class LoadMyProducts extends AbstractFixture implements OrderedFixtureInterface{
      */
     function load(ObjectManager $manager)
     {
-        $banana = new myProducts();
+        $banana = new MyProduct();
         $banana->setProductName('banana');
 
-        $fish = new myProducts();
+        $fish = new MyProduct();
         $fish->setProductName('fish');
 
         $manager->persist($banana);

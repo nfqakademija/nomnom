@@ -11,7 +11,7 @@ use Doctrine\Common\DataFixtures\Doctrine;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Nfq\NomnomBundle\Entity\myUserProducts;
+use Nfq\NomnomBundle\Entity\MyUserProduct;
 
 
 class LoadUserProducts extends AbstractFixture implements OrderedFixtureInterface {
@@ -23,12 +23,12 @@ class LoadUserProducts extends AbstractFixture implements OrderedFixtureInterfac
      */
     function load(ObjectManager $manager)
     {
-        $userproduct = new myUserProducts();
+        $userproduct = new MyUserProduct();
         $userproduct->setMyproducts($this->getReference('fish'));
         $userproduct->setQuantity(200.0);
         $userproduct->setQuantityMeasure(2);
 
-        $userproduct2 = new myUserProducts();
+        $userproduct2 = new MyUserProduct();
         $userproduct2->setMyproducts($this->getReference('banana'));
         $userproduct2->setQuantity(150);
         $userproduct2->setQuantityMeasure(1);

@@ -12,7 +12,7 @@ use Doctrine\Common\DataFixtures\Doctrine;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Nfq\NomnomBundle\Entity\myRights;
+use Nfq\NomnomBundle\Entity\MyRight;
 
 class LoadMyRights extends AbstractFixture implements OrderedFixtureInterface
 {
@@ -25,10 +25,10 @@ class LoadMyRights extends AbstractFixture implements OrderedFixtureInterface
     function load(ObjectManager $manager)
 
     {
-        $createEventRight = new myRights();
+        $createEventRight = new MyRight();
         $createEventRight->setRightName("createEvent");
 
-        $sendInvitationsRight = new myRights();
+        $sendInvitationsRight = new MyRight();
         $sendInvitationsRight->setRightName("sendInvitations");
 
         $manager->persist($sendInvitationsRight);

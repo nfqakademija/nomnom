@@ -12,7 +12,7 @@ use Doctrine\Common\DataFixtures\Doctrine;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Nfq\NomnomBundle\Entity\myRoleRights;
+use Nfq\NomnomBundle\Entity\MyRoleRight;
 
 class LoadMyRoleRights extends AbstractFixture implements OrderedFixtureInterface{
 
@@ -23,11 +23,11 @@ class LoadMyRoleRights extends AbstractFixture implements OrderedFixtureInterfac
      */
     function load(ObjectManager $manager)
     {
-        $firstRR = new myRoleRights();
+        $firstRR = new MyRoleRight();
         $firstRR->setMyrights($this->getReference('createEvent'));
         $firstRR->setMyroles($this->getReference('registeredUser'));
 
-        $secondRR = new myRoleRights();
+        $secondRR = new MyRoleRight();
         $secondRR->setMyrights($this->getReference('sendInvitations'));
         $secondRR->setMyroles($this->getReference('guest'));
 

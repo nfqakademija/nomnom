@@ -12,7 +12,7 @@ use Doctrine\Common\DataFixtures\Doctrine;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Nfq\NomnomBundle\Entity\myUserProfile;
+use Nfq\NomnomBundle\Entity\MyUserProfile;
 class LoadUserProfile extends AbstractFixture implements OrderedFixtureInterface{
 
     /**
@@ -22,7 +22,7 @@ class LoadUserProfile extends AbstractFixture implements OrderedFixtureInterface
      */
     function load(ObjectManager $manager)
     {
-        $userprofile = new myUserProfile();
+        $userprofile = new MyUserProfile();
         $userprofile->setAvatar('iVBORw0KGgoAAAANSUhEUgAAAJYAAACLCAYAAACDSWCnAAARoklEQVR42u2d63NTxRvHv+eS5Jzc
 0xSQ0irQggjYC1QBkYsDUwTBNwoqg+MbfeFf5At9pRZnGEdFZwCpaBl0Ki1IEaFFAnJpWtI2aXPP
 uf9e8NszaawFmrQ5SfY70zed5GTP7mef59ndZ3cZwzAM1IgMw4BhGGBZdsb/ZVnG1NQUotEoYrEY
@@ -105,7 +105,7 @@ oqJgUVGwqChYVFQULCoKFhUFi4qKgkVFwaKiYFFRUbCoKFhUFCwqKgoWFQWLioJFRUXBoqJgUVGw
 qKgoWFQULCoKFhUVBYuKgkVFwaKiomBRVQ1Y2WwWLperJi//rlaRc++z2WxRz/kfjpCyDa/tEEUA
 AAAASUVORK5CYII=');
 
-        $userprofile2 = new myUserProfile();
+        $userprofile2 = new MyUserProfile();
         $userprofile2->setAvatar('galirsitastiks');
 
         $manager->persist($userprofile);

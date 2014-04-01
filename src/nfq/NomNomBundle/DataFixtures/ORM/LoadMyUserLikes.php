@@ -12,7 +12,7 @@ use Doctrine\Common\DataFixtures\Doctrine;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Nfq\NomnomBundle\Entity\myUserLikes;
+use Nfq\NomnomBundle\Entity\MyUserLike;
 class LoadMyUserLikes extends AbstractFixture implements OrderedFixtureInterface
 {
 
@@ -23,11 +23,11 @@ class LoadMyUserLikes extends AbstractFixture implements OrderedFixtureInterface
      */
     function load(ObjectManager $manager)
     {
-        $bananaLike = new myUserLikes();
+        $bananaLike = new MyUserLike();
         $bananaLike->setFood("banana")->setLikeOrDislike(1);
         $bananaLike->setMyuserprofile($this->getReference('userProfile'));
 
-        $fishDislike = new myUserLikes();
+        $fishDislike = new MyUserLike();
         $fishDislike->setFood("fish")->setLikeOrDislike(0);
         $fishDislike->setMyuserprofile($this->getReference('userProfile2'));
 

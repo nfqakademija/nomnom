@@ -12,7 +12,7 @@ use Doctrine\Common\DataFixtures\Doctrine;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Nfq\NomnomBundle\Entity\myRoles;
+use Nfq\NomnomBundle\Entity\MyRole;
 
 class LoadMyRoles extends AbstractFixture implements OrderedFixtureInterface
 {
@@ -24,10 +24,10 @@ class LoadMyRoles extends AbstractFixture implements OrderedFixtureInterface
      */
     function load(ObjectManager $manager)
     {
-        $registeredUser = new myRoles();
+        $registeredUser = new MyRole();
         $registeredUser->setRoleName("registeredUser");
 
-        $guest = new myRoles();
+        $guest = new MyRole();
         $guest->setRoleName("guest");
 
         $manager->persist($guest);
