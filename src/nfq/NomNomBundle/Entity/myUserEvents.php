@@ -5,12 +5,12 @@ namespace Nfq\NomNomBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * myUserEvents
+ * MyUserEvent
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\myUserEventsRepository")
+ * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\MyUserEventRepository")
  */
-class myUserEvents
+class MyUserEvent
 {
     /**
      * @var integer
@@ -22,16 +22,15 @@ class myUserEvents
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="myUserProducts", inversedBy="myuserevents")
-     * @ORM\JoinColumn(name="myuserproducts_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="MyUserProduct", inversedBy="myUserEvents")
+     * @ORM\JoinColumn(name="my_user_product_id", referencedColumnName="id")
      */
-    private $myuserproducts;
-
+    private $myUserProduct;
 
     /**
      * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="myRoles", inversedBy="myUserEvents")
+     * @ORM\ManyToOne(targetEntity="MyRole", inversedBy="myUserEvents")
      * @ORM\JoinColumn(name="role_id", referencedColumnName="id")
      */
     private $myRole;
@@ -39,7 +38,7 @@ class myUserEvents
     /**
      * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="myEvents", inversedBy="myUserEvents")
+     * @ORM\ManyToOne(targetEntity="MyEvent", inversedBy="myUserEvents")
      * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
      */
     private $myEvent;
@@ -54,10 +53,10 @@ class myUserEvents
     /**
      * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="myRecipeVotes", inversedBy="myuserevents")
-     *
+     * @ORM\ManyToOne(targetEntity="MyRecipeVote", inversedBy="myUserEvents")
+     * @ORM\JoinColumn(name="my_recipe_vote_id", referencedColumnName="id")
      */
-    private $myrecipevote;
+    private $myRecipeVote;
 
     /**
      * @var integer
@@ -66,7 +65,6 @@ class myUserEvents
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $myUser;
-
 
     /**
      * Get id
@@ -82,7 +80,7 @@ class myUserEvents
      * Set invitationStatus
      *
      * @param integer $invitationStatus
-     * @return myUserEvents
+     * @return MyUserEvent
      */
     public function setInvitationStatus($invitationStatus)
     {
@@ -102,35 +100,35 @@ class myUserEvents
     }
 
     /**
-     * Set myuserproducts
+     * Set myUserProduct
      *
-     * @param \Nfq\NomNomBundle\Entity\myUserProducts $myuserproducts
-     * @return myUserEvents
+     * @param \Nfq\NomNomBundle\Entity\MyUserProduct $myUserProduct
+     * @return MyUserEvent
      */
-    public function setMyuserproducts(\Nfq\NomNomBundle\Entity\myUserProducts $myuserproducts = null)
+    public function setMyUserProduct(\Nfq\NomNomBundle\Entity\MyUserProduct $myUserProduct = null)
     {
-        $this->myuserproducts = $myuserproducts;
+        $this->myUserProduct = $myUserProduct;
 
         return $this;
     }
 
     /**
-     * Get myuserproducts
+     * Get myUserProduct
      *
-     * @return \Nfq\NomNomBundle\Entity\myUserProducts 
+     * @return \Nfq\NomNomBundle\Entity\MyUserProduct 
      */
-    public function getMyuserproducts()
+    public function getMyUserProduct()
     {
-        return $this->myuserproducts;
+        return $this->myUserProduct;
     }
 
     /**
      * Set myRole
      *
-     * @param \Nfq\NomNomBundle\Entity\myRoles $myRole
-     * @return myUserEvents
+     * @param \Nfq\NomNomBundle\Entity\MyRole $myRole
+     * @return MyUserEvent
      */
-    public function setMyRole(\Nfq\NomNomBundle\Entity\myRoles $myRole = null)
+    public function setMyRole(\Nfq\NomNomBundle\Entity\MyRole $myRole = null)
     {
         $this->myRole = $myRole;
 
@@ -140,7 +138,7 @@ class myUserEvents
     /**
      * Get myRole
      *
-     * @return \Nfq\NomNomBundle\Entity\myRoles 
+     * @return \Nfq\NomNomBundle\Entity\MyRole 
      */
     public function getMyRole()
     {
@@ -150,10 +148,10 @@ class myUserEvents
     /**
      * Set myEvent
      *
-     * @param \Nfq\NomNomBundle\Entity\myEvents $myEvent
-     * @return myUserEvents
+     * @param \Nfq\NomNomBundle\Entity\MyEvent $myEvent
+     * @return MyUserEvent
      */
-    public function setMyEvent(\Nfq\NomNomBundle\Entity\myEvents $myEvent = null)
+    public function setMyEvent(\Nfq\NomNomBundle\Entity\MyEvent $myEvent = null)
     {
         $this->myEvent = $myEvent;
 
@@ -163,7 +161,7 @@ class myUserEvents
     /**
      * Get myEvent
      *
-     * @return \Nfq\NomNomBundle\Entity\myEvents 
+     * @return \Nfq\NomNomBundle\Entity\MyEvent 
      */
     public function getMyEvent()
     {
@@ -173,10 +171,10 @@ class myUserEvents
     /**
      * Set myRecipeVote
      *
-     * @param \Nfq\NomNomBundle\Entity\myRecipeVotes $myRecipeVote
-     * @return myUserEvents
+     * @param \Nfq\NomNomBundle\Entity\myRecipeVote $myRecipeVote
+     * @return MyUserEvent
      */
-    public function setMyRecipeVote(\Nfq\NomNomBundle\Entity\myRecipeVotes $myRecipeVote = null)
+    public function setMyRecipeVote(\Nfq\NomNomBundle\Entity\myRecipeVote $myRecipeVote = null)
     {
         $this->myRecipeVote = $myRecipeVote;
 
@@ -186,7 +184,7 @@ class myUserEvents
     /**
      * Get myRecipeVote
      *
-     * @return \Nfq\NomNomBundle\Entity\myRecipeVotes 
+     * @return \Nfq\NomNomBundle\Entity\myRecipeVote 
      */
     public function getMyRecipeVote()
     {
@@ -197,7 +195,7 @@ class myUserEvents
      * Set myUser
      *
      * @param \Nfq\NomNomBundle\Entity\User $myUser
-     * @return myUserEvents
+     * @return MyUserEvent
      */
     public function setMyUser(\Nfq\NomNomBundle\Entity\User $myUser = null)
     {

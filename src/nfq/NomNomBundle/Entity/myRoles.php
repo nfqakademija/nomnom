@@ -7,12 +7,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 
 /**
- * myRoles
+ * MyRole
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\myRolesRepository")
+ * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\MyRoleRepository")
  */
-class myRoles
+class MyRole
 {
     /**
      * @var integer
@@ -31,12 +31,12 @@ class myRoles
     private $roleName;
 
     /**
-     * @ORM\OneToMany(targetEntity="myRoleRights", mappedBy="myroles")
+     * @ORM\OneToMany(targetEntity="MyRoleRight", mappedBy="myRole")
      */
-    private $myrolerights;
+    private $myRoleRights;
 
     /**
-     * @ORM\OneToMany(targetEntity="myUserEvents", mappedBy="myRole")
+     * @ORM\OneToMany(targetEntity="MyUserEvent", mappedBy="myRole")
      */
     protected $myUserEvents;
 
@@ -45,7 +45,7 @@ class myRoles
      */
     public function __construct()
     {
-        $this->myrolerights = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->myRoleRights = new \Doctrine\Common\Collections\ArrayCollection();
         $this->myUserEvents = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -63,7 +63,7 @@ class myRoles
      * Set roleName
      *
      * @param string $roleName
-     * @return myRoles
+     * @return MyRole
      */
     public function setRoleName($roleName)
     {
@@ -83,45 +83,45 @@ class myRoles
     }
 
     /**
-     * Add myrolerights
+     * Add myRoleRights
      *
-     * @param \Nfq\NomNomBundle\Entity\myRoleRights $myrolerights
-     * @return myRoles
+     * @param \Nfq\NomNomBundle\Entity\MyRoleRight $myRoleRights
+     * @return MyRole
      */
-    public function addMyroleright(\Nfq\NomNomBundle\Entity\myRoleRights $myrolerights)
+    public function addMyRoleRight(\Nfq\NomNomBundle\Entity\MyRoleRight $myRoleRights)
     {
-        $this->myrolerights[] = $myrolerights;
+        $this->myRoleRights[] = $myRoleRights;
 
         return $this;
     }
 
     /**
-     * Remove myrolerights
+     * Remove myRoleRights
      *
-     * @param \Nfq\NomNomBundle\Entity\myRoleRights $myrolerights
+     * @param \Nfq\NomNomBundle\Entity\MyRoleRight $myRoleRights
      */
-    public function removeMyroleright(\Nfq\NomNomBundle\Entity\myRoleRights $myrolerights)
+    public function removeMyRoleRight(\Nfq\NomNomBundle\Entity\MyRoleRight $myRoleRights)
     {
-        $this->myrolerights->removeElement($myrolerights);
+        $this->myRoleRights->removeElement($myRoleRights);
     }
 
     /**
-     * Get myrolerights
+     * Get myRoleRights
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getMyrolerights()
+    public function getMyRoleRights()
     {
-        return $this->myrolerights;
+        return $this->myRoleRights;
     }
 
     /**
      * Add myUserEvents
      *
-     * @param \Nfq\NomNomBundle\Entity\myUserEvents $myUserEvents
-     * @return myRoles
+     * @param \Nfq\NomNomBundle\Entity\MyUserEvent $myUserEvents
+     * @return MyRole
      */
-    public function addMyUserEvent(\Nfq\NomNomBundle\Entity\myUserEvents $myUserEvents)
+    public function addMyUserEvent(\Nfq\NomNomBundle\Entity\MyUserEvent $myUserEvents)
     {
         $this->myUserEvents[] = $myUserEvents;
 
@@ -131,9 +131,9 @@ class myRoles
     /**
      * Remove myUserEvents
      *
-     * @param \Nfq\NomNomBundle\Entity\myUserEvents $myUserEvents
+     * @param \Nfq\NomNomBundle\Entity\MyUserEvent $myUserEvents
      */
-    public function removeMyUserEvent(\Nfq\NomNomBundle\Entity\myUserEvents $myUserEvents)
+    public function removeMyUserEvent(\Nfq\NomNomBundle\Entity\MyUserEvent $myUserEvents)
     {
         $this->myUserEvents->removeElement($myUserEvents);
     }

@@ -5,12 +5,12 @@ namespace Nfq\NomNomBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * myRecipes
+ * MyRecipe
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\myRecipesRepository")
+ * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\MyRecipeRepository")
  */
-class myRecipes
+class MyRecipe
 {
     /**
      * @var integer
@@ -22,69 +22,65 @@ class myRecipes
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="myRecipeCategory", inversedBy="myrecipies")
-     *
-     */
-    private $myrecipecategory;
-
-    /**
-     * @ORM\OneToMany(targetEntity="myRecipeProducts", mappedBy="myrecipes")
-     */
-    private $myrecipeproducts;
-
-    /**
-     * @ORM\OneToMany(targetEntity="myRecipeVotes", mappedBy="myrecipes")
-     */
-    private $myrecipesvotes;
-
-    /**
-     * @ORM\OneToMany(targetEntity="myEventRecipes", mappedBy="myrecipes")
-     */
-    private $myeventsrecipes;
-
-
-   /**
      * @var integer
-     *
-     * @ORM\Column(name="numberOfServings", type="smallint")
      */
     private $numberOfServings;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="preparationTime", type="time")
      */
     private $preparationTime;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="recipeName", type="string", length=50)
      */
     private $recipeName;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="foto", type="blob")
      */
     private $foto;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="preparationInstructions", type="text")
      */
     private $preparationInstructions;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="categoryId", type="integer")
      */
     private $categoryId;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="MyRecipeCategory", inversedBy="myRecipes")
+     * @ORM\JoinColumn(name="my_recipe_category_id", referencedColumnName="id")
+     */
+    private $myRecipeCategory;
+
+    /**
+     * @ORM\OneToMany(targetEntity="MyRecipeProduct", mappedBy="myRecipe")
+     */
+    private $myRecipeProducts;
+
+    /**
+     * @ORM\OneToMany(targetEntity="MyRecipeVote", mappedBy="myRecipe")
+     */
+    private $myRecipeVotes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="MyEventRecipe", mappedBy="myRecipe")
+     */
+    private $myEventRecipes;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->myRecipeProducts = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->myRecipeVotes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->myEventRecipes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -97,140 +93,124 @@ class myRecipes
     }
 
     /**
-     * Set numberOfServings
+     * Set myRecipeCategory
      *
-     * @param integer $numberOfServings
-     * @return myRecipes
+     * @param \Nfq\NomNomBundle\Entity\MyRecipeCategory $myRecipeCategory
+     * @return MyRecipe
      */
-    public function setNumberOfServings($numberOfServings)
+    public function setMyRecipeCategory(\Nfq\NomNomBundle\Entity\MyRecipeCategory $myRecipeCategory = null)
     {
-        $this->numberOfServings = $numberOfServings;
+        $this->myRecipeCategory = $myRecipeCategory;
 
         return $this;
     }
 
     /**
-     * Get numberOfServings
+     * Get myRecipeCategory
      *
-     * @return integer 
+     * @return \Nfq\NomNomBundle\Entity\MyRecipeCategory 
      */
-    public function getNumberOfServings()
+    public function getMyRecipeCategory()
     {
-        return $this->numberOfServings;
+        return $this->myRecipeCategory;
     }
 
     /**
-     * Set preparationTime
+     * Add myRecipeProducts
      *
-     * @param \DateTime $preparationTime
-     * @return myRecipes
+     * @param \Nfq\NomNomBundle\Entity\MyRecipeProduct $myRecipeProducts
+     * @return MyRecipe
      */
-    public function setPreparationTime($preparationTime)
+    public function addMyRecipeProduct(\Nfq\NomNomBundle\Entity\MyRecipeProduct $myRecipeProducts)
     {
-        $this->preparationTime = $preparationTime;
+        $this->myRecipeProducts[] = $myRecipeProducts;
 
         return $this;
     }
 
     /**
-     * Get preparationTime
+     * Remove myRecipeProducts
      *
-     * @return \DateTime 
+     * @param \Nfq\NomNomBundle\Entity\MyRecipeProduct $myRecipeProducts
      */
-    public function getPreparationTime()
+    public function removeMyRecipeProduct(\Nfq\NomNomBundle\Entity\MyRecipeProduct $myRecipeProducts)
     {
-        return $this->preparationTime;
+        $this->myRecipeProducts->removeElement($myRecipeProducts);
     }
 
     /**
-     * Set recipeName
+     * Get myRecipeProducts
      *
-     * @param string $recipeName
-     * @return myRecipes
+     * @return \Doctrine\Common\Collections\Collection 
      */
-    public function setRecipeName($recipeName)
+    public function getMyRecipeProducts()
     {
-        $this->recipeName = $recipeName;
+        return $this->myRecipeProducts;
+    }
+
+    /**
+     * Add myRecipeVotes
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyRecipeVote $myRecipeVotes
+     * @return MyRecipe
+     */
+    public function addMyRecipeVote(\Nfq\NomNomBundle\Entity\MyRecipeVote $myRecipeVotes)
+    {
+        $this->myRecipeVotes[] = $myRecipeVotes;
 
         return $this;
     }
 
     /**
-     * Get recipeName
+     * Remove myRecipeVotes
      *
-     * @return string 
+     * @param \Nfq\NomNomBundle\Entity\MyRecipeVote $myRecipeVotes
      */
-    public function getRecipeName()
+    public function removeMyRecipeVote(\Nfq\NomNomBundle\Entity\MyRecipeVote $myRecipeVotes)
     {
-        return $this->recipeName;
+        $this->myRecipeVotes->removeElement($myRecipeVotes);
     }
 
     /**
-     * Set foto
+     * Get myRecipeVotes
      *
-     * @param string $foto
-     * @return myRecipes
+     * @return \Doctrine\Common\Collections\Collection 
      */
-    public function setFoto($foto)
+    public function getMyRecipeVotes()
     {
-        $this->foto = $foto;
+        return $this->myRecipeVotes;
+    }
+
+    /**
+     * Add myEventRecipes
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyEventRecipe $myEventRecipes
+     * @return MyRecipe
+     */
+    public function addMyEventRecipe(\Nfq\NomNomBundle\Entity\MyEventRecipe $myEventRecipes)
+    {
+        $this->myEventRecipes[] = $myEventRecipes;
 
         return $this;
     }
 
     /**
-     * Get foto
+     * Remove myEventRecipes
      *
-     * @return string 
+     * @param \Nfq\NomNomBundle\Entity\MyEventRecipe $myEventRecipes
      */
-    public function getFoto()
+    public function removeMyEventRecipe(\Nfq\NomNomBundle\Entity\MyEventRecipe $myEventRecipes)
     {
-        return $this->foto;
+        $this->myEventRecipes->removeElement($myEventRecipes);
     }
 
     /**
-     * Set preparationInstructions
+     * Get myEventRecipes
      *
-     * @param string $preparationInstructions
-     * @return myRecipes
+     * @return \Doctrine\Common\Collections\Collection 
      */
-    public function setPreparationInstructions($preparationInstructions)
+    public function getMyEventRecipes()
     {
-        $this->preparationInstructions = $preparationInstructions;
-
-        return $this;
-    }
-
-    /**
-     * Get preparationInstructions
-     *
-     * @return string 
-     */
-    public function getPreparationInstructions()
-    {
-        return $this->preparationInstructions;
-    }
-
-    /**
-     * Set categoryId
-     *
-     * @param integer $categoryId
-     * @return myRecipes
-     */
-    public function setCategoryId($categoryId)
-    {
-        $this->categoryId = $categoryId;
-
-        return $this;
-    }
-
-    /**
-     * Get categoryId
-     *
-     * @return integer 
-     */
-    public function getCategoryId()
-    {
-        return $this->categoryId;
+        return $this->myEventRecipes;
     }
 }

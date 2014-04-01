@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * myRights
+ * MyRight
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\myRightsRepository")
+ * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\MyRightRepository")
  */
-class myRights
+class MyRight
 {
     /**
      * @var integer
@@ -30,13 +30,13 @@ class myRights
     private $rightName;
 
     /**
-     * @ORM\OneToMany(targetEntity="myRoleRights", mappedBy="myrights")
+     * @ORM\OneToMany(targetEntity="MyRoleRight", mappedBy="myRight")
      */
-    private $myrolerights;
+    private $myRoleRights;
 
     public function __construct()
     {
-        $this->myrolerights = new ArrayCollection();
+        $this->myRoleRights = new ArrayCollection();
     }
 
     /**
@@ -53,7 +53,7 @@ class myRights
      * Set rightName
      *
      * @param string $rightName
-     * @return myRights
+     * @return MyRight
      */
     public function setRightName($rightName)
     {
@@ -73,35 +73,35 @@ class myRights
     }
 
     /**
-     * Add myrolerights
+     * Add myRoleRights
      *
-     * @param \Nfq\NomNomBundle\Entity\myRoleRights $myrolerights
-     * @return myRights
+     * @param \Nfq\NomNomBundle\Entity\MyRoleRight $myRoleRights
+     * @return MyRight
      */
-    public function addMyroleright(\Nfq\NomNomBundle\Entity\myRoleRights $myrolerights)
+    public function addMyRoleRight(\Nfq\NomNomBundle\Entity\MyRoleRight $myRoleRights)
     {
-        $this->myrolerights[] = $myrolerights;
+        $this->myRoleRights[] = $myRoleRights;
 
         return $this;
     }
 
     /**
-     * Remove myrolerights
+     * Remove myRoleRights
      *
-     * @param \Nfq\NomNomBundle\Entity\myRoleRights $myrolerights
+     * @param \Nfq\NomNomBundle\Entity\MyRoleRight $myRoleRights
      */
-    public function removeMyroleright(\Nfq\NomNomBundle\Entity\myRoleRights $myrolerights)
+    public function removeMyRoleRight(\Nfq\NomNomBundle\Entity\MyRoleRight $myRoleRights)
     {
-        $this->myrolerights->removeElement($myrolerights);
+        $this->myRoleRights->removeElement($myRoleRights);
     }
 
     /**
-     * Get myrolerights
+     * Get myRoleRights
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getMyrolerights()
+    public function getMyRoleRights()
     {
-        return $this->myrolerights;
+        return $this->myRoleRights;
     }
 }

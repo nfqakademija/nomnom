@@ -6,12 +6,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * myUserProfile
+ * MyUserProfile
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\myUserProfileRepository")
+ * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\MyUserProfileRepository")
  */
-class myUserProfile
+class MyUserProfile
 {
     /**
      * @var integer
@@ -23,9 +23,9 @@ class myUserProfile
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="User", mappedBy="myuserprofile")
+     * @ORM\OneToOne(targetEntity="User", mappedBy="myUserProfile")
      */
-    private $user;
+    private $myUser;
 
     /**
      * @var string
@@ -35,14 +35,16 @@ class myUserProfile
     private $avatar;
 
     /**
-     * @ORM\OneToMany(targetEntity="myUserLikes", mappedBy="myuserprofile")
+     * @ORM\OneToMany(targetEntity="MyUserLike", mappedBy="myUserProfile")
      */
-    private $myuserlikes;
+    private $myUserLikes;
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
-        $this->myuserlikes = new ArrayCollection();
+        $this->myUserLikes = new ArrayCollection();
     }
 
     /**
@@ -59,7 +61,7 @@ class myUserProfile
      * Set avatar
      *
      * @param string $avatar
-     * @return myUserProfile
+     * @return MyUserProfile
      */
     public function setAvatar($avatar)
     {
@@ -78,82 +80,60 @@ class myUserProfile
         return $this->avatar;
     }
 
+
     /**
-     * Set user
+     * Set myUser
      *
-     * @param \Nfq\NomNomBundle\Entity\User $user
-     * @return myUserProfile
+     * @param \Nfq\NomNomBundle\Entity\User $myUser
+     * @return MyUserProfile
      */
-    public function setUser(\Nfq\NomNomBundle\Entity\User $user = null)
+    public function setMyUser(\Nfq\NomNomBundle\Entity\User $myUser = null)
     {
-        $this->user = $user;
+        $this->myUser = $myUser;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Get myUser
      *
      * @return \Nfq\NomNomBundle\Entity\User 
      */
-    public function getUser()
+    public function getMyUser()
     {
-        return $this->user;
+        return $this->myUser;
     }
 
     /**
-     * Add myuserlikes
+     * Add myUserLikes
      *
-     * @param \Nfq\NomNomBundle\Entity\myUserLikes $myuserlikes
-     * @return myUserProfile
+     * @param \Nfq\NomNomBundle\Entity\MyUserLike $myUserLikes
+     * @return MyUserProfile
      */
-    public function addMyuserlike(\Nfq\NomNomBundle\Entity\myUserLikes $myuserlikes)
+    public function addMyUserLike(\Nfq\NomNomBundle\Entity\MyUserLike $myUserLikes)
     {
-        $this->myuserlikes[] = $myuserlikes;
+        $this->myUserLikes[] = $myUserLikes;
 
         return $this;
     }
 
     /**
-     * Remove myuserlikes
+     * Remove myUserLikes
      *
-     * @param \Nfq\NomNomBundle\Entity\myUserLikes $myuserlikes
+     * @param \Nfq\NomNomBundle\Entity\MyUserLike $myUserLikes
      */
-    public function removeMyuserlike(\Nfq\NomNomBundle\Entity\myUserLikes $myuserlikes)
+    public function removeMyUserLike(\Nfq\NomNomBundle\Entity\MyUserLike $myUserLikes)
     {
-        $this->myuserlikes->removeElement($myuserlikes);
+        $this->myUserLikes->removeElement($myUserLikes);
     }
 
     /**
-     * Get myuserlikes
+     * Get myUserLikes
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getMyuserlikes()
+    public function getMyUserLikes()
     {
-        return $this->myuserlikes;
-    }
-
-    /**
-     * Set users
-     *
-     * @param \Nfq\NomNomBundle\Entity\User $users
-     * @return myUserProfile
-     */
-    public function setUsers(\Nfq\NomNomBundle\Entity\User $users = null)
-    {
-        $this->users = $users;
-
-        return $this;
-    }
-
-    /**
-     * Get users
-     *
-     * @return \Nfq\NomNomBundle\Entity\User 
-     */
-    public function getUsers()
-    {
-        return $this->users;
+        return $this->myUserLikes;
     }
 }

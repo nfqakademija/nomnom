@@ -5,12 +5,12 @@ namespace Nfq\NomNomBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * myRecipeProducts
+ * MyRecipeProduct
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\myRecipeProductsRepository")
+ * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\MyRecipeProductRepository")
  */
-class myRecipeProducts
+class MyRecipeProduct
 {
     /**
      * @var integer
@@ -22,30 +22,16 @@ class myRecipeProducts
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="myRecipes", inversedBy="myrecipeproducts")
-     *
+     * @ORM\ManyToOne(targetEntity="MyRecipe", inversedBy="myRecipeProducts")
+     * @ORM\JoinColumn(name="my_recipe_id", referencedColumnName="id")
      */
-    private $myrecipes;
+    private $myRecipe;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="recipeId", type="integer")
+     * @ORM\ManyToOne(targetEntity="MyProduct", inversedBy="myRecipeProducts")
+     * @ORM\JoinColumn(name="my_product_id", referencedColumnName="id")
      */
-    private $recipeId;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="myProducts", inversedBy="myrecipeproducts")
-     *
-     */
-    private $myproducts;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="productId", type="integer")
-     */
-    private $productId;
+    private $myProduct;
 
     /**
      * @var float
@@ -61,7 +47,6 @@ class myRecipeProducts
      */
     private $quantityMeasure;
 
-
     /**
      * Get id
      *
@@ -76,7 +61,7 @@ class myRecipeProducts
      * Set recipeId
      *
      * @param integer $recipeId
-     * @return myRecipeProducts
+     * @return MyRecipeProduct
      */
     public function setRecipeId($recipeId)
     {
@@ -99,7 +84,7 @@ class myRecipeProducts
      * Set productId
      *
      * @param integer $productId
-     * @return myRecipeProducts
+     * @return MyRecipeProduct
      */
     public function setProductId($productId)
     {
@@ -122,7 +107,7 @@ class myRecipeProducts
      * Set quantity
      *
      * @param float $quantity
-     * @return myRecipeProducts
+     * @return MyRecipeProduct
      */
     public function setQuantity($quantity)
     {
@@ -145,7 +130,7 @@ class myRecipeProducts
      * Set quantityMeasure
      *
      * @param integer $quantityMeasure
-     * @return myRecipeProducts
+     * @return MyRecipeProduct
      */
     public function setQuantityMeasure($quantityMeasure)
     {
@@ -162,5 +147,51 @@ class myRecipeProducts
     public function getQuantityMeasure()
     {
         return $this->quantityMeasure;
+    }
+
+    /**
+     * Set myRecipe
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyRecipe $myRecipe
+     * @return MyRecipeProduct
+     */
+    public function setMyRecipe(\Nfq\NomNomBundle\Entity\MyRecipe $myRecipe = null)
+    {
+        $this->myRecipe = $myRecipe;
+
+        return $this;
+    }
+
+    /**
+     * Get myRecipe
+     *
+     * @return \Nfq\NomNomBundle\Entity\MyRecipe 
+     */
+    public function getMyRecipe()
+    {
+        return $this->myRecipe;
+    }
+
+    /**
+     * Set myProduct
+     *
+     * @param \Nfq\NomNomBundle\Entity\myProducts $myProduct
+     * @return MyRecipeProduct
+     */
+    public function setMyProduct(\Nfq\NomNomBundle\Entity\myProducts $myProduct = null)
+    {
+        $this->myProduct = $myProduct;
+
+        return $this;
+    }
+
+    /**
+     * Get myProduct
+     *
+     * @return \Nfq\NomNomBundle\Entity\myProducts 
+     */
+    public function getMyProduct()
+    {
+        return $this->myProduct;
     }
 }

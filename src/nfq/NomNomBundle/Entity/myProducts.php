@@ -2,16 +2,15 @@
 
 namespace Nfq\NomNomBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * myProducts
+ * MyProduct
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\myProductsRepository")
+ * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\MyProductRepository")
  */
-class myProducts
+class MyProduct
 {
     /**
      * @var integer
@@ -23,21 +22,31 @@ class myProducts
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="myRecipeProducts",mappedBy="myproducts")
-     */
-    private $myrecipeproducts;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="productName", type="string", length=50)
      */
     private $productName;
 
+    /**
+     * @ORM\OneToMany(targetEntity="MyRecipeProduct", mappedBy="myProducts")
+     */
+    private $myRecipeProducts;
+
+    /**
+     * @ORM\OneToMany(targetEntity="MyUserProduct", mappedBy="myProduct")
+     */
+    private $myUserProducts;
+
+    /**
+     * Constructor
+     */
     public function __construct()
     {
-        $this->myuserproducts = new ArrayCollection();
+        $this->myRecipeProducts = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->myUserProducts = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
     /**
      * Get id
      *
@@ -49,10 +58,76 @@ class myProducts
     }
 
     /**
+     * Add myRecipeProducts
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyRecipeProduct $myRecipeProducts
+     * @return MyProduct
+     */
+    public function addMyRecipeProduct(\Nfq\NomNomBundle\Entity\MyRecipeProduct $myRecipeProducts)
+    {
+        $this->myRecipeProducts[] = $myRecipeProducts;
+
+        return $this;
+    }
+
+    /**
+     * Remove myRecipeProducts
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyRecipeProduct $myRecipeProducts
+     */
+    public function removeMyRecipeProduct(\Nfq\NomNomBundle\Entity\MyRecipeProduct $myRecipeProducts)
+    {
+        $this->myRecipeProducts->removeElement($myRecipeProducts);
+    }
+
+    /**
+     * Get myRecipeProducts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMyRecipeProducts()
+    {
+        return $this->myRecipeProducts;
+    }
+
+    /**
+     * Add myUserProducts
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyUserProduct $myUserProducts
+     * @return MyProduct
+     */
+    public function addMyUserProduct(\Nfq\NomNomBundle\Entity\MyUserProduct $myUserProducts)
+    {
+        $this->myUserProducts[] = $myUserProducts;
+
+        return $this;
+    }
+
+    /**
+     * Remove myUserProducts
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyUserProduct $myUserProducts
+     */
+    public function removeMyUserProduct(\Nfq\NomNomBundle\Entity\MyUserProduct $myUserProducts)
+    {
+        $this->myUserProducts->removeElement($myUserProducts);
+    }
+
+    /**
+     * Get myUserProducts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMyUserProducts()
+    {
+        return $this->myUserProducts;
+    }
+
+    /**
      * Set productName
      *
      * @param string $productName
-     * @return myProducts
+     * @return MyProduct
      */
     public function setProductName($productName)
     {
@@ -69,38 +144,5 @@ class myProducts
     public function getProductName()
     {
         return $this->productName;
-    }
-
-    /**
-     * Add myuserproducts
-     *
-     * @param \Nfq\NomNomBundle\Entity\myUserProducts $myuserproducts
-     * @return myProducts
-     */
-    public function addMyuserproduct(\Nfq\NomNomBundle\Entity\myUserProducts $myuserproducts)
-    {
-        $this->myuserproducts[] = $myuserproducts;
-
-        return $this;
-    }
-
-    /**
-     * Remove myuserproducts
-     *
-     * @param \Nfq\NomNomBundle\Entity\myUserProducts $myuserproducts
-     */
-    public function removeMyuserproduct(\Nfq\NomNomBundle\Entity\myUserProducts $myuserproducts)
-    {
-        $this->myuserproducts->removeElement($myuserproducts);
-    }
-
-    /**
-     * Get myuserproducts
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getMyuserproducts()
-    {
-        return $this->myuserproducts;
     }
 }

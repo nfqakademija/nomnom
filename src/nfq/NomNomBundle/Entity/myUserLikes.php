@@ -5,12 +5,12 @@ namespace Nfq\NomNomBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * myUserLikes
+ * MyUserLike
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\myUserLikesRepository")
+ * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\MyUserLikeRepository")
  */
-class myUserLikes
+class MyUserLike
 {
     /**
      * @var integer
@@ -36,12 +36,11 @@ class myUserLikes
      */
     private $likeOrDislike;
 
-
     /**
-     * @ORM\ManyToOne(targetEntity="myUserProfile",inversedBy="myuserlikes")
-     * @ORM\JoinColumn(name="myuserprofile_id",referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="MyUserProfile",inversedBy="myUserLikes")
+     * @ORM\JoinColumn(name="my_user_profile_id",referencedColumnName="id")
      */
-    private $myuserprofile;
+    private $myUserProfile;
 
     /**
      * Get id
@@ -57,7 +56,7 @@ class myUserLikes
      * Set food
      *
      * @param string $food
-     * @return myUserLikes
+     * @return MyUserLike
      */
     public function setFood($food)
     {
@@ -80,7 +79,7 @@ class myUserLikes
      * Set likeOrDislike
      *
      * @param boolean $likeOrDislike
-     * @return myUserLikes
+     * @return MyUserLike
      */
     public function setLikeOrDislike($likeOrDislike)
     {
@@ -100,25 +99,25 @@ class myUserLikes
     }
 
     /**
-     * Set myuserprofile
+     * Set myUserProfile
      *
-     * @param \Nfq\NomNomBundle\Entity\myUserProfile $myuserprofile
-     * @return myUserLikes
+     * @param \Nfq\NomNomBundle\Entity\MyUserProfile $myUserProfile
+     * @return MyUserLike
      */
-    public function setMyuserprofile(\Nfq\NomNomBundle\Entity\myUserProfile $myuserprofile = null)
+    public function setMyUserProfile(\Nfq\NomNomBundle\Entity\MyUserProfile $myUserProfile = null)
     {
-        $this->myuserprofile = $myuserprofile;
+        $this->myUserProfile = $myUserProfile;
 
         return $this;
     }
 
     /**
-     * Get myuserprofile
+     * Get myUserProfile
      *
-     * @return \Nfq\NomNomBundle\Entity\myUserProfile 
+     * @return \Nfq\NomNomBundle\Entity\MyUserProfile 
      */
-    public function getMyuserprofile()
+    public function getMyUserProfile()
     {
-        return $this->myuserprofile;
+        return $this->myUserProfile;
     }
 }

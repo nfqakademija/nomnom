@@ -5,12 +5,12 @@ namespace Nfq\NomNomBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * myRoleRights
+ * MyRoleRight
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\myRoleRightsRepository")
+ * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\MyRoleRightRepository")
  */
-class myRoleRights
+class MyRoleRight
 {
     /**
      * @var integer
@@ -22,16 +22,16 @@ class myRoleRights
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="myRoles", inversedBy="myrolerights")
-     * @ORM\JoinColumn(name="myroles_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="MyRole", inversedBy="myRoleRights")
+     * @ORM\JoinColumn(name="my_role_id", referencedColumnName="id")
      */
-    private $myroles;
+    private $myRole;
 
     /**
-     * @ORM\ManyToOne(targetEntity="myRights", inversedBy="myrolerights")
-     * @ORM\JoinColumn(name="myrights_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="MyRight", inversedBy="myRoleRights")
+     * @ORM\JoinColumn(name="my_right_id", referencedColumnName="id")
      */
-    private $myrights;
+    private $myRight;
 
     /**
      * Get id
@@ -44,48 +44,48 @@ class myRoleRights
     }
 
     /**
-     * Set myroles
+     * Set myRole
      *
-     * @param \Nfq\NomNomBundle\Entity\myRoles $myroles
-     * @return myRoleRights
+     * @param \Nfq\NomNomBundle\Entity\MyRole $myRole
+     * @return MyRoleRight
      */
-    public function setMyroles(\Nfq\NomNomBundle\Entity\myRoles $myroles = null)
+    public function setMyRole(\Nfq\NomNomBundle\Entity\MyRole $myRole = null)
     {
-        $this->myroles = $myroles;
+        $this->myRole = $myRole;
 
         return $this;
     }
 
     /**
-     * Get myroles
+     * Get myRole
      *
-     * @return \Nfq\NomNomBundle\Entity\myRoles 
+     * @return \Nfq\NomNomBundle\Entity\MyRole 
      */
-    public function getMyroles()
+    public function getMyRole()
     {
-        return $this->myroles;
+        return $this->myRole;
     }
 
     /**
-     * Set myrights
+     * Set myRight
      *
-     * @param \Nfq\NomNomBundle\Entity\myRights $myrights
-     * @return myRoleRights
+     * @param \Nfq\NomNomBundle\Entity\MyRight $myRight
+     * @return MyRoleRight
      */
-    public function setMyrights(\Nfq\NomNomBundle\Entity\myRights $myrights = null)
+    public function setMyRight(\Nfq\NomNomBundle\Entity\MyRight $myRight = null)
     {
-        $this->myrights = $myrights;
+        $this->myRight = $myRight;
 
         return $this;
     }
 
     /**
-     * Get myrights
+     * Get myRight
      *
-     * @return \Nfq\NomNomBundle\Entity\myRights 
+     * @return \Nfq\NomNomBundle\Entity\MyRight 
      */
-    public function getMyrights()
+    public function getMyRight()
     {
-        return $this->myrights;
+        return $this->myRight;
     }
 }

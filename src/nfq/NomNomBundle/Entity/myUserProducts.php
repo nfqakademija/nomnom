@@ -2,16 +2,15 @@
 
 namespace Nfq\NomNomBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * myUserProducts
+ * MyUserProduct
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\myUserProductsRepository")
+ * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\MyUerProductRepository")
  */
-class myUserProducts
+class MyUserProduct
 {
     /**
      * @var integer
@@ -23,12 +22,6 @@ class myUserProducts
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="myUserEvents", mappedBy="myuserproducts")
-     */
-    private $myuserevents;
-
-
-    /**
      * @var float
      *
      * @ORM\Column(name="quantity", type="float")
@@ -37,17 +30,28 @@ class myUserProducts
 
     /**
      * @var integer
-     * quantity will be number coded
      *
      * @ORM\Column(name="quantityMeasure", type="smallint")
      */
     private $quantityMeasure;
 
+    /**
+     * @ORM\OneToMany(targetEntity="MyUserEvent", mappedBy="myUserProduct")
+     */
+    private $myUserEvents;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="MyProduct", inversedBy="myUserProducts")
+     * @ORM\JoinColumn(name="my_product_id", referencedColumnName="id")
+     */
+    protected $myProduct;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
-        $this->myuserevents = new ArrayCollection();
+        $this->myUserEvents = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -61,10 +65,66 @@ class myUserProducts
     }
 
     /**
+     * Add myUserEvents
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyUserEvent $myUserEvents
+     * @return MyUserProduct
+     */
+    public function addMyUserEvent(\Nfq\NomNomBundle\Entity\MyUserEvent $myUserEvents)
+    {
+        $this->myUserEvents[] = $myUserEvents;
+
+        return $this;
+    }
+
+    /**
+     * Remove myUserEvents
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyUserEvent $myUserEvents
+     */
+    public function removeMyUserEvent(\Nfq\NomNomBundle\Entity\MyUserEvent $myUserEvents)
+    {
+        $this->myUserEvents->removeElement($myUserEvents);
+    }
+
+    /**
+     * Get myUserEvents
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMyUserEvents()
+    {
+        return $this->myUserEvents;
+    }
+
+    /**
+     * Set myProduct
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyProduct $myProduct
+     * @return MyUserProduct
+     */
+    public function setMyProduct(\Nfq\NomNomBundle\Entity\MyProduct $myProduct = null)
+    {
+        $this->myProduct = $myProduct;
+
+        return $this;
+    }
+
+    /**
+     * Get myProduct
+     *
+     * @return \Nfq\NomNomBundle\Entity\MyProduct 
+     */
+    public function getMyProduct()
+    {
+        return $this->myProduct;
+    }
+
+    /**
      * Set quantity
      *
      * @param float $quantity
-     * @return myUserProducts
+     * @return MyUserProduct
      */
     public function setQuantity($quantity)
     {
@@ -87,7 +147,7 @@ class myUserProducts
      * Set quantityMeasure
      *
      * @param integer $quantityMeasure
-     * @return myUserProducts
+     * @return MyUserProduct
      */
     public function setQuantityMeasure($quantityMeasure)
     {
@@ -104,61 +164,5 @@ class myUserProducts
     public function getQuantityMeasure()
     {
         return $this->quantityMeasure;
-    }
-
-    /**
-     * Add myuserevents
-     *
-     * @param \Nfq\NomNomBundle\Entity\myUserEvents $myuserevents
-     * @return myUserProducts
-     */
-    public function addMyuserevent(\Nfq\NomNomBundle\Entity\myUserEvents $myuserevents)
-    {
-        $this->myuserevents[] = $myuserevents;
-
-        return $this;
-    }
-
-    /**
-     * Remove myuserevents
-     *
-     * @param \Nfq\NomNomBundle\Entity\myUserEvents $myuserevents
-     */
-    public function removeMyuserevent(\Nfq\NomNomBundle\Entity\myUserEvents $myuserevents)
-    {
-        $this->myuserevents->removeElement($myuserevents);
-    }
-
-    /**
-     * Get myuserevents
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getMyuserevents()
-    {
-        return $this->myuserevents;
-    }
-
-    /**
-     * Set myproducts
-     *
-     * @param \Nfq\NomNomBundle\Entity\myProducts $myproducts
-     * @return myUserProducts
-     */
-    public function setMyproducts(\Nfq\NomNomBundle\Entity\myProducts $myproducts = null)
-    {
-        $this->myproducts = $myproducts;
-
-        return $this;
-    }
-
-    /**
-     * Get myproducts
-     *
-     * @return \Nfq\NomNomBundle\Entity\myProducts 
-     */
-    public function getMyproducts()
-    {
-        return $this->myproducts;
     }
 }

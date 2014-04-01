@@ -2,15 +2,16 @@
 
 namespace Nfq\NomNomBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * myEventRecipes
+ * MyEventRecipe
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\myEventRecipesRepository")
+ * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\myEventRecipeRepository")
  */
-class myEventRecipes
+class MyEventRecipe
 {
     /**
      * @var integer
@@ -24,13 +25,6 @@ class myEventRecipes
     /**
      * @var integer
      *
-     * @ORM\Column(name="recipeId", type="integer")
-     */
-    private $recipeId;
-
-    /**
-     * @var integer
-     *
      * @ORM\Column(name="totalUpvote", type="integer")
      */
     private $totalUpvote;
@@ -38,17 +32,16 @@ class myEventRecipes
     /**
      * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="myEvents", inversedBy="myEventRecipes")
-     * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="MyEvent", inversedBy="myEventRecipes")
+     * @ORM\JoinColumn(name="my_event_id", referencedColumnName="id")
      */
     private $myEvent;
 
     /**
-     * @ORM\ManyToOne(targetEntity="myRecipes", inversedBy="myeventsrecipes")
-     *
+     * @ORM\ManyToOne(targetEntity="MyRecipe", inversedBy="myEventRecipe")
+     * @ORM\JoinColumn(name="my_recipe_id", referencedColumnName="id")*
      */
-    private $myrecipes;
-
+    private $myRecipe;
 
     /**
      * Get id
@@ -64,7 +57,7 @@ class myEventRecipes
      * Set recipeId
      *
      * @param integer $recipeId
-     * @return myEventRecipes
+     * @return MyEventRecipe
      */
     public function setRecipeId($recipeId)
     {
@@ -87,7 +80,7 @@ class myEventRecipes
      * Set totalUpvote
      *
      * @param integer $totalUpvote
-     * @return myEventRecipes
+     * @return MyEventRecipe
      */
     public function setTotalUpvote($totalUpvote)
     {
@@ -109,10 +102,10 @@ class myEventRecipes
     /**
      * Set myEvent
      *
-     * @param \Nfq\NomNomBundle\Entity\myEvents $myEvent
-     * @return myEventRecipes
+     * @param \Nfq\NomNomBundle\Entity\MyEvent $myEvent
+     * @return MyEventRecipe
      */
-    public function setMyEvent(\Nfq\NomNomBundle\Entity\myEvents $myEvent = null)
+    public function setMyEvent(\Nfq\NomNomBundle\Entity\MyEvent $myEvent = null)
     {
         $this->myEvent = $myEvent;
 
@@ -122,10 +115,56 @@ class myEventRecipes
     /**
      * Get myEvent
      *
-     * @return \Nfq\NomNomBundle\Entity\myEvents 
+     * @return \Nfq\NomNomBundle\Entity\MyEvent 
      */
     public function getMyEvent()
     {
         return $this->myEvent;
+    }
+
+    /**
+     * Set myRecipes
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyRecipe $myRecipes
+     * @return MyEventRecipe
+     */
+    public function setMyRecipes(\Nfq\NomNomBundle\Entity\MyRecipe $myRecipes = null)
+    {
+        $this->myRecipes = $myRecipes;
+
+        return $this;
+    }
+
+    /**
+     * Get myRecipes
+     *
+     * @return \Nfq\NomNomBundle\Entity\MyRecipe 
+     */
+    public function getMyRecipes()
+    {
+        return $this->myRecipes;
+    }
+
+    /**
+     * Set myRecipe
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyRecipe $myRecipe
+     * @return MyEventRecipe
+     */
+    public function setMyRecipe(\Nfq\NomNomBundle\Entity\MyRecipe $myRecipe = null)
+    {
+        $this->myRecipe = $myRecipe;
+
+        return $this;
+    }
+
+    /**
+     * Get myRecipe
+     *
+     * @return \Nfq\NomNomBundle\Entity\MyRecipe 
+     */
+    public function getMyRecipe()
+    {
+        return $this->myRecipe;
     }
 }

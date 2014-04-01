@@ -5,12 +5,12 @@ namespace Nfq\NomNomBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * myRecipeCategory
+ * MyRecipeCategory
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\myRecipeCategoryRepository")
+ * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\MyRecipeCategoryRepository")
  */
-class myRecipeCategory
+class MyRecipeCategory
 {
     /**
      * @var integer
@@ -22,9 +22,9 @@ class myRecipeCategory
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="myRecipes", mappedBy="myrecipecategory")
+     * @ORM\OneToMany(targetEntity="MyRecipe", mappedBy="myRecipeCategory")
      */
-    private $myrecipies;
+    private $myRecipes;
 
     /**
      * @var string
@@ -33,6 +33,13 @@ class myRecipeCategory
      */
     private $categoryName;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->myRecipes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -48,7 +55,7 @@ class myRecipeCategory
      * Set categoryName
      *
      * @param string $categoryName
-     * @return myRecipeCategory
+     * @return MyRecipeCategory
      */
     public function setCategoryName($categoryName)
     {
@@ -65,5 +72,38 @@ class myRecipeCategory
     public function getCategoryName()
     {
         return $this->categoryName;
+    }
+
+    /**
+     * Add myRecipes
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyRecipe $myRecipes
+     * @return MyRecipeCategory
+     */
+    public function addMyRecipe(\Nfq\NomNomBundle\Entity\MyRecipe $myRecipes)
+    {
+        $this->myRecipes[] = $myRecipes;
+
+        return $this;
+    }
+
+    /**
+     * Remove myRecipes
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyRecipe $myRecipes
+     */
+    public function removeMyRecipe(\Nfq\NomNomBundle\Entity\MyRecipe $myRecipes)
+    {
+        $this->myRecipes->removeElement($myRecipes);
+    }
+
+    /**
+     * Get myRecipes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMyRecipes()
+    {
+        return $this->myRecipes;
     }
 }
