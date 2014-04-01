@@ -37,9 +37,15 @@ class myRecipeVotes
     private $vote;
 
     /**
-     * @ORM\OneToMany(targetEntity="myUserEvents", mappedBy="myRecipeVote")
+     * @ORM\OneToMany(targetEntity="myUserEvents", mappedBy="myrecipevote")
      */
-    private $myUserEvents;
+    private $myuserevents;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="myRecipes", inversedBy="myrecipesvotes")
+     *
+     */
+    private $myrecipes;
 
     /**
      * Constructor

@@ -22,7 +22,7 @@ class myUserEvents
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="myUserProducts", inversedBy="myUserEvents")
+     * @ORM\ManyToOne(targetEntity="myUserProducts", inversedBy="myuserevents")
      * @ORM\JoinColumn(name="myuserproducts_id", referencedColumnName="id")
      */
     private $myuserproducts;
@@ -54,10 +54,10 @@ class myUserEvents
     /**
      * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="myRecipeVotes", inversedBy="myUserEvents")
-     * @ORM\JoinColumn(name="recipeVote_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="myRecipeVotes", inversedBy="myuserevents")
+     *
      */
-    private $myRecipeVote;
+    private $myrecipevote;
 
     /**
      * @var integer

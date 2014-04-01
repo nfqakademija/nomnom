@@ -22,11 +22,23 @@ class myRecipeProducts
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="myRecipes", inversedBy="myrecipeproducts")
+     *
+     */
+    private $myrecipes;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="recipeId", type="integer")
      */
     private $recipeId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="myProducts", inversedBy="myrecipeproducts")
+     *
+     */
+    private $myproducts;
 
     /**
      * @var integer

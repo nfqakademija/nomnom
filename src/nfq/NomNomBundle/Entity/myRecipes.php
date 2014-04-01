@@ -22,6 +22,28 @@ class myRecipes
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="myRecipeCategory", inversedBy="myrecipies")
+     *
+     */
+    private $myrecipecategory;
+
+    /**
+     * @ORM\OneToMany(targetEntity="myRecipeProducts", mappedBy="myrecipes")
+     */
+    private $myrecipeproducts;
+
+    /**
+     * @ORM\OneToMany(targetEntity="myRecipeVotes", mappedBy="myrecipes")
+     */
+    private $myrecipesvotes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="myEventRecipes", mappedBy="myrecipes")
+     */
+    private $myeventsrecipes;
+
+
+   /**
      * @var integer
      *
      * @ORM\Column(name="numberOfServings", type="smallint")

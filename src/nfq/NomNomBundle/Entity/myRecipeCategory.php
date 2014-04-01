@@ -22,6 +22,11 @@ class myRecipeCategory
     private $id;
 
     /**
+     * @ORM\OneToMany(targetEntity="myRecipes", mappedBy="myrecipecategory")
+     */
+    private $myrecipies;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="categoryName", type="string", length=50)

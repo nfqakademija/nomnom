@@ -39,10 +39,6 @@ class myUserProfile
      */
     private $myuserlikes;
 
-    /**
-     * @ORM\OneToOne(targetEntity="User", mappedBy="myuserprofile")
-     */
-    private $users;
 
     public function __construct()
     {

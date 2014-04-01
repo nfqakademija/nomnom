@@ -27,11 +27,7 @@ class myUserProducts
      */
     private $myuserevents;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="myProducts", inversedBy="myuserproducts")
-     * @ORM\JoinColumn(name="myproducts_id", referencedColumnName="id")
-     */
-    private $myproducts;
+
     /**
      * @var float
      *
@@ -47,7 +43,6 @@ class myUserProducts
      */
     private $quantityMeasure;
 
-    private $myUserProducts;
 
 
     public function __construct()

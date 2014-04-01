@@ -21,10 +21,7 @@ class myEvents
      */
     private $id;
 
-    /**
-     * @ORM\OneToMany(targetEntity="myUserEvents", mappedBy="myEvents")
-     */
-    private $myrolerights;
+
 
     /**
      * @var \DateTime

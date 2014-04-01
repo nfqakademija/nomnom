@@ -43,6 +43,12 @@ class myEventRecipes
      */
     private $myEvent;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="myRecipes", inversedBy="myeventsrecipes")
+     *
+     */
+    private $myrecipes;
+
 
     /**
      * Get id

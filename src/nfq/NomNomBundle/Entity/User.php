@@ -22,7 +22,7 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="myUserProfile", inversedBy="users")
+     * @ORM\OneToOne(targetEntity="myUserProfile", inversedBy="user")
      */
     private $myuserprofile;
 

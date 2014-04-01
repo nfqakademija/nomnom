@@ -23,9 +23,9 @@ class myProducts
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="myUserProducts",mappedBy="myproducts")
+     * @ORM\OneToMany(targetEntity="myRecipeProducts",mappedBy="myproducts")
      */
-    private $myuserproducts;
+    private $myrecipeproducts;
 
     /**
      * @var string
