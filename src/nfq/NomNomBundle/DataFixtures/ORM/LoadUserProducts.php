@@ -7,6 +7,7 @@
  */
 
 namespace Nfq\NomNomBundle\DataFixtures\ORM;
+
 use Doctrine\Common\DataFixtures\Doctrine;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -14,7 +15,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Nfq\NomnomBundle\Entity\MyUserProduct;
 
 
-class LoadUserProducts extends AbstractFixture implements OrderedFixtureInterface {
+class LoadUserProducts extends AbstractFixture implements OrderedFixtureInterface
+{
 
     /**
      * Load data fixtures with the passed EntityManager
@@ -37,8 +39,8 @@ class LoadUserProducts extends AbstractFixture implements OrderedFixtureInterfac
         $manager->persist($userproduct2);
         $manager->flush();
 
-        $this->addReference('userproduct',$userproduct);
-        $this->addReference('userproduct2',$userproduct2);
+        $this->addReference('userproduct', $userproduct);
+        $this->addReference('userproduct2', $userproduct2);
     }
 
     /**

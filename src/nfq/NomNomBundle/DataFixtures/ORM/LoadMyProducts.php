@@ -14,7 +14,8 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Nfq\NomnomBundle\Entity\MyProduct;
 
-class LoadMyProducts extends AbstractFixture implements OrderedFixtureInterface{
+class LoadMyProducts extends AbstractFixture implements OrderedFixtureInterface
+{
 
     /**
      * Load data fixtures with the passed EntityManager
@@ -33,8 +34,8 @@ class LoadMyProducts extends AbstractFixture implements OrderedFixtureInterface{
         $manager->persist($fish);
         $manager->flush();
 
-        $this->addReference('fish',$fish);
-        $this->addReference('banana',$banana);
+        $this->addReference('fish', $fish);
+        $this->addReference('banana', $banana);
     }
 
     /**

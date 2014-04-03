@@ -13,6 +13,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Nfq\NomnomBundle\Entity\MyUserLike;
+
 class LoadMyUserLikes extends AbstractFixture implements OrderedFixtureInterface
 {
 
@@ -35,8 +36,8 @@ class LoadMyUserLikes extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist($fishDislike);
         $manager->flush();
 
-        $this->addReference("bananaLikes",$bananaLike);
-        $this->addReference("fishDislikes",$fishDislike);
+        $this->addReference("bananaLikes", $bananaLike);
+        $this->addReference("fishDislikes", $fishDislike);
     }
 
     /**
