@@ -169,18 +169,18 @@ class MyRecipeProduct
      */
     public function getMyRecipe()
     {
-        return $this->myRecipe;
+        return $this->MyRecipe;
     }
 
     /**
      * Set myProduct
      *
-     * @param \Nfq\NomNomBundle\Entity\myProducts $myProduct
+     * @param \Nfq\NomNomBundle\Entity\MyProduct $myProduct
      * @return MyRecipeProduct
      */
-    public function setMyProduct(\Nfq\NomNomBundle\Entity\myProducts $myProduct = null)
+    public function setMyProduct(\Nfq\NomNomBundle\Entity\MyProduct $myProductyProduct = null)
     {
-        $this->myProduct = $myProduct;
+        $this->myProduct = $myProductyProduct;
 
         return $this;
     }
@@ -188,7 +188,7 @@ class MyRecipeProduct
     /**
      * Get myProduct
      *
-     * @return \Nfq\NomNomBundle\Entity\myProducts 
+     * @return \Nfq\NomNomBundle\Entity\MyProduct
      */
     public function getMyProduct()
     {

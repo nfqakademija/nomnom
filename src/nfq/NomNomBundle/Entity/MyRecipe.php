@@ -23,33 +23,34 @@ class MyRecipe
 
     /**
      * @var integer
+     * @ORM\Column(name="numberOfServings", type="integer")
      */
     private $numberOfServings;
 
     /**
-     * @var \DateTime
+     * @var string
+     * @ORM\Column(name="preparationTime", type="string", length=50)
      */
     private $preparationTime;
 
     /**
      * @var string
+     * @ORM\Column(name="recipeName", type="string", length=50)
      */
     private $recipeName;
 
     /**
      * @var string
+     * @ORM\Column(name="recipeFoto", type="string", length=50)
      */
     private $foto;
 
     /**
      * @var string
+     * @ORM\Column(name="preparationInstructions", type="string", length=500)
      */
     private $preparationInstructions;
 
-    /**
-     * @var integer
-     */
-    private $categoryId;
 
     /**
      * @ORM\ManyToOne(targetEntity="MyRecipeCategory", inversedBy="myRecipes")
@@ -72,6 +73,8 @@ class MyRecipe
      */
     private $myEventRecipes;
 
+
+
     /**
      * Constructor
      */
@@ -90,6 +93,121 @@ class MyRecipe
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set numberOfServings
+     *
+     * @param integer $numberOfServings
+     * @return MyRecipe
+     */
+    public function setNumberOfServings($numberOfServings)
+    {
+        $this->numberOfServings = $numberOfServings;
+
+        return $this;
+    }
+
+    /**
+     * Get numberOfServings
+     *
+     * @return integer 
+     */
+    public function getNumberOfServings()
+    {
+        return $this->numberOfServings;
+    }
+
+    /**
+     * Set preparationTime
+     *
+     * @param string $preparationTime
+     * @return MyRecipe
+     */
+    public function setPreparationTime($preparationTime)
+    {
+        $this->preparationTime = $preparationTime;
+
+        return $this;
+    }
+
+    /**
+     * Get preparationTime
+     *
+     * @return string 
+     */
+    public function getPreparationTime()
+    {
+        return $this->preparationTime;
+    }
+
+    /**
+     * Set recipeName
+     *
+     * @param string $recipeName
+     * @return MyRecipe
+     */
+    public function setRecipeName($recipeName)
+    {
+        $this->recipeName = $recipeName;
+
+        return $this;
+    }
+
+    /**
+     * Get recipeName
+     *
+     * @return string 
+     */
+    public function getRecipeName()
+    {
+        return $this->recipeName;
+    }
+
+    /**
+     * Set foto
+     *
+     * @param string $foto
+     * @return MyRecipe
+     */
+    public function setFoto($foto)
+    {
+        $this->foto = $foto;
+
+        return $this;
+    }
+
+    /**
+     * Get foto
+     *
+     * @return string 
+     */
+    public function getFoto()
+    {
+        return $this->foto;
+    }
+
+    /**
+     * Set preparationInstructions
+     *
+     * @param string $preparationInstructions
+     * @return MyRecipe
+     */
+    public function setPreparationInstructions($preparationInstructions)
+    {
+        $this->preparationInstructions = $preparationInstructions;
+
+        return $this;
+    }
+
+    /**
+     * Get preparationInstructions
+     *
+     * @return string 
+     */
+    public function getPreparationInstructions()
+    {
+        return $this->preparationInstructions;
     }
 
     /**
