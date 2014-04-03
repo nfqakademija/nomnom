@@ -13,7 +13,9 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Nfq\NomnomBundle\Entity\MyUserProfile;
-class LoadUserProfile extends AbstractFixture implements OrderedFixtureInterface{
+
+class LoadUserProfile extends AbstractFixture implements OrderedFixtureInterface
+{
 
     /**
      * Load data fixtures with the passed EntityManager
@@ -112,8 +114,8 @@ AAAASUVORK5CYII=');
         $manager->persist($userprofile2);
         $manager->flush();
 
-        $this->addReference('userProfile',$userprofile);
-        $this->addReference('userProfile2',$userprofile2);
+        $this->addReference('userProfile', $userprofile);
+        $this->addReference('userProfile2', $userprofile2);
     }
 
     /**

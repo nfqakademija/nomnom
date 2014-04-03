@@ -14,7 +14,8 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Nfq\NomnomBundle\Entity\MyRoleRight;
 
-class LoadMyRoleRights extends AbstractFixture implements OrderedFixtureInterface{
+class LoadMyRoleRights extends AbstractFixture implements OrderedFixtureInterface
+{
 
     /**
      * Load data fixtures with the passed EntityManager
@@ -35,8 +36,8 @@ class LoadMyRoleRights extends AbstractFixture implements OrderedFixtureInterfac
         $manager->persist($firstRR);
         $manager->flush();
 
-        $this->addReference('firstRoleRights',$firstRR);
-        $this->addReference('secondRoleRights',$secondRR);
+        $this->addReference('firstRoleRights', $firstRR);
+        $this->addReference('secondRoleRights', $secondRR);
     }
 
     /**

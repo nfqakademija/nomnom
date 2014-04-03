@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Nfq\NomnomBundle\Entity\User;
 
-class LoadUser extends AbstractFixture implements  ContainerAwareInterface, OrderedFixtureInterface
+class LoadUser extends AbstractFixture implements ContainerAwareInterface, OrderedFixtureInterface
 {
 
     /**
@@ -61,8 +61,8 @@ class LoadUser extends AbstractFixture implements  ContainerAwareInterface, Orde
 
         $userManager->updateUser($user2);
 
-        $this->addReference('user',$user);
-        $this->addReference('user2',$user2);
+        $this->addReference('user', $user);
+        $this->addReference('user2', $user2);
     }
 
     /**
