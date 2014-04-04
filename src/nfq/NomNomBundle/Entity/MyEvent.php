@@ -55,10 +55,6 @@ class MyEvent
     private $myUserEvents;
 
     /**
-     * @ORM\OneToMany(targetEntity="MyRoleRight", mappedBy="myEvent")
-     */
-    private $myRoleRights;
-    /**
      * @ORM\OneToMany(targetEntity="MyEventRecipe", mappedBy="myEvent")
      */
     private $myEventRecipes;
@@ -68,7 +64,6 @@ class MyEvent
      */
     public function __construct()
     {
-        $this->myRoleRights = new \Doctrine\Common\Collections\ArrayCollection();
         $this->myUserEvents = new \Doctrine\Common\Collections\ArrayCollection();
         $this->myEventRecipes = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -206,39 +201,6 @@ class MyEvent
     public function getMyUserEvents()
     {
         return $this->myUserEvents;
-    }
-
-    /**
-     * Add myRoleRights
-     *
-     * @param \Nfq\NomNomBundle\Entity\MyRoleRight $myRoleRights
-     * @return MyEvent
-     */
-    public function addMyRoleRight(\Nfq\NomNomBundle\Entity\MyRoleRight $myRoleRights)
-    {
-        $this->myRoleRights[] = $myRoleRights;
-
-        return $this;
-    }
-
-    /**
-     * Remove myRoleRights
-     *
-     * @param \Nfq\NomNomBundle\Entity\MyRoleRight $myRoleRights
-     */
-    public function removeMyRoleRight(\Nfq\NomNomBundle\Entity\MyRoleRight $myRoleRights)
-    {
-        $this->myRoleRights->removeElement($myRoleRights);
-    }
-
-    /**
-     * Get myRoleRights
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getMyRoleRights()
-    {
-        return $this->myRoleRights;
     }
 
     /**
