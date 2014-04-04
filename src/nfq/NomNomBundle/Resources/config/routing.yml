@@ -13,3 +13,7 @@ Nfq_nom_nom_event_manager:
 Nfq_nom_nom_events:
     pattern: /event/{eventId}
     defaults: { _controller: NfqNomNomBundle:Default:event , eventId: 0}
+
+Nfq_nom_nom_create_event:
+    pattern:  /createevent/
+    defaults: { _controller: NfqNomNomBundle:Default:createEvent }

@@ -30,13 +30,13 @@ class LoadMyEvents extends AbstractFixture implements OrderedFixtureInterface
         $event1->setDateCreated(new DateTime());
         $event1->setEventName('Gimtadienis');
         $event1->setEventDate(new DateTime('2014-05-01 19:00'));
-        $event1->setEvenPhases(0);
+        $event1->setEventPhase(0);
 
         $event2 = new MyEvent();
         $event2->setDateCreated(new DateTime());
         $event2->setEventName('Įkurtuvės');
         $event2->setEventDate(new DateTime('2014-04-15 16:30'));
-        $event2->setEvenPhases(0);
+        $event2->setEventPhase(0);
 
 
         $manager->persist($event1);

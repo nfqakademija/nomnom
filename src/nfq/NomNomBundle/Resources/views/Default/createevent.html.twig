@@ -2,6 +2,8 @@
 {% block content %}
     {{ error }}
     <br>
-    <a href="{{ path('Nfq_nom_nom_create_event') }}">Create Event</a>
+    <div class="myEvent">
+        {{ form(forma) }}
+    </div>
     {#generated content displaying#}
 {% endblock %}
