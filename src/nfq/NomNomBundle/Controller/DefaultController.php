@@ -6,6 +6,7 @@ use Nfq\NomNomBundle\Entity\MyEvent;
 use Nfq\NomNomBundle\Entity\MyUserEvent;
 use Nfq\NomNomBundle\Entity\User;
 use Nfq\NomNomBundle\Form\Type\EventType;
+use Nfq\NomNomBundle\NfqNomNomBundle;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,7 +40,7 @@ class DefaultController extends Controller
     {
         $user = $this->getUser();
         if ($user != '') {
-            return $this->render('NfqNomNomBundle:Default:event.html.twig');
+            return $this->render('NfqNomNomBundle:Default:event.html.twig', array('error' => ''));
         } else {
             return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'log  in first'));
         }
@@ -48,8 +49,26 @@ class DefaultController extends Controller
     public function eventManagerAction()
     {
         $user = $this->getUser();
+        // TODO: we should check is the user is registered but maybe this is enough
         if ($user != '') {
-            return $this->render('NfqNomNomBundle:Default:eventmanager.html.twig', array('error' => ''));
+            $em = $this->getDoctrine()->getManager();
+            //getting all userevent objects where user_id is current users id
+            $myUserEvents = $em->createQuery('SELECT m FROM NfqNomNomBundle:MyUserEvent m WHERE m.myUser = :myuser')
+                ->setParameter('myuser', $user)
+                ->getResult();
+
+            //getting array of eventName and eventIds pairs
+            $names = array();
+            foreach ($myUserEvents as $mue) {
+                $temp = array();
+                $temp[] = $mue->getMyEvent()->getEventName();
+                $temp[] = $mue->getMyEvent()->getId();
+                $names[] = $temp;
+            }
+
+            return $this->render('NfqNomNomBundle:Default:eventmanager.html.twig',
+                array('names' => $names,
+                    'error' => ''));
         } else {
             return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'log in  first'));
         }
@@ -95,6 +114,9 @@ class DefaultController extends Controller
                 return $this->redirect($this->generateUrl('Nfq_nom_nom_event_manager'));
             }
         }
-        return $this->render('NfqNomNomBundle:Default:createevent.html.twig', array('forma' => $form->createView(), 'error' => ''));
+
+        return $this->render('NfqNomNomBundle:Default:createevent.html.twig',
+            array('forma' => $form->createView(),
+                'error' => ''));
     }
 }

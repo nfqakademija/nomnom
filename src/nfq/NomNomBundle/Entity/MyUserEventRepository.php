@@ -12,13 +12,5 @@ use Doctrine\ORM\EntityRepository;
  */
 class MyUserEventRepository extends EntityRepository
 {
-    public function findAllUserEventsByUserId($userId)
-    {
-        return $this->getEntityManager()
-            ->createQuery(
-                'SELECT * FROM NfqNomNomBundle:MyUserEvent WHERE user_id = :Id'
-            )
-            ->setParameter('id',$userId)
-            ->getResult();
-    }
+
 }

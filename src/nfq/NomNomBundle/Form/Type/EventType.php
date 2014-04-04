@@ -30,7 +30,7 @@ class EventType extends AbstractType{
     {
         $builder->add('eventName')
                 ->add('eventDate')
-                ->add('save', 'submit');
+                ->add('create', 'submit');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
