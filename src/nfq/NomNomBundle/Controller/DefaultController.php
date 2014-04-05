@@ -7,6 +7,7 @@ use Nfq\NomNomBundle\Entity\MyUserEvent;
 use Nfq\NomNomBundle\Entity\User;
 use Nfq\NomNomBundle\Form\Type\EventType;
 use Nfq\NomNomBundle\NfqNomNomBundle;
+use Nfq\NomNomBundle\Utilities;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,7 +41,21 @@ class DefaultController extends Controller
     {
         $user = $this->getUser();
         if ($user != '') {
-            return $this->render('NfqNomNomBundle:Default:event.html.twig', array('error' => ''));
+            $em = $this->getDoctrine()->getManager();
+            /**@var $myEvent MyEvent */
+            $myEvent = $em->getRepository('NfqNomNomBundle:MyEvent')->find($eventId);
+            if (Utilities::hasUserPermissionToEvent($myEvent, $user, $em)) {
+                $myEventArray = array();
+                $myEventArray['dateCreated'] = $myEvent->getDateCreated()->format('Y-m-d H:i:s');
+                $myEventArray['eventName'] = $myEvent->getEventName();
+                $myEventArray['eventDate'] = $myEvent->getEventDate()->format('Y-m-d H:i:s');
+                $myEventArray['eventPhase'] = $myEvent->getEventPhase();
+                return $this->render('NfqNomNomBundle:Default:event.html.twig',
+                    array('error' => '',
+                        'event' => $myEventArray));
+            } else {
+                return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => "you don't have permission to this evvent" ));
+            }
         } else {
             return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'log  in first'));
         }
@@ -57,7 +72,7 @@ class DefaultController extends Controller
                 ->setParameter('myuser', $user)
                 ->getResult();
 
-            //getting array of eventName and eventIds pairs
+            //getting array of eventName and eventId pairs
             $names = array();
             foreach ($myUserEvents as $mue) {
                 $temp = array();

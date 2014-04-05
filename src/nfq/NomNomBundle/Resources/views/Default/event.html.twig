@@ -1,5 +1,17 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
 {% block content %}
     {{ error }}
+    <div>Event Name:</div>
+    {{ event['eventName'] }}
+
+    <div>Event creation date:</div>
+    {{ event['dateCreated'] }}
+
+    <div>Event date:</div>
+    {{ event['eventDate'] }}
+
+    <div>Event Phase:</div>
+    {{ event['eventPhase'] }}
+
     {#generated content displaying#}
 {% endblock %}
