@@ -5,39 +5,39 @@
     {# ... #}
 
     {# store the prototype on the data-prototype attribute #}
-    <ul id="email-fields-list" data-prototype="{{ form_widget(forma.emails.vars.prototype)|e }}">
-        {% for emailField in forma.emails %}
+    <ul id="user-fields-list" data-prototype="{{ form_widget(forma.users.vars.prototype)|e }}">
+        {% for userField in forma.users %}
             <li>
-                {{ form_errors(emailField) }}
-                {{ form_widget(emailField) }}
+                {{ form_errors(userField) }}
+                {{ form_widget(userField) }}
             </li>
         {% endfor %}
     </ul>
 
-    <a href="#" id="add-another-email">Add another email</a>
+    <a href="#" id="add-another-user">Add another user</a>
 
     {# ... #}
     {{ form_end(forma) }}
 
     <script type="text/javascript">
-        // keep track of how many email fields have been rendered
-        var emailCount = '{{ forma.emails|length }}';
+        // keep track of how many user fields have been rendered
+        var userCount = '{{ forma.users|length }}';
 
         jQuery(document).ready(function() {
-            jQuery('#add-another-email').click(function() {
-                var emailList = jQuery('#email-fields-list');
+            jQuery('#add-another-user').click(function() {
+                var userList = jQuery('#user-fields-list');
 
                 // grab the prototype template
-                var newWidget = emailList.attr('data-prototype');
+                var newWidget = userList.attr('data-prototype');
                 // replace the "__name__" used in the id and name of the prototype
-                // with a number that's unique to your emails
-                // end name attribute looks like name="contact[emails][2]"
-                newWidget = newWidget.replace(/__name__/g, emailCount);
-                emailCount++;
+                // with a number that's unique to your users
+                // end name attribute looks like name="contact[users][2]"
+                newWidget = newWidget.replace(/__name__/g, userCount);
+                userCount++;
 
                 // create a new list element and add it to the list
                 var newLi = jQuery('<li></li>').html(newWidget);
-                newLi.appendTo(jQuery('#email-fields-list'));
+                newLi.appendTo(jQuery('#user-fields-list'));
 
                 return false;
             });

@@ -27,9 +27,9 @@ class AddUsersToEventType extends AbstractType{
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('emails', 'collection', array(
+        $builder->add('users', 'collection', array(
             // each item in the array will be an "email" field
-            'type'   => 'email',
+            'type'   => 'text',
             // these options are passed to each "email" type
             'options'  => array(
                 'required'  => false,

@@ -149,8 +149,8 @@ class DefaultController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $data = $form->getData()['emails'];
-                foreach($data as $email)
+                $data = $form->getData()['users'];
+                foreach($data as $userNames)
                 {
                     //TODO email perssisting logic
                 }
