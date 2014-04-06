@@ -152,7 +152,19 @@ class DefaultController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $data = $form->getData()['user'];
+
+                $userEvent = new MyUserEvent();
+                /** @var @var Nfq\NomNomBundle\Entity\MyRole $myRole */
+                $myRole = $em->getRepository('NfqNomNomBundle:MyRole')
+                    ->findOneBy(array('roleName' => 'participatingUser'));
+
+                $userEvent->setMyEvent($myEvent);
+                $userEvent->setMyRole($myRole);
+                $userEvent->setInvitationStatus(1);
+                $userEvent->setMyUser($form->getData()['user']);
+
+                $em->persist($userEvent);
+                $em->flush();
 
                 return $this->redirect($this->generateUrl('Nfq_nom_nom_events',array('eventId' => $eventId)));
             } else {
