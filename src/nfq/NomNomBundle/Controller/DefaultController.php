@@ -52,9 +52,10 @@ class DefaultController extends Controller
                 $myEventArray['eventPhase'] = $myEvent->getEventPhase();
                 return $this->render('NfqNomNomBundle:Default:event.html.twig',
                     array('error' => '',
-                        'event' => $myEventArray));
+                        'event' => $myEventArray,
+                        'eventId' => $eventId));
             } else {
-                return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => "you don't have permission to this evvent" ));
+                return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => "you don't have permission to this evvent"));
             }
         } else {
             return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'log  in first'));
@@ -133,5 +134,34 @@ class DefaultController extends Controller
         return $this->render('NfqNomNomBundle:Default:createevent.html.twig',
             array('forma' => $form->createView(),
                 'error' => ''));
+    }
+
+    public function addUsersToEventAction($eventId, Request $request)
+    {
+        $user = $this->getUser();
+
+        $em = $this->getDoctrine()->getManager();
+        /**@var $myEvent MyEvent */
+        $myEvent = $em->getRepository('NfqNomNomBundle:MyEvent')->find($eventId);
+
+        if (Utilities::hasUserPermissionToEvent($myEvent, $user, $em)) {
+            $form = $this->createForm('adduserstoevent');
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $data = $form->getData()['emails'];
+                foreach($data as $email)
+                {
+                    //TODO email perssisting logic
+                }
+                return $this->redirect($this->generateUrl('Nfq_nom_nom_events',array('eventId' => $eventId)));
+            } else {
+                return $this->render('NfqNomNomBundle:Default:adduserstoevent.html.twig',
+                    array('forma' => $form->createView(),
+                        'error' => ''));
+            }
+        } else {
+            return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'log in  first'));
+        }
     }
 }

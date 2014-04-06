@@ -9,3 +9,8 @@ services:
         class: Nfq\NomNomBundle\Form\Type\EventType
         tags:
             - { name: form.type, alias: event }
+
+     nfq_nom_nom.form.type.adduserstoevent:
+             class: Nfq\NomNomBundle\Form\Type\AddUsersToEventType
+             tags:
+                 - { name: form.type, alias: adduserstoevent }

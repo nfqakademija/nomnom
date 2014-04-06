@@ -14,6 +14,10 @@ Nfq_nom_nom_events:
     pattern: /event/{eventId}
     defaults: { _controller: NfqNomNomBundle:Default:event , eventId: 0}
 
+Nfq_nom_nom_add_user_to_event:
+    pattern: /event/addusers/{eventId}
+    defaults: { _controller: NfqNomNomBundle:Default:addUsersToEvent , eventId: 0}
+
 Nfq_nom_nom_create_event:
     pattern:  /createevent/
     defaults: { _controller: NfqNomNomBundle:Default:createEvent }

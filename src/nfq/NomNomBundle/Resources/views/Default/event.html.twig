@@ -13,5 +13,7 @@
     <div>Event Phase:</div>
     {{ event['eventPhase'] }}
 
+    <br>
+    <a href="{{ path('Nfq_nom_nom_add_user_to_event', {'eventId': eventId}) }}">Add people</a>
     {#generated content displaying#}
 {% endblock %}
