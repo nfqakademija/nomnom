@@ -46,10 +46,13 @@ class DefaultController extends Controller
             $myEvent = $em->getRepository('NfqNomNomBundle:MyEvent')->find($eventId);
             if (Utilities::hasUserPermissionToEvent($myEvent, $user, $em)) {
                 $myEventArray = array();
+                 $userNames = array();
+
                 $myEventArray['dateCreated'] = $myEvent->getDateCreated()->format('Y-m-d H:i:s');
                 $myEventArray['eventName'] = $myEvent->getEventName();
                 $myEventArray['eventDate'] = $myEvent->getEventDate()->format('Y-m-d H:i:s');
                 $myEventArray['eventPhase'] = $myEvent->getEventPhase();
+
                 return $this->render('NfqNomNomBundle:Default:event.html.twig',
                     array('error' => '',
                         'event' => $myEventArray,
@@ -149,11 +152,8 @@ class DefaultController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $data = $form->getData()['users'];
-                foreach($data as $userNames)
-                {
-                    //TODO email perssisting logic
-                }
+                $data = $form->getData()['user'];
+
                 return $this->redirect($this->generateUrl('Nfq_nom_nom_events',array('eventId' => $eventId)));
             } else {
                 return $this->render('NfqNomNomBundle:Default:adduserstoevent.html.twig',

@@ -27,18 +27,10 @@ class AddUsersToEventType extends AbstractType{
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('users', 'collection', array(
-            // each item in the array will be an "email" field
-            'type'   => 'text',
-            // these options are passed to each "email" type
-            'options'  => array(
-                'required'  => false,
-                'attr'      => array('class' => 'email-box')
-            ),
-
-            'allow_add' => true,
-            'prototype' => true,
-        ))
+        $builder->add('user', 'genemu_jqueryselect2_entity', array(
+        'class' => 'NfqNomNomBundle:User',
+        'property' => 'username',
+    ))
         ->add('submit', 'submit');;
     }
 }
