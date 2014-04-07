@@ -1,5 +1,11 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
 {% block content %}
     {{ error }}
-    {#generated content displaying#}
+    <br>
+    <a href="{{ path('Nfq_nom_nom_create_event') }}">Create Event</a>
+    <br>
+    <span>Events where you're participating in:</span>
+    {% for value in names %}
+        <a href="{{ path('Nfq_nom_nom_events', {'eventId': value['1']}) }}">{{ value['0'] }}</a>
+    {% endfor %}
 {% endblock %}

@@ -2,6 +2,8 @@
 
 namespace Nfq\NomNomBundle\Entity;
 
+
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,14 +32,14 @@ class MyEvent
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="eventName", type="string", length=50)
      */
     private $eventName;
 
     /**
      * @var \DateTime
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="eventDate", type="datetime")
      */
     private $eventDate;
@@ -45,19 +47,15 @@ class MyEvent
     /**
      * @var integer
      *
-     * @ORM\Column(name="evenPhase", type="smallint")
+     * @ORM\Column(name="eventPhase", type="smallint")
      */
-    private $evenPhases;
+    private $eventPhase;
 
     /**
      * @ORM\OneToMany(targetEntity="MyUserEvent", mappedBy="myEvent")
      */
     private $myUserEvents;
 
-    /**
-     * @ORM\OneToMany(targetEntity="MyRoleRight", mappedBy="myEvent")
-     */
-    private $myRoleRights;
     /**
      * @ORM\OneToMany(targetEntity="MyEventRecipe", mappedBy="myEvent")
      */
@@ -68,7 +66,6 @@ class MyEvent
      */
     public function __construct()
     {
-        $this->myRoleRights = new \Doctrine\Common\Collections\ArrayCollection();
         $this->myUserEvents = new \Doctrine\Common\Collections\ArrayCollection();
         $this->myEventRecipes = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -153,26 +150,26 @@ class MyEvent
     }
 
     /**
-     * Set evenPhases
+     * Set eventPhase
      *
-     * @param integer $evenPhases
+     * @param integer $eventPhase
      * @return MyEvent
      */
-    public function setEvenPhases($evenPhases)
+    public function setEventPhase($eventPhase)
     {
-        $this->evenPhases = $evenPhases;
+        $this->eventPhase = $eventPhase;
 
         return $this;
     }
 
     /**
-     * Get evenPhases
+     * Get eventPhase
      *
      * @return integer 
      */
-    public function getEvenPhases()
+    public function getEventPhase()
     {
-        return $this->evenPhases;
+        return $this->eventPhase;
     }
 
     /**
@@ -206,39 +203,6 @@ class MyEvent
     public function getMyUserEvents()
     {
         return $this->myUserEvents;
-    }
-
-    /**
-     * Add myRoleRights
-     *
-     * @param \Nfq\NomNomBundle\Entity\MyRoleRight $myRoleRights
-     * @return MyEvent
-     */
-    public function addMyRoleRight(\Nfq\NomNomBundle\Entity\MyRoleRight $myRoleRights)
-    {
-        $this->myRoleRights[] = $myRoleRights;
-
-        return $this;
-    }
-
-    /**
-     * Remove myRoleRights
-     *
-     * @param \Nfq\NomNomBundle\Entity\MyRoleRight $myRoleRights
-     */
-    public function removeMyRoleRight(\Nfq\NomNomBundle\Entity\MyRoleRight $myRoleRights)
-    {
-        $this->myRoleRights->removeElement($myRoleRights);
-    }
-
-    /**
-     * Get myRoleRights
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getMyRoleRights()
-    {
-        return $this->myRoleRights;
     }
 
     /**

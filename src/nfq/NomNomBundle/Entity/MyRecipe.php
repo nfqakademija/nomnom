@@ -2,6 +2,7 @@
 
 namespace Nfq\NomNomBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,7 +42,7 @@ class MyRecipe
 
     /**
      * @var string
-     * @ORM\Column(name="recipeFoto", type="string", length=50)
+     * @ORM\Column(name="recipe_photo", type="string", length=50)
      */
     private $foto;
 
@@ -74,15 +75,14 @@ class MyRecipe
     private $myEventRecipes;
 
 
-
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->myRecipeProducts = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->myRecipeVotes = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->myEventRecipes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->myRecipeProducts = new ArrayCollection();
+        $this->myRecipeVotes = new ArrayCollection();
+        $this->myEventRecipes = new  ArrayCollection();
     }
 
     /**

@@ -33,7 +33,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
+    bundles:        [ NfqNomNomBundle ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -72,3 +72,6 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Nfq\NomNomBundle\Entity\User
+
+genemu_form:
+    select2: ~

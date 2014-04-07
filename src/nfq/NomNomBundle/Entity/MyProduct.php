@@ -29,7 +29,7 @@ class MyProduct
     private $productName;
 
     /**
-     * @ORM\OneToMany(targetEntity="MyRecipeProduct", mappedBy="myProducts")
+     * @ORM\OneToMany(targetEntity="MyRecipeProduct", mappedBy="myProduct")
      */
     private $myRecipeProducts;
 

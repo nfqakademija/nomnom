@@ -5,6 +5,11 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        {% javascripts '@NfqNomNomBundle/Resources/public/js/jquery-1.11.0.min.js'%}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
     </head>
     <body>
         {% block body %}{% endblock %}

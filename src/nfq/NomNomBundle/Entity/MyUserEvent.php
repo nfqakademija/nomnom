@@ -51,6 +51,9 @@ class MyUserEvent
     private $invitationStatus;
 
     /**
+     * 0 for event creator
+     * 1 for pending
+     * 2 for accepted
      * @var integer
      *
      * @ORM\ManyToOne(targetEntity="MyRecipeVote", inversedBy="myUserEvents")

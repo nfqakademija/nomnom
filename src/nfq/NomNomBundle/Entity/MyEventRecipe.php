@@ -38,7 +38,7 @@ class MyEventRecipe
     private $myEvent;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MyRecipe", inversedBy="myEventRecipe")
+     * @ORM\ManyToOne(targetEntity="MyRecipe", inversedBy="myEventRecipes")
      * @ORM\JoinColumn(name="my_recipe_id", referencedColumnName="id")*
      */
     private $myRecipe;
