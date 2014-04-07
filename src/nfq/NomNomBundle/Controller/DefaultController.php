@@ -117,12 +117,6 @@ class DefaultController extends Controller
                 $event->setDateCreated(new \DateTime());
                 $em = $this->getDoctrine()->getManager();
 
-                //getting current user
-                $currentUser = $em->getRepository('NfqNomNomBundle:User')
-                    ->findOneBy(
-                        array('username' => get_current_user())
-                    );
-
                 //getting registredUser role_id
                 $registeredUserRole = $em->getRepository('NfqNomNomBundle:MyRole')
                     ->findOneBy(
@@ -131,7 +125,7 @@ class DefaultController extends Controller
 
                 //creating new user event with current user and registeredUser role
                 $eventUser = new MyUserEvent();
-                $eventUser->setMyUser($currentUser);
+                $eventUser->setMyUser($this->getUser());
                 $eventUser->setInvitationStatus(0);
                 $eventUser->setMyEvent($event);
                 $eventUser->setMyRole($registeredUserRole);
