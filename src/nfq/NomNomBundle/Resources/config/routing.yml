@@ -21,3 +21,15 @@ Nfq_nom_nom_add_user_to_event:
 Nfq_nom_nom_create_event:
     pattern:  /createevent/
     defaults: { _controller: NfqNomNomBundle:Default:createEvent }
+
+Nfq_nom_nom_profile:
+    pattern: /profile
+    defaults: {_controller: NfqNomNomBundle:Default:profile }
+
+Nfq_nom_nom_profile_edit:
+    pattern: /profile/edit
+    defaults: {_controller: NfqNomNomBundle:Default:profileEdit }
+
+Nfq_nom_nom_password_change:
+    pattern: /profile/change_password
+    defaults: {_controller: NfqNomNomBundle:Default:changepassword }

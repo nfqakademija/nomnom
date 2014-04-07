@@ -3,6 +3,7 @@
     {% block header %}
         <a href=" {{ path('Nfq_nom_nom_homepage') }}">Home</a> |
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <a href=" {{ path('Nfq_nom_nom_profile') }}">Profile</a> |
             <a href=" {{ path('Nfq_nom_nom_event_manager') }}">Events</a> |
             {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
             <a href="{{ path('fos_user_security_logout') }}">

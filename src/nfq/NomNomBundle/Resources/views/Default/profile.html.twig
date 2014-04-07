@@ -1,0 +1,12 @@
+{% extends "NfqNomNomBundle:Default:index.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block content %}
+    <div>
+        <p>{{ 'profile.show.username'|trans }}: {{ app.user.username }}</p>
+        <p>{{ 'profile.show.email'|trans }}: {{ app.user.email }}</p>
+        <p><a href=" {{ path('Nfq_nom_nom_profile_edit') }}">Edit Profile</a> |
+        <a href=" {{ path('Nfq_nom_nom_password_change') }}">Change Password</a></p>
+    </div>
+{% endblock %}
