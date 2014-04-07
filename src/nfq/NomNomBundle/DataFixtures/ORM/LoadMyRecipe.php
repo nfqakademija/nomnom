@@ -22,23 +22,23 @@ class LoadMyRecipes extends AbstractFixture implements OrderedFixtureInterface{
      */
     function load(ObjectManager $manager)
     {
+
         $recipe1 = new MyRecipe();
         $recipe1->setNumberOfServings(4);
-        $recipe1->setRecipeName('Karališkieji kotletai');
-        $recipe1->setPreparationTime('00:45');
-        $recipe1->setPreparationInstructions('Gaminimo eiga:
-1.	Svogūną susmulkinti ir sumaišyti su mėsa. Tada supilti 1 kiaušinio baltymą, berti žiupsnį druskos, dėti apie 2 šaukštus miltų, sudėti piene išmirkytą batono riekę, pagardinti druska ir pipirais. Masę kruopščiai išminkykite rankomis.
-2.	Sūrį sutarkuoti smulkia tarka ir sumaišyti su trintu česnaku, kiaušinio tryniu ir smulkintais krapais.
-3.	Iš mėsos daryti delno dydžio paplotį, dėti įdarą ir suformuoti kotletus.
-4.	Kotletus apvolioti džiūvėsiuose ir kepti įkaitintame aliejuje iš abiejų pusių.');
-        $recipe1->setFoto('lala');
-        $recipe1->getMyRecipeCategory();
-
+        $recipe1->setRecipeName('Fruit Salad');
+        $recipe1->setPreparationTime('01:00');
+        $recipe1->setPreparationInstructions("
+        1.Soak all the fruit in the amaretto for at least 1 hour.
+        2.	Serve the fruit in a glass and spoon over a bit of the amaretto used to marinate the fruit in.
+        3.	Garnish with a sprig of mint.");
+        $recipe1->setPhoto('fruit salad.jpg');
+        $recipe1->setMyRecipeCategory($this->getReference('Salad'));
 
         $manager->persist($recipe1);
         $manager->flush();
 
-        $this->addReference('Kotletai',$recipe1);
+        $this->addReference('Salads',$recipe1);
+
     }
 
     /**
@@ -48,6 +48,6 @@ class LoadMyRecipes extends AbstractFixture implements OrderedFixtureInterface{
      */
     function getOrder()
     {
-        return 10;
+        return 11;
     }
 }

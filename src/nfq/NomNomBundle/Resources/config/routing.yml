@@ -33,3 +33,8 @@ Nfq_nom_nom_profile_edit:
 Nfq_nom_nom_password_change:
     pattern: /profile/change_password
     defaults: {_controller: NfqNomNomBundle:Default:changepassword }
+
+Nfq_nom_nom_recipe:
+    pattern:  /recipe/{id}
+    defaults: { _controller: NfqNomNomBundle:Recipes:recipe}
+

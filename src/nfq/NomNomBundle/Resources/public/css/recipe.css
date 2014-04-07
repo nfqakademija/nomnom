@@ -1,0 +1,113 @@
+#firstBox{
+    height: 400px;
+    margin: 50px 50px 10px 50px;
+    width: 1400px;
+}
+
+#secondBox{
+    height: 450px;
+    margin: 0 50px;
+    width: 1400px;
+}
+
+#recipePhoto{
+    height: 300px;
+    border-radius: 10px;
+    width: 400px;
+    float: left;
+}
+
+#recipePhotoBox{
+    border-radius: 10px;
+    height: 300px;
+    width: 400px;
+    float: left;
+    box-shadow: 0 0 4px 3px;
+
+}
+
+#recipeIngredients{
+    border-radius: 10px;
+    float: left;
+    font-family: "Lucida Sans Unicode";
+    font-size: 17px;
+    font-style: italic;
+    height: 200px;
+    margin: 0 0 0 40px;
+    width: 955px;
+}
+#recipeIngredients ul{
+    list-style: none;
+    text-align: left;
+}
+
+#recipePortion{
+
+    border-radius: 10px;
+    float: right;
+    height: 75px;
+    margin: 0 1000px 0 0;
+    width: 396px;
+}
+
+#recipeInstructions{
+    border-radius: 10px;
+    box-shadow: 0 0 4px 3px #808080;
+    font-family: "Lucida Sans Unicode";
+    font-size: 15px;
+    font-style: italic;
+    height: 350px;
+    width: 1400px;
+}
+
+h2{
+    text-align: center;
+    font-family: "Lucida Sans Unicode";
+    font-style: italic;
+    font-size: 30px;
+
+    }
+
+.info{
+    float: left;
+    height: 62px;
+    margin: 20px 0 0;
+    text-align: left;
+    vertical-align: middle;
+    width: 70px;
+    font-size: 18px;
+    font-family: "Lucida Sans Unicode";
+    font-style: italic;
+}
+
+#logo1{
+    float: left;
+    height: 40px;
+    width: 40px;
+    margin: 10px;
+}
+
+#logo2{
+    background-size: 100% auto;
+    float: left;
+    height: 60px;
+    margin: 0;
+    width: 60px;
+}
+#logo3{
+    float: left;
+    height: 40px;
+    margin: 10px 10px 10px 0;
+    width: 40px;
+}
+
+h4{
+    height: 20px;
+    margin: 20px 0 0 60px;
+    width: 60px;
+    vertical-align: middle;
+}
+
+
+
+

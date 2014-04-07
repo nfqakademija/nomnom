@@ -42,9 +42,10 @@ class MyRecipe
 
     /**
      * @var string
-     * @ORM\Column(name="recipe_photo", type="string", length=50)
+
+     * @ORM\Column(name="recipePhoto", type="string", length=50)
      */
-    private $foto;
+    private $photo;
 
     /**
      * @var string
@@ -75,6 +76,7 @@ class MyRecipe
     private $myEventRecipes;
 
 
+    private $PhotoDir = 'recipes';
     /**
      * Constructor
      */
@@ -165,26 +167,26 @@ class MyRecipe
     }
 
     /**
-     * Set foto
+     * Set photo
      *
-     * @param string $foto
+     * @param string $photo
      * @return MyRecipe
      */
-    public function setFoto($foto)
+    public function setPhoto($photo)
     {
-        $this->foto = $foto;
+        $this->photo = $photo;
 
         return $this;
     }
 
     /**
-     * Get foto
+     * Get photo
      *
      * @return string 
      */
-    public function getFoto()
+    public function getPhoto()
     {
-        return $this->foto;
+        return $this->photo;
     }
 
     /**
@@ -331,4 +333,15 @@ class MyRecipe
     {
         return $this->myEventRecipes;
     }
+
+    public function getPhotoDir()
+    {
+        return $this->PhotoDir;
+    }
+
+    public function getPhotoUrl()
+    {
+        return 'bundles/NfqNomNom/images/'.$this->getPhotoDir().'/'.$this->getPhoto();
+    }
 }
+
