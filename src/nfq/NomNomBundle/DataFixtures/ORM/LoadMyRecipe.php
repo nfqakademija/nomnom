@@ -28,8 +28,8 @@ class LoadMyRecipes extends AbstractFixture implements OrderedFixtureInterface{
         $recipe1->setRecipeName('Fruit Salad');
         $recipe1->setPreparationTime('01:00');
         $recipe1->setPreparationInstructions("
-        1.Soak all the fruit in the amaretto for at least 1 hour.
-        2.	Serve the fruit in a glass and spoon over a bit of the amaretto used to marinate the fruit in.
+        1.Soak all the fruit in the amaretto for at least 1 hour.<br />
+        2.	Serve the fruit in a glass and spoon over a bit of the amaretto used to marinate the fruit in.<br />
         3.	Garnish with a sprig of mint.");
         $recipe1->setPhoto('fruit salad.jpg');
         $recipe1->setMyRecipeCategory($this->getReference('Salad'));

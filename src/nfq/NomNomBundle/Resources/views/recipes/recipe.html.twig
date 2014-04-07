@@ -61,9 +61,7 @@
 
     <div id="secondBox">
          <div id="recipeInstructions" >
-             <h3 style="text-align: center">
-                 {{ recipe.getPreparationInstructions() }}
-             </h3>
+             {{ recipe.getPreparationInstructions()|raw }}
          </div>
     </div>
 
