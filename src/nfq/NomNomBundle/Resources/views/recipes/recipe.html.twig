@@ -1,10 +1,16 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
+
+{% block title %}
+    {{ recipe.getRecipeName() }}
+{% endblock %}
+
 {% block stylesheets%}
     {{ parent() }}
     {% stylesheets '@NfqNomNomBundle/Resources/public/css/recipe.css' %}
     <link rel="stylesheet" href="{{asset_url}}"  type="text/css"/>
     {% endstylesheets %}
 {% endblock %}
+
 {% block content %}
     <div class="error">
         {{ error }}
