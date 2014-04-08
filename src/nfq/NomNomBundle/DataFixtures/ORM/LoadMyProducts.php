@@ -30,37 +30,52 @@ class LoadMyProducts extends AbstractFixture implements OrderedFixtureInterface{
         $fish->setProductName('fish');
 
         $mince = new MyProduct();
-        $mince->setProductName('Malta mėsa');
+        $mince->setProductName('mince');
 
         $egg = new MyProduct();
-        $egg->setProductName('Kiaušinis');
+        $egg->setProductName('egg');
 
         $onion = new MyProduct();
-        $onion->setProductName('Svogūnas');
+        $onion->setProductName('onion');
 
         $garlic = new MyProduct();
-        $garlic->setProductName('Česnakas');
+        $garlic->setProductName('garlic');
 
         $blackPepper = new MyProduct();
-        $blackPepper->setProductName('Juodieji piprai');
+        $blackPepper->setProductName('black pepper');
 
         $flour = new MyProduct();
-        $flour->setProductName('Miltai');
+        $flour->setProductName('flavour');
 
         $whiteBread = new MyProduct();
-        $whiteBread->setProductName('Balta duona');
+        $whiteBread->setProductName('white bread');
 
         $salt = new MyProduct();
-        $salt->setProductName('Druska');
+        $salt->setProductName('salt');
 
         $oil = new MyProduct();
-        $oil->setProductName('Aliejus');
+        $oil->setProductName('oil');
 
         $cheese = new MyProduct();
-        $cheese->setProductName('Fermentinis sūris');
+        $cheese->setProductName('cheese');
 
         $breadcrumbs = new MyProduct();
-        $breadcrumbs->setProductName('Džiūvėsėliai');
+        $breadcrumbs->setProductName('breadcrumbs');
+
+        $amaretoLiquor = new MyProduct();
+        $amaretoLiquor->setProductName('Amareto Liquor');
+
+        $strawberries = new MyProduct();
+        $strawberries->setProductName('Strawberries');
+
+        $blueberries = new MyProduct();
+        $blueberries->setProductName('Blueberries');
+
+        $melon = new MyProduct();
+        $melon->setProductName('Melon');
+
+        $mint = new MyProduct();
+        $mint->setProductName('Mint');
 
 
         $manager->persist($banana);
@@ -76,21 +91,31 @@ class LoadMyProducts extends AbstractFixture implements OrderedFixtureInterface{
         $manager->persist($oil);
         $manager->persist($cheese);
         $manager->persist($breadcrumbs);
+        $manager->persist($amaretoLiquor);
+        $manager->persist($strawberries);
+        $manager->persist($blueberries);
+        $manager->persist($melon);
+        $manager->persist($mint);
         $manager->flush();
 
         $this->addReference('fish',$fish);
         $this->addReference('banana',$banana);
-        $this->addReference('MaltaMėsa',$mince);
-        $this->addReference('Kiaušinis',$egg);
-        $this->addReference('Svogūnas',$onion);
-        $this->addReference('Česnakas',$garlic);
-        $this->addReference('JuodiejiPipirai',$blackPepper);
-        $this->addReference('Miltai',$flour);
-        $this->addReference('BaltaDuona',$whiteBread);
-        $this->addReference('Druska',$salt);
-        $this->addReference('Aliejus',$oil);
-        $this->addReference('Sūris',$cheese);
-        $this->addReference('Džiūvėsėliai',$breadcrumbs);
+        $this->addReference('mince',$mince);
+        $this->addReference('egg',$egg);
+        $this->addReference('onion',$onion);
+        $this->addReference('garlic',$garlic);
+        $this->addReference('blackPepper',$blackPepper);
+        $this->addReference('flour',$flour);
+        $this->addReference('whiteBread',$whiteBread);
+        $this->addReference('salt',$salt);
+        $this->addReference('oil',$oil);
+        $this->addReference('cheese',$cheese);
+        $this->addReference('breadcrumbs',$breadcrumbs);
+        $this->addReference('amaretoLiquor',$amaretoLiquor);
+        $this->addReference('strawberries', $strawberries);
+        $this->addReference('blueberries', $blueberries);
+        $this->addReference('melon', $melon);
+        $this->addReference('mint', $mint);
 
     }
 

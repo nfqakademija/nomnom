@@ -47,6 +47,7 @@ class MyRecipeProduct
      */
     private $quantityMeasure;
 
+
     /**
      * Get id
      *
@@ -55,52 +56,6 @@ class MyRecipeProduct
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set recipeId
-     *
-     * @param integer $recipeId
-     * @return MyRecipeProduct
-     */
-    public function setRecipeId($recipeId)
-    {
-        $this->recipeId = $recipeId;
-
-        return $this;
-    }
-
-    /**
-     * Get recipeId
-     *
-     * @return integer 
-     */
-    public function getRecipeId()
-    {
-        return $this->recipeId;
-    }
-
-    /**
-     * Set productId
-     *
-     * @param integer $productId
-     * @return MyRecipeProduct
-     */
-    public function setProductId($productId)
-    {
-        $this->productId = $productId;
-
-        return $this;
-    }
-
-    /**
-     * Get productId
-     *
-     * @return integer 
-     */
-    public function getProductId()
-    {
-        return $this->productId;
     }
 
     /**
@@ -169,7 +124,7 @@ class MyRecipeProduct
      */
     public function getMyRecipe()
     {
-        return $this->MyRecipe;
+        return $this->myRecipe;
     }
 
     /**
@@ -178,9 +133,9 @@ class MyRecipeProduct
      * @param \Nfq\NomNomBundle\Entity\MyProduct $myProduct
      * @return MyRecipeProduct
      */
-    public function setMyProduct(\Nfq\NomNomBundle\Entity\MyProduct $myProductyProduct = null)
+    public function setMyProduct(\Nfq\NomNomBundle\Entity\MyProduct $myProduct = null)
     {
-        $this->myProduct = $myProductyProduct;
+        $this->myProduct = $myProduct;
 
         return $this;
     }
@@ -188,7 +143,7 @@ class MyRecipeProduct
     /**
      * Get myProduct
      *
-     * @return \Nfq\NomNomBundle\Entity\MyProduct
+     * @return \Nfq\NomNomBundle\Entity\MyProduct 
      */
     public function getMyProduct()
     {

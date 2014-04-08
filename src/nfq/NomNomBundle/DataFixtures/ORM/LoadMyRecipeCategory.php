@@ -23,13 +23,12 @@ class LoadMyRecipeCategory extends AbstractFixture implements OrderedFixtureInte
     function load(ObjectManager $manager)
     {
         $category1 = new MyRecipeCategory();
-        $category1->setCategoryName('Karštieji patiekalai');
-
+        $category1->setCategoryName('Salads');
 
         $manager->persist($category1);
         $manager->flush();
 
-        $this->addReference('Karštieji patiekalai',$category1);
+        $this->addReference('Salad',$category1);
     }
 
     /**
@@ -39,6 +38,6 @@ class LoadMyRecipeCategory extends AbstractFixture implements OrderedFixtureInte
      */
     function getOrder()
     {
-        return 12;
+        return 10;
     }
 }
