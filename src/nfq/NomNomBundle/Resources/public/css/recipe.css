@@ -58,7 +58,8 @@
     font-style: italic;
     height: 350px;
     padding: 50px;
-    width: 1305px;
+    width: 93%;
+    margin-right: auto;
 }
 
 h2{
