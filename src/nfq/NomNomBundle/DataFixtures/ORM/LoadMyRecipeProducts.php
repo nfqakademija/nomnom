@@ -62,11 +62,128 @@ class LoadMyRecipeProducts extends AbstractFixture implements OrderedFixtureInte
         $dish5->setMyProduct($prod5);
         $dish5->setMyRecipe($this->getReference('Salads'));
 
+        $dish6 = new MyRecipeProduct();
+        $dish6->setQuantity(1);
+        $dish6->setQuantityMeasure(2);
+        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod6 */
+        $prod6 = $this->getReference('oliveOil');
+        $dish6->setMyProduct($prod6);
+        $dish6->setMyRecipe($this->getReference('Lasagna'));
+
+        $dish7 = new MyRecipeProduct();
+        $dish7->setQuantity(1);
+        $dish7->setQuantityMeasure(0);
+        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod7 */
+        $prod7 = $this->getReference('onion');
+        $dish7->setMyProduct($prod7);
+        $dish7->setMyRecipe($this->getReference('Lasagna'));
+
+        $dish8 = new MyRecipeProduct();
+        $dish8->setQuantity(1);
+        $dish8->setQuantityMeasure(0);
+        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod8 */
+        $prod8 = $this->getReference('carrot');
+        $dish8->setMyProduct($prod8);
+        $dish8->setMyRecipe($this->getReference('Lasagna'));
+
+        $dish9 = new MyRecipeProduct();
+        $dish9->setQuantity(2);
+        $dish9->setQuantityMeasure(0);
+        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod9 */
+        $prod9 = $this->getReference('stalksCelery');
+        $dish9->setMyProduct($prod9);
+        $dish9->setMyRecipe($this->getReference('Lasagna'));
+
+        $dish10 = new MyRecipeProduct();
+        $dish10->setQuantity(2);
+        $dish10->setQuantityMeasure(3);
+        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod10 */
+        $prod10 = $this->getReference('garlic');
+        $dish10->setMyProduct($prod10);
+        $dish10->setMyRecipe($this->getReference('Lasagna'));
+
+        $dish11 = new MyRecipeProduct();
+        $dish11->setQuantity(600);
+        $dish11->setQuantityMeasure(1);
+        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod11 */
+        $prod11 = $this->getReference('chickenMince');
+        $dish11->setMyProduct($prod11);
+        $dish11->setMyRecipe($this->getReference('Lasagna'));
+
+        $dish12 = new MyRecipeProduct();
+        $dish12->setQuantity(400);
+        $dish12->setQuantityMeasure(1);
+        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod12*/
+        $prod12 = $this->getReference('tomato');
+        $dish12->setMyProduct($prod12);
+        $dish12->setMyRecipe($this->getReference('Lasagna'));
+
+        $dish13 = new MyRecipeProduct();
+        $dish13->setQuantity(1);
+        $dish13->setQuantityMeasure(0);
+        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod13*/
+        $prod13 = $this->getReference('silverbeet');
+        $dish13->setMyProduct($prod13);
+        $dish13->setMyRecipe($this->getReference('Lasagna'));
+
+        $dish14 = new MyRecipeProduct();
+        $dish14->setQuantity(1);
+        $dish14->setQuantityMeasure(4);
+        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod14*/
+        $prod14 = $this->getReference('ricotta');
+        $dish14->setMyProduct($prod14);
+        $dish14->setMyRecipe($this->getReference('Lasagna'));
+
+        $dish15 = new MyRecipeProduct();
+        $dish15->setQuantity(200);
+        $dish15->setQuantityMeasure(1);
+        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod15*/
+        $prod15 = $this->getReference('feta');
+        $dish15->setMyProduct($prod15);
+        $dish15->setMyRecipe($this->getReference('Lasagna'));
+
+        $dish16 = new MyRecipeProduct();
+        $dish16->setQuantity(2);
+        $dish16->setQuantityMeasure(0);
+        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod16*/
+        $prod16 = $this->getReference('egg');
+        $dish16->setMyProduct($prod16);
+        $dish16->setMyRecipe($this->getReference('Lasagna'));
+
+        $dish17 = new MyRecipeProduct();
+        $dish17->setQuantity(12);
+        $dish17->setQuantityMeasure(0);
+        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod17*/
+        $prod17 = $this->getReference('lasagnaSheets');
+        $dish17->setMyProduct($prod17);
+        $dish17->setMyRecipe($this->getReference('Lasagna'));
+
+        $dish18 = new MyRecipeProduct();
+        $dish18->setQuantity(100);
+        $dish18->setQuantityMeasure(1);
+        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod18*/
+        $prod18 = $this->getReference('mozzarella');
+        $dish18->setMyProduct($prod18);
+        $dish18->setMyRecipe($this->getReference('Lasagna'));
+
         $manager->persist($dish1);
         $manager->persist($dish2);
         $manager->persist($dish3);
         $manager->persist($dish4);
         $manager->persist($dish5);
+        $manager->persist($dish6);
+        $manager->persist($dish7);
+        $manager->persist($dish8);
+        $manager->persist($dish9);
+        $manager->persist($dish10);
+        $manager->persist($dish11);
+        $manager->persist($dish12);
+        $manager->persist($dish13);
+        $manager->persist($dish14);
+        $manager->persist($dish15);
+        $manager->persist($dish16);
+        $manager->persist($dish17);
+        $manager->persist($dish18);
         $manager->flush();
 
     }

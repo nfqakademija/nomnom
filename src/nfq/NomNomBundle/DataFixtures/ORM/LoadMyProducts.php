@@ -24,43 +24,43 @@ class LoadMyProducts extends AbstractFixture implements OrderedFixtureInterface{
     function load(ObjectManager $manager)
     {
         $banana = new MyProduct();
-        $banana->setProductName('banana');
+        $banana->setProductName('Banana');
 
         $fish = new MyProduct();
-        $fish->setProductName('fish');
+        $fish->setProductName('Fish');
 
-        $mince = new MyProduct();
-        $mince->setProductName('mince');
+        $chickenMince = new MyProduct();
+        $chickenMince->setProductName('Chicken mince');
 
         $egg = new MyProduct();
-        $egg->setProductName('egg');
+        $egg->setProductName('Egg');
 
         $onion = new MyProduct();
-        $onion->setProductName('onion');
+        $onion->setProductName('Onion');
 
         $garlic = new MyProduct();
-        $garlic->setProductName('garlic');
+        $garlic->setProductName('Garlic');
 
         $blackPepper = new MyProduct();
-        $blackPepper->setProductName('black pepper');
+        $blackPepper->setProductName('Black pepper');
 
         $flour = new MyProduct();
-        $flour->setProductName('flavour');
+        $flour->setProductName('Flavour');
 
         $whiteBread = new MyProduct();
-        $whiteBread->setProductName('white bread');
+        $whiteBread->setProductName('White bread');
 
         $salt = new MyProduct();
-        $salt->setProductName('salt');
+        $salt->setProductName('Salt');
 
         $oil = new MyProduct();
-        $oil->setProductName('oil');
+        $oil->setProductName('Oil');
 
         $cheese = new MyProduct();
-        $cheese->setProductName('cheese');
+        $cheese->setProductName('Cheese');
 
         $breadcrumbs = new MyProduct();
-        $breadcrumbs->setProductName('breadcrumbs');
+        $breadcrumbs->setProductName('Breadcrumbs');
 
         $amaretoLiquor = new MyProduct();
         $amaretoLiquor->setProductName('Amareto Liquor');
@@ -77,10 +77,37 @@ class LoadMyProducts extends AbstractFixture implements OrderedFixtureInterface{
         $mint = new MyProduct();
         $mint->setProductName('Mint');
 
+        $oliveOil = new MyProduct();
+        $oliveOil->setProductName('Olive oil');
+
+        $carrot = new MyProduct();
+        $carrot->setProductName('Carrot');
+
+        $stalksCelery = new MyProduct();
+        $stalksCelery->setProductName('Stalks Celery');
+
+        $tomato = new MyProduct();
+        $tomato->setProductName('Tomatoes');
+
+        $silverbeet = new MyProduct();
+        $silverbeet->setProductName('Silverbeet');
+
+        $ricotta = new MyProduct();
+        $ricotta->setProductName('Ricotta');
+
+        $feta = new MyProduct();
+        $feta->setProductName('Feta');
+
+        $lasagnaSheets = new MyProduct();
+        $lasagnaSheets->setProductName('Lasagna sheets');
+
+        $mozzarella = new MyProduct();
+        $mozzarella->setProductName('Mozarella');
+
 
         $manager->persist($banana);
         $manager->persist($fish);
-        $manager->persist($mince);
+        $manager->persist($chickenMince);
         $manager->persist($egg);
         $manager->persist($onion);
         $manager->persist($garlic);
@@ -96,11 +123,21 @@ class LoadMyProducts extends AbstractFixture implements OrderedFixtureInterface{
         $manager->persist($blueberries);
         $manager->persist($melon);
         $manager->persist($mint);
+        $manager->persist($oliveOil);
+        $manager->persist($carrot);
+        $manager->persist($stalksCelery);
+        $manager->persist($tomato);
+        $manager->persist($silverbeet);
+        $manager->persist($ricotta);
+        $manager->persist($feta);
+        $manager->persist($lasagnaSheets);
+        $manager->persist($mozzarella);
+
         $manager->flush();
 
         $this->addReference('fish',$fish);
         $this->addReference('banana',$banana);
-        $this->addReference('mince',$mince);
+        $this->addReference('chickenMince',$chickenMince);
         $this->addReference('egg',$egg);
         $this->addReference('onion',$onion);
         $this->addReference('garlic',$garlic);
@@ -116,6 +153,16 @@ class LoadMyProducts extends AbstractFixture implements OrderedFixtureInterface{
         $this->addReference('blueberries', $blueberries);
         $this->addReference('melon', $melon);
         $this->addReference('mint', $mint);
+        $this->addReference('oliveOil', $oliveOil);
+        $this->addReference('carrot',$carrot);
+        $this->addReference('stalksCelery',$stalksCelery);
+        $this->addReference('tomato',$tomato);
+        $this->addReference('silverbeet',$silverbeet);
+        $this->addReference('ricotta',$ricotta);
+        $this->addReference('feta',$feta);
+        $this->addReference('lasagnaSheets',$lasagnaSheets);
+        $this->addReference('mozzarella',$mozzarella);
+
 
     }
 

@@ -25,10 +25,15 @@ class LoadMyRecipeCategory extends AbstractFixture implements OrderedFixtureInte
         $category1 = new MyRecipeCategory();
         $category1->setCategoryName('Salads');
 
+        $category2 = new MyRecipeCategory();
+        $category2->setCategoryName('Main dish');
+
         $manager->persist($category1);
+        $manager->persist($category2);
         $manager->flush();
 
         $this->addReference('Salad',$category1);
+        $this->addReference('MainDish',$category2);
     }
 
     /**
