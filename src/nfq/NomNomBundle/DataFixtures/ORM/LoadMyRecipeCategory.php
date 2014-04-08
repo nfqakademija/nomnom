@@ -29,7 +29,7 @@ class LoadMyRecipeCategory extends AbstractFixture implements OrderedFixtureInte
         $category2->setCategoryName('Main dish');
 
         $category3 = new MyRecipeCategory();
-        $category2->setCategoryName('Deserts');
+        $category3->setCategoryName('Deserts');
 
         $manager->persist($category1);
         $manager->persist($category2);

@@ -4,22 +4,15 @@ namespace Nfq\NomNomBundle\Controller;
 
 use Nfq\NomNomBundle\Entity\MyEvent;
 use Nfq\NomNomBundle\Entity\MyUserEvent;
-use Nfq\NomNomBundle\Entity\User;
-use Nfq\NomNomBundle\Form\Type\EventType;
-use Nfq\NomNomBundle\NfqNomNomBundle;
 use Nfq\NomNomBundle\Utilities;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Validator\Constraints\DateTime;
-
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Model\UserInterface;
-use Symfony\Component\DependencyInjection\ContainerAware;
-
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 

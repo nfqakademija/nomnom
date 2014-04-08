@@ -9,8 +9,6 @@
 namespace Nfq\NomNomBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
-use Nfq\NomNomBundle\Entity\MyRecipe;
 
 class RecipesController extends Controller
 {
