@@ -35,6 +35,7 @@ class LoadMyRoles extends AbstractFixture implements OrderedFixtureInterface
 
         $manager->persist($guest);
         $manager->persist($registeredUser);
+        $manager->persist($participatingUser);
         $manager->flush();
 
         $this->addReference("registeredUser", $registeredUser);

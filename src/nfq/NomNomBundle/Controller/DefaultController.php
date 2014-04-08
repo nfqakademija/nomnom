@@ -143,7 +143,8 @@ class DefaultController extends Controller
                 'error' => ''));
     }
 
-    public function addUsersToEventAction($eventId, Request $request)
+    public
+    function addUsersToEventAction($eventId, Request $request)
     {
         $user = $this->getUser();
 
@@ -157,19 +158,22 @@ class DefaultController extends Controller
 
             if ($form->isValid()) {
 
-                $userEvent = new MyUserEvent();
                 /** @var @var Nfq\NomNomBundle\Entity\MyRole $myRole */
                 $myRole = $em->getRepository('NfqNomNomBundle:MyRole')
                     ->findOneBy(array('roleName' => 'participatingUser'));
 
-                $userEvent->setMyEvent($myEvent);
-                $userEvent->setMyRole($myRole);
-                $userEvent->setInvitationStatus(1);
-                $userEvent->setMyUser($form->getData()['user']);
+                $someUserEvents = $em->getRepository('NfqNomNomBundle:MyUserEvent')
+                    ->findUserEvent($myEvent, $this->getUser());
+                if (empty($someUserEvents)) {
+                    $userEvent = new MyUserEvent();
+                    $userEvent->setMyEvent($myEvent);
+                    $userEvent->setMyRole($myRole);
+                    $userEvent->setInvitationStatus(1);
+                    $userEvent->setMyUser($form->getData()['user']);
 
-                $em->persist($userEvent);
-                $em->flush();
-
+                    $em->persist($userEvent);
+                    $em->flush();
+                }
                 return $this->redirect($this->generateUrl('Nfq_nom_nom_events', array('eventId' => $eventId)));
             } else {
                 return $this->render('NfqNomNomBundle:Default:adduserstoevent.html.twig',
@@ -181,12 +185,14 @@ class DefaultController extends Controller
         }
     }
 
-    public function profileAction()
+    public
+    function profileAction()
     {
         return $this->render('NfqNomNomBundle:Default:profile.html.twig');
     }
 
-    public function profileEditAction(Request $request)
+    public
+    function profileEditAction(Request $request)
     {
         $user = $this->container->get('security.context')->getToken()->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
@@ -231,13 +237,14 @@ class DefaultController extends Controller
             }
         }
         return $this->container->get('templating')->renderResponse(
-            //'FOSUserBundle:Profile:edit.html.' . $this->container->getParameter('fos_user.template.engine'),
+        //'FOSUserBundle:Profile:edit.html.' . $this->container->getParameter('fos_user.template.engine'),
             'NfqNomNomBundle:Default:profileEdit.html.twig',
             array('form' => $form->createView())
         );
     }
 
-    public function changePasswordAction(Request $request)
+    public
+    function changePasswordAction(Request $request)
     {
         $user = $this->container->get('security.context')->getToken()->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
@@ -284,7 +291,7 @@ class DefaultController extends Controller
         }
 
         return $this->container->get('templating')->renderResponse(
-            //'FOSUserBundle:ChangePassword:changePassword.html.'.$this->container->getParameter('fos_user.template.engine'),
+        //'FOSUserBundle:ChangePassword:changePassword.html.'.$this->container->getParameter('fos_user.template.engine'),
             'NfqNomNomBundle:Default:changepassword.html.twig',
             array('form' => $form->createView())
         );
