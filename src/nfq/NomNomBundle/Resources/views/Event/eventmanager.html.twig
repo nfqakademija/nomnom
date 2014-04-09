@@ -5,7 +5,7 @@
     <a href="{{ path('Nfq_nom_nom_create_event') }}">Create Event</a>
     <br>
     <span>Events where you're participating in:</span>
-    {% for value in names %}
-        <a href="{{ path('Nfq_nom_nom_events', {'eventId': value['1']}) }}">{{ value['0'] }}</a>
+    {% for userEvent in userEvents %}
+        <a href="{{ path('Nfq_nom_nom_events', {'eventId': userEvent.myEvent.id}) }}">{{ userEvent.myEvent.eventName }}</a>
     {% endfor %}
 {% endblock %}

@@ -23,24 +23,14 @@ class EventController extends Controller
         $user = $this->getUser();
         // TODO: we should check is the user is registered but maybe this is enough
         if ($user != '') {
-            $em = $this->getDoctrine()->getManager();
+            $rep = $this->getDoctrine()->getRepository('NfqNomNomBundle:MyUserEvent');
             //getting all userevent objects where user_id is current users id
-            $myUserEvents = $em->createQuery('SELECT m FROM NfqNomNomBundle:MyUserEvent m WHERE m.myUser = :myuser')
-                ->setParameter('myuser', $user)
-                ->getResult();
-
-            //getting array of eventName and eventId pairs
-            $names = array();
-            foreach ($myUserEvents as $mue) {
-                $temp = array();
-                $temp[] = $mue->getMyEvent()->getEventName();
-                $temp[] = $mue->getMyEvent()->getId();
-                $names[] = $temp;
-            }
+            $myUserEvents = $rep->findByUser($user);
 
             return $this->render('NfqNomNomBundle:Event:eventmanager.html.twig',
-                array('names' => $names,
-                    'error' => ''));
+                array('error' => '',
+                    'userEvents' => $myUserEvents
+                ));
         } else {
             return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'log in  first'));
         }
@@ -128,7 +118,7 @@ class EventController extends Controller
                     ->findOneBy(array('roleName' => 'participatingUser'));
 
                 $someUserEvents = $em->getRepository('NfqNomNomBundle:MyUserEvent')
-                    ->findUserEvent($myEvent, $form->getData()['user']);
+                    ->findByEventAndUser($myEvent, $form->getData()['user']);
                 if (empty($someUserEvents)) {
                     $userEvent = new MyUserEvent();
                     $userEvent->setMyEvent($myEvent);
