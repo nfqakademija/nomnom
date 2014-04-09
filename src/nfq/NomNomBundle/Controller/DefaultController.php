@@ -48,18 +48,13 @@ class DefaultController extends Controller
             /**@var $myEvent MyEvent */
             $myEvent = $em->getRepository('NfqNomNomBundle:MyEvent')->find($eventId);
             if (Utilities::hasUserPermissionToEvent($myEvent, $user, $em)) {
-                $myEventArray = array();
-                $userNames = array();
-
-                $myEventArray['dateCreated'] = $myEvent->getDateCreated()->format('Y-m-d H:i:s');
-                $myEventArray['eventName'] = $myEvent->getEventName();
-                $myEventArray['eventDate'] = $myEvent->getEventDate()->format('Y-m-d H:i:s');
-                $myEventArray['eventPhase'] = $myEvent->getEventPhase();
+                $userNames = $em->getRepository('NfqNomNomBundle:MyUserEvent')->findUsersInUserEvent($eventId);
 
                 return $this->render('NfqNomNomBundle:Default:event.html.twig',
                     array('error' => '',
-                        'event' => $myEventArray,
-                        'eventId' => $eventId));
+                        'event' => $myEvent,
+                        'eventId' => $eventId,
+                        'userNames' => $userNames));
             } else {
                 return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => "you don't have permission to this evvent"));
             }
@@ -156,7 +151,7 @@ class DefaultController extends Controller
                     ->findOneBy(array('roleName' => 'participatingUser'));
 
                 $someUserEvents = $em->getRepository('NfqNomNomBundle:MyUserEvent')
-                    ->findUserEvent($myEvent, $this->getUser());
+                    ->findUserEvent($myEvent, $form->getData()['user']);
                 if (empty($someUserEvents)) {
                     $userEvent = new MyUserEvent();
                     $userEvent->setMyEvent($myEvent);

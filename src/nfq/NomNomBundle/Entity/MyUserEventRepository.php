@@ -22,4 +22,14 @@ class MyUserEventRepository extends EntityRepository
                                 'useris' =>$user))
             ->getResult();
     }
+
+    public function findUsersInUserEvent($event)
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT DISTINCT u.username FROM NfqNomNomBundle:MyUserEvent AS m JOIN m.myUser AS u WHERE m.myEvent = :event'
+            )
+            ->setParameters(array('event' => $event))
+            ->getResult();
+    }
 }

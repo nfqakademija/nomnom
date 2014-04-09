@@ -2,18 +2,23 @@
 {% block content %}
     {{ error }}
     <div>Event Name:</div>
-    {{ event['eventName'] }}
+    {{ event.eventName }}
 
     <div>Event creation date:</div>
-    {{ event['dateCreated'] }}
+    {{ event.dateCreated.date }}
 
     <div>Event date:</div>
-    {{ event['eventDate'] }}
+    {{ event.eventDate.date }}
 
     <div>Event Phase:</div>
-    {{ event['eventPhase'] }}
+    {{ event.eventPhase }}
 
     <br>
     <a href="{{ path('Nfq_nom_nom_add_user_to_event', {'eventId': eventId}) }}">Add people</a>
+    <br>
+    <div> people all ready participating:</div>
+    {% for user in userNames %}
+        <div> {{ user['username'] }}</div>
+    {% endfor %}
     {#generated content displaying#}
 {% endblock %}
