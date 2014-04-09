@@ -38,7 +38,7 @@ class EventController extends Controller
                 $names[] = $temp;
             }
 
-            return $this->render('NfqNomNomBundle:Default:eventmanager.html.twig',
+            return $this->render('NfqNomNomBundle:Event:eventmanager.html.twig',
                 array('names' => $names,
                     'error' => ''));
         } else {
@@ -56,7 +56,7 @@ class EventController extends Controller
             if (Utilities::hasUserPermissionToEvent($myEvent, $user, $em)) {
                 $userNames = $em->getRepository('NfqNomNomBundle:MyUserEvent')->findUsersInUserEvent($eventId);
 
-                return $this->render('NfqNomNomBundle:Default:event.html.twig',
+                return $this->render('NfqNomNomBundle:Event:event.html.twig',
                     array('error' => '',
                         'event' => $myEvent,
                         'eventId' => $eventId,
@@ -104,7 +104,7 @@ class EventController extends Controller
             }
         }
 
-        return $this->render('NfqNomNomBundle:Default:createevent.html.twig',
+        return $this->render('NfqNomNomBundle:Event:createevent.html.twig',
             array('forma' => $form->createView(),
                 'error' => ''));
     }
@@ -141,7 +141,7 @@ class EventController extends Controller
                 }
                 return $this->redirect($this->generateUrl('Nfq_nom_nom_events', array('eventId' => $eventId)));
             } else {
-                return $this->render('NfqNomNomBundle:Default:adduserstoevent.html.twig',
+                return $this->render('NfqNomNomBundle:Event:adduserstoevent.html.twig',
                     array('forma' => $form->createView(),
                         'error' => ''));
             }
