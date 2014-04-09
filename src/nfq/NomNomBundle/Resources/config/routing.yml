@@ -8,19 +8,19 @@ Nfq_nom_nom_avatar_display:
 
 Nfq_nom_nom_event_manager:
     pattern:  /eventmanager/
-    defaults: { _controller: NfqNomNomBundle:Default:eventManager }
+    defaults: { _controller: NfqNomNomBundle:Event:eventManager }
 
 Nfq_nom_nom_events:
     pattern: /event/{eventId}
-    defaults: { _controller: NfqNomNomBundle:Default:event , eventId: 0}
+    defaults: { _controller: NfqNomNomBundle:Event:event , eventId: 0}
 
 Nfq_nom_nom_add_user_to_event:
     pattern: /event/addusers/{eventId}
-    defaults: { _controller: NfqNomNomBundle:Default:addUsersToEvent , eventId: 0}
+    defaults: { _controller: NfqNomNomBundle:Event:addUsersToEvent , eventId: 0}
 
 Nfq_nom_nom_create_event:
     pattern:  /createevent/
-    defaults: { _controller: NfqNomNomBundle:Default:createEvent }
+    defaults: { _controller: NfqNomNomBundle:Event:createEvent }
 
 Nfq_nom_nom_profile:
     pattern: /profile

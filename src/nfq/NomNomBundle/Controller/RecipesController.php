@@ -14,27 +14,27 @@ class RecipesController extends Controller
 {
     public function recipeAction($id)
     {
-        $error='';
+        $error = '';
 
         $recipe = $this->getDoctrine()
             ->getRepository('NfqNomNomBundle:MyRecipe')
             ->find($id);
 
         if (!$recipe) {
-            $error='No recipe found for id '.$id;
+            $error = 'No recipe found for id ' . $id;
         }
 
         $photo_path = $recipe->getPhotoUrl();
         $products = $recipe->getMyRecipeProducts();
-        $logo1="bundles/nfqnomnom/images/recipes/clock.jpg";
-        $logo2="bundles/nfqnomnom/images/recipes/portion.png";
-        $logo3="bundles/nfqnomnom/images/recipes/category.png";
+        $logo1 = "bundles/nfqnomnom/images/recipes/clock.jpg";
+        $logo2 = "bundles/nfqnomnom/images/recipes/portion.png";
+        $logo3 = "bundles/nfqnomnom/images/recipes/category.png";
 
         return $this->render(
             'NfqNomNomBundle:Recipes:recipe.html.twig',
             array(
                 'recipe_photo_path' => $photo_path,
-                'error'=>$error,
+                'error' => $error,
                 //'recipe_preparation' => $preparation,
                 'recipe_products' => $products,
                 'recipe' => $recipe,
