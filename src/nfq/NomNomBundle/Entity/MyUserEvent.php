@@ -3,6 +3,7 @@
 namespace Nfq\NomNomBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * MyUserEvent
@@ -22,10 +23,9 @@ class MyUserEvent
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MyUserProduct", inversedBy="myUserEvents")
-     * @ORM\JoinColumn(name="my_user_product_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="MyUserProduct", mappedBy="myUserEvent")
      */
-    private $myUserProduct;
+    private $myUserProducts;
 
     /**
      * @var integer
@@ -54,12 +54,10 @@ class MyUserEvent
      * 0 for event creator
      * 1 for pending
      * 2 for accepted
-     * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="MyRecipeVote", inversedBy="myUserEvents")
-     * @ORM\JoinColumn(name="my_recipe_vote_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="MyRecipeVote", mappedBy="myUserEvent")
      */
-    private $myRecipeVote;
+    private $myRecipeVotes;
 
     /**
      * @var integer
@@ -68,6 +66,15 @@ class MyUserEvent
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $myUser;
+
+    /**
+     * Constructor
+     */
+    public function __constructor()
+    {
+        $this->myUserProducts = new ArrayCollection();
+        $this->myRecipeVotes = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -100,29 +107,6 @@ class MyUserEvent
     public function getInvitationStatus()
     {
         return $this->invitationStatus;
-    }
-
-    /**
-     * Set myUserProduct
-     *
-     * @param \Nfq\NomNomBundle\Entity\MyUserProduct $myUserProduct
-     * @return MyUserEvent
-     */
-    public function setMyUserProduct(\Nfq\NomNomBundle\Entity\MyUserProduct $myUserProduct = null)
-    {
-        $this->myUserProduct = $myUserProduct;
-
-        return $this;
-    }
-
-    /**
-     * Get myUserProduct
-     *
-     * @return \Nfq\NomNomBundle\Entity\MyUserProduct 
-     */
-    public function getMyUserProduct()
-    {
-        return $this->myUserProduct;
     }
 
     /**
@@ -172,29 +156,6 @@ class MyUserEvent
     }
 
     /**
-     * Set myRecipeVote
-     *
-     * @param \Nfq\NomNomBundle\Entity\myRecipeVote $myRecipeVote
-     * @return MyUserEvent
-     */
-    public function setMyRecipeVote(\Nfq\NomNomBundle\Entity\myRecipeVote $myRecipeVote = null)
-    {
-        $this->myRecipeVote = $myRecipeVote;
-
-        return $this;
-    }
-
-    /**
-     * Get myRecipeVote
-     *
-     * @return \Nfq\NomNomBundle\Entity\myRecipeVote 
-     */
-    public function getMyRecipeVote()
-    {
-        return $this->myRecipeVote;
-    }
-
-    /**
      * Set myUser
      *
      * @param \Nfq\NomNomBundle\Entity\User $myUser
@@ -215,5 +176,79 @@ class MyUserEvent
     public function getMyUser()
     {
         return $this->myUser;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->myUserProducts = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->myRecipeVotes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add myUserProducts
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyUserProduct $myUserProducts
+     * @return MyUserEvent
+     */
+    public function addMyUserProduct(\Nfq\NomNomBundle\Entity\MyUserProduct $myUserProducts)
+    {
+        $this->myUserProducts[] = $myUserProducts;
+
+        return $this;
+    }
+
+    /**
+     * Remove myUserProducts
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyUserProduct $myUserProducts
+     */
+    public function removeMyUserProduct(\Nfq\NomNomBundle\Entity\MyUserProduct $myUserProducts)
+    {
+        $this->myUserProducts->removeElement($myUserProducts);
+    }
+
+    /**
+     * Get myUserProducts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMyUserProducts()
+    {
+        return $this->myUserProducts;
+    }
+
+    /**
+     * Add myRecipeVotes
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyRecipeVote $myRecipeVotes
+     * @return MyUserEvent
+     */
+    public function addMyRecipeVote(\Nfq\NomNomBundle\Entity\MyRecipeVote $myRecipeVotes)
+    {
+        $this->myRecipeVotes[] = $myRecipeVotes;
+
+        return $this;
+    }
+
+    /**
+     * Remove myRecipeVotes
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyRecipeVote $myRecipeVotes
+     */
+    public function removeMyRecipeVote(\Nfq\NomNomBundle\Entity\MyRecipeVote $myRecipeVotes)
+    {
+        $this->myRecipeVotes->removeElement($myRecipeVotes);
+    }
+
+    /**
+     * Get myRecipeVotes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMyRecipeVotes()
+    {
+        return $this->myRecipeVotes;
     }
 }

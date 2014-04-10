@@ -36,23 +36,16 @@ class MyUserProduct
     private $quantityMeasure;
 
     /**
-     * @ORM\OneToMany(targetEntity="MyUserEvent", mappedBy="myUserProduct")
+     * @ORM\ManyToOne(targetEntity="MyUserEvent", inversedBy="myUserProducts")
+     * @ORM\JoinColumn(name="my_user_event_id", referencedColumnName="id")
      */
-    private $myUserEvents;
+    private $myUserEvent;
 
     /**
      * @ORM\ManyToOne(targetEntity="MyProduct", inversedBy="myUserProducts")
      * @ORM\JoinColumn(name="my_product_id", referencedColumnName="id")
      */
     protected $myProduct;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->myUserEvents = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Get id
@@ -62,39 +55,6 @@ class MyUserProduct
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Add myUserEvents
-     *
-     * @param \Nfq\NomNomBundle\Entity\MyUserEvent $myUserEvents
-     * @return MyUserProduct
-     */
-    public function addMyUserEvent(\Nfq\NomNomBundle\Entity\MyUserEvent $myUserEvents)
-    {
-        $this->myUserEvents[] = $myUserEvents;
-
-        return $this;
-    }
-
-    /**
-     * Remove myUserEvents
-     *
-     * @param \Nfq\NomNomBundle\Entity\MyUserEvent $myUserEvents
-     */
-    public function removeMyUserEvent(\Nfq\NomNomBundle\Entity\MyUserEvent $myUserEvents)
-    {
-        $this->myUserEvents->removeElement($myUserEvents);
-    }
-
-    /**
-     * Get myUserEvents
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getMyUserEvents()
-    {
-        return $this->myUserEvents;
     }
 
     /**
@@ -164,5 +124,28 @@ class MyUserProduct
     public function getQuantityMeasure()
     {
         return $this->quantityMeasure;
+    }
+
+    /**
+     * Set myUserEvent
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyUserEvent $myUserEvent
+     * @return MyUserProduct
+     */
+    public function setMyUserEvent(\Nfq\NomNomBundle\Entity\MyUserEvent $myUserEvent = null)
+    {
+        $this->myUserEvent = $myUserEvent;
+
+        return $this;
+    }
+
+    /**
+     * Get myUserEvent
+     *
+     * @return \Nfq\NomNomBundle\Entity\MyUserEvent 
+     */
+    public function getMyUserEvent()
+    {
+        return $this->myUserEvent;
     }
 }

@@ -30,7 +30,6 @@ class MyEventRecipe
     private $totalUpvote;
 
     /**
-     * @var integer
      *
      * @ORM\ManyToOne(targetEntity="MyEvent", inversedBy="myEventRecipes")
      * @ORM\JoinColumn(name="my_event_id", referencedColumnName="id")
@@ -39,9 +38,30 @@ class MyEventRecipe
 
     /**
      * @ORM\ManyToOne(targetEntity="MyRecipe", inversedBy="myEventRecipes")
-     * @ORM\JoinColumn(name="my_recipe_id", referencedColumnName="id")*
+     * @ORM\JoinColumn(name="my_recipe_id", referencedColumnName="id")
      */
     private $myRecipe;
+
+    /**
+     * @ORM\OneToMany(targetEntity="MyRecipeVote", mappedBy="myEventRecipe")
+     */
+    private $myRecipeVotes;
+
+    /**
+     * Constructor
+     */
+    public function __constructor()
+    {
+        $this->myRecipeVotes = new ArrayCollection();
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->myRecipeVotes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -51,29 +71,6 @@ class MyEventRecipe
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set recipeId
-     *
-     * @param integer $recipeId
-     * @return MyEventRecipe
-     */
-    public function setRecipeId($recipeId)
-    {
-        $this->recipeId = $recipeId;
-
-        return $this;
-    }
-
-    /**
-     * Get recipeId
-     *
-     * @return integer 
-     */
-    public function getRecipeId()
-    {
-        return $this->recipeId;
     }
 
     /**
@@ -123,29 +120,6 @@ class MyEventRecipe
     }
 
     /**
-     * Set myRecipes
-     *
-     * @param \Nfq\NomNomBundle\Entity\MyRecipe $myRecipes
-     * @return MyEventRecipe
-     */
-    public function setMyRecipes(\Nfq\NomNomBundle\Entity\MyRecipe $myRecipes = null)
-    {
-        $this->myRecipes = $myRecipes;
-
-        return $this;
-    }
-
-    /**
-     * Get myRecipes
-     *
-     * @return \Nfq\NomNomBundle\Entity\MyRecipe 
-     */
-    public function getMyRecipes()
-    {
-        return $this->myRecipes;
-    }
-
-    /**
      * Set myRecipe
      *
      * @param \Nfq\NomNomBundle\Entity\MyRecipe $myRecipe
@@ -166,5 +140,38 @@ class MyEventRecipe
     public function getMyRecipe()
     {
         return $this->myRecipe;
+    }
+
+    /**
+     * Add myRecipeVotes
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyRecipeVote $myRecipeVotes
+     * @return MyEventRecipe
+     */
+    public function addMyRecipeVote(\Nfq\NomNomBundle\Entity\MyRecipeVote $myRecipeVotes)
+    {
+        $this->myRecipeVotes[] = $myRecipeVotes;
+
+        return $this;
+    }
+
+    /**
+     * Remove myRecipeVotes
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyRecipeVote $myRecipeVotes
+     */
+    public function removeMyRecipeVote(\Nfq\NomNomBundle\Entity\MyRecipeVote $myRecipeVotes)
+    {
+        $this->myRecipeVotes->removeElement($myRecipeVotes);
+    }
+
+    /**
+     * Get myRecipeVotes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMyRecipeVotes()
+    {
+        return $this->myRecipeVotes;
     }
 }

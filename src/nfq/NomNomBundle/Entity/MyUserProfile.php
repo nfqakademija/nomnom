@@ -2,7 +2,6 @@
 
 namespace Nfq\NomNomBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,19 +32,6 @@ class MyUserProfile
      * @ORM\Column(name="avatar", type="blob")
      */
     private $avatar;
-
-    /**
-     * @ORM\OneToMany(targetEntity="MyUserLike", mappedBy="myUserProfile")
-     */
-    private $myUserLikes;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->myUserLikes = new ArrayCollection();
-    }
 
     /**
      * Get id
@@ -102,38 +88,5 @@ class MyUserProfile
     public function getMyUser()
     {
         return $this->myUser;
-    }
-
-    /**
-     * Add myUserLikes
-     *
-     * @param \Nfq\NomNomBundle\Entity\MyUserLike $myUserLikes
-     * @return MyUserProfile
-     */
-    public function addMyUserLike(\Nfq\NomNomBundle\Entity\MyUserLike $myUserLikes)
-    {
-        $this->myUserLikes[] = $myUserLikes;
-
-        return $this;
-    }
-
-    /**
-     * Remove myUserLikes
-     *
-     * @param \Nfq\NomNomBundle\Entity\MyUserLike $myUserLikes
-     */
-    public function removeMyUserLike(\Nfq\NomNomBundle\Entity\MyUserLike $myUserLikes)
-    {
-        $this->myUserLikes->removeElement($myUserLikes);
-    }
-
-    /**
-     * Get myUserLikes
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getMyUserLikes()
-    {
-        return $this->myUserLikes;
     }
 }

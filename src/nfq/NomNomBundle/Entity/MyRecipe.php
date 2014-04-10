@@ -66,11 +66,6 @@ class MyRecipe
     private $myRecipeProducts;
 
     /**
-     * @ORM\OneToMany(targetEntity="MyRecipeVote", mappedBy="myRecipe")
-     */
-    private $myRecipeVotes;
-
-    /**
      * @ORM\OneToMany(targetEntity="MyEventRecipe", mappedBy="myRecipe")
      */
     private $myEventRecipes;
@@ -83,7 +78,6 @@ class MyRecipe
     public function __construct()
     {
         $this->myRecipeProducts = new ArrayCollection();
-        $this->myRecipeVotes = new ArrayCollection();
         $this->myEventRecipes = new  ArrayCollection();
     }
 
@@ -269,39 +263,6 @@ class MyRecipe
     }
 
     /**
-     * Add myRecipeVotes
-     *
-     * @param \Nfq\NomNomBundle\Entity\MyRecipeVote $myRecipeVotes
-     * @return MyRecipe
-     */
-    public function addMyRecipeVote(\Nfq\NomNomBundle\Entity\MyRecipeVote $myRecipeVotes)
-    {
-        $this->myRecipeVotes[] = $myRecipeVotes;
-
-        return $this;
-    }
-
-    /**
-     * Remove myRecipeVotes
-     *
-     * @param \Nfq\NomNomBundle\Entity\MyRecipeVote $myRecipeVotes
-     */
-    public function removeMyRecipeVote(\Nfq\NomNomBundle\Entity\MyRecipeVote $myRecipeVotes)
-    {
-        $this->myRecipeVotes->removeElement($myRecipeVotes);
-    }
-
-    /**
-     * Get myRecipeVotes
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getMyRecipeVotes()
-    {
-        return $this->myRecipeVotes;
-    }
-
-    /**
      * Add myEventRecipes
      *
      * @param \Nfq\NomNomBundle\Entity\MyEventRecipe $myEventRecipes
@@ -344,4 +305,3 @@ class MyRecipe
         return 'bundles/NfqNomNom/images/'.$this->getPhotoDir().'/'.$this->getPhoto();
     }
 }
-

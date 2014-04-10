@@ -29,15 +29,16 @@ class MyRecipeVote
     private $vote;
 
     /**
-     * @ORM\OneToMany(targetEntity="MyUserEvent", mappedBy="myRecipeVote")
+     * @ORM\ManyToOne(targetEntity="MyUserEvent", inversedBy="myRecipeVotes")
+     * @ORM\JoinColumn(name="my_user_event_id", referencedColumnName="id")
      */
-    private $myUserEvents;
+    private $myUserEvent;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MyRecipe", inversedBy="myRecipeVotes")
-     * @ORM\JoinColumn(name="my_recipe_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="MyEventRecipe", inversedBy="myRecipeVotes")
+     * @ORM\JoinColumn(name="my_event_recipe_id", referencedColumnName="id")
      */
-    private $myRecipe;
+    private $myEventRecipe;
 
     /**
      * Constructor
@@ -55,29 +56,6 @@ class MyRecipeVote
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set recipeId
-     *
-     * @param integer $recipeId
-     * @return MyRecipeVote
-     */
-    public function setRecipeId($recipeId)
-    {
-        $this->recipeId = $recipeId;
-
-        return $this;
-    }
-
-    /**
-     * Get recipeId
-     *
-     * @return integer 
-     */
-    public function getRecipeId()
-    {
-        return $this->recipeId;
     }
 
     /**
@@ -137,25 +115,48 @@ class MyRecipeVote
     }
 
     /**
-     * Set myRecipe
+     * Set myUserEvent
      *
-     * @param \Nfq\NomNomBundle\Entity\MyRecipe $myRecipe
+     * @param \Nfq\NomNomBundle\Entity\MyUserEvent $myUserEvent
      * @return MyRecipeVote
      */
-    public function setMyRecipe(\Nfq\NomNomBundle\Entity\MyRecipe $myRecipe = null)
+    public function setMyUserEvent(\Nfq\NomNomBundle\Entity\MyUserEvent $myUserEvent = null)
     {
-        $this->myRecipe = $myRecipe;
+        $this->myUserEvent = $myUserEvent;
 
         return $this;
     }
 
     /**
-     * Get myRecipe
+     * Get myUserEvent
      *
-     * @return \Nfq\NomNomBundle\Entity\MyRecipe 
+     * @return \Nfq\NomNomBundle\Entity\MyUserEvent 
      */
-    public function getMyRecipe()
+    public function getMyUserEvent()
     {
-        return $this->myRecipe;
+        return $this->myUserEvent;
+    }
+
+    /**
+     * Set myEventRecipe
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyEventRecipe $myEventRecipe
+     * @return MyRecipeVote
+     */
+    public function setMyEventRecipe(\Nfq\NomNomBundle\Entity\MyEventRecipe $myEventRecipe = null)
+    {
+        $this->myEventRecipe = $myEventRecipe;
+
+        return $this;
+    }
+
+    /**
+     * Get myEventRecipe
+     *
+     * @return \Nfq\NomNomBundle\Entity\MyEventRecipe 
+     */
+    public function getMyEventRecipe()
+    {
+        return $this->myEventRecipe;
     }
 }
