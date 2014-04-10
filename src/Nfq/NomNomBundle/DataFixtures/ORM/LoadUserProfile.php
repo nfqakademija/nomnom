@@ -110,12 +110,22 @@ AAAASUVORK5CYII=');
         $userprofile2 = new MyUserProfile();
         $userprofile2->setAvatar('galirsitastiks');
 
+        $userprofile3 = new MyUserProfile();
+        $userprofile3->setAvatar('galirsitastiks');
+
+        $userprofile4 = new MyUserProfile();
+        $userprofile4->setAvatar('galirsitastiks');
+
         $manager->persist($userprofile);
         $manager->persist($userprofile2);
+        $manager->persist($userprofile3);
+        $manager->persist($userprofile4);
         $manager->flush();
 
         $this->addReference('userProfile', $userprofile);
         $this->addReference('userProfile2', $userprofile2);
+        $this->addReference('userProfile3', $userprofile3);
+        $this->addReference('userProfile4', $userprofile4);
     }
 
     /**

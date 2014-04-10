@@ -58,11 +58,30 @@ class LoadUser extends AbstractFixture implements ContainerAwareInterface, Order
         $user2->setPlainPassword('user_password');
         $user2->setEnabled(true);
         $user2->setMyuserprofile($this->getReference('userProfile2'));
-
         $userManager->updateUser($user2);
+
+        // Create a new user
+        $user3 = $userManager->createUser();
+        $user3->setUsername('jonas');
+        $user3->setEmail('jonas@domain.com');
+        $user3->setPlainPassword('jonas');
+        $user3->setEnabled(true);
+        $user3->setMyuserprofile($this->getReference('userProfile3'));
+        $userManager->updateUser($user3);
+
+        // Create a new user
+        $user4 = $userManager->createUser();
+        $user4->setUsername('petras');
+        $user4->setEmail('petras@domain.com');
+        $user4->setPlainPassword('petras');
+        $user4->setEnabled(true);
+        $user4->setMyuserprofile($this->getReference('userProfile4'));
+        $userManager->updateUser($user4);
 
         $this->addReference('user', $user);
         $this->addReference('user2', $user2);
+        $this->addReference('user3', $user3);
+        $this->addReference('user4', $user4);
     }
 
     /**

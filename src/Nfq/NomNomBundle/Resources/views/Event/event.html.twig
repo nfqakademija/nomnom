@@ -14,11 +14,22 @@
     {{ event.eventPhase }}
 
     <br>
-    <a href="{{ path('Nfq_nom_nom_add_user_to_event', {'eventId': eventId}) }}">Add people</a>
-    <br>
-    <div> people all ready participating:</div>
-    {% for user in userNames %}
-        <div> {{ user['username'] }}</div>
+    <a href="{{ path('Nfq_nom_nom_add_user_to_event', {'eventId': event.id}) }}">Add people</a>
+
+    <hr>
+    <div>Host of the event:</div>
+    <div>{{ host.myUser.username }}</div>
+
+    <hr>
+    <div> people invited:</div>
+    {% for userEvent in invitedUE %}
+        <div> {{ userEvent.myUser.username }}</div>
+    {% endfor %}
+
+    <hr>
+    <div> people accepted invitations:</div>
+    {% for userEvent in acceptedUE %}
+        <div> {{ userEvent.myUser.username }}</div>
     {% endfor %}
     {#generated content displaying#}
 {% endblock %}

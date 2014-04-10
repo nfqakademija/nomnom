@@ -3,9 +3,23 @@
     {{ error }}
     <br>
     <a href="{{ path('Nfq_nom_nom_create_event') }}">Create Event</a>
-    <br>
-    <span>Events where you're participating in:</span>
-    {% for userEvent in userEvents %}
+    <hr>
+    <div>Events where you are host:</div>
+    {% for userEvent in hostUE %}
+        <a href="{{ path('Nfq_nom_nom_events', {'eventId': userEvent.myEvent.id}) }}">{{ userEvent.myEvent.eventName }}</a>
+    {% endfor %}
+    <hr>
+    <div>Events where you are invited:</div>
+    {% for userEvent in invitedUE %}
+        <div>
+            <span>{{ userEvent.myEvent.eventName }}</span>
+            <a href="{{ path('Nfq_nom_nom_accept_event', {'userEventId': userEvent.id}) }}">Accept</a>
+        </div>
+    {% endfor %}
+    <hr>
+    <div>Events where you are guest:</div>
+    {% for userEvent in acceptedUE %}
+
         <a href="{{ path('Nfq_nom_nom_events', {'eventId': userEvent.myEvent.id}) }}">{{ userEvent.myEvent.eventName }}</a>
     {% endfor %}
 {% endblock %}

@@ -24,12 +24,18 @@ class EventController extends Controller
         // TODO: we should check is the user is registered but maybe this is enough
         if ($user != '') {
             $rep = $this->getDoctrine()->getRepository('NfqNomNomBundle:MyUserEvent');
-            //getting all userevent objects where user_id is current users id
-            $myUserEvents = $rep->findByUser($user);
+            //find all userevent objects where current user is host
+            $hostUserEvents = $rep->findByUserHost($user);
+            //find all userevnt objects where current user is invited
+            $invitedUserEvents = $rep->findByUserInvited($user);
+            //find all userevent objects where current user accepted invitations
+            $acceptedUserEvents = $rep->findByUserAccepted($user);
 
             return $this->render('NfqNomNomBundle:Event:eventmanager.html.twig',
                 array('error' => '',
-                    'userEvents' => $myUserEvents
+                    'hostUE' => $hostUserEvents,
+                    'invitedUE' => $invitedUserEvents,
+                    'acceptedUE' => $acceptedUserEvents
                 ));
         } else {
             return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'log in  first'));
@@ -44,13 +50,23 @@ class EventController extends Controller
             /**@var $myEvent MyEvent */
             $myEvent = $em->getRepository('NfqNomNomBundle:MyEvent')->find($eventId);
             if (Utilities::hasUserPermissionToEvent($myEvent, $user, $em)) {
-                $userNames = $em->getRepository('NfqNomNomBundle:MyUserEvent')->findUsersInUserEvent($eventId);
+                $rep = $em->getRepository('NfqNomNomBundle:MyUserEvent');
+
+                //find host(there should be only one) of the event
+                $host = $rep->findbyEventHost($eventId)['0'];
+
+                //find users that accepted invitations to this event
+                $acceptedUsers = $rep->findByEventAccepted($eventId);
+
+                //find users that are invited to this event
+                $invitedUsers = $rep->findByEventInvited($eventId);
 
                 return $this->render('NfqNomNomBundle:Event:event.html.twig',
                     array('error' => '',
                         'event' => $myEvent,
-                        'eventId' => $eventId,
-                        'userNames' => $userNames));
+                        'acceptedUE' => $acceptedUsers,
+                        'invitedUE' => $invitedUsers,
+                        'host' => $host));
             } else {
                 return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => "you don't have permission to this evvent"));
             }
@@ -138,5 +154,24 @@ class EventController extends Controller
         } else {
             return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'log in  first'));
         }
+    }
+
+    public function acceptEventAction($userEventId)
+    {
+        //TODO check permisions so that other users could not accept this invitation
+        $em = $this->getDoctrine()->getManager();
+        /** @var MyUserEvent $myUserEvent */
+        $myUserEvent = $em->getRepository('NfqNomNomBundle:MyUserEvent')
+            ->find($userEventId);
+
+        if(!$myUserEvent){
+            //TODO userevent not found handling
+        }
+        else{
+            $myUserEvent->setInvitationStatus(2);
+            $em->flush();
+        }
+
+        return $this->redirect($this->generateUrl('Nfq_nom_nom_event_manager'));
     }
 } 

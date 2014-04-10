@@ -15,30 +15,63 @@ class MyUserEventRepository extends EntityRepository
     public function findByEventAndUser($event, $user)
     {
         return $this->getEntityManager()
-            ->createQuery(
-                'SELECT m FROM NfqNomNomBundle:MyUserEvent m
-                WHERE m.myEvent = :event AND m.myUser = :useris'
-            )
-            ->setParameters(array('event' => $event,
-                                'useris' =>$user))
+            ->createQuery('SELECT m FROM NfqNomNomBundle:MyUserEvent m
+            WHERE m.myEvent = :myevent AND m.myUser = :myuser')
+            ->setParameters(array( 'myevent' => $event,
+                                    'myuser' => $user))
             ->getResult();
     }
 
-    public function findUsersInUserEvent($event)
-    {
-        return $this->getEntityManager()
-            ->createQuery(
-                'SELECT DISTINCT u.username FROM NfqNomNomBundle:MyUserEvent AS m
-                JOIN m.myUser AS u WHERE m.myEvent = :event'
-            )
-            ->setParameters(array('event' => $event))
-            ->getResult();
-    }
-    public function findByUser($user)
+    public function findByEventHost($event)
     {
         return $this->getEntityManager()
             ->createQuery('SELECT m FROM NfqNomNomBundle:MyUserEvent m
-            WHERE m.myUser = :myuser')
+            WHERE m.myEvent = :myevent AND m.invitationStatus = 0')
+            ->setParameter('myevent', $event)
+            ->getResult();
+    }
+
+    public function findByEventInvited($event)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT m FROM NfqNomNomBundle:MyUserEvent m
+            WHERE m.myEvent = :myevent AND m.invitationStatus = 1')
+            ->setParameter('myevent', $event)
+            ->getResult();
+    }
+
+    public function findByEventAccepted($event)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT m FROM NfqNomNomBundle:MyUserEvent m
+            WHERE m.myEvent = :myevent AND m.invitationStatus = 2')
+            ->setParameter('myevent', $event)
+            ->getResult();
+    }
+
+    public function findByUserHost($user)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT m FROM NfqNomNomBundle:MyUserEvent m
+            WHERE m.myUser = :myuser AND m.invitationStatus = 0')
+            ->setParameter('myuser', $user)
+            ->getResult();
+    }
+
+    public function findByUserInvited($user)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT m FROM NfqNomNomBundle:MyUserEvent m
+            WHERE m.myUser = :myuser AND m.invitationStatus = 1')
+            ->setParameter('myuser', $user)
+            ->getResult();
+    }
+
+    public function findByUserAccepted($user)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT m FROM NfqNomNomBundle:MyUserEvent m
+            WHERE m.myUser = :myuser AND m.invitationStatus = 2')
             ->setParameter('myuser', $user)
             ->getResult();
     }

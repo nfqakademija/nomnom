@@ -22,6 +22,10 @@ Nfq_nom_nom_create_event:
     pattern:  /createevent/
     defaults: { _controller: NfqNomNomBundle:Event:createEvent }
 
+Nfq_nom_nom_accept_event:
+    pattern:  /acceptevent/{userEventId}
+    defaults: { _controller: NfqNomNomBundle:Event:acceptEvent }
+
 Nfq_nom_nom_profile:
     pattern: /profile
     defaults: {_controller: NfqNomNomBundle:Default:profile }
