@@ -26,6 +26,10 @@ Nfq_nom_nom_accept_event:
     pattern:  /acceptevent/{userEventId}
     defaults: { _controller: NfqNomNomBundle:Event:acceptEvent }
 
+Nfq_nom_nom_progress_event:
+    pattern:  /progressevent/{eventId}
+    defaults: { _controller: NfqNomNomBundle:Event:progressEvent }
+
 Nfq_nom_nom_profile:
     pattern: /profile
     defaults: {_controller: NfqNomNomBundle:Default:profile }

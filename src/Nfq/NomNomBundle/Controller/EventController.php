@@ -49,11 +49,13 @@ class EventController extends Controller
             $em = $this->getDoctrine()->getManager();
             /**@var $myEvent MyEvent */
             $myEvent = $em->getRepository('NfqNomNomBundle:MyEvent')->find($eventId);
+
             if (Utilities::hasUserPermissionToEvent($myEvent, $user, $em)) {
                 $rep = $em->getRepository('NfqNomNomBundle:MyUserEvent');
 
                 //find host(there should be only one) of the event
-                $host = $rep->findbyEventHost($eventId)['0'];
+                /** @var MyUserEvent $host */
+                $hostUser = $rep->findbyEventHost($eventId)['0'];
 
                 //find users that accepted invitations to this event
                 $acceptedUsers = $rep->findByEventAccepted($eventId);
@@ -61,12 +63,29 @@ class EventController extends Controller
                 //find users that are invited to this event
                 $invitedUsers = $rep->findByEventInvited($eventId);
 
+                if ($this->getUser() == $hostUser->getMyUser()) {
+                    switch ($myEvent->getEventPhase()) {
+                        case 0:
+                            $progressionButtonText = 'Finish recipe addition';
+                            break;
+                        case 1:
+                            $progressionButtonText = 'Finish Event';
+                            break;
+                        case 2:
+                            $progressionButtonText = '';
+                            break;
+                    }
+                } else {
+                    $progressionButtonText = '';
+                }
+
                 return $this->render('NfqNomNomBundle:Event:event.html.twig',
                     array('error' => '',
                         'event' => $myEvent,
                         'acceptedUE' => $acceptedUsers,
                         'invitedUE' => $invitedUsers,
-                        'host' => $host));
+                        'host' => $hostUser,
+                        'progButton' => $progressionButtonText));
             } else {
                 return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => "you don't have permission to this evvent"));
             }
@@ -164,14 +183,34 @@ class EventController extends Controller
         $myUserEvent = $em->getRepository('NfqNomNomBundle:MyUserEvent')
             ->find($userEventId);
 
-        if(!$myUserEvent){
+        if (!$myUserEvent) {
             //TODO userevent not found handling
-        }
-        else{
+        } else {
             $myUserEvent->setInvitationStatus(2);
             $em->flush();
         }
 
         return $this->redirect($this->generateUrl('Nfq_nom_nom_event_manager'));
+    }
+
+    public function progressEventAction($eventId)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $rep = $em->getRepository('NfqNomNomBundle:MyUserEvent');
+
+        //find userEvent where user is host of event
+        /** @var MyUserEvent $hostUserEvent */
+        $hostUserEvent = $rep->findbyEventHost($eventId)['0'];
+        $hostUser = $hostUserEvent->getMyUser();
+
+        if($user == $hostUser)
+        {
+            $hostEvent = $hostUserEvent->getMyEvent();
+            $hostEvent->setEventPhase($hostEvent->getEventPhase() + 1);
+            $em->flush();
+        }
+
+        return $this->redirect($this->generateUrl("Nfq_nom_nom_events", array('eventId' => $eventId)));
     }
 } 

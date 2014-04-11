@@ -31,5 +31,7 @@
     {% for userEvent in acceptedUE %}
         <div> {{ userEvent.myUser.username }}</div>
     {% endfor %}
+    <hr>
+    <a href="{{ path('Nfq_nom_nom_progress_event', {'eventId': event.id}) }}">{{ progButton }}</a>
     {#generated content displaying#}
 {% endblock %}
