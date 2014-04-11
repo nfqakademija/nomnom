@@ -14,3 +14,8 @@ services:
              class: Nfq\NomNomBundle\Form\Type\AddUsersToEventType
              tags:
                  - { name: form.type, alias: adduserstoevent }
+
+     nfq_nom_nom.form.type.addrecipetoevent:
+                  class: Nfq\NomNomBundle\Form\Type\AddRecipeToEventType
+                  tags:
+                      - { name: form.type, alias: addrecipetoevent }

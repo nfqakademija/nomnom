@@ -18,6 +18,10 @@ Nfq_nom_nom_add_user_to_event:
     pattern: /event/addusers/{eventId}
     defaults: { _controller: NfqNomNomBundle:Event:addUsersToEvent , eventId: 0}
 
+Nfq_nom_nom_add_recipe_to_event:
+    pattern: /event/addrecipe/{eventId}
+    defaults: { _controller: NfqNomNomBundle:Event:addRecipeToEvent , eventId: 0}
+
 Nfq_nom_nom_create_event:
     pattern:  /createevent/
     defaults: { _controller: NfqNomNomBundle:Event:createEvent }

@@ -12,4 +12,21 @@ use Doctrine\ORM\EntityRepository;
  */
 class MyEventRecipeRepository extends EntityRepository
 {
+    public function findByEvent($eventId)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT r FROM NfqNomNomBundle:MyEventRecipe r WHERE r.myEvent = :myevent')
+            ->setParameter('myevent', $eventId)
+            ->getResult();
+    }
+
+    public function findByEventAndRecipe($eventId, $recipeId)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT r FROM NfqNomNomBundle:MyEventRecipe r
+             WHERE r.myEvent = :myevent AND r.myRecipe = :myrecipe')
+            ->setParameters(array('myevent' => $eventId,
+                                'myrecipe' => $recipeId))
+            ->getResult();
+    }
 }

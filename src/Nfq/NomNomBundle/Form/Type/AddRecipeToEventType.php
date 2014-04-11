@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Admin
- * Date: 4/6/14
- * Time: 2:46 PM
+ * User: Pimpackiukas
+ * Date: 4/11/14
+ * Time: 2:28 PM
  */
 
 namespace Nfq\NomNomBundle\Form\Type;
@@ -12,8 +12,7 @@ namespace Nfq\NomNomBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class AddUsersToEventType extends AbstractType{
-
+class AddRecipeToEventType extends AbstractType {
     /**
      * Returns the name of this type.
      *
@@ -21,15 +20,15 @@ class AddUsersToEventType extends AbstractType{
      */
     public function getName()
     {
-        return 'adduserstoevent';
+        return 'addrecipetoevent';
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('user', 'genemu_jqueryselect2_entity', array(
-        'class' => 'NfqNomNomBundle:User',
-        'property' => 'username',
-    ))
-        ->add('submit', 'submit');;
+        $builder->add('recipe', 'genemu_jqueryselect2_entity', array(
+            'class' => 'NfqNomNomBundle:MyRecipe',
+            'property' => 'recipeName',
+        ))
+            ->add('submit', 'submit');;
     }
-}
+} 

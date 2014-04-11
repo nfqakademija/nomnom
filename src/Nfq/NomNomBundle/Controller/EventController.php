@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Nfq\NomNomBundle\Utilities;
 use Nfq\NomNomBundle\Entity\MyEvent;
 use Nfq\NomNomBundle\Entity\MyUserEvent;
+use Nfq\NomNomBundle\Entity\MyEventRecipe;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -44,23 +45,27 @@ class EventController extends Controller
     public function eventAction($eventId)
     {
         $user = $this->getUser();
-        if ($user != '') {
+        if ($user) {
             $em = $this->getDoctrine()->getManager();
             /**@var $myEvent MyEvent */
             $myEvent = $em->getRepository('NfqNomNomBundle:MyEvent')->find($eventId);
 
             if (Utilities::hasUserPermissionToEvent($myEvent, $user, $em)) {
-                $rep = $em->getRepository('NfqNomNomBundle:MyUserEvent');
+                $repUE = $em->getRepository('NfqNomNomBundle:MyUserEvent');
+                $repER = $em->getRepository('NfqNomNomBundle:MyEventRecipe');
 
                 //find host(there should be only one) of the event
                 /** @var MyUserEvent $host */
-                $hostUser = $rep->findbyEventHost($eventId)['0'];
+                $hostUser = $repUE->findbyEventHost($eventId)['0'];
 
                 //find users that accepted invitations to this event
-                $acceptedUsers = $rep->findByEventAccepted($eventId);
+                $acceptedUsers = $repUE->findByEventAccepted($eventId);
 
                 //find users that are invited to this event
-                $invitedUsers = $rep->findByEventInvited($eventId);
+                $invitedUsers = $repUE->findByEventInvited($eventId);
+
+                //find all eventRecipes for this event
+                $eventRecipes = $repER->findByEvent($eventId);
 
                 if ($this->getUser() == $hostUser->getMyUser()) {
                     switch ($myEvent->getEventPhase()) {
@@ -84,7 +89,8 @@ class EventController extends Controller
                         'acceptedUE' => $acceptedUsers,
                         'invitedUE' => $invitedUsers,
                         'host' => $hostUser,
-                        'progButton' => $progressionButtonText));
+                        'progButton' => $progressionButtonText,
+                        'eventRecipes' => $eventRecipes));
             } else {
                 return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => "you don't have permission to this evvent"));
             }
@@ -166,6 +172,41 @@ class EventController extends Controller
                 return $this->redirect($this->generateUrl('Nfq_nom_nom_events', array('eventId' => $eventId)));
             } else {
                 return $this->render('NfqNomNomBundle:Event:adduserstoevent.html.twig',
+                    array('forma' => $form->createView(),
+                        'error' => ''));
+            }
+        } else {
+            return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'log in  first'));
+        }
+    }
+    public function addRecipeToEventAction($eventId, Request $request)
+    {
+        $user = $this->getUser();
+
+        $em = $this->getDoctrine()->getManager();
+        /**@var $myEvent MyEvent */
+        $myEvent = $em->getRepository('NfqNomNomBundle:MyEvent')->find($eventId);
+
+        if ($user) {
+            $form = $this->createForm('addrecipetoevent');
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                //check if current user is participating in this event
+                $someEventRecipe = $em->getRepository('NfqNomNomBundle:MyEventRecipe')
+                    ->findByEventAndRecipe($myEvent, $form->getData()['recipe']);
+                if (empty($someEventRecipe)) {
+                    $eventRecipe = new MyEventRecipe();
+                    $eventRecipe->setMyEvent($myEvent);
+                    $eventRecipe->setMyRecipe($form->getData()['recipe']);
+                    $eventRecipe->setTotalUpvote(0);
+
+                    $em->persist($eventRecipe);
+                    $em->flush();
+                }
+                return $this->redirect($this->generateUrl('Nfq_nom_nom_events', array('eventId' => $eventId)));
+            } else {
+                return $this->render('NfqNomNomBundle:Event:addrecipetoevent.html.twig',
                     array('forma' => $form->createView(),
                         'error' => ''));
             }
