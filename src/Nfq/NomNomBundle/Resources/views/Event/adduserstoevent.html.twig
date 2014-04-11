@@ -1,5 +1,22 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
 {% block content %}
+    {% javascripts '@NfqNomNomBundle/Resources/public/js/*'%}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    {% stylesheets 'bundles/nfqnomnom/css/*' filter='cssrewrite'%}
+    <link  rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+
+    <script>
+        $(document).ready(function() {
+            $("#adduserstoevent_user").val(["AL","AZ"]).select2();
+            $("#adduserstoevent_user").click(function() { $("#adduserstoevent_user").select2(); });
+            $("#wait_tags_destroy").click(function() { $("#wait_").select2("destroy"); });
+        });
+    </script>
+
     {{ error }}
     {{ form(forma) }}
     {#generated content displaying#}
