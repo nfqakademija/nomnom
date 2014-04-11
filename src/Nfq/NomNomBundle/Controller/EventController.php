@@ -21,8 +21,7 @@ class EventController extends Controller
     public function eventManagerAction()
     {
         $user = $this->getUser();
-        // TODO: we should check is the user is registered but maybe this is enough
-        if ($user != '') {
+        if ($user) {
             $rep = $this->getDoctrine()->getRepository('NfqNomNomBundle:MyUserEvent');
             //find all userevent objects where current user is host
             $hostUserEvents = $rep->findByUserHost($user);
@@ -177,17 +176,26 @@ class EventController extends Controller
 
     public function acceptEventAction($userEventId)
     {
-        //TODO check permisions so that other users could not accept this invitation
+        $user = $this->getUser();
+
+        if (!$user) {
+            $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'log in  first'));
+        }
+
         $em = $this->getDoctrine()->getManager();
         /** @var MyUserEvent $myUserEvent */
         $myUserEvent = $em->getRepository('NfqNomNomBundle:MyUserEvent')
             ->find($userEventId);
 
         if (!$myUserEvent) {
-            //TODO userevent not found handling
-        } else {
+            $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'something went wrong.'));
+        }
+
+        if ($myUserEvent->getMyUser() == $user) {
             $myUserEvent->setInvitationStatus(2);
             $em->flush();
+        } else {
+            $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'you don\'t have permission.'));
         }
 
         return $this->redirect($this->generateUrl('Nfq_nom_nom_event_manager'));
@@ -204,8 +212,7 @@ class EventController extends Controller
         $hostUserEvent = $rep->findbyEventHost($eventId)['0'];
         $hostUser = $hostUserEvent->getMyUser();
 
-        if($user == $hostUser)
-        {
+        if ($user == $hostUser) {
             $hostEvent = $hostUserEvent->getMyEvent();
             $hostEvent->setEventPhase($hostEvent->getEventPhase() + 1);
             $em->flush();
