@@ -12,6 +12,7 @@
     <script>
         $(document).ready(function() {
             $("#adduserstoevent_user").val(["AL","AZ"]).select2();
+            $("#adduserstoevent_user").select2({width: 'resolve'});
             $("#adduserstoevent_user").click(function() { $("#adduserstoevent_user").select2(); });
             $("#wait_tags_destroy").click(function() { $("#wait_").select2("destroy"); });
         });
