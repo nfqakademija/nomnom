@@ -18,7 +18,7 @@ class RecipesListController extends Controller{
         $name="Recipes";
 
         return $this->render(
-            'NfqNomNomBundle:Recipes:recipesList.html.twig',
+            'NfqNomNomBundle:recipes:recipesList.html.twig',
             array(
                 'recipes' => $recipes,
                 'name' => $name

@@ -31,7 +31,7 @@ class RecipesController extends Controller
         $logo3 = "bundles/nfqnomnom/images/recipes/category.png";
 
         return $this->render(
-            'NfqNomNomBundle:Recipes:recipe.html.twig',
+            'NfqNomNomBundle:recipes:recipe.html.twig',
             array(
                 'recipe_photo_path' => $photo_path,
                 'error' => $error,
