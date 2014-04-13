@@ -17,18 +17,21 @@ body{
     background-size: auto 250px;
     background-position: center;
     background-repeat: no-repeat;
-    border-radius: 5px  5px 0px 0px;
+    border-radius: 5px  5px 0 0;
 }
 
 #main{
     width:1000px;
     height: auto;
     margin:0 auto;
+
 }
 
 h2{
-    font-size: 40px;
+    font-size:30px;
     text-align: center;
+    font-family: "Lucida Sans Unicode";
+    font-style: italic;
 }
 
 #textBox{
@@ -37,6 +40,8 @@ h2{
     text-align: center;
     width: 230px;
     font-size: 20px;
+    font-style: italic;
+    font-family: "Lucida Sans Unicode";
 }
 
 a{

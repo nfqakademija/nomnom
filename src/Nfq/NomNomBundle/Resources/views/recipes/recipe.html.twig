@@ -51,6 +51,7 @@
 
                         <li>
                             {{ product.getQuantity() ? product.getQuantity() : '' }}
+                            {{ product.getQuantity() ? product.getMeasurementTitle(product.getQuantityMeasure()) : '' }}
                             {{ product.getMyProduct().getProductName() }}
                         </li>
 

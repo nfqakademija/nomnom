@@ -47,6 +47,20 @@ class MyRecipeProduct
      */
     private $quantityMeasure;
 
+    /**
+     * Measurements keys and values
+     *
+     * @var array
+     */
+    private $measuresMap = array(
+        '0' => '',
+        '1' => 'g',
+        '2' => 'tbsp',
+        '3' => 'stalk',
+        '4' => 'kg',
+        '5' => 'bunch',
+    );
+
 
     /**
      * Get id
@@ -148,5 +162,18 @@ class MyRecipeProduct
     public function getMyProduct()
     {
         return $this->myProduct;
+    }
+
+    /**
+     * Returns measurement title by measurement key
+     *
+     * @param $measurementKey
+     * @return string
+     */
+    public function getMeasurementTitle($measurementKey) {
+        if(isset($this->measuresMap[$measurementKey])) {
+            return $this->measuresMap[$measurementKey];
+        }
+        return '';
     }
 }
