@@ -98,7 +98,6 @@ class EventController extends Controller
                         'host' => $hostUser,
                         'progButton' => $progressionButtonText,
                         'eventRecipes' => $eventRecipes,
-                        'recipeVotes' => $recipeVotes,
                         'currentUserEvent' => $userEvent));
             } else {
                 return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => "you don't have permission to this evvent"));
