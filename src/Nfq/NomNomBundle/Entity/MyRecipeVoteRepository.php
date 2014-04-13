@@ -12,4 +12,22 @@ use Doctrine\ORM\EntityRepository;
  */
 class MyRecipeVoteRepository extends EntityRepository
 {
+    public function findExisting($userEventId, $eventRecipeId)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT r FROM NfqNomNomBundle:MyRecipeVote r
+            WHERE r.myUserEvent = :userEvent AND r.myEventRecipe = :eventRecipe')
+            ->setParameters(array('userEvent' => $userEventId,
+                                    'eventRecipe' => $eventRecipeId))
+            ->getResult();
+    }
+
+    public function findByEventRecipe($eventRecipeId)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT r FROM NfqNomNomBundle:MyRecipeVote r
+            WHERE r.myEventRecipe = :eventRecipe')
+            ->setParameter('eventRecipe' , $eventRecipeId)
+            ->getResult();
+    }
 }

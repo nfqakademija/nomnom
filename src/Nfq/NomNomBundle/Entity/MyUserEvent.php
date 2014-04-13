@@ -3,7 +3,6 @@
 namespace Nfq\NomNomBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * MyUserEvent
@@ -66,15 +65,6 @@ class MyUserEvent
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $myUser;
-
-    /**
-     * Constructor
-     */
-    public function __constructor()
-    {
-        $this->myUserProducts = new ArrayCollection();
-        $this->myRecipeVotes = new ArrayCollection();
-    }
 
     /**
      * Get id

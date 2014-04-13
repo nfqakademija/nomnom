@@ -67,6 +67,13 @@ class EventController extends Controller
                 //find all eventRecipes for this event
                 $eventRecipes = $repER->findByEvent($eventId);
 
+                foreach($eventRecipes as $eventRecipe){
+
+                    $recipeVotes[] = $eventRecipe->getMyRecipeVotes();
+                }
+
+                $userEvent = $repUE->findByEventAndUser($myEvent, $user)['0'];
+
                 if ($this->getUser() == $hostUser->getMyUser()) {
                     switch ($myEvent->getEventPhase()) {
                         case 0:
@@ -90,7 +97,9 @@ class EventController extends Controller
                         'invitedUE' => $invitedUsers,
                         'host' => $hostUser,
                         'progButton' => $progressionButtonText,
-                        'eventRecipes' => $eventRecipes));
+                        'eventRecipes' => $eventRecipes,
+                        'recipeVotes' => $recipeVotes,
+                        'currentUserEvent' => $userEvent));
             } else {
                 return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => "you don't have permission to this evvent"));
             }
@@ -179,6 +188,7 @@ class EventController extends Controller
             return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'log in  first'));
         }
     }
+
     public function addRecipeToEventAction($eventId, Request $request)
     {
         $user = $this->getUser();

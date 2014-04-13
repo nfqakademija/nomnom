@@ -39,6 +39,20 @@
         <a href="{{ path('nfq_nom_nom_recipe', {'id':eventRecipe.myRecipe.id}) }}">
             {{ eventRecipe.myRecipe.recipeName }}
         </a>
+
+        <a href="{{ path('Nfq_nom_nom_upvote_recipe',
+        {'eventRecipeId':eventRecipe.id,
+        'userEventId':currentUserEvent.id}) }}">
+            UpVote
+        </a>
+
+        <span>Total votes: {{ eventRecipe.totalUpvote }}</span>
+
+        <a href="{{ path('Nfq_nom_nom_downvote_recipe',
+        {'eventRecipeId':eventRecipe.id,
+        'userEventId':currentUserEvent.id}) }}">
+        DownVote
+        </a>
         <br>
     {% endfor %}
     <hr>

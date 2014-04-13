@@ -54,3 +54,11 @@ nfq_nom_nom_recipe:
     pattern:  /recipe/{id}
     defaults: { _controller: NfqNomNomBundle:Recipes:recipe}
 
+Nfq_nom_nom_upvote_recipe:
+    pattern:  /upvoterecipe/{userEventId}/{eventRecipeId}
+    defaults: { _controller: NfqNomNomBundle:Recipes:upvoteRecipe}
+
+Nfq_nom_nom_downvote_recipe:
+    pattern:  /downvoterecipe/{userEventId}/{eventRecipeId}
+    defaults: { _controller: NfqNomNomBundle:Recipes:downvoteRecipe}
+
