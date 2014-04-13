@@ -2,7 +2,7 @@
 {% block body %}
     {% block header %}
         <a href=" {{ path('Nfq_nom_nom_homepage') }}">Home</a> |
-        <a href=" {{ path('Nfq_nom_nom_recipe_list') }}">Recipes</a> |
+        <a href=" {{ path('nfq_nom_nom_recipe_list') }}">Recipes</a> |
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
             <a href=" {{ path('Nfq_nom_nom_profile') }}">Profile</a> |
             <a href=" {{ path('Nfq_nom_nom_event_manager') }}">Events</a> |

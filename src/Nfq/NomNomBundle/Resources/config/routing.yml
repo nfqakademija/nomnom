@@ -46,11 +46,11 @@ Nfq_nom_nom_password_change:
     pattern: /profile/change_password
     defaults: {_controller: NfqNomNomBundle:Default:changepassword }
 
-Nfq_nom_nom_recipe_list:
+nfq_nom_nom_recipe_list:
     pattern:  /recipe/
     defaults: { _controller: NfqNomNomBundle:RecipesList:recipeList}
 
-Nfq_nom_nom_recipe:
+nfq_nom_nom_recipe:
     pattern:  /recipe/{id}
     defaults: { _controller: NfqNomNomBundle:Recipes:recipe}
 

@@ -36,7 +36,7 @@
     <hr>
     <div> recipes included:</div>
     {% for eventRecipe in eventRecipes %}
-        <a href="{{ path('Nfq_nom_nom_recipe', {'id':eventRecipe.myRecipe.id}) }}">
+        <a href="{{ path('nfq_nom_nom_recipe', {'id':eventRecipe.myRecipe.id}) }}">
             {{ eventRecipe.myRecipe.recipeName }}
         </a>
         <br>

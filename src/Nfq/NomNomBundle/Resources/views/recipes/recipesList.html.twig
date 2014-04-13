@@ -15,7 +15,7 @@
 
     <div id="main">
         {% for recipe in recipes %}
-            <a href="{{ path('Nfq_nom_nom_recipe', {'id': recipe.getId()}) }}">
+            <a href="{{ path('nfq_nom_nom_recipe', {'id': recipe.getId()}) }}">
                 <div id="recipeBox">
                     <div id="recipePhotoBox" style="background-image: url({{ asset(recipe.getPhotoUrl()) }});">
                     </div>
