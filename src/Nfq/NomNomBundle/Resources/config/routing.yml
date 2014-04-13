@@ -47,7 +47,7 @@ Nfq_nom_nom_password_change:
     defaults: {_controller: NfqNomNomBundle:Default:changepassword }
 
 Nfq_nom_nom_recipe_list:
-    pattern:  /recipe
+    pattern:  /recipe/
     defaults: { _controller: NfqNomNomBundle:RecipesList:recipeList}
 
 Nfq_nom_nom_recipe:
