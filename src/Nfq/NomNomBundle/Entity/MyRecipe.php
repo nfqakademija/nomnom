@@ -302,6 +302,6 @@ class MyRecipe
 
     public function getPhotoUrl()
     {
-        return 'bundles/NfqNomNom/images/'.$this->getPhotoDir().'/'.$this->getPhoto();
+        return 'bundles/nfqnomnom/images/'.$this->getPhotoDir().'/'.$this->getPhoto();
     }
 }
