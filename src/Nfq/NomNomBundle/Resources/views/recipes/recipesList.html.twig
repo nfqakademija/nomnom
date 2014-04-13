@@ -1,0 +1,30 @@
+{% extends "NfqNomNomBundle:Default:index.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets '@NfqNomNomBundle/Resources/public/css/recipesList.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+
+    <h2>
+        {{ name }}
+    </h2>
+
+    <div id="main">
+        {% for recipe in recipes %}
+            <a href="{{ path('Nfq_nom_nom_recipe', {'id': recipe.getId()}) }}">
+                <div id="recipeBox">
+                    <div id="recipePhotoBox" style="background-image: url({{ asset(recipe.getPhotoUrl()) }});">
+                    </div>
+                    <div id="textBox">
+                        {{ recipe.getRecipeName() }}
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+
+{% endblock %}

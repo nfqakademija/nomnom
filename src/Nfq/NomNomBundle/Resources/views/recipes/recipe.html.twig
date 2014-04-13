@@ -4,10 +4,10 @@
     {{ recipe.getRecipeName() }}
 {% endblock %}
 
-{% block stylesheets%}
+{% block stylesheets %}
     {{ parent() }}
     {% stylesheets '@NfqNomNomBundle/Resources/public/css/recipe.css' %}
-    <link rel="stylesheet" href="{{asset_url}}"  type="text/css"/>
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
     {% endstylesheets %}
 {% endblock %}
 
@@ -22,36 +22,40 @@
 
 
     <div id="firstBox">
-
-        <div id="recipePhotoBox">
-           <img id="recipePhoto" src="{{ asset(recipe_photo_path) }}" alt="Symfony!"  />
-        </div>
-        <div id="recipeIngredients" >
-            <ul>
-
-                {% for product in recipe_products %}
-
-                    <li>
-                        {{ product.getQuantity() ? product.getQuantity() : '' }}
-                        {{ product.getMyProduct().getProductName() }}
-
-                    </li>
-
-                {% endfor %}
-            </ul>
-        </div>
-        <div id="recipePortion">
-            <img id="logo1" src="{{ asset(logo1_path) }}"/>
-            <div class="info">
-                {{ recipe.getPreparationTime() }}
+        <div id="imgInfo">
+            <div id="recipePhotoBox">
+                <img id="recipePhoto" src="{{ asset(recipe_photo_path) }}" alt="Symfony!"/>
             </div>
-            <img id="logo2" src="{{ asset(logo2_path) }}"/>
-            <div class="info">
-                {{ recipe.getNumberOfServings() }}
+            <div id="recipePortion">
+                <img id="logo1" src="{{ asset(logo1_path) }}"/>
+
+                <div class="info">
+                    {{ recipe.getPreparationTime() }}
+                </div>
+                <img id="logo2" src="{{ asset(logo2_path) }}"/>
+
+                <div class="info">
+                    {{ recipe.getNumberOfServings() }}
+                </div>
+                <img id="logo3" src="{{ asset(logo3_path) }}"/>
+
+                <div class="info">
+                    {{ recipe.getMyRecipeCategory().getCategoryName() }}
+                </div>
             </div>
-            <img id="logo3" src="{{ asset(logo3_path) }}"/>
-            <div class="info">
-                {{ recipe.getMyRecipeCategory().getCategoryName() }}
+        </div>
+            <div id="recipeIngredients">
+                <ul>
+
+                    {% for product in recipe_products %}
+
+                        <li>
+                            {{ product.getQuantity() ? product.getQuantity() : '' }}
+                            {{ product.getMyProduct().getProductName() }}
+                        </li>
+
+                    {% endfor %}
+                </ul>
             </div>
 
 
@@ -60,9 +64,9 @@
     </div>
 
     <div id="secondBox">
-         <div id="recipeInstructions" >
-             {{ recipe.getPreparationInstructions()|raw }}
-         </div>
+        <div id="recipeInstructions">
+            {{ recipe.getPreparationInstructions()|raw }}
+        </div>
     </div>
 
 {% endblock %}
