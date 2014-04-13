@@ -4,7 +4,7 @@ Nfq_nom_nom_homepage:
 
 Nfq_nom_nom_avatar_display:
     pattern:  /a/{avatarId}
-    defaults: { _controller: NfqNomNomBundle:Default:getAvatar }
+    defaults: { _controller: NfqNomNomBundle:Account:getAvatar }
 
 Nfq_nom_nom_event_manager:
     pattern:  /eventmanager/
@@ -36,15 +36,15 @@ Nfq_nom_nom_progress_event:
 
 Nfq_nom_nom_profile:
     pattern: /profile
-    defaults: {_controller: NfqNomNomBundle:Default:profile }
+    defaults: {_controller: NfqNomNomBundle:Account:profile }
 
 Nfq_nom_nom_profile_edit:
     pattern: /profile/edit
-    defaults: {_controller: NfqNomNomBundle:Default:profileEdit }
+    defaults: {_controller: NfqNomNomBundle:Account:profileEdit }
 
 Nfq_nom_nom_password_change:
     pattern: /profile/change_password
-    defaults: {_controller: NfqNomNomBundle:Default:changepassword }
+    defaults: {_controller: NfqNomNomBundle:Account:changepassword }
 
 nfq_nom_nom_recipe_list:
     pattern:  /recipe/
