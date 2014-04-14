@@ -283,6 +283,7 @@ class EventController extends Controller
         $myEvent = $em->getRepository('NfqNomNomBundle:MyEvent')->find($eventId);
         $repUE = $em->getRepository('NfqNomNomBundle:MyUserEvent');
         $repER = $em->getRepository('NfqNomNomBundle:MyEventRecipe');
+        $myUserProductRepository = $em->getRepository('NfqNomNomBundle:MyUserProduct');
 
         //find host(there should be only one) of the event
         /** @var MyUserEvent $host */
@@ -298,6 +299,9 @@ class EventController extends Controller
         $eventRecipes = $repER->findByEvent($eventId);
 
         $userEvent = $repUE->findByEventAndUser($myEvent, $user)['0'];
+
+        //all the userProducts within current event
+        $userProducts = $myUserProductRepository->findByEvent($myEvent);
 
         $progressionButtonText = '';
         if ($this->getUser() == $hostUser->getMyUser()) {
