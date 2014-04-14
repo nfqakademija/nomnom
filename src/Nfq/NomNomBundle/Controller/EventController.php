@@ -9,6 +9,7 @@
 namespace Nfq\NomNomBundle\Controller;
 
 
+use Nfq\NomNomBundle\Form\Type\EventType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Nfq\NomNomBundle\Utilities;
 use Nfq\NomNomBundle\Entity\MyEvent;
@@ -69,7 +70,7 @@ class EventController extends Controller
     public function createEventAction(Request $request)
     {
         $event = new MyEvent();
-        $form = $this->createForm('event', $event);
+        $form = $this->createForm(new EventType(), $event);
         $form->get('eventDate')->setData(new \DateTime());
 
         if ($request->isMethod("POST")) {
