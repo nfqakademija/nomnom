@@ -51,60 +51,19 @@ class EventController extends Controller
             $myEvent = $em->getRepository('NfqNomNomBundle:MyEvent')->find($eventId);
 
             if (Utilities::hasUserPermissionToEvent($myEvent, $user, $em)) {
-                $repUE = $em->getRepository('NfqNomNomBundle:MyUserEvent');
-                $repER = $em->getRepository('NfqNomNomBundle:MyEventRecipe');
-
-                //find host(there should be only one) of the event
-                /** @var MyUserEvent $host */
-                $hostUser = $repUE->findbyEventHost($eventId)['0'];
-
-                //find users that accepted invitations to this event
-                $acceptedUsers = $repUE->findByEventAccepted($eventId);
-
-                //find users that are invited to this event
-                $invitedUsers = $repUE->findByEventInvited($eventId);
-
-                //find all eventRecipes for this event
-                $eventRecipes = $repER->findByEvent($eventId);
-
-                foreach($eventRecipes as $eventRecipe){
-
-                    $recipeVotes[] = $eventRecipe->getMyRecipeVotes();
+                switch ($myEvent->getEventPhase()) {
+                    case 0:
+                        return $this->processPhaseOne($eventId);
+                    case 1:
+                        return $this->processPhaseTwo($eventId);
+                    case 2:
+                        return $this->ProcessPhaseThree($eventId);
                 }
-
-                $userEvent = $repUE->findByEventAndUser($myEvent, $user)['0'];
-
-                if ($this->getUser() == $hostUser->getMyUser()) {
-                    switch ($myEvent->getEventPhase()) {
-                        case 0:
-                            $progressionButtonText = 'Finish recipe addition';
-                            break;
-                        case 1:
-                            $progressionButtonText = 'Finish Event';
-                            break;
-                        case 2:
-                            $progressionButtonText = '';
-                            break;
-                    }
-                } else {
-                    $progressionButtonText = '';
-                }
-
-                return $this->render('NfqNomNomBundle:Event:event.html.twig',
-                    array('error' => '',
-                        'event' => $myEvent,
-                        'acceptedUE' => $acceptedUsers,
-                        'invitedUE' => $invitedUsers,
-                        'host' => $hostUser,
-                        'progButton' => $progressionButtonText,
-                        'eventRecipes' => $eventRecipes,
-                        'currentUserEvent' => $userEvent));
             } else {
                 return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => "you don't have permission to this evvent"));
             }
-        } else {
-            return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'log  in first'));
         }
+        return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'log  in first'));
     }
 
     public function createEventAction(Request $request)
@@ -264,10 +223,128 @@ class EventController extends Controller
 
         if ($user == $hostUser) {
             $hostEvent = $hostUserEvent->getMyEvent();
-            $hostEvent->setEventPhase($hostEvent->getEventPhase() + 1);
-            $em->flush();
+            $eventPhase = $hostEvent->getEventPhase();
+            //making sure user will not force eventphase to be bigger than 3
+            if($eventPhase < 3){
+                $hostEvent->setEventPhase($hostEvent->getEventPhase() + 1);
+                $em->flush();
+            }
         }
 
         return $this->redirect($this->generateUrl("Nfq_nom_nom_events", array('eventId' => $eventId)));
+    }
+
+    public function processPhaseOne($eventId)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        /**@var $myEvent MyEvent */
+        $myEvent = $em->getRepository('NfqNomNomBundle:MyEvent')->find($eventId);
+        $repUE = $em->getRepository('NfqNomNomBundle:MyUserEvent');
+        $repER = $em->getRepository('NfqNomNomBundle:MyEventRecipe');
+
+        //find host(there should be only one) of the event
+        /** @var MyUserEvent $host */
+        $hostUser = $repUE->findbyEventHost($eventId)['0'];
+
+        //find users that accepted invitations to this event
+        $acceptedUsers = $repUE->findByEventAccepted($eventId);
+
+        //find users that are invited to this event
+        $invitedUsers = $repUE->findByEventInvited($eventId);
+
+        //find all eventRecipes for this event
+        $eventRecipes = $repER->findByEvent($eventId);
+
+        $userEvent = $repUE->findByEventAndUser($myEvent, $user)['0'];
+
+        $progressionButtonText = '';
+        if ($this->getUser() == $hostUser->getMyUser()) {
+            $progressionButtonText = 'end recipe suggestion';
+        }
+
+        return $this->render('NfqNomNomBundle:Event:eventphaseone.html.twig',
+            array('error' => '',
+                'event' => $myEvent,
+                'acceptedUE' => $acceptedUsers,
+                'invitedUE' => $invitedUsers,
+                'host' => $hostUser,
+                'progButton' => $progressionButtonText,
+                'eventRecipes' => $eventRecipes,
+                'currentUserEvent' => $userEvent));
+    }
+
+    public function processPhaseTwo($eventId)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        /**@var $myEvent MyEvent */
+        $myEvent = $em->getRepository('NfqNomNomBundle:MyEvent')->find($eventId);
+        $repUE = $em->getRepository('NfqNomNomBundle:MyUserEvent');
+        $repER = $em->getRepository('NfqNomNomBundle:MyEventRecipe');
+
+        //find host(there should be only one) of the event
+        /** @var MyUserEvent $host */
+        $hostUser = $repUE->findbyEventHost($eventId)['0'];
+
+        //find users that accepted invitations to this event
+        $acceptedUsers = $repUE->findByEventAccepted($eventId);
+
+        //find users that are invited to this event
+        $invitedUsers = $repUE->findByEventInvited($eventId);
+
+        //find all eventRecipes for this event
+        $eventRecipes = $repER->findByEvent($eventId);
+
+        $userEvent = $repUE->findByEventAndUser($myEvent, $user)['0'];
+
+        $progressionButtonText = '';
+        if ($this->getUser() == $hostUser->getMyUser()) {
+            $progressionButtonText = 'finalize event';
+        }
+
+        return $this->render('NfqNomNomBundle:Event:eventphasetwo.html.twig',
+            array('error' => '',
+                'event' => $myEvent,
+                'acceptedUE' => $acceptedUsers,
+                'invitedUE' => $invitedUsers,
+                'host' => $hostUser,
+                'progButton' => $progressionButtonText,
+                'eventRecipes' => $eventRecipes,
+                'currentUserEvent' => $userEvent));
+    }
+
+    public function processPhaseThree($eventId)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        /**@var $myEvent MyEvent */
+        $myEvent = $em->getRepository('NfqNomNomBundle:MyEvent')->find($eventId);
+        $repUE = $em->getRepository('NfqNomNomBundle:MyUserEvent');
+        $repER = $em->getRepository('NfqNomNomBundle:MyEventRecipe');
+
+        //find host(there should be only one) of the event
+        /** @var MyUserEvent $host */
+        $hostUser = $repUE->findbyEventHost($eventId)['0'];
+
+        //find users that accepted invitations to this event
+        $acceptedUsers = $repUE->findByEventAccepted($eventId);
+
+        //find users that are invited to this event
+        $invitedUsers = $repUE->findByEventInvited($eventId);
+
+        //find all eventRecipes for this event
+        $eventRecipes = $repER->findByEvent($eventId);
+
+        $userEvent = $repUE->findByEventAndUser($myEvent, $user)['0'];
+
+        return $this->render('NfqNomNomBundle:Event:eventphasethree.html.twig',
+            array('error' => '',
+                'event' => $myEvent,
+                'acceptedUE' => $acceptedUsers,
+                'invitedUE' => $invitedUsers,
+                'host' => $hostUser,
+                'eventRecipes' => $eventRecipes,
+                'currentUserEvent' => $userEvent));
     }
 } 

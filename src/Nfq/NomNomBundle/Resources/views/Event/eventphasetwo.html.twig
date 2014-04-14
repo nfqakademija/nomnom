@@ -1,0 +1,57 @@
+{% extends "NfqNomNomBundle:Default:index.html.twig" %}
+{% block content %}
+    {{ error }}
+    <div>Event Name:</div>
+    {{ event.eventName }}
+
+    <div>Event creation date:</div>
+    {{ event.dateCreated.date }}
+
+    <div>Event date:</div>
+    {{ event.eventDate.date }}
+
+    <div>You can choose which products you want to bring.</div>
+    <hr>
+    <div>Host of the event:</div>
+    <div>{{ host.myUser.username }}</div>
+
+    <hr>
+    <div> people invited:</div>
+    {% for userEvent in invitedUE %}
+        <div> {{ userEvent.myUser.username }}</div>
+    {% endfor %}
+
+    <hr>
+    <div> people accepted invitations:</div>
+    {% for userEvent in acceptedUE %}
+        <div> {{ userEvent.myUser.username }}</div>
+    {% endfor %}
+    <hr>
+    <div> recipes included:</div>
+    {% for eventRecipe in eventRecipes %}
+
+        {% if eventRecipe.totalUpvote > 0 %}
+            <a href="{{ path('nfq_nom_nom_recipe', {'id':eventRecipe.myRecipe.id}) }}">
+                {{ eventRecipe.myRecipe.recipeName }}
+            </a>
+            <div id="recipeIngredients{{ eventRecipe.myRecipe.id }}">
+                <ul>
+                    {% for product in eventRecipe.myRecipe.myRecipeProducts %}
+
+                        <li>
+                            {{ product.getQuantity() ? product.getQuantity() : '' }}
+                            {{ product.getQuantity() ? product.getMeasurementTitle(product.getQuantityMeasure()) : '' }}
+                            {{ product.getMyProduct().getProductName() }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <span>People eating: {{ eventRecipe.totalUpvote }}</span>
+            <br>
+        {% endif %}
+
+    {% endfor %}
+    <hr>
+    <a href="{{ path('Nfq_nom_nom_progress_event', {'eventId': event.id}) }}">{{ progButton }}</a>
+    {#generated content displaying#}
+{% endblock %}

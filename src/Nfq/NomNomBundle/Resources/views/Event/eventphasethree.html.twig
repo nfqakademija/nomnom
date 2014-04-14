@@ -1,0 +1,40 @@
+{% extends "NfqNomNomBundle:Default:index.html.twig" %}
+{% block content %}
+    {{ error }}
+    <div>Event Name:</div>
+    {{ event.eventName }}
+
+    <div>Event creation date:</div>
+    {{ event.dateCreated.date }}
+
+    <div>Event date:</div>
+    {{ event.eventDate.date }}
+
+    <div>Event is at its final stage:</div>
+
+
+    <hr>
+    <div>Host of the event:</div>
+    <div>{{ host.myUser.username }}</div>
+
+    <hr>
+    <div> people invited:</div>
+    {% for userEvent in invitedUE %}
+        <div> {{ userEvent.myUser.username }}</div>
+    {% endfor %}
+
+    <hr>
+    <div> people accepted invitations:</div>
+    {% for userEvent in acceptedUE %}
+        <div> {{ userEvent.myUser.username }}</div>
+    {% endfor %}
+    <hr>
+    <div> recipes included:</div>
+    {% for eventRecipe in eventRecipes %}
+        <a href="{{ path('nfq_nom_nom_recipe', {'id':eventRecipe.myRecipe.id}) }}">
+            {{ eventRecipe.myRecipe.recipeName }}
+        </a>
+
+        <br>
+    {% endfor %}
+{% endblock %}
