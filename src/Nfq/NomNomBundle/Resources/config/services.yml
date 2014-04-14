@@ -11,11 +11,11 @@ services:
             - { name: form.type, alias: event }
 
      nfq_nom_nom.form.type.adduserstoevent:
-             class: Nfq\NomNomBundle\Form\Type\AddUsersToEventType
-             tags:
-                 - { name: form.type, alias: adduserstoevent }
+         class: Nfq\NomNomBundle\Form\Type\AddUsersToEventType
+         tags:
+             - { name: form.type }
 
      nfq_nom_nom.form.type.addrecipetoevent:
-                  class: Nfq\NomNomBundle\Form\Type\AddRecipeToEventType
-                  tags:
-                      - { name: form.type, alias: addrecipetoevent }
+          class: Nfq\NomNomBundle\Form\Type\AddRecipeToEventType
+          tags:
+              - { name: form.type, alias: addrecipetoevent }

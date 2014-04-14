@@ -116,7 +116,7 @@ class EventController extends Controller
         $myEvent = $em->getRepository('NfqNomNomBundle:MyEvent')->find($eventId);
 
         if (Utilities::hasUserPermissionToEvent($myEvent, $user, $em)) {
-            $form = $this->createForm('adduserstoevent');
+            $form = $this->createForm($this->get('nfq_nom_nom.form.type.adduserstoevent'));
             $form->handleRequest($request);
 
             if ($form->isValid()) {
