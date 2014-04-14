@@ -74,3 +74,6 @@ Nfq_nom_nom_downvote_recipe:
     pattern:  /downvoterecipe/{userEventId}/{eventRecipeId}
     defaults: { _controller: NfqNomNomBundle:Recipes:downvoteRecipe}
 
+Nfq_nom_nom_add_userproduct:
+    pattern:  /adduserproduct/{userEventId}/{recipeProductId}
+    defaults: { _controller: NfqNomNomBundle:Product:addUserProduct}
