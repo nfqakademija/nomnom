@@ -9,6 +9,9 @@
 namespace Nfq\NomNomBundle\Controller;
 
 
+use Nfq\NomNomBundle\Entity\MyProduct;
+use Nfq\NomNomBundle\Entity\MyRecipe;
+use Nfq\NomNomBundle\Entity\MyRecipeProduct;
 use Nfq\NomNomBundle\Form\Type\EventType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Nfq\NomNomBundle\Utilities;
@@ -300,8 +303,8 @@ class EventController extends Controller
 
         $userEvent = $repUE->findByEventAndUser($myEvent, $user)['0'];
 
-        //all the userProducts within current event
-        $userProducts = $myUserProductRepository->findByEvent($myEvent);
+        //this array is holding all the information about recipes in this event that we're going to show
+        $information = $this->transformToArray($eventRecipes, $userEvent);
 
         $progressionButtonText = '';
         if ($this->getUser() == $hostUser->getMyUser()) {
@@ -315,8 +318,7 @@ class EventController extends Controller
                 'invitedUE' => $invitedUsers,
                 'host' => $hostUser,
                 'progButton' => $progressionButtonText,
-                'eventRecipes' => $eventRecipes,
-                'currentUserEvent' => $userEvent));
+                'information' => $information));
     }
 
     public function processPhaseThree($eventId)
@@ -351,5 +353,45 @@ class EventController extends Controller
                 'host' => $hostUser,
                 'eventRecipes' => $eventRecipes,
                 'currentUserEvent' => $userEvent));
+    }
+
+    public function transformToArray($eventRecipes, $userEvent)
+    {
+        $visas = array();
+        $em = $this->getDoctrine()->getManager();
+        $myRep = $em->getRepository('NfqNomNomBundle:MyUserProduct');
+
+        foreach($eventRecipes as $eventRecipe)
+        {
+            /** @var MyRecipe $recipe */
+            $recipe = $eventRecipe->getMyRecipe();
+            $tovalVotes = $eventRecipe->getTotalUpvote();
+            $recipeProducts = $recipe->getMyRecipeProducts();
+            $vidinis = array();
+            $subVidinis = array();
+            foreach($recipeProducts as $recipeProduct){
+                /** @var MyRecipeProduct $r */
+                $r = $recipeProduct;
+                $myUserProduct = $myRep->findByEventAndRecipeProduct($userEvent->getMyEvent(), $recipeProduct);
+                $name = '';
+                if(!empty($myUserProduct)){
+                    $name = $myUserProduct['0']->getMyUserEvent()->getMyUser()->getUsername();
+                }
+                /** @var MyProduct $myProduct */
+                $myProduct = $recipeProduct->getMyProduct();
+                $subVidinis[] = array( 'productName' => $myProduct->getProductName(),
+                                        'quantity' => $r->getQuantity(),
+                                        'quantityMeasure' => $r->getMeasurementTitle($r->getQuantityMeasure()),
+                                        'userEventId' => $userEvent->getId(),
+                                        'recipeProductId' => $recipeProduct->getId(),
+                                        'bringerName' => $name);
+            }
+            $vidinis['totalUpvote'] = $tovalVotes;
+            $vidinis['products'] = $subVidinis;
+            $vidinis['id'] = $recipe->getId();
+            $visas[$recipe->getRecipeName()] = $vidinis;
+        }
+
+        return $visas;
     }
 } 

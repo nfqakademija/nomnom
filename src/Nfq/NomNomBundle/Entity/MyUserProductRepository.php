@@ -22,12 +22,22 @@ class MyUserProductRepository extends EntityRepository
             ->getResult();
     }
 
-    public function findByEvent($eventId)
+    public function findByEvent($event)
     {
         return $this->getEntityManager()
-            ->createQuery('SELECT m FROM NfqNomNomBundle:MyUserProduct AS m JOIN m.myUserEvent AS ue WHERE
-            ue.myEvent = :event ')
-            ->setParameters(array('event' => $eventId))
+            ->createQuery('SELECT m FROM NfqNomNomBundle:MyUserProduct AS m JOIN m.myUserEvent AS ue
+            WHERE ue.myEvent = :event ')
+            ->setParameters(array('event' => $event))
+            ->getResult();
+    }
+
+    public function findByEventAndRecipeProduct($event, $recipeProduct)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT m FROM NfqNomNomBundle:MyUserProduct AS m JOIN m.myUserEvent AS ue
+            WHERE ue.myEvent = :event AND m.myRecipeProduct = :recipeProduct')
+            ->setParameters(array('event' => $event,
+                                  'recipeProduct' => $recipeProduct))
             ->getResult();
     }
 }

@@ -28,35 +28,37 @@
         <div> {{ userEvent.myUser.username }}</div>
     {% endfor %}
     <hr>
+
     <div> recipes included:</div>
-    {% for eventRecipe in eventRecipes %}
+    {% for recipeName, recipe in information %}
 
-        {% if eventRecipe.totalUpvote > 0 %}
-            <a href="{{ path('nfq_nom_nom_recipe', {'id':eventRecipe.myRecipe.id}) }}">
-                {{ eventRecipe.myRecipe.recipeName }}
+            <a href="{{ path('nfq_nom_nom_recipe', {'id':recipe['id']}) }}">
+                {{ recipeName }}
             </a>
-            <span>People eating: {{ eventRecipe.totalUpvote }}</span>
-            <div id="recipeIngredients{{ eventRecipe.myRecipe.id }}">
+            <span>People eating: {{ recipe['totalUpvote'] }}</span>
+            <div id="recipeIngredients{{ recipe['id'] }}">
                 <ul>
-                    {% for product in eventRecipe.myRecipe.myRecipeProducts %}
-
+                    {% for product in recipe['products'] %}
                         <li>
-                            {{ product.getQuantity() ? product.getQuantity() : '' }}
-                            {{ product.getQuantity() ? product.getMeasurementTitle(product.getQuantityMeasure()) : '' }}
-                            {{ product.getMyProduct().getProductName() }}
+                            {{ product['quantity'] ? product['quantity'] : '' }}
+                            {{ product['quantityMeasure'] ? product['quantityMeasure'] : '' }}
+                            {{ product['productName'] }}
+                            {% if product['bringerName'] is sameas('') %}
                             <a href="{{ path('Nfq_nom_nom_add_userproduct',
-                            {'userEventId':currentUserEvent.id,
-                            'recipeProductId':product.id}) }}">
+                            {'userEventId':product['userEventId'],
+                            'recipeProductId':product['recipeProductId']}) }}">
                                 i'll bring
                             </a>
+                            {% else %}
+                                <span>{{ product['bringerName'] }} is bringing</span>
+                            {% endif %}
                         </li>
                     {% endfor %}
                 </ul>
             </div>
             <br>
-        {% endif %}
-
     {% endfor %}
+
     <hr>
     <a href="{{ path('Nfq_nom_nom_progress_event', {'eventId': event.id}) }}">{{ progButton }}</a>
     {#generated content displaying#}
