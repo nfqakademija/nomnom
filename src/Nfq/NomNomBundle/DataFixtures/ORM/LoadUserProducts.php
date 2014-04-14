@@ -25,13 +25,12 @@ class LoadUserProducts extends AbstractFixture implements OrderedFixtureInterfac
      */
     function load(ObjectManager $manager)
     {
+        //TODO update userproduct fixture
         $userproduct = new MyUserProduct();
-        $userproduct->setMyProduct($this->getReference('fish'));
         $userproduct->setQuantity(200.0);
         $userproduct->setQuantityMeasure(2);
 
         $userproduct2 = new MyUserProduct();
-        $userproduct2->setMyProduct($this->getReference('banana'));
         $userproduct2->setQuantity(150);
         $userproduct2->setQuantityMeasure(1);
 

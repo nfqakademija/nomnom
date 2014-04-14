@@ -42,10 +42,10 @@ class MyUserProduct
     private $myUserEvent;
 
     /**
-     * @ORM\ManyToOne(targetEntity="MyProduct", inversedBy="myUserProducts")
-     * @ORM\JoinColumn(name="my_product_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="MyRecipeProduct", inversedBy="myUserProducts")
+     * @ORM\JoinColumn(name="my_recipe_product_id", referencedColumnName="id")
      */
-    protected $myProduct;
+    protected $myRecipeProduct;
 
     /**
      * Get id
@@ -147,5 +147,28 @@ class MyUserProduct
     public function getMyUserEvent()
     {
         return $this->myUserEvent;
+    }
+
+    /**
+     * Set myRecipeProduct
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyRecipeProduct $myRecipeProduct
+     * @return MyUserProduct
+     */
+    public function setMyRecipeProduct(\Nfq\NomNomBundle\Entity\MyRecipeProduct $myRecipeProduct = null)
+    {
+        $this->myRecipeProduct = $myRecipeProduct;
+
+        return $this;
+    }
+
+    /**
+     * Get myRecipeProduct
+     *
+     * @return \Nfq\NomNomBundle\Entity\MyRecipeProduct 
+     */
+    public function getMyRecipeProduct()
+    {
+        return $this->myRecipeProduct;
     }
 }

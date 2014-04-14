@@ -34,11 +34,6 @@ class MyProduct
     private $myRecipeProducts;
 
     /**
-     * @ORM\OneToMany(targetEntity="MyUserProduct", mappedBy="myProduct")
-     */
-    private $myUserProducts;
-
-    /**
      * Constructor
      */
     public function __construct()

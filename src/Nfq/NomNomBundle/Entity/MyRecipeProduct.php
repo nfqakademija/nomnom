@@ -48,6 +48,19 @@ class MyRecipeProduct
     private $quantityMeasure;
 
     /**
+     * @ORM\OneToMany(targetEntity="MyUserProduct", mappedBy="myRecipeProduct")
+     */
+    private $myUserProducts;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->myUserProducts = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Measurements keys and values
      *
      * @var array
@@ -175,5 +188,38 @@ class MyRecipeProduct
             return $this->measuresMap[$measurementKey];
         }
         return '';
+    }
+
+    /**
+     * Add myUserProducts
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyUserProduct $myUserProducts
+     * @return MyRecipeProduct
+     */
+    public function addMyUserProduct(\Nfq\NomNomBundle\Entity\MyUserProduct $myUserProducts)
+    {
+        $this->myUserProducts[] = $myUserProducts;
+
+        return $this;
+    }
+
+    /**
+     * Remove myUserProducts
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyUserProduct $myUserProducts
+     */
+    public function removeMyUserProduct(\Nfq\NomNomBundle\Entity\MyUserProduct $myUserProducts)
+    {
+        $this->myUserProducts->removeElement($myUserProducts);
+    }
+
+    /**
+     * Get myUserProducts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMyUserProducts()
+    {
+        return $this->myUserProducts;
     }
 }

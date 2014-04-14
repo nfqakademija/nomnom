@@ -14,6 +14,9 @@ class ProductController extends Controller{
 
    public function addUserProductAction($userEventId, $recipeProductId)
    {
+       $em = $this->getDoctrine()->getManager();
+       $myUserProductRepository = $em->getRepository('NfqNomNomBundle:MyUserProduct');
+
        return $this->redirect($this->generateUrl('Nfq_nom_nom_events',
            array('eventId' => $userEventId)));
    }
