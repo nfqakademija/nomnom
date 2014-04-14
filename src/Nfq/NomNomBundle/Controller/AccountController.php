@@ -26,7 +26,7 @@ class AccountController extends Controller{
 
     public function profileAction()
     {
-        return $this->render('NfqNomNomBundle:Default:profile.html.twig');
+        return $this->render('NfqNomNomBundle:Account:profile.html.twig');
     }
 
     public function profileEditAction(Request $request)
@@ -75,7 +75,7 @@ class AccountController extends Controller{
         }
         return $this->container->get('templating')->renderResponse(
         //'FOSUserBundle:Profile:edit.html.' . $this->container->getParameter('fos_user.template.engine'),
-            'NfqNomNomBundle:Default:profileEdit.html.twig',
+            'NfqNomNomBundle:Account:profileEdit.html.twig',
             array('form' => $form->createView())
         );
     }
