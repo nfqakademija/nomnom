@@ -13,9 +13,11 @@
     <div>You can start inviting people and suggesting recipes:</div>
 
     <hr>
-    <a href="{{ path('Nfq_nom_nom_add_user_to_event', {'eventId': event.id}) }}">Add a person</a>
+    <a class="btn btn-info" href="{{ path('Nfq_nom_nom_add_user_to_event',
+    {'eventId': event.id}) }}">Add a person</a>
     <hr>
-    <a href="{{ path('Nfq_nom_nom_add_recipe_to_event', {'eventId': event.id}) }}">Add a recipe</a>
+    <a class="btn btn-info" href="{{ path('Nfq_nom_nom_add_recipe_to_event',
+    {'eventId': event.id}) }}">Add a recipe</a>
 
     <hr>
     <div>Host of the event:</div>
@@ -39,14 +41,13 @@
             {{ eventRecipe.myRecipe.recipeName }}
         </a>
         <br>
-        <a href="{{ path('Nfq_nom_nom_upvote_recipe',
+        <a class="btn btn-info" href="{{ path('Nfq_nom_nom_upvote_recipe',
         {'eventRecipeId':eventRecipe.id,
         'userEventId':currentUserEvent.id}) }}">
             I would like.
         </a>
 
-
-        <a href="{{ path('Nfq_nom_nom_downvote_recipe',
+        <a class="btn btn-info" href="{{ path('Nfq_nom_nom_downvote_recipe',
         {'eventRecipeId':eventRecipe.id,
         'userEventId':currentUserEvent.id}) }}">
             I wouldn't like.
@@ -55,6 +56,7 @@
         <br>
     {% endfor %}
     <hr>
-    <a href="{{ path('Nfq_nom_nom_progress_event', {'eventId': event.id}) }}">{{ progButton }}</a>
+    <a class="btn btn-large btn-primary" href="{{ path('Nfq_nom_nom_progress_event',
+    {'eventId': event.id}) }}">{{ progButton }}</a>
     {#generated content displaying#}
 {% endblock %}

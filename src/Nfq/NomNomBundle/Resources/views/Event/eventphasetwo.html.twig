@@ -37,14 +37,14 @@
             </a>
             <span>People eating: {{ recipe['totalUpvote'] }}</span>
             <div id="recipeIngredients{{ recipe['id'] }}">
-                <ul>
+                <ul class="list-group">
                     {% for product in recipe['products'] %}
-                        <li>
+                        <li class="list-group-item">
                             {{ product['quantity'] ? product['quantity'] : '' }}
                             {{ product['quantityMeasure'] ? product['quantityMeasure'] : '' }}
                             {{ product['productName'] }}
                             {% if product['bringerName'] is sameas('') %}
-                            <a href="{{ path('Nfq_nom_nom_add_userproduct',
+                            <a class="btn btn-info" href="{{ path('Nfq_nom_nom_add_userproduct',
                             {'userEventId':product['userEventId'],
                             'recipeProductId':product['recipeProductId']}) }}">
                                 i'll bring
@@ -60,6 +60,7 @@
     {% endfor %}
 
     <hr>
-    <a href="{{ path('Nfq_nom_nom_progress_event', {'eventId': event.id}) }}">{{ progButton }}</a>
+    <a class="btn btn-large btn-primary" href="{{ path('Nfq_nom_nom_progress_event',
+    {'eventId': event.id}) }}">{{ progButton }}</a>
     {#generated content displaying#}
 {% endblock %}

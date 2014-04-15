@@ -6,7 +6,7 @@
     <div>
         <p>{{ 'profile.show.username'|trans }}: {{ app.user.username }}</p>
         <p>{{ 'profile.show.email'|trans }}: {{ app.user.email }}</p>
-        <p><a href=" {{ path('Nfq_nom_nom_profile_edit') }}">Edit Profile</a> |
-        <a href=" {{ path('Nfq_nom_nom_password_change') }}">Change Password</a></p>
+        <p><a class="btn btn-info" href=" {{ path('Nfq_nom_nom_profile_edit') }}">Edit Profile</a> |
+        <a class="btn btn-info" href=" {{ path('Nfq_nom_nom_password_change') }}">Change Password</a></p>
     </div>
 {% endblock %}

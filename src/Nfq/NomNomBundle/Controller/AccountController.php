@@ -127,7 +127,7 @@ class AccountController extends Controller{
         }
 
         return $this->container->get('templating')->renderResponse(
-            'NfqNomNomBundle:Default:changepassword.html.twig',
+            'NfqNomNomBundle:Account:changepassword.html.twig',
             array('form' => $form->createView())
         );
     }
