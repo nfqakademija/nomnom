@@ -1,20 +1,30 @@
 {%  extends "base.html.twig" %}
 {% block body %}
     {% block header %}
-        <a href=" {{ path('Nfq_nom_nom_homepage') }}">Home</a> |
-        <a href=" {{ path('nfq_nom_nom_recipe_list') }}">Recipes</a> |
+        {% javascripts '@NfqNomNomBundle/Resources/public/js/*' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
+        {% stylesheets 'bundles/nfqnomnom/css/*' filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+
+        <ul class="nav nav-tabs">
+        <li><a href=" {{ path('Nfq_nom_nom_homepage') }}">Home</a> </li>
+            <li><a href=" {{ path('nfq_nom_nom_recipe_list') }}">Recipes</a> </li>
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            <a href=" {{ path('Nfq_nom_nom_profile') }}">Profile</a> |
-            <a href=" {{ path('Nfq_nom_nom_event_manager') }}">Events</a> |
-            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-            <a href="{{ path('fos_user_security_logout') }}">
+            <li><a href=" {{ path('Nfq_nom_nom_profile') }}">Profile</a> </li>
+            <li><a href=" {{ path('Nfq_nom_nom_event_manager') }}">Events</a> </li>
+            <li>{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} </li>
+            <li><a href="{{ path('fos_user_security_logout') }}">
                 {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-            </a>
+            </a></li>
         {% else %}
-            <a href="{{ path('nfq_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-            <a href="{{ path('nfq_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
-            <a href="{{ path('Nfq_forgot_password') }}">Forgot password?</a>
+            <li><a href="{{ path('nfq_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
+            <li><a href="{{ path('nfq_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a></li>
+            <li><a href="{{ path('Nfq_forgot_password') }}">Forgot password?</a></li>
         {% endif %}
+        </ul>
     {% endblock %}
     {% block content %}
         {{ error }}

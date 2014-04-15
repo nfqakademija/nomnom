@@ -3,7 +3,24 @@
     {{ error }}
     <br>
     <div class="myEvent">
-        {{ form(forma) }}
+        {{ form_start(forma, {'attr': {'class': 'well span6'}}) }}
+        <div>
+            {{ form_label(forma.eventName) }}
+            {{ form_errors(forma.eventName) }}
+            {{ form_widget(forma.eventName, {'attr': {'class': 'span3'}}) }}
+        </div>
+
+        <div>
+            {{ form_label(forma.eventDate) }}
+            {{ form_errors(forma.eventDate) }}
+            {{ form_widget(forma.eventDate, {'attr': {'class': 'span3'}}) }}
+        </div>
+
+        <div>
+            {{ form_widget(forma.create, {'attr': {'class': 'btn btn-primary'}}) }}
+        </div>
+
+        {{ form_end(forma) }}
     </div>
     {#generated content displaying#}
 {% endblock %}

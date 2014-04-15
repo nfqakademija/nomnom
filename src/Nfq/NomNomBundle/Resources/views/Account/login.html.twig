@@ -1,9 +1,16 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
+    {% javascripts '@NfqNomNomBundle/Resources/public/js/*' %}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+{% stylesheets 'bundles/nfqnomnom/css/*' filter='cssrewrite' %}
+<link rel="stylesheet" href="{{ asset_url }}"/>
+{% endstylesheets %}
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-{% if error %}
+    {% if error %}
     <div>{{ error|trans }}</div>
 {% endif %}
 
