@@ -328,14 +328,13 @@ class EventController extends Controller
                 'information' => $information));
     }
 
-    public function processPhaseThree($eventId)
+    public function processPhaseThree($eventId, $error = "")
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         /**@var $myEvent MyEvent */
         $myEvent = $em->getRepository('NfqNomNomBundle:MyEvent')->find($eventId);
         $repUE = $em->getRepository('NfqNomNomBundle:MyUserEvent');
-        $repER = $em->getRepository('NfqNomNomBundle:MyEventRecipe');
 
         //find host(there should be only one) of the event
         /** @var MyUserEvent $host */
@@ -347,19 +346,21 @@ class EventController extends Controller
         //find users that are invited to this event
         $invitedUsers = $repUE->findByEventInvited($eventId);
 
-        //find all eventRecipes for this event
-        $eventRecipes = $repER->findByEvent($eventId);
-
         $userEvent = $repUE->findByEventAndUser($myEvent, $user)['0'];
 
+        //this array is holding all the information about recipes in this event that we're going to show
+        $information = $this->transformToArray($userEvent);
+
+        $progressionButtonText = '';
+
         return $this->render('NfqNomNomBundle:Event:eventphasethree.html.twig',
-            array('error' => '',
+            array('error' => $error,
                 'event' => $myEvent,
                 'acceptedUE' => $acceptedUsers,
                 'invitedUE' => $invitedUsers,
                 'host' => $hostUser,
-                'eventRecipes' => $eventRecipes,
-                'currentUserEvent' => $userEvent));
+                'progButton' => $progressionButtonText,
+                'information' => $information));
     }
 
     public function transformToArray($userEvent)

@@ -10,9 +10,7 @@
     <div>Event date:</div>
     {{ event.eventDate.date }}
 
-    <div>Event is at its final stage:</div>
-
-
+    <div>Event is at its final stage.</div>
     <hr>
     <div>Host of the event:</div>
     <div>{{ host.myUser.username }}</div>
@@ -30,11 +28,33 @@
     {% endfor %}
     <hr>
     <div> recipes included:</div>
-    {% for eventRecipe in eventRecipes %}
-        <a href="{{ path('nfq_nom_nom_recipe', {'id':eventRecipe.myRecipe.id}) }}">
-            {{ eventRecipe.myRecipe.recipeName }}
-        </a>
+    {% for recipeName, recipe in information %}
 
+        <a href="{{ path('nfq_nom_nom_recipe', {'id':recipe['id']}) }}">
+            {{ recipeName }}
+        </a>
+        <span>People eating: {{ recipe['totalUpvote'] }}</span>
+        <div id="recipeIngredients{{ recipe['id'] }}">
+            <ul class="list-group">
+                {% for product in recipe['products'] %}
+                    <li class="list-group-item">
+                        {{ product['quantity'] ? product['quantity'] : '' }}
+                        {{ product['quantityMeasure'] ? product['quantityMeasure'] : '' }}
+                        {{ product['productName'] }}
+                        {% if product['bringerName'] is sameas('') %}
+                            <a class="btn btn-info" href="{{ path('Nfq_nom_nom_add_userproduct',
+                            {'userEventId':product['userEventId'],
+                            'recipeProductId':product['recipeProductId']}) }}">
+                                i'll bring
+                            </a>
+                        {% else %}
+                            <span>{{ product['bringerName'] }} is bringing</span>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
         <br>
     {% endfor %}
+    {#generated content displaying#}
 {% endblock %}
