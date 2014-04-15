@@ -229,12 +229,10 @@ class EventController extends Controller
             $hostEvent = $hostUserEvent->getMyEvent();
             $eventPhase = $hostEvent->getEventPhase();
 
-            if ($eventPhase = 0) {
+            if ($eventPhase == 0) {
                 $hostEvent->setEventPhase($eventPhase + 1);
                 $em->flush();
-            }
-
-            if ($eventPhase = 1) {
+            } else if ($eventPhase == 1) {
                 //perform event finalization validation
                 if ($this->eventFinalizationCheck($eventId)) {
                     $hostEvent->setEventPhase($eventPhase + 1);
