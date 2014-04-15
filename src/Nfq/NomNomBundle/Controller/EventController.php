@@ -228,10 +228,22 @@ class EventController extends Controller
         if ($user == $hostUser) {
             $hostEvent = $hostUserEvent->getMyEvent();
             $eventPhase = $hostEvent->getEventPhase();
-            //making sure user will not force eventphase to be bigger than 3
-            if($eventPhase < 3){
-                $hostEvent->setEventPhase($hostEvent->getEventPhase() + 1);
+
+            if ($eventPhase = 0) {
+                $hostEvent->setEventPhase($eventPhase + 1);
                 $em->flush();
+            }
+
+            if ($eventPhase = 1) {
+                //perform event finalization validation
+                if ($this->eventFinalizationCheck($eventId)) {
+                    $hostEvent->setEventPhase($eventPhase + 1);
+                    $em->flush();
+                } else {
+                    //TODO ask if this is solution a bad practise
+                    $error = 'you must assign all products before finalizing the event';
+                    return $this->processPhaseTwo($eventId, $error);
+                }
             }
         }
 
@@ -278,15 +290,13 @@ class EventController extends Controller
                 'currentUserEvent' => $userEvent));
     }
 
-    public function processPhaseTwo($eventId)
+    public function processPhaseTwo($eventId, $error = '')
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         /**@var $myEvent MyEvent */
         $myEvent = $em->getRepository('NfqNomNomBundle:MyEvent')->find($eventId);
         $repUE = $em->getRepository('NfqNomNomBundle:MyUserEvent');
-        $repER = $em->getRepository('NfqNomNomBundle:MyEventRecipe');
-        $myUserProductRepository = $em->getRepository('NfqNomNomBundle:MyUserProduct');
 
         //find host(there should be only one) of the event
         /** @var MyUserEvent $host */
@@ -298,13 +308,10 @@ class EventController extends Controller
         //find users that are invited to this event
         $invitedUsers = $repUE->findByEventInvited($eventId);
 
-        //find all eventRecipes for this event
-        $eventRecipes = $repER->findByEvent($eventId);
-
         $userEvent = $repUE->findByEventAndUser($myEvent, $user)['0'];
 
         //this array is holding all the information about recipes in this event that we're going to show
-        $information = $this->transformToArray($eventRecipes, $userEvent);
+        $information = $this->transformToArray($userEvent);
 
         $progressionButtonText = '';
         if ($this->getUser() == $hostUser->getMyUser()) {
@@ -312,7 +319,7 @@ class EventController extends Controller
         }
 
         return $this->render('NfqNomNomBundle:Event:eventphasetwo.html.twig',
-            array('error' => '',
+            array('error' => $error,
                 'event' => $myEvent,
                 'acceptedUE' => $acceptedUsers,
                 'invitedUE' => $invitedUsers,
@@ -355,43 +362,87 @@ class EventController extends Controller
                 'currentUserEvent' => $userEvent));
     }
 
-    public function transformToArray($eventRecipes, $userEvent)
+    public function transformToArray($userEvent)
     {
-        $visas = array();
+        $whole = array();
         $em = $this->getDoctrine()->getManager();
         $myRep = $em->getRepository('NfqNomNomBundle:MyUserProduct');
+        $repER = $em->getRepository('NfqNomNomBundle:MyEventRecipe');
+        //find all eventRecipes for this event
+        $eventRecipes = $repER->findByEvent($userEvent->getMyEvent()->getId());
 
-        foreach($eventRecipes as $eventRecipe)
-        {
+        foreach ($eventRecipes as $eventRecipe) {
             /** @var MyRecipe $recipe */
             $recipe = $eventRecipe->getMyRecipe();
             $tovalVotes = $eventRecipe->getTotalUpvote();
             $recipeProducts = $recipe->getMyRecipeProducts();
-            $vidinis = array();
-            $subVidinis = array();
-            foreach($recipeProducts as $recipeProduct){
+            $inner = array();
+            $subInner = array();
+            foreach ($recipeProducts as $recipeProduct) {
                 /** @var MyRecipeProduct $r */
                 $r = $recipeProduct;
                 $myUserProduct = $myRep->findByEventAndRecipeProduct($userEvent->getMyEvent(), $recipeProduct);
                 $name = '';
-                if(!empty($myUserProduct)){
+                if (!empty($myUserProduct)) {
                     $name = $myUserProduct['0']->getMyUserEvent()->getMyUser()->getUsername();
                 }
                 /** @var MyProduct $myProduct */
                 $myProduct = $recipeProduct->getMyProduct();
-                $subVidinis[] = array( 'productName' => $myProduct->getProductName(),
-                                        'quantity' => $r->getQuantity(),
-                                        'quantityMeasure' => $r->getMeasurementTitle($r->getQuantityMeasure()),
-                                        'userEventId' => $userEvent->getId(),
-                                        'recipeProductId' => $recipeProduct->getId(),
-                                        'bringerName' => $name);
+                $subInner[] = array('productName' => $myProduct->getProductName(),
+                    'quantity' => $r->getQuantity(),
+                    'quantityMeasure' => $r->getMeasurementTitle($r->getQuantityMeasure()),
+                    'userEventId' => $userEvent->getId(),
+                    'recipeProductId' => $recipeProduct->getId(),
+                    'bringerName' => $name);
             }
-            $vidinis['totalUpvote'] = $tovalVotes;
-            $vidinis['products'] = $subVidinis;
-            $vidinis['id'] = $recipe->getId();
-            $visas[$recipe->getRecipeName()] = $vidinis;
+            $inner['totalUpvote'] = $tovalVotes;
+            $inner['products'] = $subInner;
+            $inner['id'] = $recipe->getId();
+            $whole[$recipe->getRecipeName()] = $inner;
         }
 
-        return $visas;
+        return $whole;
+    }
+
+    public function eventFinalizationCheck($eventId)
+    {
+        $whole = array();
+        $em = $this->getDoctrine()->getManager();
+        $myRep = $em->getRepository('NfqNomNomBundle:MyUserProduct');
+        $repER = $em->getRepository('NfqNomNomBundle:MyEventRecipe');
+        $repUE = $em->getRepository('NfqNomNomBundle:MyUserEvent');
+        $myEvent = $em->getRepository('NfqNomNomBundle:MyEvent')->find($eventId);
+        $userEvent = $repUE->findByEventAndUser($myEvent, $this->getUser())['0'];
+
+        //find all eventRecipes for this event
+        $eventRecipes = $repER->findByEvent($eventId);
+
+        foreach ($eventRecipes as $eventRecipe) {
+            /** @var MyRecipe $recipe */
+            $recipe = $eventRecipe->getMyRecipe();
+            $recipeProducts = $recipe->getMyRecipeProducts();
+            $inner = array();
+            foreach ($recipeProducts as $recipeProduct) {
+                $myUserProduct = $myRep->findByEventAndRecipeProduct($userEvent->getMyEvent(), $recipeProduct);
+                $name = '';
+                if (!empty($myUserProduct)) {
+                    $name = $myUserProduct['0']->getMyUserEvent()->getMyUser()->getUsername();
+                }
+                /** @var MyProduct $myProduct */
+                $myProduct = $recipeProduct->getMyProduct();
+                $inner[$myProduct->getProductName()] = $name;
+            }
+            $whole[$recipe->getRecipeName()] = $inner;
+        }
+        //check if there is an empty names in the array
+        $returnValue = true;
+        foreach ($whole as $one) {
+            foreach ($one as $value) {
+                if ($value == '') {
+                    $returnValue = false;
+                }
+            }
+        }
+        return $returnValue;
     }
 } 
