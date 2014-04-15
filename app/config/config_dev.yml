@@ -33,5 +33,7 @@ assetic:
     use_controller: true
 
 swiftmailer:
-    #delivery_address: me@example.com
-    disable_delivery: true
+    disable_delivery: false
+    transport: gmail
+    username:  nfqnomnom
+    password:  nfqn0mn0m

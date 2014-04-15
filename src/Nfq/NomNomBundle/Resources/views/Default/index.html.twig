@@ -13,6 +13,7 @@
         {% else %}
             <a href="{{ path('nfq_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
             <a href="{{ path('nfq_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+            <a href="{{ path('Nfq_forgot_password') }}">Forgot password?</a>
         {% endif %}
     {% endblock %}
     {% block content %}

@@ -77,3 +77,11 @@ Nfq_nom_nom_downvote_recipe:
 Nfq_nom_nom_add_userproduct:
     pattern:  /adduserproduct/{userEventId}/{recipeProductId}
     defaults: { _controller: NfqNomNomBundle:Product:addUserProduct}
+
+Nfq_forgot_password:
+    pattern: /forgot_password
+    defaults: {_controller: NfqNomNomBundle:Account:forgot}
+
+Nfq_reset_password:
+    pattern: /reset_password
+    defaults: {_controller: NfqNomNomBundle:Account:reset}
