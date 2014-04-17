@@ -6,13 +6,14 @@
             $("#addrecipetoevent_recipe").select2({width: 'resolve'});
             $("#addrecipetoevent_recipe").click(function() { $("#addrecipetoevent_recipe").select2(); });
             $("#wait_tags_destroy").click(function() { $("#wait_").select2("destroy");
-            $("#addrecipetoevent_submit").addClass('btn btn-primary');
-            $("form").addClass('well')
             });
         });
     </script>
 
     {{ error }}
-    {{ form(forma) }}
+    {{ form_start(forma, {'attr': {'class': 'well span6'}}) }}
+        {{ form_row(forma.recipe) }}
+        {{ form_row(forma.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+    {{ form_end(forma) }}
     {#generated content displaying#}
 {% endblock %}

@@ -1,12 +1,21 @@
 {%  extends "base.html.twig" %}
 {% block body %}
     {% block header %}
-        {% javascripts '@NfqNomNomBundle/Resources/public/js/*' %}
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+        {% javascripts '@NfqNomNomBundle/Resources/public/js/select2.js' %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
 
         {% stylesheets 'bundles/nfqnomnom/css/*' filter='cssrewrite' %}
         <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+
+        {% stylesheets filter="compass"
+        "@NfqNomNomBundle/Resources/assets/css/main.scss"
+        %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
 
         <ul class="nav nav-tabs">

@@ -6,12 +6,13 @@
             $("#adduserstoevent_user").select2({width: 'resolve'});
             $("#adduserstoevent_user").click(function() { $("#adduserstoevent_user").select2(); });
             $("#wait_tags_destroy").click(function() { $("#wait_").select2("destroy"); });
-            $("#adduserstoevent_submit").addClass('btn btn-primary');
-            $("form").addClass('well')
         });
     </script>
 
     {{ error }}
-    {{ form(forma) }}
+    {{ form_start(forma, {'attr': {'class': 'well'}}) }}
+        {{ form_row(forma.user) }}
+        {{ form_row(forma.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+    {{ form_end(forma) }}
     {#generated content displaying#}
 {% endblock %}
