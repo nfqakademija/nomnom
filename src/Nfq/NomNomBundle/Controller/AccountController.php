@@ -198,6 +198,10 @@ class AccountController extends Controller{
 
     public function loginAction(Request $request)
     {
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        if (is_object($user) && $user instanceof UserInterface) {
+            return $this->redirect($this->generateUrl('Nfq_nom_nom_homepage'));}
+
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
 
@@ -210,6 +214,8 @@ class AccountController extends Controller{
         } else {
             $error = '';
         }
+
+
 
         if ($error) {
             // TODO: this is a potential security risk (see http://trac.symfony-project.org/ticket/9523)
@@ -227,6 +233,7 @@ class AccountController extends Controller{
             'error'         => $error,
             'csrf_token' => $csrfToken,
         ));
+
     }
 
     /**
@@ -425,4 +432,6 @@ class AccountController extends Controller{
 
         return $email;
     }
+
+
 } 
