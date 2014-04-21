@@ -32,34 +32,38 @@
     <div> recipes included:</div>
     {% for recipeName, recipe in information %}
 
-            <a href="{{ path('nfq_nom_nom_recipe', {'id':recipe['id']}) }}">
-                {{ recipeName }}
-            </a>
-            <span>People eating: {{ recipe['totalUpvote'] }}</span>
-            <div id="recipeIngredients{{ recipe['id'] }}">
-                <ul class="list-group">
-                    {% for product in recipe['products'] %}
-                        <li class="list-group-item">
-                            {{ product['quantity'] ? product['quantity'] : '' }}
-                            {{ product['quantityMeasure'] ? product['quantityMeasure'] : '' }}
-                            {{ product['productName'] }}
-                            <span>bringing: </span>
-                            {% for bringer in product['bringers'] %}
-                                <span>name: {{ bringer['name'] }} ({{ bringer['quantity'] }})</span>
-                            {% endfor %}
-                            {{ form_start(product['forma']) }}
-                                {{ form_widget(product['forma']) }}
-                                {{ form_rest(product['forma']) }}
-                            {{ form_end(product['forma']) }}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <br>
+        <a href="{{ path('nfq_nom_nom_recipe', {'id':recipe['id']}) }}">
+            {{ recipeName }}
+        </a>
+        <span>People eating: {{ recipe['totalUpvote'] }}</span>
+        <div id="recipeIngredients{{ recipe['id'] }}">
+            <ul class="list-group">
+                {% for product in recipe['products'] %}
+                    <li class="list-group-item">
+                        {{ product['quantity'] ? product['quantity'] : '' }}
+                        {{ product['quantityMeasure'] ? product['quantityMeasure'] : '' }}
+                        {{ product['productName'] }}
+                        <span>bringing: </span>
+                        {% for bringer in product['bringers'] %}
+                            <span>name: {{ bringer['name'] }} ({{ bringer['quantity'] }})</span>
+                        {% endfor %}
+                        {{ form_start(product['forma']) }}
+                        {{ form_widget(product['forma']) }}
+                        {{ form_rest(product['forma']) }}
+                        {{ form_end(product['forma']) }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <br>
     {% endfor %}
 
     <hr>
-    <a class="btn btn-large btn-primary" href="{{ path('Nfq_nom_nom_progress_event',
-    {'eventId': event.id}) }}">{{ progButton }}</a>
+    {% if isHost %}
+        <a class="btn btn-large btn-primary" href="{{ path('Nfq_nom_nom_regress_event',
+        {'eventId': event.id}) }}">Go back to Recipe suggestion</a>
+        <a class="btn btn-large btn-primary" href="{{ path('Nfq_nom_nom_progress_event',
+        {'eventId': event.id}) }}">Finalize event</a>
+    {% endif %}
     {#generated content displaying#}
 {% endblock %}

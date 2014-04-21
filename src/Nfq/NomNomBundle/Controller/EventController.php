@@ -250,6 +250,31 @@ class EventController extends Controller
         return $this->redirect($this->generateUrl("Nfq_nom_nom_events", array('eventId' => $eventId)));
     }
 
+    public function regressEventAction($eventId)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $rep = $em->getRepository('NfqNomNomBundle:MyUserEvent');
+
+        //find userEvent where user is host of event
+        /** @var MyUserEvent $hostUserEvent */
+        $hostUserEvent = $rep->findbyEventHost($eventId)['0'];
+        $hostUser = $hostUserEvent->getMyUser();
+
+        if ($user == $hostUser) {
+            $hostEvent = $hostUserEvent->getMyEvent();
+            $eventPhase = $hostEvent->getEventPhase();
+            //if the event is finalized you cannot go back.
+            //you can only go back to select more recepies and revote them
+            if ($eventPhase == 1) {
+                $hostEvent->setEventPhase($eventPhase - 1);
+                $em->flush();
+            }
+        }
+
+        return $this->redirect($this->generateUrl("Nfq_nom_nom_events", array('eventId' => $eventId)));
+    }
+
     public function processPhaseOne($eventId)
     {
         $user = $this->getUser();
@@ -314,7 +339,7 @@ class EventController extends Controller
 
         //this array is holding all the information about recipes in this event that we're going to show
         //**********************************************************************************************
-        $whole = array();
+        $information = array();
         //find all eventRecipes for this event
         $eventRecipes = $repER->findByEvent($userEvent->getMyEvent()->getId());
 
@@ -336,7 +361,7 @@ class EventController extends Controller
                         $name = $mup->getMyUserEvent()->getMyUser()->getUsername();
                         $amount = $mup->getQuantity();
                         $bringers[] = array('name' => $name,
-                                             'quantity' => $amount);
+                            'quantity' => $amount);
                     }
                 }
 
@@ -357,7 +382,7 @@ class EventController extends Controller
                         $bringersUP);
                 }
                 if ($request->isMethod("POST")) {
-                    if($request->request->getIterator()->key() == $form->getName()){
+                    if ($request->request->getIterator()->key() == $form->getName()) {
                         $form->submit($request);
                         if ($form->isValid()) {
 
@@ -367,7 +392,6 @@ class EventController extends Controller
                         }
                     }
                 }
-
 
                 /** @var MyProduct $myProduct */
                 $myProduct = $recipeProduct->getMyProduct();
@@ -382,15 +406,10 @@ class EventController extends Controller
             $inner['totalUpvote'] = $tovalVotes;
             $inner['products'] = $subInner;
             $inner['id'] = $recipe->getId();
-            $whole[$recipe->getRecipeName()] = $inner;
+            $information[$recipe->getRecipeName()] = $inner;
         }
         //**************************************************************
-        $information = $whole;
-
-        $progressionButtonText = '';
-        if ($this->getUser() == $hostUser->getMyUser()) {
-            $progressionButtonText = 'finalize event';
-        }
+        $isHost = $this->getUser() == $hostUser->getMyUser();
 
         return $this->render('NfqNomNomBundle:Event:eventphasetwo.html.twig',
             array('error' => $error,
@@ -398,7 +417,7 @@ class EventController extends Controller
                 'acceptedUE' => $acceptedUsers,
                 'invitedUE' => $invitedUsers,
                 'host' => $hostUser,
-                'progButton' => $progressionButtonText,
+                'isHost' => $isHost,
                 'information' => $information));
     }
 
@@ -409,6 +428,8 @@ class EventController extends Controller
         /**@var $myEvent MyEvent */
         $myEvent = $em->getRepository('NfqNomNomBundle:MyEvent')->find($eventId);
         $repUE = $em->getRepository('NfqNomNomBundle:MyUserEvent');
+        $repUP = $em->getRepository('NfqNomNomBundle:MyUserProduct');
+        $repER = $em->getRepository('NfqNomNomBundle:MyEventRecipe');
 
         //find host(there should be only one) of the event
         /** @var MyUserEvent $host */
@@ -417,15 +438,53 @@ class EventController extends Controller
         //find users that accepted invitations to this event
         $acceptedUsers = $repUE->findByEventAccepted($eventId);
 
+        $userEvent = $repUE->findByEventAndUser($myEvent, $user)['0'];
+
+        $personalUserProducts = $repUP->findByUserEvent($userEvent);
+
         //find users that are invited to this event
         $invitedUsers = $repUE->findByEventInvited($eventId);
 
-        $userEvent = $repUE->findByEventAndUser($myEvent, $user)['0'];
+        $information = array();
+        //find all eventRecipes for this event
+        $eventRecipes = $repER->findByEvent($userEvent->getMyEvent()->getId());
 
-        //this array is holding all the information about recipes in this event that we're going to show
-        $information = $this->transformToArray($userEvent);
+        foreach ($eventRecipes as $eventRecipe) {
+            /** @var MyRecipe $recipe */
+            $recipe = $eventRecipe->getMyRecipe();
+            $tovalVotes = $eventRecipe->getTotalUpvote();
+            $recipeProducts = $recipe->getMyRecipeProducts();
+            $inner = array();
+            $subInner = array();
+            foreach ($recipeProducts as $recipeProduct) {
+                /** @var MyRecipeProduct $r */
+                $r = $recipeProduct;
+                $myUserProducts = $repUP->findByEventAndRecipeProduct($userEvent->getMyEvent(), $recipeProduct);
+                $bringers = array();
+                //add all the bringers names to names array
+                if (!empty($myUserProducts)) {
+                    foreach ($myUserProducts as $mup) {
+                        $name = $mup->getMyUserEvent()->getMyUser()->getUsername();
+                        $amount = $mup->getQuantity();
+                        $bringers[] = array('name' => $name,
+                            'quantity' => $amount);
+                    }
+                }
 
-        $progressionButtonText = '';
+                /** @var MyProduct $myProduct */
+                $myProduct = $recipeProduct->getMyProduct();
+                $subInner[] = array('productName' => $myProduct->getProductName(),
+                    'quantity' => $r->getQuantity(),
+                    'quantityMeasure' => $r->getMeasurementTitle($r->getQuantityMeasure()),
+                    'userEventId' => $userEvent->getId(),
+                    'recipeProductId' => $recipeProduct->getId(),
+                    'bringers' => $bringers);
+            }
+            $inner['totalUpvote'] = $tovalVotes;
+            $inner['products'] = $subInner;
+            $inner['id'] = $recipe->getId();
+            $information[$recipe->getRecipeName()] = $inner;
+        }
 
         return $this->render('NfqNomNomBundle:Event:eventphasethree.html.twig',
             array('error' => $error,
@@ -433,8 +492,9 @@ class EventController extends Controller
                 'acceptedUE' => $acceptedUsers,
                 'invitedUE' => $invitedUsers,
                 'host' => $hostUser,
-                'progButton' => $progressionButtonText,
-                'information' => $information));
+                'personalUserProducts' => $personalUserProducts,
+                'information' => $information
+            ));
     }
 
     public function eventFinalizationCheck($eventId)

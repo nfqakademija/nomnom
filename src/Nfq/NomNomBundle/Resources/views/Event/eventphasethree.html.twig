@@ -10,7 +10,6 @@
     <div>Event date:</div>
     {{ event.eventDate.date }}
 
-    <div>Event is at its final stage.</div>
     <hr>
     <div>Host of the event:</div>
     <div>{{ host.myUser.username }}</div>
@@ -27,6 +26,17 @@
         <div> {{ userEvent.myUser.username }}</div>
     {% endfor %}
     <hr>
+    <div>You are bringing:</div>
+    {% for product in personalUserProducts %}
+        <span>{{ product.myRecipeProduct.myProduct.getProductName }}
+            ({{ product.getQuantity }}) for
+        </span>
+        <a href="{{ path('nfq_nom_nom_recipe', {'id':product.myRecipeProduct.myRecipe.getId}) }}">
+            {{ product.myRecipeProduct.myRecipe.getRecipeName }}
+        </a>
+        <br>
+    {% endfor %}
+    <hr>
     <div> recipes included:</div>
     {% for recipeName, recipe in information %}
 
@@ -41,15 +51,10 @@
                         {{ product['quantity'] ? product['quantity'] : '' }}
                         {{ product['quantityMeasure'] ? product['quantityMeasure'] : '' }}
                         {{ product['productName'] }}
-                        {% if product['bringerName'] is sameas('') %}
-                            <a class="btn btn-info" href="{{ path('Nfq_nom_nom_add_userproduct',
-                            {'userEventId':product['userEventId'],
-                            'recipeProductId':product['recipeProductId']}) }}">
-                                i'll bring
-                            </a>
-                        {% else %}
-                            <span>{{ product['bringerName'] }} is bringing</span>
-                        {% endif %}
+                        <span>bringing: </span>
+                        {% for bringer in product['bringers'] %}
+                            <span>name: {{ bringer['name'] }} ({{ bringer['quantity'] }})</span>
+                        {% endfor %}
                     </li>
                 {% endfor %}
             </ul>

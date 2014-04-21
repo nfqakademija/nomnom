@@ -40,4 +40,13 @@ class MyUserProductRepository extends EntityRepository
                                   'recipeProduct' => $recipeProduct))
             ->getResult();
     }
+
+    public function findByUserEvent($userEventId)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT m FROM NfqNomNomBundle:MyUserProduct m WHERE
+            m.myUserEvent = :userEvent')
+            ->setParameter('userEvent', $userEventId)
+            ->getResult();
+    }
 }
