@@ -13,11 +13,13 @@ use Nfq\NomNomBundle\Entity\MyProduct;
 use Nfq\NomNomBundle\Entity\MyRecipe;
 use Nfq\NomNomBundle\Entity\MyRecipeProduct;
 use Nfq\NomNomBundle\Form\Type\EventType;
+use Nfq\NomNomBundle\Form\Type\UserProductType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Nfq\NomNomBundle\Utilities;
 use Nfq\NomNomBundle\Entity\MyEvent;
 use Nfq\NomNomBundle\Entity\MyUserEvent;
 use Nfq\NomNomBundle\Entity\MyEventRecipe;
+use Nfq\NomNomBundle\Entity\MyUserProduct;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -46,7 +48,7 @@ class EventController extends Controller
         }
     }
 
-    public function eventAction($eventId)
+    public function eventAction($eventId, Request $request)
     {
         $user = $this->getUser();
         if ($user) {
@@ -59,7 +61,7 @@ class EventController extends Controller
                     case 0:
                         return $this->processPhaseOne($eventId);
                     case 1:
-                        return $this->processPhaseTwo($eventId);
+                        return $this->processPhaseTwo($eventId, $request);
                     case 2:
                         return $this->ProcessPhaseThree($eventId);
                 }
@@ -214,7 +216,7 @@ class EventController extends Controller
         return $this->redirect($this->generateUrl('Nfq_nom_nom_event_manager'));
     }
 
-    public function progressEventAction($eventId)
+    public function progressEventAction($eventId, Request $request)
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -240,7 +242,7 @@ class EventController extends Controller
                 } else {
                     //TODO ask if this is solution a bad practise
                     $error = 'you must assign all products before finalizing the event';
-                    return $this->processPhaseTwo($eventId, $error);
+                    return $this->processPhaseTwo($eventId, $request, $error);
                 }
             }
         }
@@ -288,13 +290,15 @@ class EventController extends Controller
                 'currentUserEvent' => $userEvent));
     }
 
-    public function processPhaseTwo($eventId, $error = '')
+    public function processPhaseTwo($eventId, Request $request, $error = '')
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         /**@var $myEvent MyEvent */
         $myEvent = $em->getRepository('NfqNomNomBundle:MyEvent')->find($eventId);
         $repUE = $em->getRepository('NfqNomNomBundle:MyUserEvent');
+        $repUP = $em->getRepository('NfqNomNomBundle:MyUserProduct');
+        $repER = $em->getRepository('NfqNomNomBundle:MyEventRecipe');
 
         //find host(there should be only one) of the event
         /** @var MyUserEvent $host */
@@ -309,7 +313,79 @@ class EventController extends Controller
         $userEvent = $repUE->findByEventAndUser($myEvent, $user)['0'];
 
         //this array is holding all the information about recipes in this event that we're going to show
-        $information = $this->transformToArray($userEvent);
+        //**********************************************************************************************
+        $whole = array();
+        //find all eventRecipes for this event
+        $eventRecipes = $repER->findByEvent($userEvent->getMyEvent()->getId());
+
+        foreach ($eventRecipes as $eventRecipe) {
+            /** @var MyRecipe $recipe */
+            $recipe = $eventRecipe->getMyRecipe();
+            $tovalVotes = $eventRecipe->getTotalUpvote();
+            $recipeProducts = $recipe->getMyRecipeProducts();
+            $inner = array();
+            $subInner = array();
+            foreach ($recipeProducts as $recipeProduct) {
+                /** @var MyRecipeProduct $r */
+                $r = $recipeProduct;
+                $myUserProducts = $repUP->findByEventAndRecipeProduct($userEvent->getMyEvent(), $recipeProduct);
+                $bringers = array();
+                //add all the bringers names to names array
+                if (!empty($myUserProducts)) {
+                    foreach ($myUserProducts as $mup) {
+                        $name = $mup->getMyUserEvent()->getMyUser()->getUsername();
+                        $amount = $mup->getQuantity();
+                        $bringers[] = array('name' => $name,
+                                             'quantity' => $amount);
+                    }
+                }
+
+                $bringersUP = $repUP->findByUserEventAndRecipeProduct($userEvent, $recipeProduct);
+                $userProductType = new UserProductType($userEvent->getId(), $recipeProduct->getId());
+                if (!empty($bringersUP)) {
+                    $bringersUP = $bringersUP['0'];
+                    $form = $this->createForm(
+                        $userProductType,
+                        $bringersUP);
+                } else {
+                    $bringersUP = new MyUserProduct();
+                    $bringersUP->setMyUserEvent($userEvent);
+                    $bringersUP->setMyRecipeProduct($recipeProduct);
+                    $bringersUP->setQuantityMeasure($r->getQuantityMeasure());
+                    $form = $this->createForm(
+                        $userProductType,
+                        $bringersUP);
+                }
+                if ($request->isMethod("POST")) {
+                    if($request->request->getIterator()->key() == $form->getName()){
+                        $form->submit($request);
+                        if ($form->isValid()) {
+
+                            $em->persist($bringersUP);
+                            $em->flush();
+                            $this->redirect($this->generateUrl('Nfq_nom_nom_events', array('eventId' => $eventId)));
+                        }
+                    }
+                }
+
+
+                /** @var MyProduct $myProduct */
+                $myProduct = $recipeProduct->getMyProduct();
+                $subInner[] = array('productName' => $myProduct->getProductName(),
+                    'quantity' => $r->getQuantity(),
+                    'quantityMeasure' => $r->getMeasurementTitle($r->getQuantityMeasure()),
+                    'userEventId' => $userEvent->getId(),
+                    'recipeProductId' => $recipeProduct->getId(),
+                    'bringers' => $bringers,
+                    'forma' => $form->createView());
+            }
+            $inner['totalUpvote'] = $tovalVotes;
+            $inner['products'] = $subInner;
+            $inner['id'] = $recipe->getId();
+            $whole[$recipe->getRecipeName()] = $inner;
+        }
+        //**************************************************************
+        $information = $whole;
 
         $progressionButtonText = '';
         if ($this->getUser() == $hostUser->getMyUser()) {
@@ -359,48 +435,6 @@ class EventController extends Controller
                 'host' => $hostUser,
                 'progButton' => $progressionButtonText,
                 'information' => $information));
-    }
-
-    public function transformToArray($userEvent)
-    {
-        $whole = array();
-        $em = $this->getDoctrine()->getManager();
-        $myRep = $em->getRepository('NfqNomNomBundle:MyUserProduct');
-        $repER = $em->getRepository('NfqNomNomBundle:MyEventRecipe');
-        //find all eventRecipes for this event
-        $eventRecipes = $repER->findByEvent($userEvent->getMyEvent()->getId());
-
-        foreach ($eventRecipes as $eventRecipe) {
-            /** @var MyRecipe $recipe */
-            $recipe = $eventRecipe->getMyRecipe();
-            $tovalVotes = $eventRecipe->getTotalUpvote();
-            $recipeProducts = $recipe->getMyRecipeProducts();
-            $inner = array();
-            $subInner = array();
-            foreach ($recipeProducts as $recipeProduct) {
-                /** @var MyRecipeProduct $r */
-                $r = $recipeProduct;
-                $myUserProduct = $myRep->findByEventAndRecipeProduct($userEvent->getMyEvent(), $recipeProduct);
-                $name = '';
-                if (!empty($myUserProduct)) {
-                    $name = $myUserProduct['0']->getMyUserEvent()->getMyUser()->getUsername();
-                }
-                /** @var MyProduct $myProduct */
-                $myProduct = $recipeProduct->getMyProduct();
-                $subInner[] = array('productName' => $myProduct->getProductName(),
-                    'quantity' => $r->getQuantity(),
-                    'quantityMeasure' => $r->getMeasurementTitle($r->getQuantityMeasure()),
-                    'userEventId' => $userEvent->getId(),
-                    'recipeProductId' => $recipeProduct->getId(),
-                    'bringerName' => $name);
-            }
-            $inner['totalUpvote'] = $tovalVotes;
-            $inner['products'] = $subInner;
-            $inner['id'] = $recipe->getId();
-            $whole[$recipe->getRecipeName()] = $inner;
-        }
-
-        return $whole;
     }
 
     public function eventFinalizationCheck($eventId)

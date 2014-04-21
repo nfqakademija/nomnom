@@ -19,3 +19,8 @@ services:
           class: Nfq\NomNomBundle\Form\Type\AddRecipeToEventType
           tags:
               - { name: form.type, alias: addrecipetoevent }
+
+     nfq_nom_nom.form.type.userproducttype:
+          class: Nfq\NomNomBundle\Form\Type\UserProductType
+          tags:
+              - { name: form.type, alias: userproducttype }

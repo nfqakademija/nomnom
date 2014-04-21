@@ -43,15 +43,14 @@
                             {{ product['quantity'] ? product['quantity'] : '' }}
                             {{ product['quantityMeasure'] ? product['quantityMeasure'] : '' }}
                             {{ product['productName'] }}
-                            {% if product['bringerName'] is sameas('') %}
-                            <a class="btn btn-info" href="{{ path('Nfq_nom_nom_add_userproduct',
-                            {'userEventId':product['userEventId'],
-                            'recipeProductId':product['recipeProductId']}) }}">
-                                i'll bring
-                            </a>
-                            {% else %}
-                                <span>{{ product['bringerName'] }} is bringing</span>
-                            {% endif %}
+                            <span>bringing: </span>
+                            {% for bringer in product['bringers'] %}
+                                <span>name: {{ bringer['name'] }} ({{ bringer['quantity'] }})</span>
+                            {% endfor %}
+                            {{ form_start(product['forma']) }}
+                                {{ form_widget(product['forma']) }}
+                                {{ form_rest(product['forma']) }}
+                            {{ form_end(product['forma']) }}
                         </li>
                     {% endfor %}
                 </ul>
