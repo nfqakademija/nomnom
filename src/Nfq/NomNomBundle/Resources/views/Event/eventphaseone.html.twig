@@ -64,6 +64,6 @@
         <a class="btn btn-large btn-primary" href="{{ path('Nfq_nom_nom_ready_to_progress',
         {'eventId': event.id}) }}">Ready To progress</a>
     {% endif %}
-    <div> people ready {{ readyPeople['ready'] }} / {{ readyPeople['all'] }}</div>
+    <div class="circle" title="people ready to progress"> {{ readyPeople['ready'] }} / {{ readyPeople['all'] }}</div>
     {#generated content displaying#}
 {% endblock %}
