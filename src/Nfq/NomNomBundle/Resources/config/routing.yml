@@ -38,6 +38,10 @@ Nfq_nom_nom_regress_event:
     pattern:  /regressevent/{eventId}
     defaults: { _controller: NfqNomNomBundle:Event:regressEvent }
 
+Nfq_nom_nom_ready_to_progress:
+    pattern:    /readytoprogres/{eventId}
+    defaults: { _controller: NfqNomNomBundle:Event:readyToProgress }
+
 Nfq_nom_nom_profile:
     pattern: /profile
     defaults: {_controller: NfqNomNomBundle:Account:profile }

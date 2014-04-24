@@ -48,6 +48,20 @@ class MyUserEvent
      * @ORM\Column(name="invitationStatus", type="smallint")
      */
     private $invitationStatus;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ready_to_phase_two", type="smallint")
+     */
+    private $readyToPhaseTwo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ready_to_phase_three", type="smallint")
+     */
+    private $readyToPhaseThree;
+
 
     /**
      * 0 for event creator
@@ -240,5 +254,51 @@ class MyUserEvent
     public function getMyRecipeVotes()
     {
         return $this->myRecipeVotes;
+    }
+
+    /**
+     * Set readyToPhaseTwo
+     *
+     * @param integer $readyToPhaseTwo
+     * @return MyUserEvent
+     */
+    public function setReadyToPhaseTwo($readyToPhaseTwo)
+    {
+        $this->readyToPhaseTwo = $readyToPhaseTwo;
+
+        return $this;
+    }
+
+    /**
+     * Get readyToPhaseTwo
+     *
+     * @return integer 
+     */
+    public function getReadyToPhaseTwo()
+    {
+        return $this->readyToPhaseTwo;
+    }
+
+    /**
+     * Set readyToPhaseThree
+     *
+     * @param integer $readyToPhaseThree
+     * @return MyUserEvent
+     */
+    public function setReadyToPhaseThree($readyToPhaseThree)
+    {
+        $this->readyToPhaseThree = $readyToPhaseThree;
+
+        return $this;
+    }
+
+    /**
+     * Get readyToPhaseThree
+     *
+     * @return integer 
+     */
+    public function getReadyToPhaseThree()
+    {
+        return $this->readyToPhaseThree;
     }
 }

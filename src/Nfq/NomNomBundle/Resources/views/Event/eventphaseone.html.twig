@@ -55,8 +55,15 @@
         <span>Total people wants this dish: {{ eventRecipe.totalUpvote }}</span>
         <br>
     {% endfor %}
-    <hr>
-    <a class="btn btn-large btn-primary" href="{{ path('Nfq_nom_nom_progress_event',
-    {'eventId': event.id}) }}">{{ progButton }}</a>
+    {% if isHost %}
+        <hr>
+        <a class="btn btn-large btn-primary" href="{{ path('Nfq_nom_nom_progress_event',
+        {'eventId': event.id}) }}">End Recipe Suggestion</a>
+    {% elseif currentUserEvent.readyToPhaseTwo == 0 %}
+        <hr>
+        <a class="btn btn-large btn-primary" href="{{ path('Nfq_nom_nom_ready_to_progress',
+        {'eventId': event.id}) }}">Ready To progress</a>
+    {% endif %}
+    <div> people ready {{ readyPeople['ready'] }} / {{ readyPeople['all'] }}</div>
     {#generated content displaying#}
 {% endblock %}

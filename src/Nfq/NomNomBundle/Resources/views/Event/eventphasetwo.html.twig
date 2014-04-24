@@ -64,6 +64,11 @@
         {'eventId': event.id}) }}">Go back to Recipe suggestion</a>
         <a class="btn btn-large btn-primary" href="{{ path('Nfq_nom_nom_progress_event',
         {'eventId': event.id}) }}">Finalize event</a>
+    {% elseif currentUserEvent.readyToPhaseThree == 0 %}
+        <hr>
+        <a class="btn btn-large btn-primary" href="{{ path('Nfq_nom_nom_ready_to_progress',
+        {'eventId': event.id}) }}">Ready To Finalize Event</a>
     {% endif %}
+    <div> people Ready  {{ readyPeople['ready'] }}/{{ readyPeople['all'] }}</div>
     {#generated content displaying#}
 {% endblock %}

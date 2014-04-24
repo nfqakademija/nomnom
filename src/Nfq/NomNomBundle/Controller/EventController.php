@@ -98,6 +98,8 @@ class EventController extends Controller
                 $eventUser->setInvitationStatus(0);
                 $eventUser->setMyEvent($event);
                 $eventUser->setMyRole($registeredUserRole);
+                $eventUser->setReadyToPhaseTwo(0);
+                $eventUser->setReadyToPhaseThree(0);
 
                 $em->persist($eventUser);
                 $em->persist($event);
@@ -138,6 +140,8 @@ class EventController extends Controller
                     $userEvent->setMyRole($myRole);
                     $userEvent->setInvitationStatus(1);
                     $userEvent->setMyUser($form->getData()['user']);
+                    $userEvent->setReadyToPhaseTwo(0);
+                    $userEvent->setReadyToPhaseThree(0);
 
                     $em->persist($userEvent);
                     $em->flush();
@@ -275,6 +279,33 @@ class EventController extends Controller
         return $this->redirect($this->generateUrl("Nfq_nom_nom_events", array('eventId' => $eventId)));
     }
 
+    public function readyToProgressAction($eventId)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $userEventRepository = $em->getRepository('NfqNomNomBundle:MyUserEvent');
+
+        //find userEvent where user accepted invitation of event
+        /** @var MyUserEvent $acceptedUserEvent */
+        $acceptedUserEvent = $userEventRepository->findbyEventAndUser($eventId, $user);
+
+        if (!empty($acceptedUserEvent)) {
+            $acceptedEvent = $acceptedUserEvent['0']->getMyEvent();
+            $eventPhase = $acceptedEvent->getEventPhase();
+
+            if ($eventPhase == 0) {
+                /**@var MyUserEvent $acceptedEvent */
+                $acceptedUserEvent['0']->setReadyToPhaseTwo(1);
+                $em->flush();
+            } else if ($eventPhase == 1) {
+                /**@var MyUserEvent $acceptedEvent */
+                $acceptedUserEvent['0']->setReadyToPhaseThree(1);
+                $em->flush();
+            }
+        }
+        return $this->redirect($this->generateUrl("Nfq_nom_nom_events", array('eventId' => $eventId)));
+    }
+
     public function processPhaseOne($eventId)
     {
         $user = $this->getUser();
@@ -299,10 +330,9 @@ class EventController extends Controller
 
         $userEvent = $repUE->findByEventAndUser($myEvent, $user)['0'];
 
-        $progressionButtonText = '';
-        if ($this->getUser() == $hostUser->getMyUser()) {
-            $progressionButtonText = 'end recipe suggestion';
-        }
+        $isHost = $this->getUser() == $hostUser->getMyUser();
+
+        $readyPeople = $repUE->getReadyPercentagePhaseTwo($eventId);
 
         return $this->render('NfqNomNomBundle:Event:eventphaseone.html.twig',
             array('error' => '',
@@ -310,9 +340,10 @@ class EventController extends Controller
                 'acceptedUE' => $acceptedUsers,
                 'invitedUE' => $invitedUsers,
                 'host' => $hostUser,
-                'progButton' => $progressionButtonText,
+                'isHost' => $isHost,
                 'eventRecipes' => $eventRecipes,
-                'currentUserEvent' => $userEvent));
+                'currentUserEvent' => $userEvent,
+                'readyPeople' => $readyPeople));
     }
 
     public function processPhaseTwo($eventId, Request $request, $error = '')
@@ -411,6 +442,8 @@ class EventController extends Controller
         //**************************************************************
         $isHost = $this->getUser() == $hostUser->getMyUser();
 
+        $readyPeople = $repUE->getReadyPercentagePhaseThree($eventId);
+
         return $this->render('NfqNomNomBundle:Event:eventphasetwo.html.twig',
             array('error' => $error,
                 'event' => $myEvent,
@@ -418,7 +451,9 @@ class EventController extends Controller
                 'invitedUE' => $invitedUsers,
                 'host' => $hostUser,
                 'isHost' => $isHost,
-                'information' => $information));
+                'information' => $information,
+                'readyPeople' => $readyPeople,
+                'currentUserEvent' => $userEvent));
     }
 
     public function processPhaseThree($eventId, $error = "")
@@ -493,7 +528,7 @@ class EventController extends Controller
                 'invitedUE' => $invitedUsers,
                 'host' => $hostUser,
                 'personalUserProducts' => $personalUserProducts,
-                'information' => $information
+                'information' => $information,
             ));
     }
 

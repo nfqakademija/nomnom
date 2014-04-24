@@ -75,4 +75,42 @@ class MyUserEventRepository extends EntityRepository
             ->setParameter('myuser', $userId)
             ->getResult();
     }
+
+    public function getReadyPercentagePhaseTwo($eventId)
+    {
+        //we will count only accepted users
+        $ready = $this->getEntityManager()
+            ->createQuery('SELECT COUNT(m.readyToPhaseTwo) FROM NfqNomNomBundle:MyUserEvent m
+            WHERE m.myEvent = :myevent AND m.readyToPhaseTwo = 1 AND m.invitationStatus = 2')
+            ->setParameter('myevent', $eventId)
+            ->getScalarResult()['0']['1'];
+
+        $all = $this->getEntityManager()
+            ->createQuery('SELECT COUNT(m.readyToPhaseTwo) FROM NfqNomNomBundle:MyUserEvent m
+            WHERE m.myEvent = :myevent AND m.invitationStatus = 2')
+            ->setParameter('myevent', $eventId)
+            ->getScalarResult()['0']['1'];
+
+        return array('ready' => $ready,
+            'all' => $all);
+    }
+
+    public function getReadyPercentagePhaseThree($eventId)
+    {
+        //we will count only accepted users
+        $ready = $this->getEntityManager()
+            ->createQuery('SELECT COUNT(m.readyToPhaseThree) FROM NfqNomNomBundle:MyUserEvent m
+            WHERE m.myEvent = :myevent AND m.readyToPhaseThree = 1 AND m.invitationStatus = 2')
+            ->setParameter('myevent', $eventId)
+            ->getScalarResult()['0']['1'];
+
+        $all = $this->getEntityManager()
+            ->createQuery('SELECT COUNT(m.readyToPhaseThree) FROM NfqNomNomBundle:MyUserEvent m
+            WHERE m.myEvent = :myevent AND m.invitationStatus = 2')
+            ->setParameter('myevent', $eventId)
+            ->getScalarResult()['0']['1'];
+
+        return array('ready' => $ready,
+            'all' => $all);
+    }
 }
