@@ -1,0 +1,32 @@
+{% extends "NfqNomNomBundle:Default:index.html.twig" %}
+
+{% block content %}
+
+    <script>
+        var $addTagLink = $('<a href="#" class="add_product_link">Add a product</a>');
+        var $object = "#createrecipe_myRecipeCategory";
+        var $collectionHolder;
+
+        $(document).ready(function() {
+            $collectionHolder = $("#createrecipe_myRecipeProducts");
+            $collectionHolder.prepend($addTagLink);
+            $collectionHolder.data('index', $collectionHolder.find(':input').length);
+            addGenemuFunctionality($object);
+            $('button , .add_product_link ').addClass("btn btn-primary");
+
+            $addTagLink.on('click', function(e) {
+                // prevent the link from creating a "#" on the URL
+                e.preventDefault();
+
+                // add a new tag form (see next code block)
+                addProductForm($collectionHolder);
+            });
+        });
+    </script>
+    <br>
+    <div class="createdRecipe">
+        {{ form_start(forma, {'attr': {'class': 'well span6'}}) }}
+        {{ form_widget(forma)}}
+        {{ form_end(forma) }}
+    </div>
+{% endblock %}

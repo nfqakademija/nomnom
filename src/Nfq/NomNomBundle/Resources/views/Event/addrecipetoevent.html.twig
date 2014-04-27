@@ -1,12 +1,9 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
 {% block content %}
     <script>
+        var genemuSelectorObject = "#addrecipetoevent_recipe";
         $(document).ready(function() {
-            $("#addrecipetoevent_recipe").val(["AL","AZ"]).select2();
-            $("#addrecipetoevent_recipe").select2({width: 'resolve'});
-            $("#addrecipetoevent_recipe").click(function() { $("#addrecipetoevent_recipe").select2(); });
-            $("#wait_tags_destroy").click(function() { $("#wait_").select2("destroy");
-            });
+          addGenemuFunctionality(genemuSelectorObject);
         });
     </script>
 

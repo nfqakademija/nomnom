@@ -13,3 +13,16 @@ body{
   text-align:center;
   color: #00aa00;
 }
+//TODO a tag ar invisible unless yyou hover over them, this is a temporar fix
+a{
+  color:blue;
+}
+#createrecipe_preparationInstructions{
+  width: 50%;
+  height: 50px;
+  resize: none;
+}
+label{text-align:center;
+  vertical-align:middle;
+  display:table-cell;
+}
