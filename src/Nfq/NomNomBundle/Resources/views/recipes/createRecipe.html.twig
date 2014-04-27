@@ -6,15 +6,20 @@
         var $addTagLink = $('<a href="#" class="add_product_link">Add a product</a>');
         var $object = "#createrecipe_myRecipeCategory";
         var $collectionHolder;
+        var $timePickingElementId = '#createrecipe_preparationTime';
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             $collectionHolder = $("#createrecipe_myRecipeProducts");
             $collectionHolder.prepend($addTagLink);
             $collectionHolder.data('index', $collectionHolder.find(':input').length);
             addGenemuFunctionality($object);
             $('button , .add_product_link ').addClass("btn btn-primary");
 
-            $addTagLink.on('click', function(e) {
+            $($timePickingElementId).timepicker({ 'timeFormat': 'G:i',
+                'step': '1',
+                'minTime': '0:00'});
+
+            $addTagLink.on('click', function (e) {
                 // prevent the link from creating a "#" on the URL
                 e.preventDefault();
 
@@ -25,8 +30,8 @@
     </script>
     <br>
     <div class="createdRecipe">
-        {{ form_start(forma, {'attr': {'class': 'well span6'}}) }}
-        {{ form_widget(forma)}}
+        {{ form_start(forma, {'attr': {'class': 'well span6' }}) }}
+        {{ form_widget(forma) }}
         {{ form_end(forma) }}
     </div>
 {% endblock %}
