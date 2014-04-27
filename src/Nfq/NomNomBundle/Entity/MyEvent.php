@@ -5,6 +5,7 @@ namespace Nfq\NomNomBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Nfq\NomNomBundle\Validator\Constraints as NfqAssert;
 
 /**
  * MyEvent
@@ -40,6 +41,7 @@ class MyEvent
     /**
      * @var \DateTime
      * @Assert\NotBlank()
+     * @NfqAssert\ConstraintsNotInThePast
      * @ORM\Column(name="eventDate", type="datetime")
      */
     private $eventDate;
