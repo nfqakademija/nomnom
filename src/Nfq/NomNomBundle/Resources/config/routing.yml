@@ -62,6 +62,10 @@ nfq_nom_nom_recipe:
     pattern:  /recipe/{id}
     defaults: { _controller: NfqNomNomBundle:Recipes:recipe}
 
+Nfq_nom_nom_create_recipe:
+    pattern:  /createrecipe
+    defaults: { _controller: NfqNomNomBundle:Recipes:createRecipe}
+
 nfq_security_login:
     pattern: /login
     defaults: {_controller: NfqNomNomBundle:Account:login}

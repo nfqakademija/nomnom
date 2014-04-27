@@ -8,10 +8,14 @@
 
 namespace Nfq\NomNomBundle\Controller;
 
+use Nfq\NomNomBundle\Entity\MyRecipe;
+use Nfq\NomNomBundle\Entity\MyRecipeProduct;
+use Nfq\NomNomBundle\Form\Type\CreateRecipeType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Nfq\NomNomBundle\Entity\MyUserEvent;
 use Nfq\NomNomBundle\Entity\MyEventRecipe;
 use Nfq\NomNomBundle\Entity\MyRecipeVote;
+use Symfony\Component\HttpFoundation\Request;
 
 class RecipesController extends Controller
 {
@@ -67,17 +71,17 @@ class RecipesController extends Controller
                 /** @var MyEventRecipe $eventRecipe */
                 $eventRecipe = $eventRecipeRepository->find($eventRecipeId);
 
-                if($eventRecipe->getMyEvent() == $userEvent->getMyEvent()){
+                if ($eventRecipe->getMyEvent() == $userEvent->getMyEvent()) {
 
-                    $recipeVote =  $recipeVoteRepository->findExisting($userEventId, $eventRecipeId);
+                    $recipeVote = $recipeVoteRepository->findExisting($userEventId, $eventRecipeId);
 
-                    if(empty($recipeVote)){
+                    if (empty($recipeVote)) {
                         $recipeVote = new MyRecipeVote();
                         $recipeVote->setMyUserEvent($userEvent);
                         $recipeVote->setMyEventRecipe($eventRecipe);
                         $recipeVote->setVote(1);
                         $em->persist($recipeVote);
-                    } else{
+                    } else {
                         $recipeVote['0']->setVote(1);
                     }
 
@@ -114,17 +118,17 @@ class RecipesController extends Controller
                 /** @var MyEventRecipe $eventRecipe */
                 $eventRecipe = $eventRecipeRepository->find($eventRecipeId);
 
-                if($eventRecipe->getMyEvent() == $userEvent->getMyEvent()){
+                if ($eventRecipe->getMyEvent() == $userEvent->getMyEvent()) {
 
                     $recipeVote = $recipeVoteRepository->findExisting($userEventId, $eventRecipeId);
 
-                    if(empty($recipeVote)){
+                    if (empty($recipeVote)) {
                         $recipeVote = new MyRecipeVote();
                         $recipeVote->setMyUserEvent($userEvent);
                         $recipeVote->setMyEventRecipe($eventRecipe);
                         $recipeVote->setVote(0);
                         $em->persist($recipeVote);
-                    } else{
+                    } else {
                         $recipeVote['0']->setVote(0);
                     }
 
@@ -153,12 +157,42 @@ class RecipesController extends Controller
 
         $recipeVotes = $recipeVoteRepository->findbyEventRecipe($eventRecipe);
         $votes = 0;
-        foreach($recipeVotes as $recipeVote)
-        {
-            $votes+= $recipeVote->getVote();
+        foreach ($recipeVotes as $recipeVote) {
+            $votes += $recipeVote->getVote();
         }
 
         $eventRecipe->setTotalUpvote($votes);
         $em->flush();
+    }
+
+    public function createRecipeAction(Request $request)
+    {
+        $user = $this->getUser();
+        if ($user) {
+            $recipe = new MyRecipe();
+
+            $form = $this->createForm(new CreateRecipeType(), $recipe);
+            if ($request->isMethod("POST")) {
+                $form->submit($request);
+                if ($form->isValid()) {
+                    $em = $this->getDoctrine()->getManager();
+                    $recipe->setPhoto('default.jpg');
+                    foreach($recipe->getMyRecipeProducts() as $product){
+                        $product->setMyRecipe($recipe);
+                        $em->persist($product);
+                    }
+                    $em->persist($recipe);
+                    $em->flush();
+                    //I think it should be persisted cascading
+                    //TODO decide where to redirect
+                    return $this->redirect($this->generateUrl('nfq_nom_nom_recipe_list'));
+                }
+            }
+            return $this->render('NfqNomNomBundle:recipes:createrecipe.html.twig',
+                array('error' => '',
+                    'forma' => $form->createView()
+                ));
+        }
+        return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'log  in first'));
     }
 }

@@ -24,3 +24,13 @@ services:
           class: Nfq\NomNomBundle\Form\Type\UserProductType
           tags:
               - { name: form.type, alias: userproducttype }
+
+     nfq_nom_nom.form.type.createrecipetype:
+               class: Nfq\NomNomBundle\Form\Type\CreateRecipeType
+               tags:
+                   - { name: form.type, alias: createrecipetype }
+
+     nfq_nom_nom.form.type.recipeproducttype:
+               class: Nfq\NomNomBundle\Form\Type\RecipeProductType
+               tags:
+                   - { name: form.type, alias: recipeproducttype }
