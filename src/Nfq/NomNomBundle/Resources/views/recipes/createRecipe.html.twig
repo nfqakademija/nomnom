@@ -7,6 +7,7 @@
         var $object = "#createrecipe_myRecipeCategory";
         var $collectionHolder;
         var $timePickingElementId = '#createrecipe_preparationTime';
+        var $numberOfServingsElementId = '#createrecipe_numberOfServings';
 
         $(document).ready(function () {
             $collectionHolder = $("#createrecipe_myRecipeProducts");
@@ -18,6 +19,11 @@
             $($timePickingElementId).timepicker({ 'timeFormat': 'G:i',
                 'step': '1',
                 'minTime': '0:00'});
+
+            $($numberOfServingsElementId).timepicker({ 'timeFormat': 'G',
+                'step': '60',
+                'minTime': '1:00',
+                'maxTime': '20:00'});
 
             $addTagLink.on('click', function (e) {
                 // prevent the link from creating a "#" on the URL
