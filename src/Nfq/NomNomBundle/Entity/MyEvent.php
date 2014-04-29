@@ -50,6 +50,11 @@ class MyEvent
      * @var integer
      *
      * @ORM\Column(name="eventPhase", type="smallint")
+     * Events will be in 4 phases
+     * 0 recipe suggestion and guest invitation
+     * 1 recipe product assignment
+     * 2 finalized event
+     * 3 past due date
      */
     private $eventPhase;
 

@@ -63,7 +63,11 @@ class EventController extends Controller
                     case 1:
                         return $this->processPhaseTwo($eventId, $request);
                     case 2:
-                        return $this->ProcessPhaseThree($eventId);
+                        return $this->processPhaseThree($eventId);
+                    case 3:
+                        //for now we render ended event as finalized event
+                        //but in event manager link they are separated
+                        return $this->processPhaseThree($eventId);
                 }
             } else {
                 return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => "you don't have permission to this evvent"));
@@ -198,7 +202,7 @@ class EventController extends Controller
         $user = $this->getUser();
 
         if (!$user) {
-            $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'log in  first'));
+            return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'log in  first'));
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -206,15 +210,21 @@ class EventController extends Controller
         $myUserEvent = $em->getRepository('NfqNomNomBundle:MyUserEvent')
             ->find($userEventId);
 
+        $pastDueDate = 3;
+        //check if the event is past due date
+        if($myUserEvent->getmyEvent()->getEventPhase() == $pastDueDate){
+            return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'event has ended.'));
+        }
+
         if (!$myUserEvent) {
-            $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'something went wrong.'));
+            return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'something went wrong.'));
         }
 
         if ($myUserEvent->getMyUser() == $user) {
             $myUserEvent->setInvitationStatus(2);
             $em->flush();
         } else {
-            $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'you don\'t have permission.'));
+            return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'you don\'t have permission.'));
         }
 
         return $this->redirect($this->generateUrl('Nfq_nom_nom_event_manager'));

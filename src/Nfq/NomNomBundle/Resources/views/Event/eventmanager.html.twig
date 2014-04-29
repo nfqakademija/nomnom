@@ -1,25 +1,66 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
 {% block content %}
     {{ error }}
+    {% set pastDueDate = '3' %}
     <br>
     <a class="btn btn-info" href="{{ path('Nfq_nom_nom_create_event') }}">Create Event</a>
     <hr>
-    <div>Events where you are host:</div>
-    {% for userEvent in hostUE %}
-        <a href="{{ path('Nfq_nom_nom_events', {'eventId': userEvent.myEvent.id}) }}">{{ userEvent.myEvent.eventName }}</a>
-    {% endfor %}
-    <hr>
-    <div>Events where you are invited:</div>
-    {% for userEvent in invitedUE %}
-        <div>
-            <span>{{ userEvent.myEvent.eventName }}</span>
-            <a href="{{ path('Nfq_nom_nom_accept_event', {'userEventId': userEvent.id}) }}">Accept</a>
-        </div>
-    {% endfor %}
-    <hr>
-    <div>Events where you are guest:</div>
-    {% for userEvent in acceptedUE %}
+    <div class="col-sm-6 col-md-6">
+        <h3>Active events</h3>
 
-        <a href="{{ path('Nfq_nom_nom_events', {'eventId': userEvent.myEvent.id}) }}">{{ userEvent.myEvent.eventName }}</a>
-    {% endfor %}
+        <div>Events where you are host:</div>
+        {% for userEvent in hostUE %}
+            {% if userEvent.myEvent.eventPhase != pastDueDate %}
+                <a href="{{ path('Nfq_nom_nom_events', {'eventId': userEvent.myEvent.id}) }}">
+                    {{ userEvent.myEvent.eventName }}
+                </a>
+            {% endif %}
+        {% endfor %}
+        <hr>
+        <div>Events where you are invited:</div>
+        {% for userEvent in invitedUE %}
+            {% if userEvent.myEvent.eventPhase != pastDueDate %}
+                <span>{{ userEvent.myEvent.eventName }}</span>
+                <a href="{{ path('Nfq_nom_nom_accept_event', {'userEventId': userEvent.id}) }}">Accept</a>
+            {% endif %}
+        {% endfor %}
+        <hr>
+        <div>Events where you are guest:</div>
+        {% for userEvent in acceptedUE %}
+            {% if userEvent.myEvent.eventPhase != pastDueDate %}
+            <a href="{{ path('Nfq_nom_nom_events', {'eventId': userEvent.myEvent.id}) }}">
+                {{ userEvent.myEvent.eventName }}
+            </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="col-sm-6 col-md-6">
+        <h3>Past events</h3>
+
+        <div>Events where you were host:</div>
+        {% for userEvent in hostUE %}
+            {% if userEvent.myEvent.eventPhase == pastDueDate %}
+                <a href="{{ path('Nfq_nom_nom_events', {'eventId': userEvent.myEvent.id}) }}">
+                    {{ userEvent.myEvent.eventName }}
+                </a>
+            {% endif %}
+        {% endfor %}
+        <hr>
+        <div>Events where you were invited:</div>
+        {% for userEvent in invitedUE %}
+            {% if userEvent.myEvent.eventPhase == pastDueDate %}
+                <span>{{ userEvent.myEvent.eventName }}</span>
+                {# you can no longer accept past due date events #}
+            {% endif %}
+        {% endfor %}
+        <hr>
+        <div>Events where you were guest:</div>
+        {% for userEvent in acceptedUE %}
+            {% if userEvent.myEvent.eventPhase == pastDueDate %}
+                <a href="{{ path('Nfq_nom_nom_events', {'eventId': userEvent.myEvent.id}) }}">
+                    {{ userEvent.myEvent.eventName }}
+                </a>
+            {% endif %}
+        {% endfor %}
+    </div>
 {% endblock %}
