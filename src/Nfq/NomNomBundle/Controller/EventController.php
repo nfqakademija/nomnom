@@ -372,19 +372,22 @@ class EventController extends Controller
         //**********************************************************************************************
         $information = array();
         //find all eventRecipes for this event
-        $eventRecipes = $repER->findByEvent($userEvent->getMyEvent()->getId());
+        $eventRecipes = $repER->findByEventWithRecipe($userEvent->getMyEvent()->getId());
 
         foreach ($eventRecipes as $eventRecipe) {
             /** @var MyRecipe $recipe */
             $recipe = $eventRecipe->getMyRecipe();
+
             $tovalVotes = $eventRecipe->getTotalUpvote();
             $recipeProducts = $recipe->getMyRecipeProducts();
+
             $inner = array();
             $subInner = array();
             foreach ($recipeProducts as $recipeProduct) {
                 /** @var MyRecipeProduct $r */
                 $r = $recipeProduct;
                 $myUserProducts = $repUP->findByEventAndRecipeProduct($userEvent->getMyEvent(), $recipeProduct);
+
                 $bringers = array();
                 //add all the bringers names to names array
                 if (!empty($myUserProducts)) {
@@ -393,27 +396,38 @@ class EventController extends Controller
                         $amount = $mup->getQuantity();
                         $bringers[] = array('name' => $name,
                             'quantity' => $amount);
+
                     }
                 }
 
                 $bringersUP = $repUP->findByUserEventAndRecipeProduct($userEvent, $recipeProduct);
-                $userProductType = new UserProductType($userEvent->getId(), $recipeProduct->getId());
+
+                // if no quantity and no quantity measure - don't show input field
+                $hidden_field = false;
+                if($recipeProduct->getQuantity() == 0 && $recipeProduct->getQuantityMeasure() == 0) {
+                    $hidden_field = true;
+                }
+
+                $userProductType = new UserProductType($userEvent->getId(), $recipeProduct->getId(), $hidden_field);
                 if (!empty($bringersUP)) {
                     $bringersUP = $bringersUP['0'];
                     $form = $this->createForm(
-                        $userProductType,
-                        $bringersUP);
+                        $userProductType
+                    );
                 } else {
                     $bringersUP = new MyUserProduct();
                     $bringersUP->setMyUserEvent($userEvent);
                     $bringersUP->setMyRecipeProduct($recipeProduct);
                     $bringersUP->setQuantityMeasure($r->getQuantityMeasure());
                     $form = $this->createForm(
-                        $userProductType,
-                        $bringersUP);
+                        $userProductType
+                    );
                 }
                 if ($request->isMethod("POST")) {
                     if ($request->request->getIterator()->key() == $form->getName()) {
+
+
+                        $form->setData($bringersUP);
                         $form->submit($request);
                         if ($form->isValid()) {
 
@@ -426,17 +440,21 @@ class EventController extends Controller
 
                 /** @var MyProduct $myProduct */
                 $myProduct = $recipeProduct->getMyProduct();
-                $subInner[] = array('productName' => $myProduct->getProductName(),
+                $subInner[] = array(
+                    'productName' => $myProduct->getProductName(),
                     'quantity' => $r->getQuantity(),
                     'quantityMeasure' => $r->getMeasurementTitle($r->getQuantityMeasure()),
                     'userEventId' => $userEvent->getId(),
                     'recipeProductId' => $recipeProduct->getId(),
                     'bringers' => $bringers,
-                    'forma' => $form->createView());
+                    'forma' => $form->createView(),
+                    'quantityDisplay' => $r->getQuantityDisplay($eventRecipe)
+                );
             }
             $inner['totalUpvote'] = $tovalVotes;
             $inner['products'] = $subInner;
             $inner['id'] = $recipe->getId();
+            $inner['servings'] =$recipe->getNumberOfServings() ;
             $information[$recipe->getRecipeName()] = $inner;
         }
         //**************************************************************

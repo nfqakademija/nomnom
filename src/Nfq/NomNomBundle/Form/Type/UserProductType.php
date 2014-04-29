@@ -15,7 +15,10 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UserProductType extends AbstractType
 {
+    private $hidden;
+
     private $suffix;
+
     /**
      * Returns the name of this type.
      *
@@ -26,22 +29,28 @@ class UserProductType extends AbstractType
         return 'userProduct' . $this->suffix;
     }
 
-    public function __construct($userEventId, $recipeProductId)
+    public function __construct($userEventId, $recipeProductId, $hidden = false)
     {
         $this->suffix = $userEventId . '_' . $recipeProductId;
+        $this->hidden = $hidden;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('quantity')
+        $type = ($this->hidden ? 'hidden' : null);
+
+        $builder
+            ->add('quantity', $type)
             ->add('bring', 'submit');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Nfq\NomNomBundle\Entity\MyUserProduct',
-            'cascade_validation' => true,
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'Nfq\NomNomBundle\Entity\MyUserProduct',
+                'cascade_validation' => true,
+            )
+        );
     }
 }

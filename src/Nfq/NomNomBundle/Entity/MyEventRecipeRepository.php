@@ -29,4 +29,25 @@ class MyEventRecipeRepository extends EntityRepository
                                 'myrecipe' => $recipeId))
             ->getResult();
     }
+
+    /**
+     * Selects event recipes and joins recipe in order to get event recipes with recipe together
+     *
+     * @param $eventId
+     * @return array
+     */
+    public function findByEventWithRecipe($eventId)
+    {
+        return $this->getEntityManager()
+            ->createQuery('
+                SELECT er
+                FROM NfqNomNomBundle:MyEventRecipe er
+                JOIN NfqNomNomBundle:MyRecipe r
+                WHERE
+                    er.myEvent = :myevent
+                    AND er.totalUpvote >= (r.numberOfServings/2) '
+            )
+            ->setParameter('myevent', $eventId)
+            ->getResult();
+    }
 }

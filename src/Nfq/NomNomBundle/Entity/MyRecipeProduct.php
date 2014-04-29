@@ -78,7 +78,7 @@ class MyRecipeProduct
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -101,7 +101,7 @@ class MyRecipeProduct
     /**
      * Get quantity
      *
-     * @return float 
+     * @return float
      */
     public function getQuantity()
     {
@@ -124,7 +124,7 @@ class MyRecipeProduct
     /**
      * Get quantityMeasure
      *
-     * @return integer 
+     * @return integer
      */
     public function getQuantityMeasure()
     {
@@ -147,7 +147,7 @@ class MyRecipeProduct
     /**
      * Get myRecipe
      *
-     * @return \Nfq\NomNomBundle\Entity\MyRecipe 
+     * @return \Nfq\NomNomBundle\Entity\MyRecipe
      */
     public function getMyRecipe()
     {
@@ -170,7 +170,7 @@ class MyRecipeProduct
     /**
      * Get myProduct
      *
-     * @return \Nfq\NomNomBundle\Entity\MyProduct 
+     * @return \Nfq\NomNomBundle\Entity\MyProduct
      */
     public function getMyProduct()
     {
@@ -183,8 +183,9 @@ class MyRecipeProduct
      * @param $measurementKey
      * @return string
      */
-    public function getMeasurementTitle($measurementKey) {
-        if(isset($this->measuresMap[$measurementKey])) {
+    public function getMeasurementTitle($measurementKey)
+    {
+        if (isset($this->measuresMap[$measurementKey])) {
             return $this->measuresMap[$measurementKey];
         }
         return '';
@@ -216,10 +217,27 @@ class MyRecipeProduct
     /**
      * Get myUserProducts
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMyUserProducts()
     {
         return $this->myUserProducts;
+    }
+
+    /**
+     * Returns quantity adapted by total upvote
+     * If numberOfServings is 4 and totalUpvote is 6, then product quantity * 2
+     *
+     * @param MyEventRecipe $eventRecipe
+     * @return float|string
+     */
+    public function getQuantityDisplay(\Nfq\NomNomBundle\Entity\MyEventRecipe $eventRecipe)
+    {
+        $quantityDisplay = '';
+
+        if ($this->getQuantity()) {
+            $quantityDisplay = $this->getQuantity() * ceil($eventRecipe->getTotalUpvote() / $eventRecipe->getMyRecipe()->getNumberOfServings());
+        }
+        return $quantityDisplay;
     }
 }
