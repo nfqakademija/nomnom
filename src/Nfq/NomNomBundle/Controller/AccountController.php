@@ -21,8 +21,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\SecurityContext;
 
 
-
-class AccountController extends Controller{
+class AccountController extends Controller
+{
 
     public function profileAction()
     {
@@ -191,16 +191,17 @@ class AccountController extends Controller{
             }
         }
 
-        return $this->container->get('templating')->renderResponse('NfqNomNomBundle:Account:register.html.'.$this->getEngine(), array(
-                'form' => $form->createView(),
-            ));
+        return $this->container->get('templating')->renderResponse('NfqNomNomBundle:Account:register.html.' . $this->getEngine(), array(
+            'form' => $form->createView(),
+        ));
     }
 
     public function loginAction(Request $request)
     {
         $user = $this->container->get('security.context')->getToken()->getUser();
         if (is_object($user) && $user instanceof UserInterface) {
-            return $this->redirect($this->generateUrl('Nfq_nom_nom_homepage'));}
+            return $this->redirect($this->generateUrl('Nfq_nom_nom_homepage'));
+        }
 
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
@@ -214,7 +215,6 @@ class AccountController extends Controller{
         } else {
             $error = '';
         }
-
 
 
         if ($error) {
@@ -260,6 +260,7 @@ class AccountController extends Controller{
     {
         throw new \RuntimeException('You must activate the logout in your security firewall configuration.');
     }
+
     protected function getEngine()
     {
         return $this->container->getParameter('fos_user.template.engine');
@@ -307,14 +308,14 @@ class AccountController extends Controller{
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
-        return $this->container->get('templating')->renderResponse('NfqNomNomBundle:Account:confirmed.html.'.$this->getEngine(), array(
-                'user' => $user,
-            ));
+        return $this->container->get('templating')->renderResponse('NfqNomNomBundle:Account:confirmed.html.' . $this->getEngine(), array(
+            'user' => $user,
+        ));
     }
 
     public function forgotAction()
     {
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:request.html.'.$this->getEngine());
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:request.html.' . $this->getEngine());
     }
 
     public function resetAction(Request $request, $token)
@@ -362,15 +363,15 @@ class AccountController extends Controller{
             }
         }
 
-        return $this->container->get('templating')->renderResponse('NfqNomNomBundle:Account:reset.html.'.$this->getEngine(), array(
-                'token' => $token,
-                'form' => $form->createView(),
-            ));
+        return $this->container->get('templating')->renderResponse('NfqNomNomBundle:Account:reset.html.' . $this->getEngine(), array(
+            'token' => $token,
+            'form' => $form->createView(),
+        ));
     }
 
     public function requestAction()
     {
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:request.html.'.$this->getEngine());
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:request.html.' . $this->getEngine());
     }
 
     /**
@@ -384,11 +385,11 @@ class AccountController extends Controller{
         $user = $this->container->get('fos_user.user_manager')->findUserByUsernameOrEmail($username);
 
         if (null === $user) {
-            return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:request.html.'.$this->getEngine(), array('invalid_username' => $username));
+            return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:request.html.' . $this->getEngine(), array('invalid_username' => $username));
         }
 
         if ($user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl'))) {
-            return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:passwordAlreadyRequested.html.'.$this->getEngine());
+            return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:passwordAlreadyRequested.html.' . $this->getEngine());
         }
 
         if (null === $user->getConfirmationToken()) {
@@ -418,9 +419,9 @@ class AccountController extends Controller{
             return new RedirectResponse($this->container->get('router')->generate('fos_user_resetting_request'));
         }
 
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:checkEmail.html.'.$this->getEngine(), array(
-                'email' => $email,
-            ));
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:checkEmail.html.' . $this->getEngine(), array(
+            'email' => $email,
+        ));
     }
 
     protected function getObfuscatedEmail(UserInterface $user)

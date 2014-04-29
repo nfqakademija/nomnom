@@ -29,6 +29,7 @@ class EventType extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('eventName')
+                ->add('eventPlaningDueDate')
                 ->add('eventDate')
                 ->add('create', 'submit');
     }

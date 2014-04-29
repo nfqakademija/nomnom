@@ -79,8 +79,9 @@ class EventController extends Controller
     public function createEventAction(Request $request)
     {
         $event = new MyEvent();
+        $event->setEventDate(new \DateTime());
+        $event->setEventPlaningDueDate(new \DateTime());
         $form = $this->createForm(new EventType(), $event);
-        $form->get('eventDate')->setData(new \DateTime());
 
         if ($request->isMethod("POST")) {
             $form->submit($request);

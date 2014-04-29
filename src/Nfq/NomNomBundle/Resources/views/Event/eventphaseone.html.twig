@@ -15,9 +15,6 @@
     <hr>
     <a class="btn btn-info" href="{{ path('Nfq_nom_nom_add_user_to_event',
     {'eventId': event.id}) }}">Add a person</a>
-    <hr>
-    <a class="btn btn-info" href="{{ path('Nfq_nom_nom_add_recipe_to_event',
-    {'eventId': event.id}) }}">Add a recipe</a>
 
     <hr>
     <div>Host of the event:</div>
@@ -35,6 +32,8 @@
         <div> {{ userEvent.myUser.username }}</div>
     {% endfor %}
     <hr>
+    <a class="btn btn-info" href="{{ path('Nfq_nom_nom_add_recipe_to_event',
+    {'eventId': event.id}) }}">Add a recipe</a>
     <div> recipes included:</div>
     {% for eventRecipe in eventRecipes %}
         <a href="{{ path('nfq_nom_nom_recipe', {'id':eventRecipe.myRecipe.id}) }}">

@@ -46,6 +46,15 @@ class MyEvent
      */
     private $eventDate;
 
+    //TODO Add a constraint that checks if the event is further in time than event planing due date
+    /**
+     * @var \DateTime
+     * @Assert\NotBlank()
+     * @NfqAssert\ConstraintsNotInThePast
+     * @ORM\Column(name="event_planing_due_date", type="datetime")
+     */
+    private $eventPlaningDueDate;
+
     /**
      * @var integer
      *
@@ -243,5 +252,28 @@ class MyEvent
     public function getMyEventRecipes()
     {
         return $this->myEventRecipes;
+    }
+
+    /**
+     * Set eventPlaningDueDate
+     *
+     * @param \DateTime $eventPlaningDueDate
+     * @return MyEvent
+     */
+    public function setEventPlaningDueDate($eventPlaningDueDate)
+    {
+        $this->eventPlaningDueDate = $eventPlaningDueDate;
+
+        return $this;
+    }
+
+    /**
+     * Get eventPlaningDueDate
+     *
+     * @return \DateTime 
+     */
+    public function getEventPlaningDueDate()
+    {
+        return $this->eventPlaningDueDate;
     }
 }
