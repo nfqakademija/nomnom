@@ -1,6 +1,6 @@
 body{
 
-  color: red;
+  color: #666666;
 
 }
 
@@ -15,7 +15,8 @@ body{
 }
 //TODO a tag ar invisible unless yyou hover over them, this is a temporar fix
 a{
-  color:blue;
+  color: #505050;
+  font-weight: bold;
 }
 #createrecipe_preparationInstructions{
   width: 50%;

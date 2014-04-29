@@ -44,23 +44,23 @@
                 </div>
             </div>
         </div>
-            <div id="recipeIngredients">
-                <ul>
+        <div id="recipeIngredients">
+            <ul>
 
-                    {% for product in recipe_products %}
+                {% for product in recipe_products %}
 
-                        <li>
-                            {{ product.getQuantity() ? product.getQuantity() : '' }}
-                            {{ product.getQuantity() ? product.getMeasurementTitle(product.getQuantityMeasure()) : '' }}
-                            {{ product.getMyProduct().getProductName() }}
-                        </li>
+                    <li>
+                        {{ product.getQuantity() ? product.getQuantity() : '' }}
+                        {{ product.getQuantity() ? product.getMeasurementTitle(product.getQuantityMeasure()) : '' }}
+                        {{ product.getMyProduct().getProductName() }}
+                    </li>
 
-                    {% endfor %}
-                </ul>
-            </div>
-
-
+                {% endfor %}
+            </ul>
         </div>
+
+
+    </div>
 
     </div>
 
