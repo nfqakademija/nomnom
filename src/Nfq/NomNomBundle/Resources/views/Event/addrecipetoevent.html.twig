@@ -2,15 +2,15 @@
 {% block content %}
     <script>
         var genemuSelectorObject = "#addrecipetoevent_recipe";
-        $(document).ready(function() {
-          addGenemuFunctionality(genemuSelectorObject);
+        $(document).ready(function () {
+            addGenemuFunctionality(genemuSelectorObject);
         });
     </script>
 
     {{ error }}
-    {{ form_start(forma, {'attr': {'class': 'well span6'}}) }}
-        {{ form_row(forma.recipe) }}
-        {{ form_row(forma.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+    {{ form_start(forma, {'attr': {'class': 'well span6' }}) }}
+    {{ form_row(forma.recipe) }}
+    {{ form_row(forma.submit, {'attr': {'class': 'btn btn-primary' }}) }}
     {{ form_end(forma) }}
     {#generated content displaying#}
 {% endblock %}

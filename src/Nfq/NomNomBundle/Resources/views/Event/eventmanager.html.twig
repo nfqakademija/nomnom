@@ -28,9 +28,9 @@
         <div>Events where you are guest:</div>
         {% for userEvent in acceptedUE %}
             {% if userEvent.myEvent.eventPhase != pastDueDate %}
-            <a href="{{ path('Nfq_nom_nom_events', {'eventId': userEvent.myEvent.id}) }}">
-                {{ userEvent.myEvent.eventName }}
-            </a>
+                <a href="{{ path('Nfq_nom_nom_events', {'eventId': userEvent.myEvent.id}) }}">
+                    {{ userEvent.myEvent.eventName }}
+                </a>
             {% endif %}
         {% endfor %}
     </div>

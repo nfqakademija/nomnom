@@ -2,15 +2,15 @@
 {% block content %}
     <script>
         var object = "#adduserstoevent_user";
-        $(document).ready(function() {
+        $(document).ready(function () {
             addGenemuFunctionality(object);
         });
     </script>
 
     {{ error }}
-    {{ form_start(forma, {'attr': {'class': 'well'}}) }}
-        {{ form_row(forma.user) }}
-        {{ form_row(forma.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+    {{ form_start(forma, {'attr': {'class': 'well' }}) }}
+    {{ form_row(forma.user) }}
+    {{ form_row(forma.submit, {'attr': {'class': 'btn btn-primary' }}) }}
     {{ form_end(forma) }}
     {#generated content displaying#}
 {% endblock %}

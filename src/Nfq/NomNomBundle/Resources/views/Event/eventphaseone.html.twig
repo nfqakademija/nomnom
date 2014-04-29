@@ -38,7 +38,7 @@
     {% for eventRecipe in eventRecipes %}
         <a href="{{ path('nfq_nom_nom_recipe', {'id':eventRecipe.myRecipe.id}) }}">
             {{ eventRecipe.myRecipe.recipeName }}
-           ( Servings: {{ eventRecipe.myRecipe.numberOfServings }} )
+            ( Servings: {{ eventRecipe.myRecipe.numberOfServings }} )
         </a>
         <br>
         <a class="btn btn-info" href="{{ path('Nfq_nom_nom_upvote_recipe',

@@ -3,13 +3,13 @@
     {{ error }}
     <br>
     <div class="myEvent">
-        {{ form_start(forma, {'attr': {'class': 'well span6'}}) }}
-            {{ form_row(forma.eventName) }}
-            {{ form_row(forma.eventPlaningDueDate) }}
-            {{ form_row(forma.eventDate) }}
+        {{ form_start(forma, {'attr': {'class': 'well span6' }}) }}
+        {{ form_row(forma.eventName) }}
+        {{ form_row(forma.eventPlanningDueDate) }}
+        {{ form_row(forma.eventDate) }}
 
         <div>
-            {{ form_widget(forma.create, {'attr': {'class': 'btn btn-primary'}}) }}
+            {{ form_widget(forma.create, {'attr': {'class': 'btn btn-primary' }}) }}
         </div>
 
         {{ form_end(forma) }}

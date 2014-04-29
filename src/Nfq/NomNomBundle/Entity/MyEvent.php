@@ -51,9 +51,9 @@ class MyEvent
      * @var \DateTime
      * @Assert\NotBlank()
      * @NfqAssert\ConstraintsNotInThePast
-     * @ORM\Column(name="event_planing_due_date", type="datetime")
+     * @ORM\Column(name="event_planning_due_date", type="datetime")
      */
-    private $eventPlaningDueDate;
+    private $eventPlanningDueDate;
 
     /**
      * @var integer
@@ -275,5 +275,28 @@ class MyEvent
     public function getEventPlaningDueDate()
     {
         return $this->eventPlaningDueDate;
+    }
+
+    /**
+     * Set eventPlanningDueDate
+     *
+     * @param \DateTime $eventPlanningDueDate
+     * @return MyEvent
+     */
+    public function setEventPlanningDueDate($eventPlanningDueDate)
+    {
+        $this->eventPlanningDueDate = $eventPlanningDueDate;
+
+        return $this;
+    }
+
+    /**
+     * Get eventPlanningDueDate
+     *
+     * @return \DateTime 
+     */
+    public function getEventPlanningDueDate()
+    {
+        return $this->eventPlanningDueDate;
     }
 }
