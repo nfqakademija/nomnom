@@ -26,7 +26,9 @@ function addProductForm($collectionHolder) {
     $collectionHolder.data('index', index + 1);
     $collectionHolder.append(newForm);
     //adding genemufunctionality to newly created form element
-    var name = "#createrecipe_myRecipeProducts_"+index+"_myProduct";
-    addGenemuFunctionality(name);
+    var myProduct = "#createrecipe_myRecipeProducts_"+index+"_myProduct";
+    var quantityMeasure = "#createrecipe_myRecipeProducts_"+index+"_quantityMeasure";
+    addGenemuFunctionality(myProduct);
+    addGenemuFunctionality(quantityMeasure)
 }
 

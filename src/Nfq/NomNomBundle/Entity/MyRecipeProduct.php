@@ -41,11 +41,10 @@ class MyRecipeProduct
     private $quantity;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="quantityMeasure", type="integer")
+     * @ORM\ManyToOne(targetEntity="MyQuantityMeasure", inversedBy="myRecipeProducts")
+     * @ORM\JoinColumn(name="my_quantity_measure_id", referencedColumnName="id")
      */
-    private $quantityMeasure;
+    private $myQuantityMeasure;
 
     /**
      * @ORM\OneToMany(targetEntity="MyUserProduct", mappedBy="myRecipeProduct")
@@ -106,29 +105,6 @@ class MyRecipeProduct
     public function getQuantity()
     {
         return $this->quantity;
-    }
-
-    /**
-     * Set quantityMeasure
-     *
-     * @param integer $quantityMeasure
-     * @return MyRecipeProduct
-     */
-    public function setQuantityMeasure($quantityMeasure)
-    {
-        $this->quantityMeasure = $quantityMeasure;
-
-        return $this;
-    }
-
-    /**
-     * Get quantityMeasure
-     *
-     * @return integer
-     */
-    public function getQuantityMeasure()
-    {
-        return $this->quantityMeasure;
     }
 
     /**
@@ -239,5 +215,28 @@ class MyRecipeProduct
             $quantityDisplay = $this->getQuantity() * ceil($eventRecipe->getTotalUpvote() / $eventRecipe->getMyRecipe()->getNumberOfServings());
         }
         return $quantityDisplay;
+    }
+
+    /**
+     * Set myQuantityMeasure
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyQuantityMeasure $myQuantityMeasure
+     * @return MyRecipeProduct
+     */
+    public function setMyQuantityMeasure(\Nfq\NomNomBundle\Entity\MyQuantityMeasure $myQuantityMeasure = null)
+    {
+        $this->myQuantityMeasure = $myQuantityMeasure;
+
+        return $this;
+    }
+
+    /**
+     * Get myQuantityMeasure
+     *
+     * @return \Nfq\NomNomBundle\Entity\MyQuantityMeasure 
+     */
+    public function getMyQuantityMeasure()
+    {
+        return $this->myQuantityMeasure;
     }
 }

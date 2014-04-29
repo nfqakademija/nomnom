@@ -29,11 +29,10 @@ class MyUserProduct
     private $quantity;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="quantityMeasure", type="smallint")
+     * @ORM\ManyToOne(targetEntity="MyQuantityMeasure", inversedBy="myUserProducts")
+     * @ORM\JoinColumn(name="my_quantity_measure_id", referencedColumnName="id")
      */
-    private $quantityMeasure;
+    private $myQuantityMeasure;
 
     /**
      * @ORM\ManyToOne(targetEntity="MyUserEvent", inversedBy="myUserProducts")
@@ -170,5 +169,28 @@ class MyUserProduct
     public function getMyRecipeProduct()
     {
         return $this->myRecipeProduct;
+    }
+
+    /**
+     * Set myQuantityMeasure
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyQuantityMeasure $myQuantityMeasure
+     * @return MyUserProduct
+     */
+    public function setMyQuantityMeasure(\Nfq\NomNomBundle\Entity\MyQuantityMeasure $myQuantityMeasure = null)
+    {
+        $this->myQuantityMeasure = $myQuantityMeasure;
+
+        return $this;
+    }
+
+    /**
+     * Get myQuantityMeasure
+     *
+     * @return \Nfq\NomNomBundle\Entity\MyQuantityMeasure 
+     */
+    public function getMyQuantityMeasure()
+    {
+        return $this->myQuantityMeasure;
     }
 }

@@ -10,19 +10,20 @@ namespace Nfq\NomNomBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class RecipesListController extends Controller{
+class RecipesListController extends Controller
+{
     public function recipeListAction()
     {
         $recipes = $this->getDoctrine()->getRepository('NfqNomNomBundle:MyRecipe')->findAll();
 
-        $name="Recipes";
+        $name = "Recipes";
 
         return $this->render(
             'NfqNomNomBundle:recipes:recipesList.html.twig',
             array(
                 'recipes' => $recipes,
                 'name' => $name
-                )
-            );
+            )
+        );
     }
 }

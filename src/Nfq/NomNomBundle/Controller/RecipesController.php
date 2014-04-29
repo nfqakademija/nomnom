@@ -177,7 +177,7 @@ class RecipesController extends Controller
                 if ($form->isValid()) {
                     $em = $this->getDoctrine()->getManager();
                     $recipe->setPhoto('default.jpg');
-                    foreach($recipe->getMyRecipeProducts() as $product){
+                    foreach ($recipe->getMyRecipeProducts() as $product) {
                         $product->setMyRecipe($recipe);
                         $em->persist($product);
                     }

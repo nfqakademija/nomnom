@@ -28,11 +28,11 @@ class LoadUserProducts extends AbstractFixture implements OrderedFixtureInterfac
         //TODO update userproduct fixture
         $userproduct = new MyUserProduct();
         $userproduct->setQuantity(200.0);
-        $userproduct->setQuantityMeasure(2);
+        $userproduct->setQuantityMeasure($this->getReference('tbsp'));
 
         $userproduct2 = new MyUserProduct();
         $userproduct2->setQuantity(150);
-        $userproduct2->setQuantityMeasure(1);
+        $userproduct2->setQuantityMeasure($this->getReference('g'));
 
         $manager->persist($userproduct);
         $manager->persist($userproduct2);

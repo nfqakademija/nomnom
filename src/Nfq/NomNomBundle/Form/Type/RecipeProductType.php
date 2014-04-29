@@ -30,7 +30,9 @@ class RecipeProductType extends AbstractType {
         $builder->add('myProduct', 'genemu_jqueryselect2_entity', array(
             'class' => 'NfqNomNomBundle:MyProduct',
             'property' => 'productName',))
-            ->add('quantityMeasure')
+            ->add('myQuantityMeasure', 'genemu_jqueryselect2_entity', array(
+                'class' => 'NfqNomNomBundle:MyQuantityMeasure',
+                'property' => 'myQuantityMeasureName',))
             ->add('quantity');
     }
 

@@ -212,7 +212,7 @@ class EventController extends Controller
 
         $pastDueDate = 3;
         //check if the event is past due date
-        if($myUserEvent->getmyEvent()->getEventPhase() == $pastDueDate){
+        if ($myUserEvent->getmyEvent()->getEventPhase() == $pastDueDate) {
             return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'event has ended.'));
         }
 
@@ -414,7 +414,9 @@ class EventController extends Controller
 
                 // if no quantity and no quantity measure - don't show input field
                 $hidden_field = false;
-                if($recipeProduct->getQuantity() == 0 && $recipeProduct->getQuantityMeasure() == 0) {
+                if ($recipeProduct->getQuantity() == 0 &&
+                    $recipeProduct->getMyQuantityMeasure()->getMyQuantityMeasureName() == ''
+                ) {
                     $hidden_field = true;
                 }
 
@@ -428,7 +430,7 @@ class EventController extends Controller
                     $bringersUP = new MyUserProduct();
                     $bringersUP->setMyUserEvent($userEvent);
                     $bringersUP->setMyRecipeProduct($recipeProduct);
-                    $bringersUP->setQuantityMeasure($r->getQuantityMeasure());
+                    $bringersUP->setQuantityMeasure($r->getMyQuantityMeasure()->getMyQuantityMeasureName());
                     $form = $this->createForm(
                         $userProductType
                     );
@@ -453,7 +455,7 @@ class EventController extends Controller
                 $subInner[] = array(
                     'productName' => $myProduct->getProductName(),
                     'quantity' => $r->getQuantity(),
-                    'quantityMeasure' => $r->getMeasurementTitle($r->getQuantityMeasure()),
+                    'quantityMeasure' => $r->getMyQuantityMeasure()->getMyQuantityMeasureName(),
                     'userEventId' => $userEvent->getId(),
                     'recipeProductId' => $recipeProduct->getId(),
                     'bringers' => $bringers,
@@ -464,7 +466,7 @@ class EventController extends Controller
             $inner['totalUpvote'] = $tovalVotes;
             $inner['products'] = $subInner;
             $inner['id'] = $recipe->getId();
-            $inner['servings'] =$recipe->getNumberOfServings() ;
+            $inner['servings'] = $recipe->getNumberOfServings();
             $information[$recipe->getRecipeName()] = $inner;
         }
         //**************************************************************
@@ -538,7 +540,7 @@ class EventController extends Controller
                 $myProduct = $recipeProduct->getMyProduct();
                 $subInner[] = array('productName' => $myProduct->getProductName(),
                     'quantity' => $r->getQuantity(),
-                    'quantityMeasure' => $r->getMeasurementTitle($r->getQuantityMeasure()),
+                    'quantityMeasure' => $r->getMyQuantityMeasure()->getMyQuantityMeasureName(),
                     'userEventId' => $userEvent->getId(),
                     'recipeProductId' => $recipeProduct->getId(),
                     'bringers' => $bringers);
