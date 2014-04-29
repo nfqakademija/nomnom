@@ -42,7 +42,7 @@ class MyRight
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -65,7 +65,7 @@ class MyRight
     /**
      * Get rightName
      *
-     * @return string 
+     * @return string
      */
     public function getRightName()
     {
@@ -98,7 +98,7 @@ class MyRight
     /**
      * Get myRoleRights
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMyRoleRights()
     {

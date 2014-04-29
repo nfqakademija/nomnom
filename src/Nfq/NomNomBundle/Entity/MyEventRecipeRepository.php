@@ -26,7 +26,7 @@ class MyEventRecipeRepository extends EntityRepository
             ->createQuery('SELECT r FROM NfqNomNomBundle:MyEventRecipe r
              WHERE r.myEvent = :myevent AND r.myRecipe = :myrecipe')
             ->setParameters(array('myevent' => $eventId,
-                                'myrecipe' => $recipeId))
+                'myrecipe' => $recipeId))
             ->getResult();
     }
 

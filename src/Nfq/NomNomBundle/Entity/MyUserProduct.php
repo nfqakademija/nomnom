@@ -49,7 +49,7 @@ class MyUserProduct
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -72,7 +72,7 @@ class MyUserProduct
     /**
      * Get myProduct
      *
-     * @return \Nfq\NomNomBundle\Entity\MyProduct 
+     * @return \Nfq\NomNomBundle\Entity\MyProduct
      */
     public function getMyProduct()
     {
@@ -95,7 +95,7 @@ class MyUserProduct
     /**
      * Get quantity
      *
-     * @return float 
+     * @return float
      */
     public function getQuantity()
     {
@@ -118,7 +118,7 @@ class MyUserProduct
     /**
      * Get quantityMeasure
      *
-     * @return integer 
+     * @return integer
      */
     public function getQuantityMeasure()
     {
@@ -141,7 +141,7 @@ class MyUserProduct
     /**
      * Get myUserEvent
      *
-     * @return \Nfq\NomNomBundle\Entity\MyUserEvent 
+     * @return \Nfq\NomNomBundle\Entity\MyUserEvent
      */
     public function getMyUserEvent()
     {
@@ -164,7 +164,7 @@ class MyUserProduct
     /**
      * Get myRecipeProduct
      *
-     * @return \Nfq\NomNomBundle\Entity\MyRecipeProduct 
+     * @return \Nfq\NomNomBundle\Entity\MyRecipeProduct
      */
     public function getMyRecipeProduct()
     {
@@ -187,7 +187,7 @@ class MyUserProduct
     /**
      * Get myQuantityMeasure
      *
-     * @return \Nfq\NomNomBundle\Entity\MyQuantityMeasure 
+     * @return \Nfq\NomNomBundle\Entity\MyQuantityMeasure
      */
     public function getMyQuantityMeasure()
     {

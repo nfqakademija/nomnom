@@ -18,7 +18,7 @@ class MyRecipeVoteRepository extends EntityRepository
             ->createQuery('SELECT r FROM NfqNomNomBundle:MyRecipeVote r
             WHERE r.myUserEvent = :userEvent AND r.myEventRecipe = :eventRecipe')
             ->setParameters(array('userEvent' => $userEventId,
-                                    'eventRecipe' => $eventRecipeId))
+                'eventRecipe' => $eventRecipeId))
             ->getResult();
     }
 
@@ -27,7 +27,7 @@ class MyRecipeVoteRepository extends EntityRepository
         return $this->getEntityManager()
             ->createQuery('SELECT r FROM NfqNomNomBundle:MyRecipeVote r
             WHERE r.myEventRecipe = :eventRecipe')
-            ->setParameter('eventRecipe' , $eventRecipeId)
+            ->setParameter('eventRecipe', $eventRecipeId)
             ->getResult();
     }
 }

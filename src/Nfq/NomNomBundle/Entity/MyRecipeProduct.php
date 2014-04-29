@@ -233,7 +233,7 @@ class MyRecipeProduct
     /**
      * Get myQuantityMeasure
      *
-     * @return \Nfq\NomNomBundle\Entity\MyQuantityMeasure 
+     * @return \Nfq\NomNomBundle\Entity\MyQuantityMeasure
      */
     public function getMyQuantityMeasure()
     {

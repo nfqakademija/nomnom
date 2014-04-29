@@ -80,3 +80,6 @@ fos_user:
 
 genemu_form:
     select2: ~
+
+sc_datetimepicker:
+    picker: ~

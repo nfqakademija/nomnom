@@ -52,7 +52,7 @@ class MyRole
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -75,7 +75,7 @@ class MyRole
     /**
      * Get roleName
      *
-     * @return string 
+     * @return string
      */
     public function getRoleName()
     {
@@ -108,7 +108,7 @@ class MyRole
     /**
      * Get myRoleRights
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMyRoleRights()
     {
@@ -141,7 +141,7 @@ class MyRole
     /**
      * Get myUserEvents
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMyUserEvents()
     {

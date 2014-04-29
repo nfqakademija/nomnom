@@ -45,7 +45,7 @@ class MyProduct
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -68,7 +68,7 @@ class MyProduct
     /**
      * Get productName
      *
-     * @return string 
+     * @return string
      */
     public function getProductName()
     {
@@ -101,7 +101,7 @@ class MyProduct
     /**
      * Get myRecipeProducts
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMyRecipeProducts()
     {
@@ -134,7 +134,7 @@ class MyProduct
     /**
      * Get myUserProducts
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMyUserProducts()
     {

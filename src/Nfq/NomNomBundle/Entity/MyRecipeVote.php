@@ -51,7 +51,7 @@ class MyRecipeVote
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -74,7 +74,7 @@ class MyRecipeVote
     /**
      * Get vote
      *
-     * @return integer 
+     * @return integer
      */
     public function getVote()
     {
@@ -107,7 +107,7 @@ class MyRecipeVote
     /**
      * Get myUserEvents
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMyUserEvents()
     {
@@ -130,7 +130,7 @@ class MyRecipeVote
     /**
      * Get myUserEvent
      *
-     * @return \Nfq\NomNomBundle\Entity\MyUserEvent 
+     * @return \Nfq\NomNomBundle\Entity\MyUserEvent
      */
     public function getMyUserEvent()
     {
@@ -153,7 +153,7 @@ class MyRecipeVote
     /**
      * Get myEventRecipe
      *
-     * @return \Nfq\NomNomBundle\Entity\MyEventRecipe 
+     * @return \Nfq\NomNomBundle\Entity\MyEventRecipe
      */
     public function getMyEventRecipe()
     {

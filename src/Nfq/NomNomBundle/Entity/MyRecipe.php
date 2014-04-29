@@ -42,7 +42,6 @@ class MyRecipe
 
     /**
      * @var string
-
      * @ORM\Column(name="recipePhoto", type="string", length=50)
      */
     private $photo;
@@ -72,6 +71,7 @@ class MyRecipe
 
 
     private $PhotoDir = 'recipes';
+
     /**
      * Constructor
      */
@@ -84,7 +84,7 @@ class MyRecipe
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -107,7 +107,7 @@ class MyRecipe
     /**
      * Get numberOfServings
      *
-     * @return integer 
+     * @return integer
      */
     public function getNumberOfServings()
     {
@@ -130,7 +130,7 @@ class MyRecipe
     /**
      * Get preparationTime
      *
-     * @return string 
+     * @return string
      */
     public function getPreparationTime()
     {
@@ -153,7 +153,7 @@ class MyRecipe
     /**
      * Get recipeName
      *
-     * @return string 
+     * @return string
      */
     public function getRecipeName()
     {
@@ -176,7 +176,7 @@ class MyRecipe
     /**
      * Get photo
      *
-     * @return string 
+     * @return string
      */
     public function getPhoto()
     {
@@ -199,7 +199,7 @@ class MyRecipe
     /**
      * Get preparationInstructions
      *
-     * @return string 
+     * @return string
      */
     public function getPreparationInstructions()
     {
@@ -222,7 +222,7 @@ class MyRecipe
     /**
      * Get myRecipeCategory
      *
-     * @return \Nfq\NomNomBundle\Entity\MyRecipeCategory 
+     * @return \Nfq\NomNomBundle\Entity\MyRecipeCategory
      */
     public function getMyRecipeCategory()
     {
@@ -255,7 +255,7 @@ class MyRecipe
     /**
      * Get myRecipeProducts
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMyRecipeProducts()
     {
@@ -288,7 +288,7 @@ class MyRecipe
     /**
      * Get myEventRecipes
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMyEventRecipes()
     {
@@ -302,6 +302,6 @@ class MyRecipe
 
     public function getPhotoUrl()
     {
-        return 'bundles/nfqnomnom/images/'.$this->getPhotoDir().'/'.$this->getPhoto();
+        return 'bundles/nfqnomnom/images/' . $this->getPhotoDir() . '/' . $this->getPhoto();
     }
 }

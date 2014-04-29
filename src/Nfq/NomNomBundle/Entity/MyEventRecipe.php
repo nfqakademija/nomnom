@@ -66,7 +66,7 @@ class MyEventRecipe
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -89,7 +89,7 @@ class MyEventRecipe
     /**
      * Get totalUpvote
      *
-     * @return integer 
+     * @return integer
      */
     public function getTotalUpvote()
     {
@@ -112,7 +112,7 @@ class MyEventRecipe
     /**
      * Get myEvent
      *
-     * @return \Nfq\NomNomBundle\Entity\MyEvent 
+     * @return \Nfq\NomNomBundle\Entity\MyEvent
      */
     public function getMyEvent()
     {
@@ -135,7 +135,7 @@ class MyEventRecipe
     /**
      * Get myRecipe
      *
-     * @return \Nfq\NomNomBundle\Entity\MyRecipe 
+     * @return \Nfq\NomNomBundle\Entity\MyRecipe
      */
     public function getMyRecipe()
     {
@@ -168,7 +168,7 @@ class MyEventRecipe
     /**
      * Get myRecipeVotes
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMyRecipeVotes()
     {

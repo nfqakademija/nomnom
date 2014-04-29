@@ -14,7 +14,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 
-class EventType extends AbstractType{
+class EventType extends AbstractType
+{
 
     /**
      * Returns the name of this type.
@@ -29,9 +30,11 @@ class EventType extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('eventName')
-                ->add('eventPlanningDueDate')
-                ->add('eventDate')
-                ->add('create', 'submit');
+            ->add('eventPlanningDueDate', 'collot_datetime', array('pickerOptions' =>
+                array('minuteStep' => 15)))
+            ->add('eventDate', 'collot_datetime', array('pickerOptions' =>
+                array('minuteStep' => 15)))
+            ->add('create', 'submit');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

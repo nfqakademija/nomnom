@@ -89,7 +89,7 @@ class MyEvent
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -112,7 +112,7 @@ class MyEvent
     /**
      * Get dateCreated
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateCreated()
     {
@@ -135,7 +135,7 @@ class MyEvent
     /**
      * Get eventName
      *
-     * @return string 
+     * @return string
      */
     public function getEventName()
     {
@@ -158,7 +158,7 @@ class MyEvent
     /**
      * Get eventDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getEventDate()
     {
@@ -181,7 +181,7 @@ class MyEvent
     /**
      * Get eventPhase
      *
-     * @return integer 
+     * @return integer
      */
     public function getEventPhase()
     {
@@ -214,7 +214,7 @@ class MyEvent
     /**
      * Get myUserEvents
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMyUserEvents()
     {
@@ -247,35 +247,13 @@ class MyEvent
     /**
      * Get myEventRecipes
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMyEventRecipes()
     {
         return $this->myEventRecipes;
     }
 
-    /**
-     * Set eventPlaningDueDate
-     *
-     * @param \DateTime $eventPlaningDueDate
-     * @return MyEvent
-     */
-    public function setEventPlaningDueDate($eventPlaningDueDate)
-    {
-        $this->eventPlaningDueDate = $eventPlaningDueDate;
-
-        return $this;
-    }
-
-    /**
-     * Get eventPlaningDueDate
-     *
-     * @return \DateTime 
-     */
-    public function getEventPlaningDueDate()
-    {
-        return $this->eventPlaningDueDate;
-    }
 
     /**
      * Set eventPlanningDueDate
@@ -293,7 +271,7 @@ class MyEvent
     /**
      * Get eventPlanningDueDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getEventPlanningDueDate()
     {

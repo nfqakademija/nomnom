@@ -36,7 +36,7 @@ class MyRoleRight
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -59,7 +59,7 @@ class MyRoleRight
     /**
      * Get myRole
      *
-     * @return \Nfq\NomNomBundle\Entity\MyRole 
+     * @return \Nfq\NomNomBundle\Entity\MyRole
      */
     public function getMyRole()
     {
@@ -82,7 +82,7 @@ class MyRoleRight
     /**
      * Get myRight
      *
-     * @return \Nfq\NomNomBundle\Entity\MyRight 
+     * @return \Nfq\NomNomBundle\Entity\MyRight
      */
     public function getMyRight()
     {

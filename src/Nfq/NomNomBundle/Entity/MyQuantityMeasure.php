@@ -47,10 +47,11 @@ class MyQuantityMeasure
         $this->myRecipeProducts = new \Doctrine\Common\Collections\ArrayCollection();
         $this->myUserProducts = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -73,7 +74,7 @@ class MyQuantityMeasure
     /**
      * Get myQuantityMeasureName
      *
-     * @return string 
+     * @return string
      */
     public function getMyQuantityMeasureName()
     {
@@ -106,7 +107,7 @@ class MyQuantityMeasure
     /**
      * Get myRecipeProducts
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMyRecipeProducts()
     {
@@ -139,7 +140,7 @@ class MyQuantityMeasure
     /**
      * Get myUserProducts
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMyUserProducts()
     {

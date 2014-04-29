@@ -18,7 +18,7 @@ class MyUserProductRepository extends EntityRepository
             ->createQuery('SELECT m FROM NfqNomNomBundle:MyUserProduct m WHERE
             m.myUserEvent = :userEvent AND m.myRecipeProduct = :recipeProduct')
             ->setParameters(array('userEvent' => $userEventId,
-                                'recipeProduct' => $recipeProductId))
+                'recipeProduct' => $recipeProductId))
             ->getResult();
     }
 
@@ -37,7 +37,7 @@ class MyUserProductRepository extends EntityRepository
             ->createQuery('SELECT m FROM NfqNomNomBundle:MyUserProduct AS m JOIN m.myUserEvent AS ue
             WHERE ue.myEvent = :event AND m.myRecipeProduct = :recipeProduct')
             ->setParameters(array('event' => $event,
-                                  'recipeProduct' => $recipeProduct))
+                'recipeProduct' => $recipeProduct))
             ->getResult();
     }
 

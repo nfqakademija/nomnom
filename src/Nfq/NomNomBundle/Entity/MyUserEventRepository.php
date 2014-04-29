@@ -17,8 +17,8 @@ class MyUserEventRepository extends EntityRepository
         return $this->getEntityManager()
             ->createQuery('SELECT m FROM NfqNomNomBundle:MyUserEvent m
             WHERE m.myEvent = :myevent AND m.myUser = :myuser')
-            ->setParameters(array( 'myevent' => $eventId,
-                                    'myuser' => $userId))
+            ->setParameters(array('myevent' => $eventId,
+                'myuser' => $userId))
             ->getResult();
     }
 

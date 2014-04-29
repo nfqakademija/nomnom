@@ -1,4 +1,12 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ form_stylesheet(forma) }}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ form_javascript(forma) }}
+{% endblock %}
 {% block content %}
     {{ error }}
     <br>

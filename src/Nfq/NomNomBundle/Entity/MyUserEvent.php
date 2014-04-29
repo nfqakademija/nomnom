@@ -83,7 +83,7 @@ class MyUserEvent
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -106,7 +106,7 @@ class MyUserEvent
     /**
      * Get invitationStatus
      *
-     * @return integer 
+     * @return integer
      */
     public function getInvitationStatus()
     {
@@ -129,7 +129,7 @@ class MyUserEvent
     /**
      * Get myRole
      *
-     * @return \Nfq\NomNomBundle\Entity\MyRole 
+     * @return \Nfq\NomNomBundle\Entity\MyRole
      */
     public function getMyRole()
     {
@@ -152,7 +152,7 @@ class MyUserEvent
     /**
      * Get myEvent
      *
-     * @return \Nfq\NomNomBundle\Entity\MyEvent 
+     * @return \Nfq\NomNomBundle\Entity\MyEvent
      */
     public function getMyEvent()
     {
@@ -175,12 +175,13 @@ class MyUserEvent
     /**
      * Get myUser
      *
-     * @return \Nfq\NomNomBundle\Entity\User 
+     * @return \Nfq\NomNomBundle\Entity\User
      */
     public function getMyUser()
     {
         return $this->myUser;
     }
+
     /**
      * Constructor
      */
@@ -216,7 +217,7 @@ class MyUserEvent
     /**
      * Get myUserProducts
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMyUserProducts()
     {
@@ -249,7 +250,7 @@ class MyUserEvent
     /**
      * Get myRecipeVotes
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMyRecipeVotes()
     {
@@ -272,7 +273,7 @@ class MyUserEvent
     /**
      * Get readyToPhaseTwo
      *
-     * @return integer 
+     * @return integer
      */
     public function getReadyToPhaseTwo()
     {
@@ -295,7 +296,7 @@ class MyUserEvent
     /**
      * Get readyToPhaseThree
      *
-     * @return integer 
+     * @return integer
      */
     public function getReadyToPhaseThree()
     {

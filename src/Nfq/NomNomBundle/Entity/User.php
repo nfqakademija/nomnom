@@ -4,13 +4,13 @@ namespace Nfq\NomNomBundle\Entity;
 
 
 //#* @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\MyUserRepository")
-    use FOS\UserBundle\Model\User as BaseUser;
-    use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
 
-    /**
-     * @ORM\Entity
-     * @ORM\Table(name="my_user")
-     */
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="my_user")
+ */
 class User extends BaseUser
 {
     /**
@@ -42,7 +42,7 @@ class User extends BaseUser
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -65,7 +65,7 @@ class User extends BaseUser
     /**
      * Get myUserProfile
      *
-     * @return \Nfq\NomNomBundle\Entity\MyUserProfile 
+     * @return \Nfq\NomNomBundle\Entity\MyUserProfile
      */
     public function getMyUserProfile()
     {
@@ -98,7 +98,7 @@ class User extends BaseUser
     /**
      * Get myUserEvents
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMyUserEvents()
     {
