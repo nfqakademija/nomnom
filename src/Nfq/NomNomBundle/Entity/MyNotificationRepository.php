@@ -20,4 +20,23 @@ class MyNotificationRepository extends EntityRepository
             ->setParameters(array('myevent' => $eventId))
             ->getResult();
     }
+
+    public function findByUser($userId)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT m FROM NfqNomNomBundle:MyNotification AS m JOIN m.myUserEvent AS ue
+            WHERE ue.myUser = :myuser')
+            ->setParameters(array('myuser' => $userId))
+            ->getResult();
+    }
+
+    public function findByUserUnread($user, $unread)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT m FROM NfqNomNomBundle:MyNotification AS m JOIN m.myUserEvent AS ue
+            WHERE ue.myUser = :myuser AND m.unread = :unread')
+            ->setParameters(array('myuser' => $user,
+                                'unread' => $unread))
+            ->getResult();
+    }
 }

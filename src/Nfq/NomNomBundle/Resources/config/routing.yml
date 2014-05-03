@@ -2,6 +2,10 @@ Nfq_nom_nom_homepage:
     pattern:  /
     defaults: { _controller: NfqNomNomBundle:Default:index }
 
+Nfq_nom_nom_notifications:
+    pattern:  /notifications
+    defaults: { _controller: NfqNomNomBundle:Default:notifications }
+
 Nfq_nom_nom_avatar_display:
     pattern:  /a/{avatarId}
     defaults: { _controller: NfqNomNomBundle:Account:getAvatar }

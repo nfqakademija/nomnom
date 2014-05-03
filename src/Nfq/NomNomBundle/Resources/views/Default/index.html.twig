@@ -1,4 +1,4 @@
-{%  extends "base.html.twig" %}
+{% extends "base.html.twig" %}
 {% block body %}
     {% block header %}
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -13,26 +13,34 @@
         {% endstylesheets %}
 
         {% stylesheets filter="compass"
-        "@NfqNomNomBundle/Resources/assets/css/main.scss"
-        %}
-        <link rel="stylesheet" href="{{ asset_url }}" />
+        "@NfqNomNomBundle/Resources/assets/css/main.scss" %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
 
         <ul class="nav nav-tabs">
-        <li><a href=" {{ path('Nfq_nom_nom_homepage') }}">Home</a> </li>
-            <li><a href=" {{ path('nfq_nom_nom_recipe_list') }}">Recipes</a> </li>
-        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            <li><a href=" {{ path('Nfq_nom_nom_profile') }}">Profile</a> </li>
-            <li><a href=" {{ path('Nfq_nom_nom_event_manager') }}">Events</a> </li>
-            <li>{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} </li>
-            <li><a href="{{ path('fos_user_security_logout') }}">
-                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-            </a></li>
-        {% else %}
-            <li><a href="{{ path('nfq_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
-            <li><a href="{{ path('nfq_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a></li>
-            <li><a href="{{ path('Nfq_forgot_password') }}">Forgot password?</a></li>
-        {% endif %}
+            <li><a href=" {{ path('Nfq_nom_nom_homepage') }}">Home</a></li>
+            <li><a href=" {{ path('nfq_nom_nom_recipe_list') }}">Recipes</a></li>
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <li><a href=" {{ path('Nfq_nom_nom_profile') }}">Profile</a></li>
+                <li><a href=" {{ path('Nfq_nom_nom_event_manager') }}">Events</a></li>
+                <li>{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} </li>
+                <li><a href="{{ path('fos_user_security_logout') }}">
+                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                    </a>
+                </li>
+                <li>
+                    {# TODO add twig extension that checks whether there is new notifications #}
+                    <a href="{{ path('Nfq_nom_nom_notifications') }}">
+                        <span class="glyphicon glyphicon-envelope" title="click to get notifications"></span>
+                    </a>
+                </li>
+            {% else %}
+                <li><a href="{{ path('nfq_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
+                <li>
+                    <a href="{{ path('nfq_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+                </li>
+                <li><a href="{{ path('Nfq_forgot_password') }}">Forgot password?</a></li>
+            {% endif %}
         </ul>
     {% endblock %}
     {% block content %}
