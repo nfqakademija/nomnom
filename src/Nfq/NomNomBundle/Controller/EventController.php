@@ -9,9 +9,12 @@
 namespace Nfq\NomNomBundle\Controller;
 
 
+use Nfq\NomNomBundle\Entity\MyEventRecipeRepository;
+use Nfq\NomNomBundle\Entity\MyNotification;
 use Nfq\NomNomBundle\Entity\MyProduct;
 use Nfq\NomNomBundle\Entity\MyRecipe;
 use Nfq\NomNomBundle\Entity\MyRecipeProduct;
+use Nfq\NomNomBundle\Entity\MyUserEventRepository;
 use Nfq\NomNomBundle\Form\Type\EventType;
 use Nfq\NomNomBundle\Form\Type\UserProductType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -29,6 +32,7 @@ class EventController extends Controller
     {
         $user = $this->getUser();
         if ($user) {
+            /** @var MyUserEventRepository $rep */
             $rep = $this->getDoctrine()->getRepository('NfqNomNomBundle:MyUserEvent');
             //find all userevent objects where current user is host
             $hostUserEvents = $rep->findByUserHost($user);
@@ -134,8 +138,9 @@ class EventController extends Controller
                 /** @var @var Nfq\NomNomBundle\Entity\MyRole $myRole */
                 $myRole = $em->getRepository('NfqNomNomBundle:MyRole')
                     ->findOneBy(array('roleName' => 'participatingUser'));
-
-                $someUserEvents = $em->getRepository('NfqNomNomBundle:MyUserEvent')
+                /** @var MyUserEventRepository $myUserEventRepository */
+                $myUserEventRepository = $em->getRepository('NfqNomNomBundle:MyUserEvent');
+                $someUserEvents = $myUserEventRepository
                     ->findByEventAndUser($myEvent, $form->getData()['user']);
                 if (empty($someUserEvents)) {
                     $userEvent = new MyUserEvent();
@@ -147,6 +152,12 @@ class EventController extends Controller
                     $userEvent->setReadyToPhaseThree(0);
 
                     $em->persist($userEvent);
+
+                    $notification = new MyNotification();
+                    $notification->setMyNotificationName('gotInvitation');
+                    $notification->setMyUserEvent($userEvent);
+                    $notification->setUnread(true);
+
                     $em->flush();
                 }
                 return $this->redirect($this->generateUrl('Nfq_nom_nom_events', array('eventId' => $eventId)));
@@ -174,7 +185,9 @@ class EventController extends Controller
 
             if ($form->isValid()) {
                 //check if current user is participating in this event
-                $someEventRecipe = $em->getRepository('NfqNomNomBundle:MyEventRecipe')
+                /** @var MyEventRecipeRepository $myEventRecipeRepository */
+                $myEventRecipeRepository = $em->getRepository('NfqNomNomBundle:MyEventRecipe');
+                $someEventRecipe = $myEventRecipeRepository
                     ->findByEventAndRecipe($myEvent, $form->getData()['recipe']);
                 if (empty($someEventRecipe)) {
                     $eventRecipe = new MyEventRecipe();
@@ -233,6 +246,7 @@ class EventController extends Controller
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
+        /** @var MyUserEventRepository $rep */
         $rep = $em->getRepository('NfqNomNomBundle:MyUserEvent');
 
         //find userEvent where user is host of event
@@ -267,6 +281,7 @@ class EventController extends Controller
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
+        /** @var MyUserEventRepository $rep */
         $rep = $em->getRepository('NfqNomNomBundle:MyUserEvent');
 
         //find userEvent where user is host of event

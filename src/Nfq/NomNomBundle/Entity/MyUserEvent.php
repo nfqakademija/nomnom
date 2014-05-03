@@ -27,6 +27,11 @@ class MyUserEvent
     private $myUserProducts;
 
     /**
+     * @ORM\OneToMany(targetEntity="MyNotification", mappedBy="myUserEvent")
+     */
+    private $myNotifications;
+
+    /**
      * @var integer
      *
      * @ORM\ManyToOne(targetEntity="MyRole", inversedBy="myUserEvents")
@@ -301,5 +306,38 @@ class MyUserEvent
     public function getReadyToPhaseThree()
     {
         return $this->readyToPhaseThree;
+    }
+
+    /**
+     * Add myNotifications
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyNotification $myNotifications
+     * @return MyUserEvent
+     */
+    public function addMyNotification(\Nfq\NomNomBundle\Entity\MyNotification $myNotifications)
+    {
+        $this->myNotifications[] = $myNotifications;
+
+        return $this;
+    }
+
+    /**
+     * Remove myNotifications
+     *
+     * @param \Nfq\NomNomBundle\Entity\MyNotification $myNotifications
+     */
+    public function removeMyNotification(\Nfq\NomNomBundle\Entity\MyNotification $myNotifications)
+    {
+        $this->myNotifications->removeElement($myNotifications);
+    }
+
+    /**
+     * Get myNotifications
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMyNotifications()
+    {
+        return $this->myNotifications;
     }
 }

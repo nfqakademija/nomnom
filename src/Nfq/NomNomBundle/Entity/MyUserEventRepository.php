@@ -21,6 +21,14 @@ class MyUserEventRepository extends EntityRepository
                 'myuser' => $userId))
             ->getResult();
     }
+    public function findByEvent($eventId)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT m FROM NfqNomNomBundle:MyUserEvent m
+            WHERE m.myEvent = :myevent')
+            ->setParameters(array('myevent' => $eventId))
+            ->getResult();
+    }
 
     public function findByEventHost($eventId)
     {

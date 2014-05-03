@@ -230,7 +230,7 @@ class AccountController extends Controller
 
         return $this->renderLogin(array(
             'last_username' => $lastUsername,
-            'error'         => $error,
+            'error' => $error,
             'csrf_token' => $csrfToken,
         ));
 
