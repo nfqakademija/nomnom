@@ -29,10 +29,16 @@
                     </a>
                 </li>
                 <li>
-                    {# TODO add twig extension that checks whether there is new notifications #}
-                    <a href="{{ path('Nfq_nom_nom_notifications') }}">
-                        <span class="glyphicon glyphicon-envelope" title="click to get notifications"></span>
-                    </a>
+                    {% if notificationCheck(app.user) is empty %}
+                        <a href="{{ path('Nfq_nom_nom_notifications') }}">
+                            <span class="glyphicon glyphicon-envelope " title="there are new notifications"></span>
+                        </a>
+                    {% else %}
+                        <a href="{{ path('Nfq_nom_nom_notifications') }}">
+                            <span class="glyphicon glyphicon-envelope new-notifications"></span>
+                        </a>
+                    {% endif %}
+
                 </li>
             {% else %}
                 <li><a href="{{ path('nfq_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
@@ -45,5 +51,6 @@
     {% endblock %}
     {% block content %}
         {{ error }}
+
     {% endblock %}
 {% endblock %}

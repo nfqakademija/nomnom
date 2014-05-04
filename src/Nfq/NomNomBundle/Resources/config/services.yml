@@ -34,3 +34,10 @@ services:
                class: Nfq\NomNomBundle\Form\Type\RecipeProductType
                tags:
                    - { name: form.type, alias: recipeproducttype }
+
+     nfq_nom_nom.twig.nfq_extension:
+         class: Nfq\NomNomBundle\Twig\NfqExtension
+         tags:
+             - { name: twig.extension }
+         arguments:
+             doctrine: "@doctrine"
