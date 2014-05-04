@@ -3,10 +3,11 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block content %}
-<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="well fos_user_profile_edit">
-    {{ form_widget(form) }}
-    <div>
-        <input class="btn btn-info" type="submit" value="{{ 'profile.edit.submit'|trans }}" />
-    </div>
-</form>
+    <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST"
+          class="well fos_user_profile_edit">
+        {{ form_widget(form) }}
+        <div>
+            <input class="btn btn-info" type="submit" value="{{ 'profile.edit.submit'|trans }}"/>
+        </div>
+    </form>
 {% endblock %}

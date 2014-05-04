@@ -1,4 +1,4 @@
-body{
+body {
 
   color: #666666;
 
@@ -9,30 +9,34 @@ body{
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  line-height:100px;
-  text-align:center;
+  line-height: 100px;
+  text-align: center;
   color: #00aa00;
 }
+
 //TODO a tag ar invisible unless yyou hover over them, this is a temporar fix
-a{
+a {
   color: #505050;
   font-weight: bold;
 }
-#createrecipe_preparationInstructions{
+
+#createrecipe_preparationInstructions {
   width: 50%;
   height: 50px;
   resize: none;
 }
-label{text-align:center;
-  vertical-align:middle;
-  display:table-cell;
+
+label {
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
 }
 
-.center-div{
+.center-div {
   float: none;
   margin: 0 auto;
 }
 
-.new-notifications{
+.new-notifications {
   color: red;
 }

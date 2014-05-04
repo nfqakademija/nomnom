@@ -1,9 +1,13 @@
-function addGenemuFunctionality($obj){
-    $($obj).val(["AL","AZ"])
+function addGenemuFunctionality($obj) {
+    $($obj).val(["AL", "AZ"])
         .select2()
         .select2({width: 'resolve'})
-        .click(function() { $($obj).select2(); });
-    $("#wait_tags_destroy").click(function() { $("#wait_").select2("destroy"); });
+        .click(function () {
+            $($obj).select2();
+        });
+    $("#wait_tags_destroy").click(function () {
+        $("#wait_").select2("destroy");
+    });
 }
 
 function addProductForm($collectionHolder) {
@@ -15,7 +19,7 @@ function addProductForm($collectionHolder) {
     var index = $collectionHolder.data('index');
 
     //so that recipe products start from 1 not from 0
-    if(index == 0) index++;
+    if (index == 0) index++;
 
     // Replace '__name__' in the prototype's HTML to
     // instead be a number based on how many items we have
@@ -26,8 +30,8 @@ function addProductForm($collectionHolder) {
     $collectionHolder.data('index', index + 1);
     $collectionHolder.append(newForm);
     //adding genemufunctionality to newly created form element
-    var myProduct = "#createrecipe_myRecipeProducts_"+index+"_myProduct";
-    var quantityMeasure = "#createrecipe_myRecipeProducts_"+index+"_quantityMeasure";
+    var myProduct = "#createrecipe_myRecipeProducts_" + index + "_myProduct";
+    var quantityMeasure = "#createrecipe_myRecipeProducts_" + index + "_quantityMeasure";
     addGenemuFunctionality(myProduct);
     addGenemuFunctionality(quantityMeasure)
 }

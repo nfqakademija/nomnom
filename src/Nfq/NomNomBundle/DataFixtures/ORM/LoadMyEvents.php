@@ -45,8 +45,8 @@ class LoadMyEvents extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist($event2);
         $manager->flush();
 
-        $this->addReference('Birthday',$event1);
-        $this->addReference('Weddings',$event2);
+        $this->addReference('Birthday', $event1);
+        $this->addReference('Weddings', $event2);
 
     }
 

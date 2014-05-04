@@ -158,6 +158,8 @@ class EventController extends Controller
                     $notification->setMyUserEvent($userEvent);
                     $notification->setUnread(true);
 
+                    $em->persist($notification);
+
                     $em->flush();
                 }
                 return $this->redirect($this->generateUrl('Nfq_nom_nom_events', array('eventId' => $eventId)));

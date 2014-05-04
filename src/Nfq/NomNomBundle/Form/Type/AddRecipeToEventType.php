@@ -12,7 +12,8 @@ namespace Nfq\NomNomBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class AddRecipeToEventType extends AbstractType {
+class AddRecipeToEventType extends AbstractType
+{
     /**
      * Returns the name of this type.
      *

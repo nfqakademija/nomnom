@@ -30,8 +30,8 @@ class LoadMyRoles extends AbstractFixture implements OrderedFixtureInterface
         $guest = new MyRole();
         $guest->setRoleName("guest");
 
-       $participatingUser = new MyRole();
-       $participatingUser->setRoleName("participatingUser");
+        $participatingUser = new MyRole();
+        $participatingUser->setRoleName("participatingUser");
 
         $manager->persist($guest);
         $manager->persist($registeredUser);

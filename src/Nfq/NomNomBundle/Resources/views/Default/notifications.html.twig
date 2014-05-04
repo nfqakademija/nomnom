@@ -8,16 +8,22 @@
                 {'eventId': notification.myUserEvent.myEvent.id}) }}" class="list-group-item">
                     {{ notification.myUserEvent.myEvent.eventName }} is nearing the end of planning.
                 </a>
+                <span> {{ notificationClosestTimeInterval(notification)['time'] }}
+                    {{ notificationClosestTimeInterval(notification)['measure'] }} ago</span>
             {% elseif notification.myNotificationName == 'endPlanning' %}
                 <a href="{{ path('Nfq_nom_nom_events',
                 {'eventId': notification.myUserEvent.myEvent.id}) }}" class="list-group-item">
                     {{ notification.myUserEvent.myEvent.eventName }} events planning has ended.
                 </a>
+                <span> {{ notificationClosestTimeInterval(notification)['time'] }}
+                    {{ notificationClosestTimeInterval(notification)['measure'] }} ago</span>
             {% elseif notification.myNotificationName == 'gotInvitation' %}
                 <a href="{{ path('Nfq_nom_nom_accept_event',
                 {'userEventId': notification.myUserEvent.id}) }}" class="list-group-item">
                     Accept invitation to {{ notification.myUserEvent.myEvent.eventName }} event.
                 </a>
+                <span> {{ notificationClosestTimeInterval(notification)['time'] }}
+                    {{ notificationClosestTimeInterval(notification)['measure'] }} ago</span>
             {% endif %}
         {% endfor %}
     </div>

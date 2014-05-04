@@ -12,7 +12,8 @@ namespace Nfq\NomNomBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class AddUsersToEventType extends AbstractType{
+class AddUsersToEventType extends AbstractType
+{
 
     /**
      * Returns the name of this type.
@@ -30,6 +31,6 @@ class AddUsersToEventType extends AbstractType{
             'class' => 'NfqNomNomBundle:User',
             'property' => 'username',
         ))
-        ->add('submit', 'submit');;
+            ->add('submit', 'submit');;
     }
 }

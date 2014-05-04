@@ -13,7 +13,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use \DateTime;
 use Nfq\NomnomBundle\Entity\MyRecipeCategory;
 
-class LoadMyRecipeCategory extends AbstractFixture implements OrderedFixtureInterface{
+class LoadMyRecipeCategory extends AbstractFixture implements OrderedFixtureInterface
+{
 
     /**
      * Load data fixtures with the passed EntityManager
@@ -36,8 +37,8 @@ class LoadMyRecipeCategory extends AbstractFixture implements OrderedFixtureInte
         $manager->persist($category3);
         $manager->flush();
 
-        $this->addReference('Salad',$category1);
-        $this->addReference('MainDish',$category2);
+        $this->addReference('Salad', $category1);
+        $this->addReference('MainDish', $category2);
         $this->addReference('Deserts', $category3);
     }
 

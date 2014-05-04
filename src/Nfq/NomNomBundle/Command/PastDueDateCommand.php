@@ -15,6 +15,7 @@ use Nfq\NomNomBundle\Entity\MyEventRepository;
 use Nfq\NomNomBundle\Entity\MyNotification;
 use Nfq\NomNomBundle\Entity\MyNotificationRepository;
 use Nfq\NomNomBundle\Entity\MyUserEventRepository;
+use Nfq\NomNomBundle\Utilities;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -48,14 +49,14 @@ class PastDueDateCommand extends ContainerAwareCommand
 
             //we assume that event date is further in time than planing
             $planningToEvent = date_diff($endPlanningDate, $eventDate);
-            $planningToEventSeconds = $this->dateIntervalToSecond($planningToEvent);
+            $planningToEventSeconds = Utilities::dateIntervalToSecond($planningToEvent);
 
             //how much time we are going to notify that planning is ending
             //for now 10 percent of time
             $notificationTime = $planningToEventSeconds / 10;
 
             $nowToPlanning = date_diff($now, $endPlanningDate);
-            $nowToPlanningSeconds = $this->dateIntervalToSecond($nowToPlanning);
+            $nowToPlanningSeconds = Utilities::dateIntervalToSecond($nowToPlanning);
             //TODO check is everything all right with timezones
             //set defaulttimezone by location.
             //something is woring buggy
@@ -123,14 +124,4 @@ class PastDueDateCommand extends ContainerAwareCommand
             }
         }
     }
-
-    protected function dateIntervalToSecond($interval)
-    {
-        return $interval->y * 31556926
-        + $interval->m * 2629743
-        + $interval->d * 86400
-        + $interval->h * 3600
-        + $interval->i * 60
-        + $interval->s;
-    }
-} 
+}

@@ -36,7 +36,7 @@ class MyNotificationRepository extends EntityRepository
             ->createQuery('SELECT m FROM NfqNomNomBundle:MyNotification AS m JOIN m.myUserEvent AS ue
             WHERE ue.myUser = :myuser AND m.unread = :unread')
             ->setParameters(array('myuser' => $user,
-                                'unread' => $unread))
+                'unread' => $unread))
             ->getResult();
     }
 }

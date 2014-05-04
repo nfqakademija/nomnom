@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * MyNotification
  *
  * @ORM\Table()
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\MyNotificationRepository")
  */
 class MyNotification
@@ -45,6 +46,13 @@ class MyNotification
      * @ORM\JoinColumn(name="my_user_event_id", referencedColumnName="id")
      */
     private $myUserEvent;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="notification_date",type="datetime")
+     */
+    private $notificationDate;
 
     /**
      * Get id
@@ -123,5 +131,30 @@ class MyNotification
     public function getMyUserEvent()
     {
         return $this->myUserEvent;
+    }
+
+    /**
+     * get the notification time
+     *
+     * @return MyNotification
+     * @ORM\PostPersist
+     * @ORM\PrePersist
+     * don't know is this a good thing but we need datetime when created and when modified
+     */
+    public function setNotificationDate()
+    {
+        $this->notificationDate = new \DateTime();
+
+        return $this;
+    }
+
+    /**
+     * Get notificationDate
+     *
+     * @return \DateTime
+     */
+    public function getNotificationDate()
+    {
+        return $this->notificationDate;
     }
 }

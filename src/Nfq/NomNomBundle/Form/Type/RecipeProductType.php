@@ -13,7 +13,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class RecipeProductType extends AbstractType {
+class RecipeProductType extends AbstractType
+{
 
     /**
      * Returns the name of this type.

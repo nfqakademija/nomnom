@@ -13,7 +13,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use \DateTime;
 use Nfq\NomnomBundle\Entity\MyRecipe;
 
-class LoadMyRecipes extends AbstractFixture implements OrderedFixtureInterface{
+class LoadMyRecipes extends AbstractFixture implements OrderedFixtureInterface
+{
 
     /**
      * Load data fixtures with the passed EntityManager
@@ -52,8 +53,8 @@ class LoadMyRecipes extends AbstractFixture implements OrderedFixtureInterface{
         $manager->persist($recipe2);
         $manager->flush();
 
-        $this->addReference('Salads',$recipe1);
-        $this->addReference('Lasagna',$recipe2);
+        $this->addReference('Salads', $recipe1);
+        $this->addReference('Lasagna', $recipe2);
 
     }
 

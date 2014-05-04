@@ -21,6 +21,7 @@ class MyUserEventRepository extends EntityRepository
                 'myuser' => $userId))
             ->getResult();
     }
+
     public function findByEvent($eventId)
     {
         return $this->getEntityManager()

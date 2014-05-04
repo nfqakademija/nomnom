@@ -12,6 +12,7 @@ namespace Nfq\NomNomBundle\Twig;
 use Doctrine\ORM\EntityManager;
 use Nfq\NomNomBundle\Entity\MyNotification;
 use Nfq\NomNomBundle\Entity\MyNotificationRepository;
+use Nfq\NomNomBundle\Utilities;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Twig_Extension;
 use Twig_SimpleFunction;
@@ -28,7 +29,8 @@ class NfqExtension extends Twig_Extension
     public function getFunctions()
     {
         return array(
-            new Twig_SimpleFunction('notificationCheck', array($this, 'notificationCheck'))
+            new Twig_SimpleFunction('notificationCheck', array($this, 'notificationCheck')),
+            new Twig_SimpleFunction('notificationClosestTimeInterval', array($this, 'notificationClosestTimeInterval'))
         );
     }
 
@@ -40,6 +42,15 @@ class NfqExtension extends Twig_Extension
         $myNotificationsRepository = $em->getRepository('NfqNomNomBundle:MyNotification');
         /** @var MyNotification $notification */
         return $notification = $myNotificationsRepository->findByUserUnread($user, true);
+    }
+
+    /** @param MyNotification $notification */
+    public function notificationClosestTimeInterval($notification)
+    {
+        $now = new \Datetime();
+        $timeInterval = $now->diff($notification->getNotificationDate());
+        $timeIntervalSeconds = Utilities::dateIntervalToSecond($timeInterval);
+        return Utilities::toClosestTimeMeasure($timeIntervalSeconds);
     }
 
     public function getName()

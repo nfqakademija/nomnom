@@ -31,7 +31,7 @@ class CreateRecipeType extends AbstractType
         $builder->add('recipeName')
             ->add('numberOfServings')
             ->add('preparationTime')
-            ->add('preparationInstructions','textarea')
+            ->add('preparationInstructions', 'textarea')
             ->add('myRecipeCategory', 'genemu_jqueryselect2_entity', array(
                 'class' => 'NfqNomNomBundle:MyRecipeCategory',
                 'property' => 'categoryName',))

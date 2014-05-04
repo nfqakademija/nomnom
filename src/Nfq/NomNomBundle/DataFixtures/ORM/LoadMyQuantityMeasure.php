@@ -15,7 +15,8 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Nfq\NomNomBundle\Entity\MyQuantityMeasure;
 
-class LoadMyQuantityMeasure extends AbstractFixture implements OrderedFixtureInterface{
+class LoadMyQuantityMeasure extends AbstractFixture implements OrderedFixtureInterface
+{
 
     /**
      * Get the order of this fixture
@@ -24,7 +25,7 @@ class LoadMyQuantityMeasure extends AbstractFixture implements OrderedFixtureInt
      */
     function getOrder()
     {
-       return 6;
+        return 6;
     }
 
     /**
@@ -61,11 +62,11 @@ class LoadMyQuantityMeasure extends AbstractFixture implements OrderedFixtureInt
 
         $manager->flush();
 
-        $this->addReference('empty',$measure0);
-        $this->addReference('g',$measure1);
-        $this->addReference('tbsp',$measure2);
-        $this->addReference('stalk',$measure3);
-        $this->addReference('kg',$measure4);
-        $this->addReference('bunch',$measure5);
+        $this->addReference('empty', $measure0);
+        $this->addReference('g', $measure1);
+        $this->addReference('tbsp', $measure2);
+        $this->addReference('stalk', $measure3);
+        $this->addReference('kg', $measure4);
+        $this->addReference('bunch', $measure5);
     }
 }

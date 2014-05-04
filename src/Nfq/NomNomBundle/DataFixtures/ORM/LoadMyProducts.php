@@ -14,7 +14,8 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Nfq\NomnomBundle\Entity\MyProduct;
 
-class LoadMyProducts extends AbstractFixture implements OrderedFixtureInterface{
+class LoadMyProducts extends AbstractFixture implements OrderedFixtureInterface
+{
 
     /**
      * Load data fixtures with the passed EntityManager
@@ -135,33 +136,33 @@ class LoadMyProducts extends AbstractFixture implements OrderedFixtureInterface{
 
         $manager->flush();
 
-        $this->addReference('fish',$fish);
-        $this->addReference('banana',$banana);
-        $this->addReference('chickenMince',$chickenMince);
-        $this->addReference('egg',$egg);
-        $this->addReference('onion',$onion);
-        $this->addReference('garlic',$garlic);
-        $this->addReference('blackPepper',$blackPepper);
-        $this->addReference('flour',$flour);
-        $this->addReference('whiteBread',$whiteBread);
-        $this->addReference('salt',$salt);
-        $this->addReference('oil',$oil);
-        $this->addReference('cheese',$cheese);
-        $this->addReference('breadcrumbs',$breadcrumbs);
-        $this->addReference('amaretoLiquor',$amaretoLiquor);
+        $this->addReference('fish', $fish);
+        $this->addReference('banana', $banana);
+        $this->addReference('chickenMince', $chickenMince);
+        $this->addReference('egg', $egg);
+        $this->addReference('onion', $onion);
+        $this->addReference('garlic', $garlic);
+        $this->addReference('blackPepper', $blackPepper);
+        $this->addReference('flour', $flour);
+        $this->addReference('whiteBread', $whiteBread);
+        $this->addReference('salt', $salt);
+        $this->addReference('oil', $oil);
+        $this->addReference('cheese', $cheese);
+        $this->addReference('breadcrumbs', $breadcrumbs);
+        $this->addReference('amaretoLiquor', $amaretoLiquor);
         $this->addReference('strawberries', $strawberries);
         $this->addReference('blueberries', $blueberries);
         $this->addReference('melon', $melon);
         $this->addReference('mint', $mint);
         $this->addReference('oliveOil', $oliveOil);
-        $this->addReference('carrot',$carrot);
-        $this->addReference('stalksCelery',$stalksCelery);
-        $this->addReference('tomato',$tomato);
-        $this->addReference('silverbeet',$silverbeet);
-        $this->addReference('ricotta',$ricotta);
-        $this->addReference('feta',$feta);
-        $this->addReference('lasagnaSheets',$lasagnaSheets);
-        $this->addReference('mozzarella',$mozzarella);
+        $this->addReference('carrot', $carrot);
+        $this->addReference('stalksCelery', $stalksCelery);
+        $this->addReference('tomato', $tomato);
+        $this->addReference('silverbeet', $silverbeet);
+        $this->addReference('ricotta', $ricotta);
+        $this->addReference('feta', $feta);
+        $this->addReference('lasagnaSheets', $lasagnaSheets);
+        $this->addReference('mozzarella', $mozzarella);
 
 
     }

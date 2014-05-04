@@ -13,7 +13,8 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Nfq\NomnomBundle\Entity\MyRecipeProduct;
 
-class LoadMyRecipeProducts extends AbstractFixture implements OrderedFixtureInterface{
+class LoadMyRecipeProducts extends AbstractFixture implements OrderedFixtureInterface
+{
 
     /**
      * Load data fixtures with the passed EntityManager
@@ -113,7 +114,7 @@ class LoadMyRecipeProducts extends AbstractFixture implements OrderedFixtureInte
         $dish12 = new MyRecipeProduct();
         $dish12->setQuantity(400);
         $dish12->setMyQuantityMeasure($this->getReference('g'));
-        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod12*/
+        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod12 */
         $prod12 = $this->getReference('tomato');
         $dish12->setMyProduct($prod12);
         $dish12->setMyRecipe($this->getReference('Lasagna'));
@@ -121,7 +122,7 @@ class LoadMyRecipeProducts extends AbstractFixture implements OrderedFixtureInte
         $dish13 = new MyRecipeProduct();
         $dish13->setQuantity(1);
         $dish13->setMyQuantityMeasure($this->getReference('empty'));
-        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod13*/
+        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod13 */
         $prod13 = $this->getReference('silverbeet');
         $dish13->setMyProduct($prod13);
         $dish13->setMyRecipe($this->getReference('Lasagna'));
@@ -129,7 +130,7 @@ class LoadMyRecipeProducts extends AbstractFixture implements OrderedFixtureInte
         $dish14 = new MyRecipeProduct();
         $dish14->setQuantity(1);
         $dish14->setMyQuantityMeasure($this->getReference('kg'));
-        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod14*/
+        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod14 */
         $prod14 = $this->getReference('ricotta');
         $dish14->setMyProduct($prod14);
         $dish14->setMyRecipe($this->getReference('Lasagna'));
@@ -137,7 +138,7 @@ class LoadMyRecipeProducts extends AbstractFixture implements OrderedFixtureInte
         $dish15 = new MyRecipeProduct();
         $dish15->setQuantity(200);
         $dish15->setMyQuantityMeasure($this->getReference('g'));
-        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod15*/
+        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod15 */
         $prod15 = $this->getReference('feta');
         $dish15->setMyProduct($prod15);
         $dish15->setMyRecipe($this->getReference('Lasagna'));
@@ -145,7 +146,7 @@ class LoadMyRecipeProducts extends AbstractFixture implements OrderedFixtureInte
         $dish16 = new MyRecipeProduct();
         $dish16->setQuantity(2);
         $dish16->setMyQuantityMeasure($this->getReference('empty'));
-        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod16*/
+        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod16 */
         $prod16 = $this->getReference('egg');
         $dish16->setMyProduct($prod16);
         $dish16->setMyRecipe($this->getReference('Lasagna'));
@@ -153,7 +154,7 @@ class LoadMyRecipeProducts extends AbstractFixture implements OrderedFixtureInte
         $dish17 = new MyRecipeProduct();
         $dish17->setQuantity(12);
         $dish17->setMyQuantityMeasure($this->getReference('empty'));
-        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod17*/
+        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod17 */
         $prod17 = $this->getReference('lasagnaSheets');
         $dish17->setMyProduct($prod17);
         $dish17->setMyRecipe($this->getReference('Lasagna'));
@@ -161,7 +162,7 @@ class LoadMyRecipeProducts extends AbstractFixture implements OrderedFixtureInte
         $dish18 = new MyRecipeProduct();
         $dish18->setQuantity(100);
         $dish18->setMyQuantityMeasure($this->getReference('g'));
-        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod18*/
+        /** @var \Nfq\NomNomBundle\Entity\MyProduct $prod18 */
         $prod18 = $this->getReference('mozzarella');
         $dish18->setMyProduct($prod18);
         $dish18->setMyRecipe($this->getReference('Lasagna'));
