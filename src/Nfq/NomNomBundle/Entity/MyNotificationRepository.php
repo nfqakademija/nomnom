@@ -25,7 +25,7 @@ class MyNotificationRepository extends EntityRepository
     {
         return $this->getEntityManager()
             ->createQuery('SELECT m FROM NfqNomNomBundle:MyNotification AS m JOIN m.myUserEvent AS ue
-            WHERE ue.myUser = :myuser')
+            WHERE ue.myUser = :myuser ORDER BY m.notificationDate DESC')
             ->setParameters(array('myuser' => $userId))
             ->getResult();
     }
@@ -34,7 +34,7 @@ class MyNotificationRepository extends EntityRepository
     {
         return $this->getEntityManager()
             ->createQuery('SELECT m FROM NfqNomNomBundle:MyNotification AS m JOIN m.myUserEvent AS ue
-            WHERE ue.myUser = :myuser AND m.unread = :unread')
+            WHERE ue.myUser = :myuser AND m.unread = :unread ORDER BY m.notificationDate DESC')
             ->setParameters(array('myuser' => $user,
                 'unread' => $unread))
             ->getResult();

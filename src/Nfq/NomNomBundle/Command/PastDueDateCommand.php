@@ -85,8 +85,10 @@ class PastDueDateCommand extends ContainerAwareCommand
                         //we have to show this notification again, but the last notification disappears
                         //this way you have less notifications. that is is you haven't logged in when the
                         //notification was sent you will not see it just the second notification
+                        if($notification->getMyNotificationName() != 'gotInvitation'){
                         $notification->setUnread(true);
                         $notification->setMyNotificationName('endPlanning');
+                        }
                     }
                     $em->flush();
                 }
@@ -115,8 +117,10 @@ class PastDueDateCommand extends ContainerAwareCommand
                         }
                     } else {
                         foreach ($notifications as $notification) {
+                            if($notification->getMyNotificationName() != 'gotInvitation'){
                             $notification->setUnread(true);
                             $notification->setMyNotificationName('soonEndPlanning');
+                            }
                         }
                     }
                     $em->flush();

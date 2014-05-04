@@ -19,22 +19,22 @@ class DefaultController extends Controller
         $user = $this->getUser();
         if ($user) {
 
-
             $em = $this->getDoctrine()->getManager();
             /** @var MyNotificationRepository $myNotificationRepository */
             $myNotificationRepository = $em->getRepository('NfqNomNomBundle:MyNotification');
 
             $notifications = $myNotificationRepository->findByUser($user);
 
-            //assuming that by clicking the link user will see new notifications
+            //TODO ask if bad practice do something after twi rendering
+            $renderedContent = $this->render('NfqNomNomBundle:Default:notifications.html.twig',
+                array('error' => '', 'notifications' => $notifications));
             foreach ($notifications as $notification) {
                 /** @var MyNotification $notification */
                 $notification->setUnread(false);
             }
             $em->flush();
 
-            return $this->render('NfqNomNomBundle:Default:notifications.html.twig',
-                array('error' => '', 'notifications' => $notifications));
+            return $renderedContent;
         } else {
             return $this->render('NfqNomNomBundle:Default:index.html.twig',
                 array('error' => 'log in first'));

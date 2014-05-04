@@ -1,27 +1,45 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
+{% set cls = '' %}
 
 {% block content %}
+    <script>
+        $(document).ready(function () {
+            $('.new-notifications').removeClass('new-notifications');
+        });
+    </script>
     <div class="list-group col-sm-6 col-md-6 text-center center-div">
         {% for notification in notifications %}
             {% if notification.myNotificationName == 'soonEndPlanning' %}
+                {% if notification.unread %}
+                    {% set cls = 'ns-notifications' %}
+                {% endif %}
                 <a href="{{ path('Nfq_nom_nom_events',
-                {'eventId': notification.myUserEvent.myEvent.id}) }}" class="list-group-item">
+                {'eventId': notification.myUserEvent.myEvent.id}) }}" class="{{ cls }} list-group-item">
                     {{ notification.myUserEvent.myEvent.eventName }} is nearing the end of planning.
                 </a>
+                {% set cls = '' %}
                 <span> {{ notificationClosestTimeInterval(notification)['time'] }}
                     {{ notificationClosestTimeInterval(notification)['measure'] }} ago</span>
             {% elseif notification.myNotificationName == 'endPlanning' %}
+                {% if notification.unread %}
+                    {% set cls = 'ns-notifications' %}
+                {% endif %}
                 <a href="{{ path('Nfq_nom_nom_events',
-                {'eventId': notification.myUserEvent.myEvent.id}) }}" class="list-group-item">
+                {'eventId': notification.myUserEvent.myEvent.id}) }}" class="{{ cls }} list-group-item">
                     {{ notification.myUserEvent.myEvent.eventName }} events planning has ended.
                 </a>
+                {% set cls = '' %}
                 <span> {{ notificationClosestTimeInterval(notification)['time'] }}
                     {{ notificationClosestTimeInterval(notification)['measure'] }} ago</span>
             {% elseif notification.myNotificationName == 'gotInvitation' %}
+                {% if notification.unread %}
+                    {% set cls = 'ns-notifications' %}
+                {% endif %}
                 <a href="{{ path('Nfq_nom_nom_accept_event',
-                {'userEventId': notification.myUserEvent.id}) }}" class="list-group-item">
+                {'userEventId': notification.myUserEvent.id}) }}" class="{{ cls }} list-group-item">
                     Accept invitation to {{ notification.myUserEvent.myEvent.eventName }} event.
                 </a>
+                {% set cls = '' %}
                 <span> {{ notificationClosestTimeInterval(notification)['time'] }}
                     {{ notificationClosestTimeInterval(notification)['measure'] }} ago</span>
             {% endif %}
