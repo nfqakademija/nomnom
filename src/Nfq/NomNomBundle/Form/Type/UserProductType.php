@@ -39,8 +39,10 @@ class UserProductType extends AbstractType
     {
         $type = ($this->hidden ? 'hidden' : null);
 
+        $options = ($this->hidden ? array('data' => 0) : array() );
+
         $builder
-            ->add('quantity', $type)
+            ->add('quantity', $type, $options)
             ->add('bring', 'submit');
     }
 

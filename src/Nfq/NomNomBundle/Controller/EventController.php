@@ -84,6 +84,7 @@ class EventController extends Controller
     {
         $event = new MyEvent();
         $form = $this->createForm(new EventType(), $event);
+        $form->get('eventDate')->setData(new \DateTime());
 
         if ($request->isMethod("POST")) {
             $form->submit($request);
@@ -398,14 +399,23 @@ class EventController extends Controller
         //**********************************************************************************************
         $information = array();
         //find all eventRecipes for this event
-        $eventRecipes = $repER->findByEventWithRecipe($userEvent->getMyEvent()->getId());
+
+        $eventRecipes = $repER->findByEventWithRecipe($userEvent->getMyEvent()->getId(), true);
 
         foreach ($eventRecipes as $eventRecipe) {
+
+
             /** @var MyRecipe $recipe */
             $recipe = $eventRecipe->getMyRecipe();
-
-            $tovalVotes = $eventRecipe->getTotalUpvote();
+            $totalVotes = $eventRecipe->getTotalUpvote();
             $recipeProducts = $recipe->getMyRecipeProducts();
+
+
+            if ($totalVotes < ($recipe->getNumberOfServings()) / 2) {
+
+
+                continue;
+            }
 
             $inner = array();
             $subInner = array();
@@ -430,9 +440,7 @@ class EventController extends Controller
 
                 // if no quantity and no quantity measure - don't show input field
                 $hidden_field = false;
-                if ($recipeProduct->getQuantity() == 0 &&
-                    $recipeProduct->getMyQuantityMeasure()->getMyQuantityMeasureName() == ''
-                ) {
+                if ($recipeProduct->getQuantity() == 0 && !$r->getMyQuantityMeasure()->getMyQuantityMeasureName()) {
                     $hidden_field = true;
                 }
 
@@ -446,19 +454,22 @@ class EventController extends Controller
                     $bringersUP = new MyUserProduct();
                     $bringersUP->setMyUserEvent($userEvent);
                     $bringersUP->setMyRecipeProduct($recipeProduct);
-                    $bringersUP->setQuantityMeasure($r->getMyQuantityMeasure()->getMyQuantityMeasureName());
+                    $bringersUP->setMyQuantityMeasure($r->getMyQuantityMeasure());
                     $form = $this->createForm(
                         $userProductType
                     );
                 }
+
                 if ($request->isMethod("POST")) {
                     if ($request->request->getIterator()->key() == $form->getName()) {
 
+                        $otherUsersProductQuantity = $repUP->getOtherUsersProductQuantity($userEvent->getId(), $recipeProduct->getId());
+
+//                        var_dump($otherUsersProductQuantity + $bringersUP->getQuantity());
 
                         $form->setData($bringersUP);
                         $form->submit($request);
                         if ($form->isValid()) {
-
                             $em->persist($bringersUP);
                             $em->flush();
                             $this->redirect($this->generateUrl('Nfq_nom_nom_events', array('eventId' => $eventId)));
@@ -479,7 +490,7 @@ class EventController extends Controller
                     'quantityDisplay' => $r->getQuantityDisplay($eventRecipe)
                 );
             }
-            $inner['totalUpvote'] = $tovalVotes;
+            $inner['totalUpvote'] = $totalVotes;
             $inner['products'] = $subInner;
             $inner['id'] = $recipe->getId();
             $inner['servings'] = $recipe->getNumberOfServings();
@@ -504,6 +515,8 @@ class EventController extends Controller
 
     public function processPhaseThree($eventId, $error = "")
     {
+
+
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         /**@var $myEvent MyEvent */
@@ -556,14 +569,14 @@ class EventController extends Controller
                 $myProduct = $recipeProduct->getMyProduct();
                 $subInner[] = array('productName' => $myProduct->getProductName(),
                     'quantity' => $r->getQuantity(),
-                    'quantityMeasure' => $r->getMyQuantityMeasure()->getMyQuantityMeasureName(),
+                    'quantityMeasure' => $r->getMeasurementTitle($r->getQuantityMeasure()),
                     'userEventId' => $userEvent->getId(),
                     'recipeProductId' => $recipeProduct->getId(),
                     'bringers' => $bringers);
             }
             $inner['totalUpvote'] = $tovalVotes;
             $inner['products'] = $subInner;
-            $inner['id'] = $recipe->getId();
+            $inner['id'] = $eventRecipe->getId();
             $information[$recipe->getRecipeName()] = $inner;
         }
 
@@ -619,4 +632,4 @@ class EventController extends Controller
         }
         return $returnValue;
     }
-} 
+}

@@ -49,4 +49,24 @@ class MyUserProductRepository extends EntityRepository
             ->setParameter('userEvent', $userEventId)
             ->getResult();
     }
+
+    public function getOtherUsersProductQuantity($myUserEventId, $myRecipeProductId)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'SELECT sum(mup.quantity)
+            FROM NfqNomNomBundle:MyUserProduct mup
+            WHERE mup.myUserEvent != :my_user_event_id AND mup.myRecipeProduct = :my_recipe_product_id
+            '
+        )
+            ->setParameter('my_user_event_id', $myUserEventId)
+            ->setParameter('my_recipe_product_id', $myRecipeProductId);
+
+        $quantity = $query->getSingleScalarResult();
+        if($quantity == null) {
+            $quantity = 0;
+        }
+
+        return (int)$quantity;
+    }
 }

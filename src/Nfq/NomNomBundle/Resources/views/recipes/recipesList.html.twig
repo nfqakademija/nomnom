@@ -27,4 +27,13 @@
         {% endfor %}
     </div>
 
+    <div id="pagination">
+        {% for i in 1..numberOfPages %}
+
+            <a href="{{ url('nfq_nom_nom_recipe_list', {'page': i}) }}">
+                {{ i }}
+            </a> |
+        {% endfor %}
+    </div>
+
 {% endblock %}

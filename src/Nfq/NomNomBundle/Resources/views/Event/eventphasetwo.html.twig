@@ -31,7 +31,6 @@
 
     <div> recipes included:</div>
     {% for recipeName, recipe in information %}
-
         <a href="{{ path('nfq_nom_nom_recipe', {'id':recipe['id']}) }}">
             {{ recipeName }}
         </a>
@@ -40,12 +39,19 @@
             <ul class="list-group">
                 {% for product in recipe['products'] %}
                     <li class="list-group-item">
-                        {{ product['quantity'] ? product['quantity'] : '' }}
+                        {{ product['quantityDisplay'] }}
                         {{ product['quantityMeasure'] ? product['quantityMeasure'] : '' }}
                         {{ product['productName'] }}
-                        <span>bringing: </span>
-                        {% for bringer in product['bringers'] %}
-                            <span>name: {{ bringer['name'] }} ({{ bringer['quantity'] }})</span>
+                        <p>
+                            <span> BRINGING: </span>
+                            {% for bringer in product['bringers'] %}
+
+                        <p>
+                            <span> {{ bringer['name'] }} </span>
+                            {% if (bringer['quantity']!=0) %}
+                                <span>  ({{ bringer['quantity'] }} {{ product['quantityMeasure'] }})</span>
+                            {% endif %}
+                        </p>
                         {% endfor %}
                         {{ form_start(product['forma']) }}
                         {{ form_widget(product['forma']) }}
@@ -53,6 +59,7 @@
                         {{ form_end(product['forma']) }}
                     </li>
                 {% endfor %}
+                </p>
             </ul>
         </div>
         <br>

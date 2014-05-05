@@ -12,4 +12,30 @@ use Doctrine\ORM\EntityRepository;
  */
 class MyRecipeRepository extends EntityRepository
 {
+
+    /**
+     * Returns total recipes count
+     *
+     * @return \Doctrine\ORM\Query
+     */
+    public function getRecipesCount()
+    {
+        $q = $this->createQueryBuilder('r')
+            ->select('count(r.id)');
+
+        return $q->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * Returns recipes query
+     *
+     * @return \Doctrine\ORM\Query
+     */
+    public function getRecipesQuery()
+    {
+        $q = $this->createQueryBuilder('r')
+            ->select('r');
+
+        return $q->getQuery();
+    }
 }

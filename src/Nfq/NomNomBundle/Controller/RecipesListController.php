@@ -12,9 +12,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class RecipesListController extends Controller
 {
-    public function recipeListAction()
+    public function recipeListAction($page)
     {
-        $recipes = $this->getDoctrine()->getRepository('NfqNomNomBundle:MyRecipe')->findAll();
+        $numberInPage = 9;
+        $repository = $this->getDoctrine()->getRepository('NfqNomNomBundle:MyRecipe');
+
+        /**
+         * @var \Doctrine\ORM\Query $recipesQuery
+         */
+        $recipesQuery = $repository->getRecipesQuery();
+
+        $totalRecipesCount = $repository->getRecipesCount();
+
+        $pagesCount = floor($totalRecipesCount / $numberInPage);
+
+
+        $offset = ($page - 1) * $numberInPage;
+
+        $recipesQuery->setFirstResult($offset);
+        $recipesQuery->setMaxResults($numberInPage);
+
+        $recipes = $recipesQuery->getResult();
 
         $name = "Recipes";
 
@@ -22,7 +40,9 @@ class RecipesListController extends Controller
             'NfqNomNomBundle:recipes:recipesList.html.twig',
             array(
                 'recipes' => $recipes,
-                'name' => $name
+                'name' => $name,
+                'numberOfPages' => $pagesCount,
+                'page' => $page
             )
         );
     }
