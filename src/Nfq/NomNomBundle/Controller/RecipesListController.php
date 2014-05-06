@@ -24,8 +24,7 @@ class RecipesListController extends Controller
 
         $totalRecipesCount = $repository->getRecipesCount();
 
-        $pagesCount = floor($totalRecipesCount / $numberInPage);
-
+        $pagesCount = ceil($totalRecipesCount / $numberInPage);
 
         $offset = ($page - 1) * $numberInPage;
 
