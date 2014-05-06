@@ -17,6 +17,8 @@
         <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
 
+
+
         <ul class="nav nav-tabs">
             <li><a href=" {{ path('Nfq_nom_nom_homepage') }}">Home</a></li>
             <li><a href=" {{ path('nfq_nom_nom_recipe_list') }}">Recipes</a></li>
@@ -49,6 +51,18 @@
             {% endif %}
         </ul>
     {% endblock %}
+    <div class="sidebar">
+        <form>
+            <input type="text" placeholder="just an idea">
+            <input type="checkbox">
+            <input type="checkbox">
+            <input type="checkbox">
+            <input type="checkbox">
+            <input type="checkbox">
+            <input type="checkbox">
+            <input type="submit" value="Browse recipes">
+        </form>
+    </div>
     {% block content %}
         {{ error }}
 

@@ -44,3 +44,14 @@ label {
 .ns-notifications{
   background-color: #e5e5ff;
 }
+
+.sidebar {
+  float:right;
+  width:200px;
+  padding:40px;
+  background:#99c;
+  right: 0;
+  top: 0;
+  position:fixed;
+  height:100%;
+}
