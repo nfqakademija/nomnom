@@ -400,6 +400,7 @@ class EventController extends Controller
         $information = array();
         //find all eventRecipes for this event
 
+        // fix
         $eventRecipes = $repER->findByEventWithRecipe($userEvent->getMyEvent()->getId(), true);
 
         foreach ($eventRecipes as $eventRecipe) {
@@ -410,10 +411,8 @@ class EventController extends Controller
             $totalVotes = $eventRecipe->getTotalUpvote();
             $recipeProducts = $recipe->getMyRecipeProducts();
 
-
+            // fix
             if ($totalVotes < ($recipe->getNumberOfServings()) / 2) {
-
-
                 continue;
             }
 
@@ -465,7 +464,20 @@ class EventController extends Controller
 
                         $otherUsersProductQuantity = $repUP->getOtherUsersProductQuantity($userEvent->getId(), $recipeProduct->getId());
 
-//                        var_dump($otherUsersProductQuantity + $bringersUP->getQuantity());
+                        $fieldsKey = 'userProduct'.$userEvent->getId().'_'.$recipeProduct->getId();
+                        $requestFields = $request->request->get($fieldsKey);
+
+                        if ($otherUsersProductQuantity + $bringersUP->getQuantity() >= $r->getQuantity()){
+                           $newQuantity = $r->getQuantity() - $otherUsersProductQuantity;
+                        } else if($bringersUP->getQuantity()) {
+                            $newQuantity = $bringersUP->getQuantity();
+                        } else {
+                            $newQuantity = $requestFields['quantity'];
+                        }
+
+                        $bringersUP->setQuantity($newQuantity);
+                        $requestFields['quantity'] = $newQuantity;
+                        $request->request->set($fieldsKey, $requestFields);
 
                         $form->setData($bringersUP);
                         $form->submit($request);
@@ -546,7 +558,13 @@ class EventController extends Controller
         foreach ($eventRecipes as $eventRecipe) {
             /** @var MyRecipe $recipe */
             $recipe = $eventRecipe->getMyRecipe();
-            $tovalVotes = $eventRecipe->getTotalUpvote();
+            $totalVotes = $eventRecipe->getTotalUpvote();
+
+            // skip recipes without votes
+            if ($totalVotes < ($recipe->getNumberOfServings()) / 2) {
+                continue;
+            }
+
             $recipeProducts = $recipe->getMyRecipeProducts();
             $inner = array();
             $subInner = array();
@@ -569,12 +587,12 @@ class EventController extends Controller
                 $myProduct = $recipeProduct->getMyProduct();
                 $subInner[] = array('productName' => $myProduct->getProductName(),
                     'quantity' => $r->getQuantity(),
-                    'quantityMeasure' => $r->getMeasurementTitle($r->getQuantityMeasure()),
+                    'quantityMeasure' => $r->getMyQuantityMeasure()->getMyQuantityMeasureName(),
                     'userEventId' => $userEvent->getId(),
                     'recipeProductId' => $recipeProduct->getId(),
                     'bringers' => $bringers);
             }
-            $inner['totalUpvote'] = $tovalVotes;
+            $inner['totalUpvote'] = $totalVotes;
             $inner['products'] = $subInner;
             $inner['id'] = $eventRecipe->getId();
             $information[$recipe->getRecipeName()] = $inner;
@@ -602,13 +620,22 @@ class EventController extends Controller
         $userEvent = $repUE->findByEventAndUser($myEvent, $this->getUser())['0'];
 
         //find all eventRecipes for this event
-        $eventRecipes = $repER->findByEvent($eventId);
+        $eventRecipes = $repER->findByEventWithRecipe($eventId, true);
+
 
         foreach ($eventRecipes as $eventRecipe) {
             /** @var MyRecipe $recipe */
             $recipe = $eventRecipe->getMyRecipe();
+            $totalVotes = $eventRecipe->getTotalUpvote();
+
+            // skip recipes without votes
+            if ($totalVotes < ($recipe->getNumberOfServings()) / 2) {
+                continue;
+            }
+
             $recipeProducts = $recipe->getMyRecipeProducts();
             $inner = array();
+
             foreach ($recipeProducts as $recipeProduct) {
                 $myUserProduct = $myRep->findByEventAndRecipeProduct($userEvent->getMyEvent(), $recipeProduct);
                 $name = '';
