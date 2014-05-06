@@ -1,19 +1,9 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends "NfqNomNomBundle:Default:index.html.twig" %}
 
-    {% javascripts '@NfqNomNomBundle/Resources/public/js/*' %}
-<script type="text/javascript" src="{{ asset_url }}"></script>
-{% endjavascripts %}
 
-{% stylesheets 'bundles/nfqnomnom/css/*' filter='cssrewrite' %}
-<link rel="stylesheet" href="{{ asset_url }}"/>
-{% endstylesheets %}
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block fos_user_content %}
-    {% if error %}
-        <div>{{ error|trans }}</div>
-    {% endif %}
-
+{% block content %}
     <form action="{{ path("fos_user_security_check") }}" method="post">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
 
@@ -28,4 +18,4 @@
 
         <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}"/>
     </form>
-{% endblock fos_user_content %}
+{% endblock content %}

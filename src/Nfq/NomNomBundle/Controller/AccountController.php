@@ -17,6 +17,7 @@ use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\SecurityContext;
 
@@ -246,7 +247,7 @@ class AccountController extends Controller
      */
     protected function renderLogin(array $data)
     {
-        $template = sprintf('FOSUserBundle:Security:login.html.%s', $this->container->getParameter('fos_user.template.engine'));
+        $template = sprintf('NfqNomNomBundle:Account:login.html.%s', $this->container->getParameter('fos_user.template.engine'));
 
         return $this->container->get('templating')->renderResponse($template, $data);
     }
@@ -315,7 +316,7 @@ class AccountController extends Controller
 
     public function forgotAction()
     {
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:request.html.' . $this->getEngine());
+        return $this->container->get('templating')->renderResponse('NfqNomNomBundle:Account:request.html.' . $this->getEngine());
     }
 
     public function resetAction(Request $request, $token)
@@ -385,11 +386,11 @@ class AccountController extends Controller
         $user = $this->container->get('fos_user.user_manager')->findUserByUsernameOrEmail($username);
 
         if (null === $user) {
-            return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:request.html.' . $this->getEngine(), array('invalid_username' => $username));
+            return $this->container->get('templating')->renderResponse('NfqNomNomBundle:Account:request.html.' . $this->getEngine(), array('invalid_username' => $username));
         }
 
         if ($user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl'))) {
-            return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:passwordAlreadyRequested.html.' . $this->getEngine());
+            return $this->container->get('templating')->renderResponse('NfqNomNomBundle:Account:passwordAlreadyRequested.html.' . $this->getEngine());
         }
 
         if (null === $user->getConfirmationToken()) {
@@ -402,7 +403,7 @@ class AccountController extends Controller
         $user->setPasswordRequestedAt(new \DateTime());
         $this->container->get('fos_user.user_manager')->updateUser($user);
 
-        return new RedirectResponse($this->container->get('router')->generate('fos_user_resetting_check_email',
+        return new RedirectResponse($this->container->get('router')->generate('Nfq_resetting_check_email',
             array('email' => $this->getObfuscatedEmail($user))
         ));
     }
@@ -419,7 +420,7 @@ class AccountController extends Controller
             return new RedirectResponse($this->container->get('router')->generate('fos_user_resetting_request'));
         }
 
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Resetting:checkEmail.html.' . $this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('NfqNomNomBundle:Account:checkEmail.html.' . $this->getEngine(), array(
             'email' => $email,
         ));
     }
@@ -433,6 +434,24 @@ class AccountController extends Controller
 
         return $email;
     }
+
+    public function checkREmailAction()
+    {
+        $email = $this->container->get('session')->get('fos_user_send_confirmation_email/email');
+        $this->container->get('session')->remove('fos_user_send_confirmation_email/email');
+        $user = $this->container->get('fos_user.user_manager')->findUserByEmail($email);
+
+        if (null === $user) {
+            throw new NotFoundHttpException(sprintf('The user with email "%s" does not exist', $email));
+        }
+
+        return $this->container->get('templating')->renderResponse('NfqNomNomBundle:Account:checkREmail.html.'.$this->getEngine(), array(
+                'user' => $user,
+            ));
+    }
+
+
+
 
 
 } 

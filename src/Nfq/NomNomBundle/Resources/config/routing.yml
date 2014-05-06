@@ -101,3 +101,15 @@ Nfq_forgot_password:
 Nfq_reset_password:
     pattern: /reset_password
     defaults: {_controller: NfqNomNomBundle:Account:reset}
+
+Nfq_resetting_send_email:
+    pattern: /reseting_send_email
+    defaults: {_controller: NfqNomNomBundle:Account:sendEmail}
+
+Nfq_resetting_check_email:
+    pattern: /resetting_check_email
+    defaults: {_controller: NfqNomNomBundle:Account:checkEmail}
+
+Nfq_registration_register:
+    pattern: /registration_register
+    defaults: {_controller: NfqNomNomBundle:Account:checkREmail}
