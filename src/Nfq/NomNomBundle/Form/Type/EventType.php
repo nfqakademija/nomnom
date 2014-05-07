@@ -31,9 +31,13 @@ class EventType extends AbstractType
     {
         $builder->add('eventName')
             ->add('eventPlanningDueDate', 'collot_datetime', array('pickerOptions' =>
-                array('minuteStep' => 15)))
+                array('format' => 'yyyy-mm-dd hh:ii',
+                    'autoclose' => 'true',
+                    'minuteStep' => 15)))
             ->add('eventDate', 'collot_datetime', array('pickerOptions' =>
-                array('minuteStep' => 15)))
+                array('format' => 'yyyy-mm-dd hh:ii',
+                    'autoclose' => 'true',
+                    'minuteStep' => 15,)))
             ->add('create', 'submit');
     }
 

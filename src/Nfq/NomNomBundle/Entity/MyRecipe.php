@@ -2,6 +2,7 @@
 
 namespace Nfq\NomNomBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,18 +24,21 @@ class MyRecipe
     private $id;
 
     /**
+     * @Assert\NotBlank
      * @var integer
      * @ORM\Column(name="numberOfServings", type="integer")
      */
     private $numberOfServings;
 
     /**
+     * @Assert\NotBlank
      * @var string
      * @ORM\Column(name="preparationTime", type="string", length=50)
      */
     private $preparationTime;
 
     /**
+     * @Assert\NotBlank
      * @var string
      * @ORM\Column(name="recipeName", type="string", length=50)
      */
@@ -47,19 +51,21 @@ class MyRecipe
     private $photo;
 
     /**
+     * @Assert\NotBlank
      * @var string
      * @ORM\Column(name="preparationInstructions", type="string", length=5000)
      */
     private $preparationInstructions;
 
-
     /**
+     * @Assert\NotBlank
      * @ORM\ManyToOne(targetEntity="MyRecipeCategory", inversedBy="myRecipes")
      * @ORM\JoinColumn(name="my_recipe_category_id", referencedColumnName="id")
      */
     private $myRecipeCategory;
 
     /**
+     * @Assert\NotBlank
      * @ORM\OneToMany(targetEntity="MyRecipeProduct", mappedBy="myRecipe")
      */
     private $myRecipeProducts;
