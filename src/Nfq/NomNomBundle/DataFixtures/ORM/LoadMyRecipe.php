@@ -32,7 +32,7 @@ class LoadMyRecipes extends AbstractFixture implements OrderedFixtureInterface
         1.Soak all the fruit in the amaretto for at least 1 hour.<br />
         2.	Serve the fruit in a glass and spoon over a bit of the amaretto used to marinate the fruit in.<br />
         3.	Garnish with a sprig of mint.");
-        $recipe1->setPhoto('fruitSalad.jpg');
+        $recipe1->setImageName('fruitSalad.jpg');
         $recipe1->setMyRecipeCategory($this->getReference('Salad'));
 
         $recipe2 = new MyRecipe();
@@ -46,7 +46,7 @@ class LoadMyRecipes extends AbstractFixture implements OrderedFixtureInterface
         4.	Spread a little of the chicken mixture over the base of six 10 x 18cm ovenproof dishes. Top each with a lasagna sheet, cutting to fit. Spread half the remaining mince over the lasagna sheets. Top with half the silverbeet mixture. Repeat with remaining lasagna sheets, chicken mixture and silverbeet mixture. Sprinkle with mozzarella.<br />
         5.	Place lasagnes on baking trays. Cover with foil. Bake for 20 minutes or until cooked. Uncover and cook for a further 10 minutes or until golden brown. Set aside for 5 minutes to rest before serving.
 ");
-        $recipe2->setPhoto('lasagna.jpg');
+        $recipe2->setImageName('lasagna.jpg');
         $recipe2->setMyRecipeCategory($this->getReference('MainDish'));
 
         $manager->persist($recipe1);
