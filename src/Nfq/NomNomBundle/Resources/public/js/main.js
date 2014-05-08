@@ -10,6 +10,16 @@ function addGenemuFunctionality($obj) {
     });
 }
 
+function addRemoveButtonListener(removeButton) {
+    $(removeButton).on('click', function (e) {
+        // prevent the link from creating a "#" on the URL
+        e.preventDefault();
+
+        // add a new tag form (see next code block)
+        $(this).parent().remove();
+    });
+}
+
 function addProductForm($collectionHolder) {
 
     // Get the data-prototype explained earlier
@@ -23,8 +33,9 @@ function addProductForm($collectionHolder) {
 
     // Replace '__name__' in the prototype's HTML to
     // instead be a number based on how many items we have
-    var newForm = prototype.replace(/__name__/g, index)
-        .replace(/label__/g, '');
+    var newForm = '<div><hr><a href="#" id="product_form_' + index + '">X</a>'
+        + prototype.replace(/__name__label__/g, '').
+        replace(/__name__/g, index).substring(5);
 
     // increase the index with one for the next item
     $collectionHolder.data('index', index + 1);
@@ -32,7 +43,9 @@ function addProductForm($collectionHolder) {
     //adding genemufunctionality to newly created form element
     var myProduct = "#createrecipe_myRecipeProducts_" + index + "_myProduct";
     var quantityMeasure = "#createrecipe_myRecipeProducts_" + index + "_quantityMeasure";
+    var removeButton = '#product_form_' + index;
     addGenemuFunctionality(myProduct);
-    addGenemuFunctionality(quantityMeasure)
+    addGenemuFunctionality(quantityMeasure);
+    addRemoveButtonListener(removeButton);
 }
 

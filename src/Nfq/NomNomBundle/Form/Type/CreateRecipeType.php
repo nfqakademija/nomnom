@@ -42,7 +42,8 @@ class CreateRecipeType extends AbstractType
             )
             ->add('myRecipeProducts', 'collection',
                 array('type' => new RecipeProductType(),
-                    'allow_add' => true,))
+                    'allow_add' => true,
+                    'allow_delete' => true,))
             ->add('create', 'submit');
     }
 
