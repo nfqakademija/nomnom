@@ -25,7 +25,6 @@ class DefaultController extends Controller
 
             $notifications = $myNotificationRepository->findByUser($user);
 
-            //TODO ask if bad practice do something after twi rendering
             $renderedContent = $this->render('NfqNomNomBundle:Default:notifications.html.twig',
                 array('error' => '', 'notifications' => $notifications));
             foreach ($notifications as $notification) {

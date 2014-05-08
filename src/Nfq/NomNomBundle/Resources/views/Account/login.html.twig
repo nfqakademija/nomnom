@@ -12,10 +12,11 @@
 
         <label for="password">{{ 'security.login.password'|trans }}</label>
         <input type="password" id="password" name="_password" required="required"/>
-
-        <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
-        <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-
+        <br />
+        <label id="checkbox_label">{{ 'security.login.remember_me'|trans }}
+        <input style="block:inline" type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+        </label>
         <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}"/>
     </form>
+    <a href="{{ path('Nfq_forgot_password') }}">Recover password</a>
 {% endblock content %}

@@ -47,22 +47,11 @@
                 <li>
                     <a href="{{ path('nfq_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
                 </li>
-                <li><a href="{{ path('Nfq_forgot_password') }}">Forgot password?</a></li>
+
             {% endif %}
         </ul>
     {% endblock %}
-    <div class="sidebar">
-        <form>
-            <input type="text" placeholder="just an idea">
-            <input type="checkbox">
-            <input type="checkbox">
-            <input type="checkbox">
-            <input type="checkbox">
-            <input type="checkbox">
-            <input type="checkbox">
-            <input type="submit" value="Browse recipes">
-        </form>
-    </div>
+
     {% block content %}
         {{ error }}
 
