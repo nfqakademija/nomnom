@@ -5,10 +5,12 @@ namespace Nfq\NomNomBundle\Entity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * MyRecipe
- *
+ * @Vich\Uploadable
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\MyRecipeRepository")
  */
@@ -45,10 +47,60 @@ class MyRecipe
     private $recipeName;
 
     /**
-     * @var string
-     * @ORM\Column(name="recipePhoto", type="string", length=50)
+     * @Assert\File(
+     *     maxSize="1M",
+     *     mimeTypes={"image/png", "image/jpeg"}
+     * )
+     * @Vich\UploadableField(mapping="recipe_image", fileNameProperty="imageName")
+     *
+     * @var File $photo
      */
-    private $photo;
+    private $image;
+
+    /**
+     * @ORM\Column(type="string", length=255, name="image_name")
+     *
+     * @var string $imageName
+     */
+    protected $imageName;
+
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     */
+    public function setImage(File $image)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @return File
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $imageName
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
 
     /**
      * @Assert\NotBlank
@@ -164,29 +216,6 @@ class MyRecipe
     public function getRecipeName()
     {
         return $this->recipeName;
-    }
-
-    /**
-     * Set photo
-     *
-     * @param string $photo
-     * @return MyRecipe
-     */
-    public function setPhoto($photo)
-    {
-        $this->photo = $photo;
-
-        return $this;
-    }
-
-    /**
-     * Get photo
-     *
-     * @return string
-     */
-    public function getPhoto()
-    {
-        return $this->photo;
     }
 
     /**

@@ -83,3 +83,25 @@ genemu_form:
 
 sc_datetimepicker:
     picker: ~
+
+knp_gaufrette:
+    stream_wrapper: ~
+
+    adapters:
+        recipe_adapter:
+            local:
+                directory: %kernel.root_dir%/../web/images/recipe
+
+    filesystems:
+        recipe_image_fs:
+            adapter:    recipe_adapter
+
+vich_uploader:
+    db_driver: orm
+    gaufrette: true
+    storage: vich_uploader.storage.gaufrette
+    mappings:
+            recipe_image:
+                uri_prefix:         /web/images/recipe
+                upload_destination: recipe_image_fs
+                namer:              vich_uploader.namer_uniqid

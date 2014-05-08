@@ -31,7 +31,6 @@ class RecipesController extends Controller
             $error = 'No recipe found for id ' . $id;
         }
 
-        $photo_path = $recipe->getPhotoUrl();
         $products = $recipe->getMyRecipeProducts();
         $logo1 = "bundles/nfqnomnom/images/recipes/clock.jpg";
         $logo2 = "bundles/nfqnomnom/images/recipes/portion.png";
@@ -40,7 +39,6 @@ class RecipesController extends Controller
         return $this->render(
             'NfqNomNomBundle:recipes:recipe.html.twig',
             array(
-                'recipe_photo_path' => $photo_path,
                 'error' => $error,
                 //'recipe_preparation' => $preparation,
                 'recipe_products' => $products,
@@ -176,8 +174,8 @@ class RecipesController extends Controller
                 $form->submit($request);
                 if ($form->isValid()) {
                     $em = $this->getDoctrine()->getManager();
-                    $recipe->setPhoto('default.jpg');
                     foreach ($recipe->getMyRecipeProducts() as $product) {
+                        /** @var MyRecipeProduct $product */
                         $product->setMyRecipe($recipe);
                         $em->persist($product);
                     }

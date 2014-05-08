@@ -24,7 +24,8 @@
     <div id="firstBox">
         <div id="imgInfo">
             <div id="recipePhotoBox">
-                <img id="recipePhoto" src="{{ asset(recipe_photo_path) }}" alt="Symfony!"/>
+                <img id="recipePhoto" src="{{ vich_uploader_asset(recipe, 'image') }}"
+                     alt="{{ recipe.recipeName }}"/>
             </div>
             <div id="recipePortion">
                 <img id="logo1" src="{{ asset(logo1_path) }}"/>

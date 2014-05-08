@@ -35,6 +35,11 @@ class CreateRecipeType extends AbstractType
             ->add('myRecipeCategory', 'genemu_jqueryselect2_entity', array(
                 'class' => 'NfqNomNomBundle:MyRecipeCategory',
                 'property' => 'categoryName',))
+            ->add('image', 'file',
+                array(
+                    'label' => 'Select the photo you want to upload'
+                )
+            )
             ->add('myRecipeProducts', 'collection',
                 array('type' => new RecipeProductType(),
                     'allow_add' => true,))
