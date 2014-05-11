@@ -21,7 +21,10 @@
                 'step': '1',
                 'minTime': '0:00'});
 
-            $($numberOfServingsElementId).timepicker({ 'timeFormat': 'G',
+            $($numberOfServingsElementId)
+                    .attr('type',"number")
+                    .attr('min','1')
+                    .timepicker({ 'timeFormat': 'G',
                 'step': '60',
                 'minTime': '1:00',
                 'maxTime': '20:00'});

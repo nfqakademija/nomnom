@@ -12,7 +12,13 @@
     <h2>
         {{ name }}
     </h2>
-
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <div class="text-center">
+            <a href="{{ path('Nfq_nom_nom_create_recipe') }}" class="btn btn-primary">
+                Create new recipe
+            </a>
+        </div>
+    {% endif %}
     <div id="main">
         {% for recipe in recipes %}
             <a href="{{ path('nfq_nom_nom_recipe', {'id': recipe.getId()}) }}">

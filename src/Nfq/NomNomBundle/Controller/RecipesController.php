@@ -182,7 +182,7 @@ class RecipesController extends Controller
                     $em->persist($recipe);
                     $em->flush();
                     //I think it should be persisted cascading
-                    //TODO decide where to redirect
+
                     return $this->redirect($this->generateUrl('nfq_nom_nom_recipe_list'));
                 }
             }
