@@ -3,6 +3,7 @@
 namespace Nfq\NomNomBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * MyRecipeProduct
@@ -28,6 +29,7 @@ class MyRecipeProduct
     private $myRecipe;
 
     /**
+     * @Assert\NotBlank
      * @ORM\ManyToOne(targetEntity="MyProduct", inversedBy="myRecipeProducts")
      * @ORM\JoinColumn(name="my_product_id", referencedColumnName="id")
      */
@@ -35,12 +37,14 @@ class MyRecipeProduct
 
     /**
      * @var float
+     * @Assert\NotBlank
      *
      * @ORM\Column(name="quantity", type="float")
      */
     private $quantity;
 
     /**
+     * @Assert\Valid
      * @ORM\ManyToOne(targetEntity="MyQuantityMeasure", inversedBy="myRecipeProducts")
      * @ORM\JoinColumn(name="my_quantity_measure_id", referencedColumnName="id")
      */

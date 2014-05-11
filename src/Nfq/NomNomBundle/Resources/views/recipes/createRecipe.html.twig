@@ -15,6 +15,7 @@
             $collectionHolder.data('index', $collectionHolder.find(':input').length);
             addGenemuFunctionality($object);
             $('button , .add_product_link ').addClass("btn btn-primary");
+            $('#createrecipe_preparationTime').attr('placeholder','hh:mm');
 
             $($timePickingElementId).timepicker({ 'timeFormat': 'G:i',
                 'step': '1',

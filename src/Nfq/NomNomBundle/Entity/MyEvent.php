@@ -10,6 +10,7 @@ use Nfq\NomNomBundle\Validator\Constraints as NfqAssert;
 /**
  * MyEvent
  *
+ * @NfqAssert\CausalityConstraints
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Nfq\NomNomBundle\Entity\MyEventRepository")
  */

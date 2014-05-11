@@ -117,7 +117,8 @@ class MyRecipe
     private $myRecipeCategory;
 
     /**
-     * @Assert\NotBlank
+     * @Assert\Valid
+     *
      * @ORM\OneToMany(targetEntity="MyRecipeProduct", mappedBy="myRecipe")
      */
     private $myRecipeProducts;

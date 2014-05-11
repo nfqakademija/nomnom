@@ -3,6 +3,7 @@
 namespace Nfq\NomNomBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * MyQuantityMeasure
@@ -23,7 +24,7 @@ class MyQuantityMeasure
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank
      * @ORM\Column(name="myQuantityMeasureName", type="string", length=255)
      */
     private $myQuantityMeasureName;
