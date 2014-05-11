@@ -129,7 +129,7 @@ class MyRecipe
     private $myEventRecipes;
 
 
-    private $PhotoDir = 'recipes';
+    private $ImageDir = 'recipes';
 
     /**
      * Constructor
@@ -331,13 +331,13 @@ class MyRecipe
         return $this->myEventRecipes;
     }
 
-    public function getPhotoDir()
+    public function getImageDir()
     {
-        return $this->PhotoDir;
+        return $this->ImageDir;
     }
 
-    public function getPhotoUrl()
+    public function getImageUrl()
     {
-        return 'bundles/nfqnomnom/images/' . $this->getPhotoDir() . '/' . $this->getPhoto();
+        return 'bundles/nfqnomnom/images/' . $this->getImageDir() . '/' . $this->getImageName();
     }
 }

@@ -122,4 +122,56 @@ class MyUserEventRepository extends EntityRepository
         return array('ready' => $ready,
             'all' => $all);
     }
+
+    public function findUsersByEvent($eventId)
+    {
+        $usersEvents = $this->getEntityManager()
+            ->createQuery('
+              SELECT ue
+              FROM NfqNomNomBundle:MyUserEvent ue
+              WHERE ue.myEvent = :myevent ')
+            ->setParameter('myevent', $eventId)
+            ->getResult()
+        ;
+
+        $users = array();
+        foreach($usersEvents as $userEvent) {
+            $users[] = $userEvent->getMyUser()->getId();
+        }
+
+        return $users;
+    }
+
+    /**
+     * @param $eventId
+     * @param null $excludeUserId
+     * @return array
+     */
+    public function getUserEventIdsByEvent($eventId, $excludeUserId = null)
+    {
+
+        $myUserEvents =  $this->getEntityManager()
+            ->createQuery('
+                SELECT mue
+                FROM NfqNomNomBundle:MyUserEvent mue
+                WHERE
+                  mue.myEvent = :myEvent
+                  '.($excludeUserId ? ' AND mue.myUser != :myUserId ' : '').'
+            ')
+        ->setParameter('myEvent', $eventId);
+
+        if($excludeUserId) {
+            $myUserEvents->setParameter('myUserId', $excludeUserId);
+        }
+
+        $myUserEvents = $myUserEvents->getResult();
+
+        $myUserEventIds = array();
+
+        foreach($myUserEvents as $myUserEvent) {
+            $myUserEventIds[] = $myUserEvent->getId();
+        }
+
+        return $myUserEventIds;
+    }
 }

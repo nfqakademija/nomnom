@@ -271,8 +271,9 @@ class EventController extends Controller
                     $em->flush();
                 } else {
                     //TODO ask if this is solution a bad practise
-                    $error = 'you must assign all products before finalizing the event';
-                    return $this->processPhaseTwo($eventId, $request, $error);
+                    $error = 'you not assign all products, so system will do it automatically';
+                    $hostEvent->setEventPhase($eventPhase + 1);
+                    $em->flush();
                 }
             }
         }
@@ -462,14 +463,18 @@ class EventController extends Controller
                 if ($request->isMethod("POST")) {
                     if ($request->request->getIterator()->key() == $form->getName()) {
 
-                        $otherUsersProductQuantity = $repUP->getOtherUsersProductQuantity($userEvent->getId(), $recipeProduct->getId());
+                        $eventIds = $repUE->getUserEventIdsByEvent($eventId, $user->getId());
+
+                        $otherUsersProductQuantity = $repUP->getUsersProductQuantity($eventIds, $recipeProduct->getId());
 
                         $fieldsKey = 'userProduct'.$userEvent->getId().'_'.$recipeProduct->getId();
                         $requestFields = $request->request->get($fieldsKey);
+                        $fullQuantity = $r->getQuantity() * round($totalVotes/$recipe->getNumberOfServings());
+                        $myUserProductQuantity = $bringersUP->getQuantity();
 
-                        if ($otherUsersProductQuantity + $bringersUP->getQuantity() >= $r->getQuantity()){
-                           $newQuantity = $r->getQuantity() - $otherUsersProductQuantity;
-                        } else if($bringersUP->getQuantity()) {
+                        if ($otherUsersProductQuantity + $bringersUP->getQuantity() >= $fullQuantity){
+                            $newQuantity = $fullQuantity - $otherUsersProductQuantity;
+                        } else if($otherUsersProductQuantity + $bringersUP->getQuantity() < $fullQuantity && $otherUsersProductQuantity != null) {
                             $newQuantity = $bringersUP->getQuantity();
                         } else {
                             $newQuantity = $requestFields['quantity'];
@@ -555,6 +560,9 @@ class EventController extends Controller
         //find all eventRecipes for this event
         $eventRecipes = $repER->findByEvent($userEvent->getMyEvent()->getId());
 
+        $em = $this->getDoctrine()->getManager();
+
+
         foreach ($eventRecipes as $eventRecipe) {
             /** @var MyRecipe $recipe */
             $recipe = $eventRecipe->getMyRecipe();
@@ -565,12 +573,50 @@ class EventController extends Controller
                 continue;
             }
 
+
             $recipeProducts = $recipe->getMyRecipeProducts();
             $inner = array();
             $subInner = array();
+
+            $AllEventUsers = $repUE->findUsersByEvent($myEvent->getId());
+            $i = 0;
+            $userEventsIds = $repUE->getUserEventIdsByEvent($eventId);
             foreach ($recipeProducts as $recipeProduct) {
                 /** @var MyRecipeProduct $r */
                 $r = $recipeProduct;
+
+
+
+                $otherUsersProductQuantity = $repUP->getUsersProductQuantity($userEventsIds, $recipeProduct->getId());
+                $quantityLeft = $r->getQuantity() - $otherUsersProductQuantity;
+                $eventUsers = $em->getRepository('NfqNomNomBundle:MyUserEvent');
+
+                $userEvent = $repUE->find($userEventsIds[$i]);
+
+
+               if ($quantityLeft > 0 ){
+
+                    $newProduct = new MyUserProduct();
+                    $newProduct->setMyUserEvent($userEvent);
+                    $newProduct->setMyRecipeProduct($recipeProduct);
+                    $newProduct->setQuantity($quantityLeft);
+                   if ($i-1 < count($userEventsIds))
+                   {
+                       $i++;
+                   }
+                   else
+                   {
+                       $i=0;
+                   }
+
+                   $em->persist($newProduct);
+                   $em->flush();
+                // var_dump( $newProduct->setMyProduct($userEvents));
+
+
+                }
+
+
                 $myUserProducts = $repUP->findByEventAndRecipeProduct($userEvent->getMyEvent(), $recipeProduct);
                 $bringers = array();
                 //add all the bringers names to names array

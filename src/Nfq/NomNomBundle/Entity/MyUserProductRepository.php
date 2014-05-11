@@ -50,16 +50,16 @@ class MyUserProductRepository extends EntityRepository
             ->getResult();
     }
 
-    public function getOtherUsersProductQuantity($myUserEventId, $myRecipeProductId)
+    public function getUsersProductQuantity($myUserEventIds, $myRecipeProductId)
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery(
             'SELECT sum(mup.quantity)
             FROM NfqNomNomBundle:MyUserProduct mup
-            WHERE mup.myUserEvent != :my_user_event_id AND mup.myRecipeProduct = :my_recipe_product_id
+            WHERE mup.myUserEvent IN (:my_user_event_id) AND mup.myRecipeProduct = :my_recipe_product_id
             '
         )
-            ->setParameter('my_user_event_id', $myUserEventId)
+            ->setParameter('my_user_event_id', $myUserEventIds)
             ->setParameter('my_recipe_product_id', $myRecipeProductId);
 
         $quantity = $query->getSingleScalarResult();
@@ -68,5 +68,8 @@ class MyUserProductRepository extends EntityRepository
         }
 
         return (int)$quantity;
+
     }
+
+
 }
