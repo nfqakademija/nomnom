@@ -1,5 +1,40 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
 {% block content %}
+    <style>
+        #right-area{
+            float: right;
+            height: 100%;
+            padding:40px;
+            width: 350px;
+            margin-top:42px;
+            margin-right:50px;
+            border-radius:20px;
+            background-color: #eeeeee;
+            right: 0;
+            top: 0;
+            position:fixed
+        }
+
+        #left-area{
+            float:left;
+            height: 100%;
+            padding: 40px;
+            width: 800px;
+            margin-top:42px;
+            margin-left:50px;
+            border-radius:20px;
+            background-color: #eeeeee;
+
+            top: 0;
+            position:fixed;
+        }
+
+
+
+    </style>
+
+    <div id="right-area">
+
     {{ error }}
     <div>Event Name:</div>
     {{ event.eventName }}
@@ -29,6 +64,8 @@
     {% endfor %}
     <hr>
 
+    </div>
+    <div id="left-area">
     <div> recipes included:</div>
     {% for recipeName, recipe in information %}
         <a href="{{ path('nfq_nom_nom_recipe', {'id':recipe['id']}) }}">
@@ -78,4 +115,5 @@
     {% endif %}
     <div class="circle" title="people ready to progress"> {{ readyPeople['ready'] }}/{{ readyPeople['all'] }}</div>
     {#generated content displaying#}
+    </div>
 {% endblock %}

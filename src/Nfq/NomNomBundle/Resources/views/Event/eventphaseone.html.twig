@@ -1,5 +1,65 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
 {% block content %}
+    <style>
+        #right-area{
+            float: right;
+            height: 100%;
+            padding:40px;
+            width: 350px;
+            margin-top:42px;
+            margin-right:50px;
+            border-radius:20px;
+            background-color: #eeeeee;
+            right: 0;
+            top: 0;
+            position:fixed
+        }
+
+        #left-area{
+            float:left;
+            height: 100%;
+            padding: 40px;
+            width: 800px;
+            margin-top:42px;
+            margin-left:50px;
+            border-radius:20px;
+            background-color: #eeeeee;
+
+            top: 0;
+            position:fixed;
+        }
+        #element_to_pop_up {
+            background-color:#fff;
+            border-radius:15px;
+            color:#000;
+            display:none;
+            padding:20px;
+            min-width:400px;
+            min-height: 180px;
+            margin-right: 440px;
+
+        }
+        .b-close {
+            border-radius: 7px;
+            font: bold 131% sans-serif;
+            padding: 0 6px 2px;
+            background-color: #2b91af;
+            color: #fff;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            position: absolute;
+            right: -7px;
+            top: -7px;
+        }
+        .b-close:hover {
+            background-color: #1e1e1e;
+        }
+
+
+
+    </style>
+    <div id="right-area">
     {{ error }}
     <div>Event Name:</div>
     {{ event.eventName }}
@@ -34,6 +94,11 @@
     <hr>
     <a class="btn btn-info" href="{{ path('Nfq_nom_nom_add_recipe_to_event',
     {'eventId': event.id}) }}">Add a recipe</a>
+    </div>
+
+
+    <div id="left-area">
+
     <div> recipes included:</div>
     {% for eventRecipe in eventRecipes %}
         <a href="{{ path('nfq_nom_nom_recipe', {'id':eventRecipe.myRecipe.id}) }}">
@@ -66,4 +131,5 @@
     {% endif %}
     <div class="circle" title="people ready to progress"> {{ readyPeople['ready'] }} / {{ readyPeople['all'] }}</div>
     {#generated content displaying#}
+    </div>
 {% endblock %}
