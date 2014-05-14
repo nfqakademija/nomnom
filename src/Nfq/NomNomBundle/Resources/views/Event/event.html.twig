@@ -1,5 +1,52 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
 {% block content %}
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    {% javascripts '@NfqNomNomBundle/Resources/public/js/*' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <style>
+        #element_to_pop_up {
+            background-color:#fff;
+            border-radius:15px;
+            color:#000;
+            display:none;
+            padding:20px;
+            min-width:400px;
+            min-height: 180px;
+        }
+        .b-close {
+            border-radius: 7px;
+            font: bold 131% sans-serif;
+            padding: 0 6px 2px;
+            background-color: #2b91af;
+            color: #fff;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            position: absolute;
+            right: -7px;
+            top: -7px;
+        }
+        .b-close:hover {
+            background-color: #1e1e1e;
+        }
+        #right-area{
+            float: right;
+            height: 100%;
+            padding:40px;
+            width: 200px;
+            margin-top: 100px;
+            background-color: #eeeeee;
+            right: 0;
+            top: 0;
+
+
+        }
+
+    </style>
+
+    <div id="right-area">
+
     {{ error }}
     <div>Event Name:</div>
     {{ event.eventName }}
@@ -34,6 +81,9 @@
         <div> {{ userEvent.myUser.username }}</div>
     {% endfor %}
     <hr>
+
+    </div>
+
     <div> recipes included:</div>
     {% for eventRecipe in eventRecipes %}
         <a href="{{ path('nfq_nom_nom_recipe', {'id':eventRecipe.myRecipe.id}) }}">

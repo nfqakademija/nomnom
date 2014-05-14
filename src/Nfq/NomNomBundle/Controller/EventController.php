@@ -343,6 +343,8 @@ class EventController extends Controller
         $repUE = $em->getRepository('NfqNomNomBundle:MyUserEvent');
         $repER = $em->getRepository('NfqNomNomBundle:MyEventRecipe');
 
+
+
         //find host(there should be only one) of the event
         /** @var MyUserEvent $host */
         $hostUser = $repUE->findbyEventHost($eventId)['0'];

@@ -113,3 +113,8 @@ Nfq_resetting_check_email:
 Nfq_registration_register:
     pattern: /registration_register
     defaults: {_controller: NfqNomNomBundle:Account:checkREmail}
+
+Nfq_test:
+    pattern: /test
+    defaults: {_controller: NfqNomNomBundle:Test:test}
+
