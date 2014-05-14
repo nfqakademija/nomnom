@@ -406,7 +406,6 @@ class EventController extends Controller
 
         foreach ($eventRecipes as $eventRecipe) {
 
-
             /** @var MyRecipe $recipe */
             $recipe = $eventRecipe->getMyRecipe();
             $totalVotes = $eventRecipe->getTotalUpvote();
@@ -422,6 +421,71 @@ class EventController extends Controller
             foreach ($recipeProducts as $recipeProduct) {
                 /** @var MyRecipeProduct $r */
                 $r = $recipeProduct;
+
+                // if no quantity and no quantity measure - don't show input field
+                $hidden_field = false;
+                if ($recipeProduct->getQuantity() == 0 && !$r->getMyQuantityMeasure()->getMyQuantityMeasureName()) {
+                    $hidden_field = true;
+                }
+
+                $bringersUP = $repUP->findByUserEventAndRecipeProduct($userEvent, $recipeProduct);
+                $userProductType = new UserProductType($userEvent->getId(), $recipeProduct->getId(), $hidden_field);
+                if (!empty($bringersUP)) {
+                    $bringersUP = $bringersUP['0'];
+                    $form = $this->createForm(
+                        $userProductType,
+                        $bringersUP
+                    );
+                } else {
+                    $bringersUP = new MyUserProduct();
+                    $bringersUP->setMyUserEvent($userEvent);
+                    $bringersUP->setMyRecipeProduct($recipeProduct);
+                    $bringersUP->setMyQuantityMeasure($r->getMyQuantityMeasure());
+                    $form = $this->createForm(
+                        $userProductType,
+                        $bringersUP
+                    );
+                }
+                if ($request->isMethod("POST")) {
+                    if ($request->request->getIterator()->key() == $form->getName()) {
+                        $form->handleRequest($request);
+                        $eventIds = $repUE->getUserEventIdsByEvent($eventId, $user->getId());
+
+                        $otherUsersProductQuantity = $repUP->getUsersProductQuantity($eventIds, $recipeProduct->getId());
+
+                        $fieldsKey = 'userProduct'.$userEvent->getId().'_'.$recipeProduct->getId();
+                        $requestFields = $request->request->get($fieldsKey);
+                        $fullQuantity = $r->getQuantity() * round($totalVotes/$recipe->getNumberOfServings());
+                        $preferredQuantityToBring = (int) $requestFields['quantity'];
+
+                        if ($preferredQuantityToBring < 0){
+                            $newQuantity = 0;
+                        } else if ($otherUsersProductQuantity + $preferredQuantityToBring >= $fullQuantity){
+                            $newQuantity = $fullQuantity - $otherUsersProductQuantity;
+                        } else if($otherUsersProductQuantity + $preferredQuantityToBring < $fullQuantity && $otherUsersProductQuantity != null) {
+                            $newQuantity = $preferredQuantityToBring;
+                        } else {
+                            $newQuantity = $preferredQuantityToBring;
+                        }
+
+                        $bringersUP->setQuantity($newQuantity);
+
+                        if ($form->isValid()) {
+                            if($bringersUP->getQuantity() == 0){
+                                $em->remove($bringersUP);
+                            } else{
+                                $em->persist($bringersUP);
+                            }
+                            $em->flush();
+                            //reconstruction could be changed with  pre_submit methid but this is faster but
+                            //we losee errors
+                            $uType= new UserProductType($userEvent->getId(), $recipeProduct->getId(), $hidden_field);
+                            $form = $this->createForm($uType,$bringersUP);
+                            $this->redirect($this->generateUrl('Nfq_nom_nom_events', array('eventId' => $eventId)));
+                        }
+                    }
+                }
+
                 $myUserProducts = $repUP->findByEventAndRecipeProduct($userEvent->getMyEvent(), $recipeProduct);
 
                 $bringers = array();
@@ -433,64 +497,6 @@ class EventController extends Controller
                         $bringers[] = array('name' => $name,
                             'quantity' => $amount);
 
-                    }
-                }
-
-                $bringersUP = $repUP->findByUserEventAndRecipeProduct($userEvent, $recipeProduct);
-
-                // if no quantity and no quantity measure - don't show input field
-                $hidden_field = false;
-                if ($recipeProduct->getQuantity() == 0 && !$r->getMyQuantityMeasure()->getMyQuantityMeasureName()) {
-                    $hidden_field = true;
-                }
-
-                $userProductType = new UserProductType($userEvent->getId(), $recipeProduct->getId(), $hidden_field);
-                if (!empty($bringersUP)) {
-                    $bringersUP = $bringersUP['0'];
-                    $form = $this->createForm(
-                        $userProductType
-                    );
-                } else {
-                    $bringersUP = new MyUserProduct();
-                    $bringersUP->setMyUserEvent($userEvent);
-                    $bringersUP->setMyRecipeProduct($recipeProduct);
-                    $bringersUP->setMyQuantityMeasure($r->getMyQuantityMeasure());
-                    $form = $this->createForm(
-                        $userProductType
-                    );
-                }
-
-                if ($request->isMethod("POST")) {
-                    if ($request->request->getIterator()->key() == $form->getName()) {
-
-                        $eventIds = $repUE->getUserEventIdsByEvent($eventId, $user->getId());
-
-                        $otherUsersProductQuantity = $repUP->getUsersProductQuantity($eventIds, $recipeProduct->getId());
-
-                        $fieldsKey = 'userProduct'.$userEvent->getId().'_'.$recipeProduct->getId();
-                        $requestFields = $request->request->get($fieldsKey);
-                        $fullQuantity = $r->getQuantity() * round($totalVotes/$recipe->getNumberOfServings());
-                        $myUserProductQuantity = $bringersUP->getQuantity();
-
-                        if ($otherUsersProductQuantity + $bringersUP->getQuantity() >= $fullQuantity){
-                            $newQuantity = $fullQuantity - $otherUsersProductQuantity;
-                        } else if($otherUsersProductQuantity + $bringersUP->getQuantity() < $fullQuantity && $otherUsersProductQuantity != null) {
-                            $newQuantity = $bringersUP->getQuantity();
-                        } else {
-                            $newQuantity = $requestFields['quantity'];
-                        }
-
-                        $bringersUP->setQuantity($newQuantity);
-                        $requestFields['quantity'] = $newQuantity;
-                        $request->request->set($fieldsKey, $requestFields);
-
-                        $form->setData($bringersUP);
-                        $form->submit($request);
-                        if ($form->isValid()) {
-                            $em->persist($bringersUP);
-                            $em->flush();
-                            $this->redirect($this->generateUrl('Nfq_nom_nom_events', array('eventId' => $eventId)));
-                        }
                     }
                 }
 
