@@ -1,0 +1,19 @@
+#createdRecipeBox{
+
+    margin: 0 auto;
+    width: 1200px;
+    background: #fdf59a;
+}
+
+#createdRecipe{
+
+    margin: 0 auto;
+    padding: 2px;
+    width: 500px;
+}
+
+
+#createdRecipe div,label,input{
+    margin: 0 auto;
+
+}

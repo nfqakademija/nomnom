@@ -1,14 +1,22 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
 
 {% trans_default_domain 'FOSUserBundle' %}
-
+{% block stylesheets %}
+    {% stylesheets filter="compass"
+    "@NfqNomNomBundle/Resources/public/css/account.css" %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
 {% block content %}
-    <div>
-        <p>{{ 'profile.show.username'|trans }}: {{ app.user.username }}</p>
+    <div id="profileBox">
+        <div id="dataBox">
+            <p>{{ 'profile.show.username'|trans }}: {{ app.user.username }}</p>
 
-        <p>{{ 'profile.show.email'|trans }}: {{ app.user.email }}</p>
-
-        <p><a class="btn btn-info" href=" {{ path('Nfq_nom_nom_profile_edit') }}">Edit Profile</a> |
-            <a class="btn btn-info" href=" {{ path('Nfq_nom_nom_password_change') }}">Change Password</a></p>
+            <p>{{ 'profile.show.email'|trans }}: {{ app.user.email }}</p>
+        </div>
+        <div id="profileButton">
+            <p><a class="profileButton" href=" {{ path('Nfq_nom_nom_profile_edit') }}">Edit Profile</a> |
+                <a class="profileButton" href=" {{ path('Nfq_nom_nom_password_change') }}">Change Password</a></p>
+        </div>
     </div>
 {% endblock %}

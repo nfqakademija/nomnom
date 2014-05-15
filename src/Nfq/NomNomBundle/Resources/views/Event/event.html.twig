@@ -1,61 +1,76 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets '@NfqNomNomBundle/Resources/public/css/event.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
+    {% endstylesheets %}
+{% endblock %}
 {% block content %}
     {{ error }}
-    <div>Event Name:</div>
-    {{ event.eventName }}
+    <div class="eventBox">
+        <h2>
+            {{ event.eventName }}
+        </h2>
 
-    <div>Event creation date:</div>
-    {{ event.dateCreated.date }}
+        <div id="DateBox">
+            <div class="createdDate">
+                <div>Event creation date:</div>
+                {{ event.dateCreated.date }}
+            </div>
+            <div class="eventDate">
+                <div>Event date:</div>
+                {{ event.eventDate.date }}
+            </div>
+        </div>
+        <div>Event Phase:</div>
+        {{ event.eventPhase }}
+        <div id="personsBox">
+            <hr>
+            <a href="{{ path('Nfq_nom_nom_add_user_to_event', {'eventId': event.id}) }} ">Add a person</a>
+            <hr>
+            <a href="{{ path('Nfq_nom_nom_add_recipe_to_event', {'eventId': event.id}) }}">Add a recipe</a>
 
-    <div>Event date:</div>
-    {{ event.eventDate.date }}
+            <hr>
+            <div>Host of the event:</div>
+            <div>{{ host.myUser.username }}</div>
 
-    <div>Event Phase:</div>
-    {{ event.eventPhase }}
+            <hr>
+            <div> people invited:</div>
+            {% for userEvent in invitedUE %}
+                <div> {{ userEvent.myUser.username }}</div>
+            {% endfor %}
 
-    <hr>
-    <a href="{{ path('Nfq_nom_nom_add_user_to_event', {'eventId': event.id}) }}">Add a person</a>
-    <hr>
-    <a href="{{ path('Nfq_nom_nom_add_recipe_to_event', {'eventId': event.id}) }}">Add a recipe</a>
+            <hr>
+            <div> people accepted invitations:</div>
+            {% for userEvent in acceptedUE %}
+                <div> {{ userEvent.myUser.username }}</div>
+            {% endfor %}</div>
+        <hr>
+        <div id="recipesBox">
+            <div> recipes included:</div>
+            {% for eventRecipe in eventRecipes %}
+                <a href="{{ path('nfq_nom_nom_recipe', {'id':eventRecipe.myRecipe.id}) }}">
+                    {{ eventRecipe.myRecipe.recipeName }}
+                </a>
 
-    <hr>
-    <div>Host of the event:</div>
-    <div>{{ host.myUser.username }}</div>
+                <a href="{{ path('Nfq_nom_nom_upvote_recipe',
+                {'eventRecipeId':eventRecipe.id,
+                'userEventId':currentUserEvent.id}) }}">
+                    UpVote
+                </a>
 
-    <hr>
-    <div> people invited:</div>
-    {% for userEvent in invitedUE %}
-        <div> {{ userEvent.myUser.username }}</div>
-    {% endfor %}
+                <span>Total votes: {{ eventRecipe.totalUpvote }}</span>
 
-    <hr>
-    <div> people accepted invitations:</div>
-    {% for userEvent in acceptedUE %}
-        <div> {{ userEvent.myUser.username }}</div>
-    {% endfor %}
-    <hr>
-    <div> recipes included:</div>
-    {% for eventRecipe in eventRecipes %}
-        <a href="{{ path('nfq_nom_nom_recipe', {'id':eventRecipe.myRecipe.id}) }}">
-            {{ eventRecipe.myRecipe.recipeName }}
-        </a>
-
-        <a href="{{ path('Nfq_nom_nom_upvote_recipe',
-        {'eventRecipeId':eventRecipe.id,
-        'userEventId':currentUserEvent.id}) }}">
-            UpVote
-        </a>
-
-        <span>Total votes: {{ eventRecipe.totalUpvote }}</span>
-
-        <a href="{{ path('Nfq_nom_nom_downvote_recipe',
-        {'eventRecipeId':eventRecipe.id,
-        'userEventId':currentUserEvent.id}) }}">
-            DownVote
-        </a>
-        <br>
-    {% endfor %}
-    <hr>
-    <a href="{{ path('Nfq_nom_nom_progress_event', {'eventId': event.id}) }}">{{ progButton }}</a>
-    {#generated content displaying#}
+                <a href="{{ path('Nfq_nom_nom_downvote_recipe',
+                {'eventRecipeId':eventRecipe.id,
+                'userEventId':currentUserEvent.id}) }}">
+                    DownVote
+                </a>
+                <br>
+            {% endfor %}
+            <hr>
+            <a href="{{ path('Nfq_nom_nom_progress_event', {'eventId': event.id}) }}">{{ progButton }}</a>
+            {#generated content displaying#}
+        </div>
+    </div>
 {% endblock %}

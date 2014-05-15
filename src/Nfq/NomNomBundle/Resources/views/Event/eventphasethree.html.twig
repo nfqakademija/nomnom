@@ -1,65 +1,74 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
 {% block content %}
     {{ error }}
-    <div>Event Name:</div>
-    {{ event.eventName }}
+    <div class="eventBox">
+    <h2>{{ event.eventName }}</h2>
 
-    <div>Event creation date:</div>
-    {{ event.dateCreated.date }}
-
-    <div>Event date:</div>
-    {{ event.eventDate.date }}
-
-    <hr>
-    <div>Host of the event:</div>
-    <div>{{ host.myUser.username }}</div>
-
-    <hr>
-    <div> people invited:</div>
-    {% for userEvent in invitedUE %}
-        <div> {{ userEvent.myUser.username }}</div>
-    {% endfor %}
-
-    <hr>
-    <div> people accepted invitations:</div>
-    {% for userEvent in acceptedUE %}
-        <div> {{ userEvent.myUser.username }}</div>
-    {% endfor %}
-    <hr>
-    <div>You are bringing:</div>
-    {% for product in personalUserProducts %}
-        <span>{{ product.myRecipeProduct.myProduct.getProductName }}
-            ({{ product.getQuantity }}) for
-        </span>
-        <a href="{{ path('nfq_nom_nom_recipe', {'id':product.myRecipeProduct.myRecipe.getId}) }}">
-            {{ product.myRecipeProduct.myRecipe.getRecipeName }}
-        </a>
-        <br>
-    {% endfor %}
-    <hr>
-    <div> recipes included:</div>
-    {% for recipeName, recipe in information %}
-
-        <a href="{{ path('nfq_nom_nom_recipe', {'id':recipe['id']}) }}">
-            {{ recipeName }}
-        </a>
-        <span>People eating: {{ recipe['totalUpvote'] }}</span>
-        <div id="recipeIngredients{{ recipe['id'] }}">
-            <ul class="list-group">
-                {% for product in recipe['products'] %}
-                    <li class="list-group-item">
-                        {{ product['quantity'] ? product['quantity'] : '' }}
-                        {{ product['quantityMeasure'] ? product['quantityMeasure'] : '' }}
-                        {{ product['productName'] }}
-                        <span>bringing: </span>
-                        {% for bringer in product['bringers'] %}
-                            <span>name: {{ bringer['name'] }} ({{ bringer['quantity'] }})</span>
-                        {% endfor %}
-                    </li>
-                {% endfor %}
-            </ul>
+    <div class="DateBox">
+        <div class="createdDate">
+            <div>Event creation date:</div>
+            {{ event.dateCreated.date }}
         </div>
-        <br>
-    {% endfor %}
+        <div class="eventDate">
+            <div>Event date:</div>
+            {{ event.eventDate.date }}
+        </div>
+    </div>
+
+
+    <div id="actionBox">
+        <div class="personsBox">
+            <div>Host of the event:</div>
+            <div>{{ host.myUser.username }}</div>
+
+            <div> people invited:</div>
+            {% for userEvent in invitedUE %}
+                <div> {{ userEvent.myUser.username }}</div>
+            {% endfor %}
+
+            <hr>
+            <div> people accepted invitations:</div>
+            {% for userEvent in acceptedUE %}
+                <div> {{ userEvent.myUser.username }}</div>
+            {% endfor %}
+            <hr>
+        </div>
+        <hr>
+    <div class="recipesBox">
+        <div>You are bringing:</div>
+        {% for product in personalUserProducts %}
+            <span>{{ product.myRecipeProduct.myProduct.getProductName }}
+                ({{ product.getQuantity }}) for
+        </span>
+            <a href="{{ path('nfq_nom_nom_recipe', {'id':product.myRecipeProduct.myRecipe.getId}) }}">
+                {{ product.myRecipeProduct.myRecipe.getRecipeName }}
+            </a>
+            <br>
+        {% endfor %}
+        <hr>
+        <div> recipes included:</div>
+        {% for recipeName, recipe in information %}
+
+            <a href="{{ path('nfq_nom_nom_recipe', {'id':recipe['id']}) }}">
+                {{ recipeName }}
+            </a>
+            <span>People eating: {{ recipe['totalUpvote'] }}</span>
+            <div id="recipeIngredients{{ recipe['id'] }}">
+                <ul class="listGroup">
+                    {% for product in recipe['products'] %}
+                        <li class="listGroup2">
+                            {{ product['quantity'] ? product['quantity'] : '' }}
+                            {{ product['quantityMeasure'] ? product['quantityMeasure'] : '' }}
+                            {{ product['productName'] }}
+                            <span>bringing: </span>
+                            {% for bringer in product['bringers'] %}
+                                <span>name: {{ bringer['name'] }} ({{ bringer['quantity'] }})</span>
+                            {% endfor %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <br>
+        {% endfor %}</div></div>
     {#generated content displaying#}
 {% endblock %}

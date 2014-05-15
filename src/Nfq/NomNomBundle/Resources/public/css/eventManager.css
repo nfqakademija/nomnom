@@ -1,0 +1,56 @@
+#eventManagerBox{
+    margin: 0 auto;
+    width: 1200px;
+    background: none repeat scroll 0 0 #F0B537;
+    height: 700px;
+    text-align: center;
+}
+
+.eventButton{
+
+    width: 200px;
+    margin: 0 auto;
+}
+
+.eventButton a{
+    background-color: #830C0C;
+    border-color: #420606;
+    padding: 12px;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+    width: 200px;
+    margin: 0 auto;
+}
+
+#activeEvent{
+    width: 600px;
+    height: 400px;
+    float: left;
+
+}
+
+#activeEvent a{
+    color: #6e2b00;
+    text-decoration: solid ;
+
+}
+
+.activeEventBox{
+    border: 1px solid;
+    border-radius: 10px;
+    margin: 2px;
+    padding: 2px;
+    text-align: center;
+}
+
+#endedEvent{
+    width: 600px;
+    height: 400px;
+    float:right;
+}
+
+#endedEvent a{
+    color:#6e2b00;
+    text-decoration: solid ;
+}

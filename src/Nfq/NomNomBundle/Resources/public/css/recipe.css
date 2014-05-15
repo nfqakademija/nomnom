@@ -5,9 +5,10 @@
 }
 
 #secondBox {
-    height: 450px;
+    height: auto;
     margin: 0 auto;
     width: 1000px;
+    padding: 0px 0 50px;
 }
 
 #recipePhoto {
@@ -22,7 +23,7 @@
     height: 300px;
     width: 400px;
     float: left;
-    box-shadow: 0 0 4px 3px;
+    box-shadow: 0 0 4px 3px #8F5618;
 
 }
 
@@ -32,9 +33,10 @@
     font-family: "Lucida Sans Unicode";
     font-size: 17px;
     font-style: italic;
-    height: 380px;
+    height: auto;
     margin: 0 auto;
-    width: auto;
+    width: 500px;
+    padding: 10px;
     -moz-column-width: 250px;
     -webkit-column-width: 250px;
 }
@@ -43,6 +45,12 @@
     list-style: none;
     text-align: left;
     height: 380px;
+}
+
+#recipeIngredients li {
+    list-style: none;
+    text-align: left;
+    width: 200px;
 }
 
 #recipePortion {
@@ -56,14 +64,15 @@
 
 #recipeInstructions {
     border-radius: 10px;
-    box-shadow: 0 0 4px 3px #808080;
+    box-shadow: 0 0 4px 3px #8F5618;
+    background: rgb(214, 130, 23);
     font-family: "Lucida Sans Unicode";
     font-size: 18px;
     font-style: italic;
     height: auto;
     padding: 50px;
     width: 900px;
-    margin: 0 0 100px 0;
+    margin: 0 auto;
 }
 
 h2 {
@@ -125,5 +134,12 @@ body {
     height: auto;
     margin: 0 auto;
     width: 400px;
+}
+
+#backgroundRecipe{
+    background: #F0B537;
+    width: 1200px;
+    margin: 0 auto;
+    height: auto;
 }
 

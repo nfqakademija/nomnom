@@ -1,0 +1,63 @@
+#profileBox{
+    background-color: #F0B537;
+    height: 200px;
+    margin: 0 auto;
+    width: 1200px;
+}
+
+#dataBox{
+    padding: 20px;
+    width: auto;
+
+}
+
+#profileButton{
+    margin: 0 20px;
+}
+
+#loginBox{
+    background: none repeat scroll 0 0 #F0B537;
+    margin: 0 auto;
+    width: 1200px;
+}
+
+#login{
+    padding: 20px;
+}
+
+#registerFormBox{
+    margin: 0 auto;
+    width: 1200px;
+    background: none repeat scroll 0 0 #F0B537;
+}
+#registerForm{
+
+    padding: 20px;
+}
+
+.profileButton{
+    background-color: #830C0C;
+    border-color: #420606;
+    padding: 6px;
+    border-radius: 10px;
+    color: white;
+}
+
+.profileButton a{
+    background-color: #F0B537;
+    border-color: #664c09;
+    padding: 6px;
+    border-radius: 10px;
+    color: black;
+    text-decoration: none;
+}
+
+.EditBox{
+    margin: 0 auto;
+    width: 1200px;
+    background: none repeat scroll 0 0 #F0B537;
+}
+
+.formBox{
+    padding: 20px;
+}

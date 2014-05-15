@@ -1,13 +1,19 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
-
+{% block stylesheets %}
+    {% stylesheets filter="compass"
+    "@NfqNomNomBundle/Resources/public/css/account.css" %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block content %}
-    <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST"
-          class="well fos_user_profile_edit">
-        {{ form_widget(form) }}
-        <div>
-            <input class="btn btn-info" type="submit" value="{{ 'profile.edit.submit'|trans }}"/>
-        </div>
-    </form>
+    <div class="EditBox">
+        <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="formBox">
+            {{ form_widget(form) }}
+            <div style="padding: 5px">
+                <input class="profileButton" type="submit" value="{{ 'profile.edit.submit'|trans }}"/>
+            </div>
+        </form>
+    </div>
 {% endblock %}

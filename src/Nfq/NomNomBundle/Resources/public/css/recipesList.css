@@ -3,7 +3,7 @@ body {
     height: 100%;
 }
 
-#recipeBox {
+#recipeBoxSmall {
     height: 325px;
     width: 250px;
     float: left;
@@ -12,7 +12,7 @@ body {
     border-radius: 5px;
 }
 
-#recipePhotoBox {
+#recipePhotoBoxSmall {
     height: 250px;
     width: 250px;
     background-size: auto 250px;
@@ -24,16 +24,19 @@ body {
 
 #main {
     width: 1000px;
-    height: auto;
+    height: 1200px;
     margin: 0 auto;
 
 }
 
+
 h2 {
-    font-size: 30px;
+    font-size: 45px;
     text-align: center;
     font-family: "Lucida Sans Unicode";
     font-style: italic;
+    margin: 0;
+    padding: 50px;
 }
 
 #textBox {
@@ -46,9 +49,25 @@ h2 {
     font-family: "Lucida Sans Unicode";
     color: black;
 }
-
+/*
 a {
     color: transparent;
     text-decoration: none;
+}*/
+
+#pagination{
+    text-align: center;
+    margin: 20px;
 }
 
+#pagination a{
+    color:black;
+    font-size: 16px;
+}
+
+#backgroundRecipeList {
+    background: #F0B537;
+    width: 1200px;
+    margin: 0 auto;
+    height: 1400px;
+}

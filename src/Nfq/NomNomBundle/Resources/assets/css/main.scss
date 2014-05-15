@@ -1,8 +1,3 @@
-body {
-
-  color: #666666;
-
-}
 
 .circle {
   background: #6edd62;
@@ -15,10 +10,6 @@ body {
 }
 
 //TODO a tag ar invisible unless yyou hover over them, this is a temporar fix
-a {
-  color: #505050;
-  font-weight: bold;
-}
 
 #createrecipe_preparationInstructions {
   width: 50%;
@@ -38,7 +29,7 @@ label {
 }
 //for notification button
 .new-notifications {
-  color: red;
+  color: #ffd157;
 }
 //new-sub-notifications for notifications links
 .ns-notifications{
@@ -49,7 +40,7 @@ label {
   float:right;
   width:200px;
   padding:40px;
-  background:#99c;
+  background: #ccbbbe;
   right: 0;
   top: 0;
   position:fixed;

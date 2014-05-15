@@ -1,24 +1,27 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
 {% block stylesheets %}
-    {{ parent() }}
-    {{ form_stylesheet(forma) }}
+    {% stylesheets filter="compass"
+    "@NfqNomNomBundle/Resources/public/css/event.css" %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
 {% endblock %}
+
+
 {% block javascripts %}
     {{ parent() }}
     {{ form_javascript(forma) }}
 {% endblock %}
 {% block content %}
     {{ error }}
-    <br>
-    <div class="myEvent">
-        {{ form_start(forma, {'attr': {'class': 'well span6' }}) }}
+    <div id="myEvent">
+        {{ form_start(forma) }}
         {{ form_errors(forma) }}
         {{ form_row(forma.eventName) }}
         {{ form_row(forma.eventPlanningDueDate) }}
         {{ form_row(forma.eventDate) }}
 
-        <div>
-            {{ form_widget(forma.create, {'attr': {'class': 'btn btn-primary' }}) }}
+        <div class="buttonBox">
+            {{ form_widget(forma.create) }}
         </div>
 
         {{ form_end(forma) }}

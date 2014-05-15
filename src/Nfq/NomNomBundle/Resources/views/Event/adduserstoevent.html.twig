@@ -1,6 +1,6 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
 {% block content %}
-    <script>
+    <div class="addNew">  <script>
         var object = "#adduserstoevent_user";
         $(document).ready(function () {
             addGenemuFunctionality(object);
@@ -8,9 +8,10 @@
     </script>
 
     {{ error }}
-    {{ form_start(forma, {'attr': {'class': 'well' }}) }}
+
+    {{ form_start(forma) }}
     {{ form_row(forma.user) }}
-    {{ form_row(forma.submit, {'attr': {'class': 'btn btn-primary' }}) }}
+    {{ form_row(forma.submit) }}
     {{ form_end(forma) }}
-    {#generated content displaying#}
+    {#generated content displaying#}</div>
 {% endblock %}

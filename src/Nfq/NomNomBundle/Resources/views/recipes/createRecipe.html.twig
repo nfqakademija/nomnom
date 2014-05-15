@@ -1,5 +1,11 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets '@NfqNomNomBundle/Resources/public/css/createRecipe.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
+    {% endstylesheets %}
+{% endblock %}
 {% block content %}
 
     <script>
@@ -15,19 +21,19 @@
             $collectionHolder.data('index', $collectionHolder.find(':input').length);
             addGenemuFunctionality($object);
             $('button , .add_product_link ').addClass("btn btn-primary");
-            $('#createrecipe_preparationTime').attr('placeholder','hh:mm');
+            $('#createrecipe_preparationTime').attr('placeholder', 'hh:mm');
 
             $($timePickingElementId).timepicker({ 'timeFormat': 'G:i',
                 'step': '1',
                 'minTime': '0:00'});
 
             $($numberOfServingsElementId)
-                    .attr('type',"number")
-                    .attr('min','1')
+                    .attr('type', "number")
+                    .attr('min', '1')
                     .timepicker({ 'timeFormat': 'G',
-                'step': '60',
-                'minTime': '1:00',
-                'maxTime': '20:00'});
+                        'step': '60',
+                        'minTime': '1:00',
+                        'maxTime': '20:00'});
 
             $addTagLink.on('click', function (e) {
                 // prevent the link from creating a "#" on the URL
@@ -38,10 +44,13 @@
             });
         });
     </script>
-    <br>
-    <div class="createdRecipe">
-        {{ form_start(forma, {'attr': {'class': 'well span6' }}) }}
-        {{ form_widget(forma) }}
-        {{ form_end(forma) }}
+
+    <div id="createdRecipeBox">
+        <div id="createdRecipe">
+            <br>
+            {{ form_start(forma, {'attr': {'class': 'well span6' }}) }}
+            {{ form_widget(forma) }}
+            {{ form_end(forma) }}
+        </div>
     </div>
 {% endblock %}

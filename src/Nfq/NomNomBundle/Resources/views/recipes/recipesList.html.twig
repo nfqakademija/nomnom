@@ -22,8 +22,8 @@
     <div id="main">
         {% for recipe in recipes %}
             <a href="{{ path('nfq_nom_nom_recipe', {'id': recipe.getId()}) }}">
-                <div id="recipeBox">
-                    <div id="recipePhotoBox"
+                <div id="recipeBoxSmall">
+                    <div id="recipePhotoBoxSmall"
                          style="background-image: url({{ vich_uploader_asset(recipe, 'image') }})">
                     </div>
                     <div id="textBox">

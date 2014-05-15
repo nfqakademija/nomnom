@@ -32,7 +32,7 @@ class RecipesController extends Controller
         }
 
         $products = $recipe->getMyRecipeProducts();
-        $logo1 = "bundles/nfqnomnom/images/recipes/clock.jpg";
+        $logo1 = "bundles/nfqnomnom/images/recipes/clock.png";
         $logo2 = "bundles/nfqnomnom/images/recipes/portion.png";
         $logo3 = "bundles/nfqnomnom/images/recipes/category.png";
 

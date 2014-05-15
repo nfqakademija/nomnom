@@ -1,7 +1,13 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
 {% set cls = '' %}
-
+{% block stylesheets %}
+    {% stylesheets filter="compass"
+    "@NfqNomNomBundle/Resources/public/css/event.css" %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
 {% block content %}
+    <div id="notificationsBox">
     <script>
         $(document).ready(function () {
             $('.new-notifications').removeClass('new-notifications');
@@ -44,5 +50,5 @@
                     {{ notificationClosestTimeInterval(notification)['measure'] }} ago</span>
             {% endif %}
         {% endfor %}
-    </div>
+    </div></div>
 {% endblock %}

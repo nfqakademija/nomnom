@@ -2,21 +2,31 @@
 
 
 {% trans_default_domain 'FOSUserBundle' %}
-
+{% block stylesheets %}
+    {% stylesheets filter="compass"
+    "@NfqNomNomBundle/Resources/public/css/account.css" %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
 {% block content %}
-    <form action="{{ path("fos_user_security_check") }}" method="post">
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+    <div id="loginBox">
 
-        <label for="username">{{ 'security.login.username'|trans }}</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required"/>
+        <div id="login">
+            <form action="{{ path("fos_user_security_check") }}" method="post">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
 
-        <label for="password">{{ 'security.login.password'|trans }}</label>
-        <input type="password" id="password" name="_password" required="required"/>
-        <br />
-        <label id="checkbox_label">{{ 'security.login.remember_me'|trans }}
-        <input style="block:inline" type="checkbox" id="remember_me" name="_remember_me" value="on"/>
-        </label>
-        <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}"/>
-    </form>
-    <a href="{{ path('Nfq_forgot_password') }}">Recover password</a>
+                <label for="username">{{ 'security.login.username'|trans }}</label>
+                <input type="text" id="username" name="_username" value="{{ last_username }}" required="required"/>
+
+                <label for="password">{{ 'security.login.password'|trans }}</label>
+                <input type="password" id="password" name="_password" required="required"/>
+                <br/>
+                <label id="checkbox_label">{{ 'security.login.remember_me'|trans }}
+                    <input style="block:inline" type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+                </label>
+                <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}"/>
+            </form>
+            <a href="{{ path('Nfq_forgot_password') }}">Recover password</a>
+        </div>
+    </div>
 {% endblock content %}
