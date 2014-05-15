@@ -1,33 +1,38 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
 {% block content %}
     <style>
+
         #right-area{
             float: right;
             height: 100%;
             padding:40px;
-            width: 350px;
+            min-width: 20%;
+            overflow:hidden;
             margin-top:42px;
             margin-right:50px;
+            margin-left:30%;
             border-radius:20px;
             background-color: #eeeeee;
             right: 0;
             top: 0;
-            position:fixed
+            position:absolute;
         }
 
         #left-area{
             float:left;
             height: 100%;
             padding: 40px;
-            width: 800px;
+            min-width: 55%;
+            overflow:hidden;
             margin-top:42px;
             margin-left:50px;
             border-radius:20px;
             background-color: #eeeeee;
-
+            margin-right:60%;
             top: 0;
-            position:fixed;
+            position:absolute;
         }
+
         #element_to_pop_up {
             background-color:#fff;
             border-radius:15px;
@@ -93,7 +98,26 @@
     {% endfor %}
     <hr>
     <a class="btn btn-info" href="{{ path('Nfq_nom_nom_add_recipe_to_event',
-    {'eventId': event.id}) }}">Add a recipe</a>
+    {'eventId': event.id}) }}">Add a recipe&nbsp;</a>
+        <!-- Button that triggers the popup -->
+        <a class="btn btn-info" id="my-button">Browse Recipes</a>
+        <br />
+        <!-- Element to pop up -->
+        <div id="element_to_pop_up">
+            <a class="b-close">x</a>
+            <h2>Browse our recipes:</h2>
+
+
+            {% embed 'NfqNomNomBundle:Default:test2.html.twig' %}
+
+
+
+            {% endembed %}
+
+        </div>
+        {% for recipe in recipes %}
+            <a href='{{ path('nfq_nom_nom_recipe', {'id': recipe.getId()}) }}'>{{ recipe.recipeName }}</a><br />
+        {% endfor %}
     </div>
 
 

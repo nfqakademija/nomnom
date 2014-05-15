@@ -45,15 +45,18 @@ class TestController extends Controller
         $form->handleRequest($request);
         $repository = $this->getDoctrine()->getRepository('NfqNomNomBundle:MyRecipe');
         $ret = NULL;
+        var_dump($form->getData()['servfrom']);
+        var_dump($form->getData()['servto']);
             if ($form->isSubmitted()) {
-                $ret = $repository->filterByCategory($form->getData()['side'],
+                $ret = $repository->filterByCategory(
+                    $form->getData()['side'],
                     $form->getData()['main'],
                     $form->getData()['deserts'],
                     $form->getData()['soups'],
                     $form->getData()['servfrom'],
-                    $form->getData()['servto'],
-                    $form->getData()['prepfrom'],
-                    $form->getData()['prepto']
+                    $form->getData()['servto']
+                    //$form->getData()['prepfrom'],
+                    //$form->getData()['prepto']
                 );
 
                 return $this->render ('NfqNomNomBundle:Default:test.html.twig', array('error' => '', 'forma' => $form->createView(), 'recipes' => $ret));

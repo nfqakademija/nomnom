@@ -63,7 +63,7 @@ class EventController extends Controller
             if (Utilities::hasUserPermissionToEvent($myEvent, $user, $em)) {
                 switch ($myEvent->getEventPhase()) {
                     case 0:
-                        return $this->processPhaseOne($eventId);
+                        return $this->processPhaseOne($eventId, $request);
                     case 1:
                         return $this->processPhaseTwo($eventId, $request);
                     case 2:
@@ -334,7 +334,7 @@ class EventController extends Controller
         return $this->redirect($this->generateUrl("Nfq_nom_nom_events", array('eventId' => $eventId)));
     }
 
-    public function processPhaseOne($eventId)
+    public function processPhaseOne($eventId, Request $request)
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -343,8 +343,24 @@ class EventController extends Controller
         $repUE = $em->getRepository('NfqNomNomBundle:MyUserEvent');
         $repER = $em->getRepository('NfqNomNomBundle:MyEventRecipe');
 
+        $form = $this->createForm('browserecipes');
 
+        $form->handleRequest($request);
+        $repository = $this->getDoctrine()->getRepository('NfqNomNomBundle:MyRecipe');
+        $ret = NULL;
 
+        if ($form->isSubmitted()) {
+            $ret = $repository->filterByCategory(
+                $form->getData()['side'],
+                $form->getData()['main'],
+                $form->getData()['deserts'],
+                $form->getData()['soups'],
+                $form->getData()['servfrom'],
+                $form->getData()['servto']
+            //$form->getData()['prepfrom'],
+            //$form->getData()['prepto']
+            );
+        }
         //find host(there should be only one) of the event
         /** @var MyUserEvent $host */
         $hostUser = $repUE->findbyEventHost($eventId)['0'];
@@ -373,7 +389,9 @@ class EventController extends Controller
                 'isHost' => $isHost,
                 'eventRecipes' => $eventRecipes,
                 'currentUserEvent' => $userEvent,
-                'readyPeople' => $readyPeople));
+                'readyPeople' => $readyPeople,
+                'recipes' => $ret,
+                'forma' => $form->createView()));
     }
 
     public function processPhaseTwo($eventId, Request $request, $error = '')

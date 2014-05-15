@@ -41,19 +41,23 @@ class MyRecipeRepository extends EntityRepository
 
 
 
-    public function filterByCategory($id1, $id2, $id3, $id4,$servfrom, $servto, $prepfrom, $prepto)
+    public function filterByCategory($id1, $id2, $id3, $id4, $servfrom, $servto)//, $prepfrom, $prepto)
     {
-        if ($id1){$id1 = 7;};
-        if ($id2){$id2 = 8;};
-        if ($id3){$id3 = 9;};
-        if ($id4){$id4 = 10;};
+        $id1 = $id1 ? 'Side dish' : ' ';
+        $id2 = $id2 ? 'Main dish' : ' ';
+        $id3 = $id3 ? 'Deserts' : ' ';
+        $id4 = $id4 ? 'Soups' : ' ';
+        //if ($id1){$id1 = 'Side dish';};
+        //if ($id2){$id2 = 'Main dish';};
+        //if ($id3){$id3 = 'Deserts';};
+        //if ($id4){$id4 = 'Soups';};
         $query = $this->getEntityManager()
             ->createQuery(
-                'SELECT p, c FROM NfqNomNomBundle:MyRecipe p
-                JOIN p.myRecipeCategory c
-                WHERE c.id = :id1 OR c.id = :id2 OR c.id = :id3 OR c.id = :id4
-                AND p.numberOfServings >= :servfrom AND p.numberOfServings <= :servto
-                AND p.preparationTime >= :prepfrom AND p.preparationTime <= :prepto
+                'SELECT p FROM NfqNomNomBundle:MyRecipe AS p
+                JOIN p.myRecipeCategory  AS c
+
+                WHERE p.numberOfServings >= :servfrom AND p.numberOfServings <= :servto
+                OR c.categoryName = :id1 OR c.categoryName = :id2 OR c.categoryName = :id3 OR c.categoryName = :id4
                 '
             )->setParameter('id1', $id1)
             ->setParameter('id2', $id2)
@@ -61,8 +65,8 @@ class MyRecipeRepository extends EntityRepository
             ->setParameter('id4', $id4)
             ->setParameter('servfrom', $servfrom)
             ->setParameter('servto', $servto)
-            ->setParameter('prepfrom', $prepfrom)
-            ->setParameter('prepto', $prepto)
+            //->setParameter('prepfrom', $prepfrom)
+            //->setParameter('prepto', $prepto)
         ;
 
         try {
