@@ -586,9 +586,9 @@ class EventController extends Controller
                 $r = $recipeProduct;
 
 
-
+                $fullQuantity = $r->getQuantity() * round($totalVotes/$recipe->getNumberOfServings());
                 $otherUsersProductQuantity = $repUP->getUsersProductQuantity($userEventsIds, $recipeProduct->getId());
-                $quantityLeft = $r->getQuantity() - $otherUsersProductQuantity;
+                $quantityLeft = $fullQuantity - $otherUsersProductQuantity;
                 $eventUsers = $em->getRepository('NfqNomNomBundle:MyUserEvent');
 
                 $userEvent = $repUE->find($userEventsIds[$i]);
@@ -635,6 +635,7 @@ class EventController extends Controller
                     'quantity' => $r->getQuantity(),
                     'quantityMeasure' => $r->getMyQuantityMeasure()->getMyQuantityMeasureName(),
                     'userEventId' => $userEvent->getId(),
+                    'fullQuantity' => $fullQuantity,
                     'recipeProductId' => $recipeProduct->getId(),
                     'bringers' => $bringers);
             }

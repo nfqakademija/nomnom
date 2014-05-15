@@ -57,12 +57,12 @@
                 <ul class="listGroup">
                     {% for product in recipe['products'] %}
                         <li class="listGroup2">
-                            {{ product['quantity'] ? product['quantity'] : '' }}
+                            {{ product['quantity'] ? product['fullQuantity'] : '' }}
                             {{ product['quantityMeasure'] ? product['quantityMeasure'] : '' }}
                             {{ product['productName'] }}
                             <span>bringing: </span>
                             {% for bringer in product['bringers'] %}
-                                <span>name: {{ bringer['name'] }} ({{ bringer['quantity'] }})</span>
+                                <span>name: {{ bringer['name'] }} ({{ bringer['quantity']}})</span>
                             {% endfor %}
                         </li>
                     {% endfor %}
