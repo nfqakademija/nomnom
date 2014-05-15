@@ -1,0 +1,18 @@
+{% block content %}
+    <script>
+        var genemuSelectorObject = "#addrecipetoevent_recipe";
+        $(document).ready(function () {
+            addGenemuFunctionality(genemuSelectorObject);
+        });
+    </script>
+
+
+    {{ error }}
+    <h2></h2>
+    <div class="createdRecipe">
+        {{ form_start(forma, {'attr': {'class': 'well span6' }}) }}
+        {{ form_widget(forma) }}
+        {{ form_end(forma) }}
+    </div>
+    {#generated content displaying#}
+{% endblock %}

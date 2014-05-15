@@ -1,0 +1,56 @@
+{% extends "NfqNomNomBundle:Default:index.html.twig" %}
+{% block content %}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+{% javascripts '@NfqNomNomBundle/Resources/public/js/*' %}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+<style>
+    #element_to_pop_up {
+        background-color:#fff;
+        border-radius:15px;
+        color:#000;
+        display:none;
+        padding:20px;
+        min-width:400px;
+        min-height: 180px;
+        margin-right: 440px;
+
+    }
+    .b-close {
+        border-radius: 7px;
+        font: bold 131% sans-serif;
+        padding: 0 6px 2px;
+        background-color: #2b91af;
+        color: #fff;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        position: absolute;
+        right: -7px;
+        top: -7px;
+    }
+    .b-close:hover {
+        background-color: #1e1e1e;
+    }
+
+</style>
+
+<!-- Button that triggers the popup -->
+<button id="my-button">POP IT UP</button>
+<!-- Element to pop up -->
+<div id="element_to_pop_up">
+    <a class="b-close">x</a>
+
+
+
+    {% embed 'NfqNomNomBundle:Default:test2.html.twig' %}
+
+
+
+    {% endembed %}
+
+</div>
+    {% for recipe in recipes %}
+        <a href='{{ path('nfq_nom_nom_recipe', {'id': recipe.getId()}) }}'>{{ recipe.recipeName }}</a><br />
+    {% endfor %}
+{% endblock content %}

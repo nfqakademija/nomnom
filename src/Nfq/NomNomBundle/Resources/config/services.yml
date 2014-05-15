@@ -41,3 +41,13 @@ services:
              - { name: twig.extension }
          arguments:
              doctrine: "@doctrine"
+
+     nfq_nom_nom.form.type.browserecipes:
+                    class: Nfq\NomNomBundle\Form\Type\BrowseRecipesType
+                    tags:
+                        - { name: form.type, alias: browserecipes }
+
+     nfq_nom_nom.form.type.addtobrowserecipes:
+                    class: Nfq\NomNomBundle\Form\Type\AddToBrowseRecipesType
+                    tags:
+                        - { name: form.type, alias: addtobrowserecipes }

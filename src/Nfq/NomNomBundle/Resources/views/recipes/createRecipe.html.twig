@@ -7,7 +7,10 @@
     {% endstylesheets %}
 {% endblock %}
 {% block content %}
-
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    {% javascripts '@NfqNomNomBundle/Resources/public/js/*' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
     <script>
         var $addTagLink = $('<a href="#" class="add_product_link">Add a product</a>');
         var $object = "#createrecipe_myRecipeCategory";
