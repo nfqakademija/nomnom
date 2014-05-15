@@ -1,73 +1,4 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
-{% block content %}
-    <style>
-
-        #right-area{
-            float: right;
-            height: 100%;
-            padding:40px;
-            min-width: 20%;
-            overflow:hidden;
-            margin-top:42px;
-            margin-right:50px;
-            margin-left:30%;
-            border-radius:20px;
-            background-color: #eeeeee;
-            right: 0;
-            top: 0;
-            position:absolute;
-        }
-
-        #left-area{
-            float:left;
-            height: 100%;
-            padding: 40px;
-            min-width: 55%;
-            overflow:hidden;
-            margin-top:42px;
-            margin-left:50px;
-            border-radius:20px;
-            background-color: #eeeeee;
-            margin-right:60%;
-            top: 0;
-            position:absolute;
-        }
-
-        #element_to_pop_up {
-            background-color:#fff;
-            border-radius:15px;
-            color:#000;
-            display:none;
-            padding:20px;
-            min-width:400px;
-            min-height: 180px;
-            margin-right: 440px;
-
-        }
-        .b-close {
-            border-radius: 7px;
-            font: bold 131% sans-serif;
-            padding: 0 6px 2px;
-            background-color: #2b91af;
-            color: #fff;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            position: absolute;
-            right: -7px;
-            top: -7px;
-        }
-        .b-close:hover {
-            background-color: #1e1e1e;
-        }
-
-
-
-    </style>
-    <div id="right-area">
-    {{ error }}
-    <div>Event Name:</div>
-    {{ event.eventName }}
 
     {% block stylesheets %}
         {{ parent() }}
@@ -77,6 +8,74 @@
     {% endblock %}
     {% block content %}
         {{ error }}
+
+        <style>
+
+            #right-area{
+                float: right;
+                height: 100%;
+                padding:40px;
+                min-width: 20%;
+                overflow:hidden;
+                margin-top:42px;
+                margin-right:50px;
+                margin-left:30%;
+                border-radius:20px;
+                background-color: #eeeeee;
+                right: 0;
+                top: 0;
+                position:absolute;
+            }
+
+            #left-area{
+                float:left;
+                height: 100%;
+                padding: 40px;
+                min-width: 55%;
+                overflow:hidden;
+                margin-top:42px;
+                margin-left:50px;
+                border-radius:20px;
+                background-color: #eeeeee;
+                margin-right:60%;
+                top: 0;
+                position:absolute;
+            }
+
+            #element_to_pop_up {
+                background-color:#fff;
+                border-radius:15px;
+                color:#000;
+                display:none;
+                padding:20px;
+                min-width:400px;
+                min-height: 180px;
+                margin-right: 440px;
+
+            }
+            .b-close {
+                border-radius: 7px;
+                font: bold 131% sans-serif;
+                padding: 0 6px 2px;
+                background-color: #2b91af;
+                color: #fff;
+                cursor: pointer;
+                text-align: center;
+                text-decoration: none;
+                position: absolute;
+                right: -7px;
+                top: -7px;
+            }
+            .b-close:hover {
+                background-color: #1e1e1e;
+            }
+
+
+
+        </style>
+
+        {{ error }}
+
         <div class="eventBox">
         <h2>
             {{ event.eventName }}

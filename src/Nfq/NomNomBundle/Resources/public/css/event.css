@@ -1,11 +1,11 @@
-#myEvent{
+#myEvent {
     background: none repeat scroll 0 0 #F0B537;
     margin: 0 auto;
     width: 1200px;
     padding: 20px;
 }
 
-.buttonBox{
+.buttonBox {
     background: #830C0C;
     padding: 6px;
 
@@ -14,92 +14,97 @@
     width: 155px;
 }
 
-.eventBox{
+.eventBox {
     width: 1200px;
     margin: 0 auto;
     background: none repeat scroll 0 0 #F0B537;
 }
 
-.createdDate{
+.createdDate {
     float: left;
     width: 560px;
     height: 40px;
     text-align: center;
 
 }
-.eventDate{
+
+.eventDate {
     width: 560px;
     height: 40px;
     float: right;
     text-align: center;
 
 }
-.DateBox{
-    padding:10px;
+
+.DateBox {
+    padding: 10px;
 
 }
-.personsBox{
+
+.personsBox {
     width: 1200px;
     padding: 40px;
     background: none repeat scroll 0 0 #F0B537;
 
 }
-.recipesBox{
+
+.recipesBox {
     width: 1200px;
     padding: 0 40px;
     background: none repeat scroll 0 0 #F0B537;
 }
-.infoBox{
+
+.infoBox {
     text-align: center;
     font-size: 16px;
     padding: 20px;
     background: none repeat scroll 0 0 #F0B537;
 }
-.readyBox{
+
+.readyBox {
     width: 1200px;
 }
 
-#actionBox{
-    width:1200px;
-    height:auto;
+#actionBox {
+    width: 1200px;
+    height: auto;
     background: none repeat scroll 0 0 #F0B537;
 }
 
-
-.endPhase{
-    width:1200px;
-    height:auto;
-    background: none repeat scroll 0 0 #F0B537;
-    padding: 20px;
-}
-
-.addNew{
-    width:1200px;
-    height:auto;
+.endPhase {
+    width: 1200px;
+    height: auto;
     background: none repeat scroll 0 0 #F0B537;
     padding: 20px;
-    margin:0 auto;
 }
 
-.listGroup{
-     position: relative;
-     display: block;
-     padding: 10px 15px;
-     margin-bottom: -1px;
-     border: 1px solid #ddd;
- }
+.addNew {
+    width: 1200px;
+    height: auto;
+    background: none repeat scroll 0 0 #F0B537;
+    padding: 20px;
+    margin: 0 auto;
+}
 
-.listGroup2{
+.listGroup {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    border: 1px solid #ddd;
+}
+
+.listGroup2 {
     position: relative;
     display: block;
     padding: 10px 15px;
     margin-bottom: -1px;
 }
 
-#notificationsBox{
-    width:1200px;
-    height:auto;
+#notificationsBox {
+    width: 1200px;
+    height: auto;
     background: none repeat scroll 0 0 #F0B537;
     padding: 20px;
-    margin:0 auto;
+    margin: 0 auto;
 }

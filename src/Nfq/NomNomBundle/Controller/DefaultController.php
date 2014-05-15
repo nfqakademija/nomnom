@@ -38,5 +38,6 @@ class DefaultController extends Controller
             return $this->render('NfqNomNomBundle:Default:index.html.twig',
                 array('error' => 'log in first'));
         }
+
     }
 }

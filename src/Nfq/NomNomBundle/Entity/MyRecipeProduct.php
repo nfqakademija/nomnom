@@ -37,14 +37,14 @@ class MyRecipeProduct
 
     /**
      * @var float
-     * @Assert\NotBlank
+     *
      *
      * @ORM\Column(name="quantity", type="float")
      */
     private $quantity;
 
     /**
-     * @Assert\Valid
+     *
      * @ORM\ManyToOne(targetEntity="MyQuantityMeasure", inversedBy="myRecipeProducts")
      * @ORM\JoinColumn(name="my_quantity_measure_id", referencedColumnName="id")
      */
