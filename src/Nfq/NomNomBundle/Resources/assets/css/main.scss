@@ -146,14 +146,14 @@ label {
   margin: 0 auto;
 
 }
-#myEvent {
-  background:#F0B537;
+#myEvent{
+  background: none repeat scroll 0 0 #F0B537;
   margin: 0 auto;
   width: 1200px;
   padding: 20px;
 }
 
-.buttonBox {
+.buttonBox{
   background: #830C0C;
   padding: 6px;
 
@@ -162,79 +162,74 @@ label {
   width: 155px;
 }
 
-.eventBox {
+.eventBox{
   width: 1200px;
   margin: 0 auto;
-  background:#F0B537;
+  background: none repeat scroll 0 0 #F0B537;
 }
 
-.createdDate {
+.createdDate{
   float: left;
   width: 560px;
   height: 40px;
   text-align: center;
 
 }
-
-.eventDate {
+.eventDate{
   width: 560px;
   height: 40px;
   float: right;
   text-align: center;
 
 }
-
-.DateBox {
-  padding: 10px;
+.DateBox{
+  padding:10px;
 
 }
-
-.personsBox {
+.personsBox{
   width: 1200px;
   padding: 40px;
-  background:#F0B537;
+  background: none repeat scroll 0 0 #F0B537;
 
 }
-
-.recipesBox {
+.recipesBox{
   width: 1200px;
   padding: 0 40px;
-  background:#F0B537;
+  background: none repeat scroll 0 0 #F0B537;
 }
-
-.infoBox {
+.infoBox{
   text-align: center;
   font-size: 16px;
   padding: 20px;
-  background:#F0B537;
+  background: none repeat scroll 0 0 #F0B537;
 }
-
-.readyBox {
+.readyBox{
   width: 1200px;
 }
 
-#actionBox {
-  width: 1200px;
-  height: auto;
-  background:#F0B537;
+#actionBox{
+  width:1200px;
+  height:auto;
+  background: none repeat scroll 0 0 #F0B537;
 }
 
-.endPhase {
-  width: 1200px;
-  height: auto;
-  background:#F0B537;
+
+.endPhase{
+  width:1200px;
+  height:auto;
+  background: none repeat scroll 0 0 #F0B537;
   padding: 20px;
 }
 
-.addNew {
-  width: 1200px;
-  height: auto;
-  background:#F0B537;
+.addNew{
+  width:1200px;
+  height:auto;
+  background: none repeat scroll 0 0 #F0B537;
   padding: 20px;
-  margin: 0 auto;
+  margin:0 auto;
 }
 
-.listGroup {
+.listGroup{
   position: relative;
   display: block;
   padding: 10px 15px;
@@ -242,20 +237,21 @@ label {
   border: 1px solid #ddd;
 }
 
-.listGroup2 {
+.listGroup2{
   position: relative;
   display: block;
   padding: 10px 15px;
   margin-bottom: -1px;
 }
 
-#notificationsBox {
-  width: 1200px;
-  height: auto;
-  background:#F0B537;
+#notificationsBox{
+  width:1200px;
+  height:auto;
+  background: none repeat scroll 0 0 #F0B537;
   padding: 20px;
-  margin: 0 auto;
+  margin:0 auto;
 }
+
 #eventManagerBox{
   margin: 0 auto;
   width: 1200px;
@@ -384,9 +380,11 @@ li.ui-timepicker-selected .ui-timepicker-duration,
 }
 
 body{
-
+  width: 100%;
+  height: 100%;
   margin: 20px;
-  background-image: url('background.png');
+  background: url("../img/background.png");
+
 }
 
 #secondBody{
@@ -400,7 +398,7 @@ body{
 #header{
   width: 1200px;
   margin: 0 auto;
-  background: url('2c22.jpg');
+  background-image: url('../img/2c22.jpg');
   border: 1px solid #5A1F1F;
   height: 42px;
   background-repeat: no-repeat;
@@ -426,8 +424,10 @@ body{
   border:none;
 }
 
+
+
 #logo{
-  background: url("nomnom.png");
+  background: url("../img/nomnom.png");
   background-position: 0 -12px;
   margin: 0 auto;
   background-repeat: no-repeat;
@@ -594,10 +594,7 @@ h4 {
   vertical-align: middle;
 }
 
-body {
-  width: 100%;
-  height: 100%;
-}
+
 
 #imgInfo {
   float: left;
@@ -613,10 +610,7 @@ body {
   height: auto;
 }
 
-body {
-  width: 100%;
-  height: 100%;
-}
+
 
 #recipeBoxSmall {
   height: 325px;
@@ -784,7 +778,7 @@ Version: 3.4.6 Timestamp: Sat Mar 22 22:30:15 EDT 2014
   text-decoration: none;
 
   border: 0;
-  background: url('select2.png') right top no-repeat;
+  background: url('../img/select2.png') right top no-repeat;
   cursor: pointer;
   outline: 0;
 }
@@ -888,7 +882,7 @@ Version: 3.4.6 Timestamp: Sat Mar 22 22:30:15 EDT 2014
   display: block;
   width: 100%;
   height: 100%;
-  background: url('select2.png') no-repeat 0 1px;
+  background: url('../img/select2.png') no-repeat 0 1px;
 }
 
 .select2-search {
@@ -922,11 +916,11 @@ Version: 3.4.6 Timestamp: Sat Mar 22 22:30:15 EDT 2014
   -webkit-box-shadow: none;
   box-shadow: none;
 
-  background: #fff url('select2.png') no-repeat 100% -22px;
-  background: url('select2.png') no-repeat 100% -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #fff), color-stop(0.99, #eee));
-  background: url('select2.png') no-repeat 100% -22px, -webkit-linear-gradient(center bottom, #fff 85%, #eee 99%);
-  background: url('select2.png') no-repeat 100% -22px, -moz-linear-gradient(center bottom, #fff 85%, #eee 99%);
-  background: url('select2.png') no-repeat 100% -22px, linear-gradient(to bottom, #fff 85%, #eee 99%) 0 0;
+  background: #fff url('../img/select2.png') no-repeat 100% -22px;
+  background: url('../img/select2.png') no-repeat 100% -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #fff), color-stop(0.99, #eee));
+  background: url('../img/select2.png') no-repeat 100% -22px, -webkit-linear-gradient(center bottom, #fff 85%, #eee 99%);
+  background: url('../img/select2.png') no-repeat 100% -22px, -moz-linear-gradient(center bottom, #fff 85%, #eee 99%);
+  background: url('../img/select2.png') no-repeat 100% -22px, linear-gradient(to bottom, #fff 85%, #eee 99%) 0 0;
 }
 
 .select2-drop.select2-drop-above .select2-search input {
@@ -934,11 +928,11 @@ Version: 3.4.6 Timestamp: Sat Mar 22 22:30:15 EDT 2014
 }
 
 .select2-search input.select2-active {
-  background: #fff url('select2-spinner.gif') no-repeat 100%;
-  background: url('select2-spinner.gif') no-repeat 100%, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #fff), color-stop(0.99, #eee));
-  background: url('select2-spinner.gif') no-repeat 100%, -webkit-linear-gradient(center bottom, #fff 85%, #eee 99%);
-  background: url('select2-spinner.gif') no-repeat 100%, -moz-linear-gradient(center bottom, #fff 85%, #eee 99%);
-  background: url('select2-spinner.gif') no-repeat 100%, linear-gradient(to bottom, #fff 85%, #eee 99%) 0 0;
+  background: #fff url('../img/select2-spinner.gif') no-repeat 100%;
+  background: url('../img/select2-spinner.gif') no-repeat 100%, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #fff), color-stop(0.99, #eee));
+  background: url('../img/select2-spinner.gif') no-repeat 100%, -webkit-linear-gradient(center bottom, #fff 85%, #eee 99%);
+  background: url('../img/select2-spinner.gif') no-repeat 100%, -moz-linear-gradient(center bottom, #fff 85%, #eee 99%);
+  background: url('../img/select2-spinner.gif') no-repeat 100%, linear-gradient(to bottom, #fff 85%, #eee 99%) 0 0;
 }
 
 .select2-container-active .select2-choice,
@@ -1115,7 +1109,7 @@ disabled look for disabled choices in the results dropdown
 }
 
 .select2-more-results.select2-active {
-  background: #f4f4f4 url('select2-spinner.gif') no-repeat 100%;
+  background: #f4f4f4 url('../img/select2-spinner.gif') no-repeat 100%;
 }
 
 .select2-more-results {
@@ -1208,7 +1202,7 @@ html[dir="rtl"] .select2-container-multi .select2-choices li {
 }
 
 .select2-container-multi .select2-choices .select2-search-field input.select2-active {
-  background: #fff url('select2-spinner.gif') no-repeat 100% !important;
+  background: #fff url('../img/select2-spinner.gif') no-repeat 100% !important;
 }
 
 .select2-default {
@@ -1269,7 +1263,7 @@ html[dir="rtl"] .select2-container-multi .select2-choices .select2-search-choice
 
   font-size: 1px;
   outline: none;
-  background: url('select2.png') right top no-repeat;
+  background: url('../img/select2.png') right top no-repeat;
 }
 
 html[dir="rtl"] .select2-search-choice-close {
@@ -1350,7 +1344,7 @@ html[dir="rtl"] .select2-search-choice-close {
   .select2-search-choice-close,
   .select2-container .select2-choice abbr,
   .select2-container .select2-choice .select2-arrow b {
-    background-image: url('select2x2.png') !important;
+    background-image: url('../img/select2x2.png') !important;
     background-repeat: no-repeat !important;
     background-size: 60px 40px !important;
   }
