@@ -88,7 +88,7 @@
                                 <span>  ({{ bringer['quantity'] }} {{ product['quantityMeasure'] }})</span>
                             {% endif %}
                         </p>
-                        {% endfor %}
+                            {% endfor %}
                         {{ form_start(product['forma']) }}
                         {{ form_widget(product['forma']) }}
                         {{ form_rest(product['forma']) }}
@@ -97,8 +97,9 @@
                 {% endfor %}
 
                 <hr>
-            </div>
+            </ul>
         </div>
+        {% endfor %}
     <div class="endPhase">
         {% if isHost %}
             <a class="buttonBox" href="{{ path('Nfq_nom_nom_regress_event',
