@@ -49,8 +49,9 @@
                                     {{ product['quantityMeasure'] ? product['quantityMeasure'] : '' }}
                                     {{ product['productName'] }}
                                     <p>
-                                        <span> BRINGING: </span>
-                                        {% for bringer in product['bringers'] %}
+                            {% endfor %}
+
+                {% endfor %}
 
     <hr>
     <div> people invited:</div>
@@ -113,7 +114,7 @@
         {% endif %}
         <div class="circle" title="people ready to progress"> {{ readyPeople['ready'] }}/{{ readyPeople['all'] }}</div>
         {#generated content displaying#}
-    </div></div>
+
 
     <hr>
     {% if isHost %}
