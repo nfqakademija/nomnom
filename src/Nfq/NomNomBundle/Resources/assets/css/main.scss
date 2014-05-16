@@ -63,3 +63,1300 @@ label {
   top: -1px;
   *overflow: hidden;
 }
+#profileBox{
+  background-color: #F0B537;
+  height: 200px;
+  margin: 0 auto;
+  width: 1200px;
+}
+
+#dataBox{
+  padding: 20px;
+  width: auto;
+
+}
+
+#profileButton{
+  margin: 0 20px;
+}
+
+#loginBox{
+  background: none repeat scroll 0 0 #F0B537;
+  margin: 0 auto;
+  width: 1200px;
+}
+
+#login{
+  padding: 20px;
+}
+
+#registerFormBox{
+  margin: 0 auto;
+  width: 1200px;
+  background: none repeat scroll 0 0 #F0B537;
+}
+#registerForm{
+
+  padding: 20px;
+}
+
+.profileButton{
+  background-color: #830C0C;
+  border-color: #420606;
+  padding: 6px;
+  border-radius: 10px;
+  color: white;
+}
+
+.profileButton a{
+  background-color: #F0B537;
+  border-color: #664c09;
+  padding: 6px;
+  border-radius: 10px;
+  color: black;
+  text-decoration: none;
+}
+
+.EditBox{
+  margin: 0 auto;
+  width: 1200px;
+  background: none repeat scroll 0 0 #F0B537;
+}
+
+.formBox{
+  padding: 20px;
+}
+
+#createdRecipeBox{
+
+  margin: 0 auto;
+  width: 1200px;
+  background: #fdf59a;
+}
+
+#createdRecipe{
+
+  margin: 0 auto;
+  padding: 2px;
+  width: 500px;
+}
+
+
+#createdRecipe div,label,input{
+  margin: 0 auto;
+
+}
+#myEvent {
+  background:#F0B537;
+  margin: 0 auto;
+  width: 1200px;
+  padding: 20px;
+}
+
+.buttonBox {
+  background: #830C0C;
+  padding: 6px;
+
+  border-radius: 10px;
+  color: rgb(255, 234, 208);
+  width: 155px;
+}
+
+.eventBox {
+  width: 1200px;
+  margin: 0 auto;
+  background:#F0B537;
+}
+
+.createdDate {
+  float: left;
+  width: 560px;
+  height: 40px;
+  text-align: center;
+
+}
+
+.eventDate {
+  width: 560px;
+  height: 40px;
+  float: right;
+  text-align: center;
+
+}
+
+.DateBox {
+  padding: 10px;
+
+}
+
+.personsBox {
+  width: 1200px;
+  padding: 40px;
+  background:#F0B537;
+
+}
+
+.recipesBox {
+  width: 1200px;
+  padding: 0 40px;
+  background:#F0B537;
+}
+
+.infoBox {
+  text-align: center;
+  font-size: 16px;
+  padding: 20px;
+  background:#F0B537;
+}
+
+.readyBox {
+  width: 1200px;
+}
+
+#actionBox {
+  width: 1200px;
+  height: auto;
+  background:#F0B537;
+}
+
+.endPhase {
+  width: 1200px;
+  height: auto;
+  background:#F0B537;
+  padding: 20px;
+}
+
+.addNew {
+  width: 1200px;
+  height: auto;
+  background:#F0B537;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.listGroup {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  border: 1px solid #ddd;
+}
+
+.listGroup2 {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+}
+
+#notificationsBox {
+  width: 1200px;
+  height: auto;
+  background:#F0B537;
+  padding: 20px;
+  margin: 0 auto;
+}
+#eventManagerBox{
+  margin: 0 auto;
+  width: 1200px;
+  background: none repeat scroll 0 0 #F0B537;
+  height: 700px;
+  text-align: center;
+}
+
+.eventButton{
+
+  width: 200px;
+  margin: 0 auto;
+}
+
+.eventButton a{
+  background-color: #830C0C;
+  border-color: #420606;
+  padding: 12px;
+  border-radius: 10px;
+  color: white;
+  text-decoration: none;
+  width: 200px;
+  margin: 0 auto;
+}
+
+#activeEvent{
+  width: 600px;
+  height: 400px;
+  float: left;
+
+}
+
+#activeEvent a{
+  color: #6e2b00;
+  text-decoration: solid ;
+
+}
+
+.activeEventBox{
+  border: 1px solid;
+  border-radius: 10px;
+  margin: 2px;
+  padding: 2px;
+  text-align: center;
+}
+
+#endedEvent{
+  width: 600px;
+  height: 400px;
+  float:right;
+}
+
+#endedEvent a{
+  color:#6e2b00;
+  text-decoration: solid ;
+}
+.ui-timepicker-wrapper {
+  overflow-y: auto;
+  height: 150px;
+  width: 6.5em;
+  background: #fff;
+  border: 1px solid #ddd;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  outline: none;
+  z-index: 10001;
+  margin: 0;
+}
+
+.ui-timepicker-wrapper.ui-timepicker-with-duration {
+  width: 11em;
+}
+
+.ui-timepicker-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ui-timepicker-duration {
+  margin-left: 5px;
+  color: #888;
+}
+
+.ui-timepicker-list:hover .ui-timepicker-duration {
+  color: #888;
+}
+
+.ui-timepicker-list li {
+  padding: 3px 0 3px 5px;
+  cursor: pointer;
+  white-space: nowrap;
+  color: #000;
+  list-style: none;
+  margin: 0;
+}
+
+.ui-timepicker-list:hover .ui-timepicker-selected {
+  background: #fff;
+  color: #000;
+}
+
+li.ui-timepicker-selected,
+.ui-timepicker-list li:hover,
+.ui-timepicker-list .ui-timepicker-selected:hover {
+  background: #1980EC;
+  color: #fff;
+}
+
+li.ui-timepicker-selected .ui-timepicker-duration,
+.ui-timepicker-list li:hover .ui-timepicker-duration {
+  color: #ccc;
+}
+
+.ui-timepicker-list li.ui-timepicker-disabled,
+.ui-timepicker-list li.ui-timepicker-disabled:hover,
+.ui-timepicker-list li.ui-timepicker-selected.ui-timepicker-disabled {
+  color: #888;
+  cursor: default;
+}
+
+.ui-timepicker-list li.ui-timepicker-disabled:hover,
+.ui-timepicker-list li.ui-timepicker-selected.ui-timepicker-disabled {
+  background: #f2f2f2;
+}
+
+body{
+
+  margin: 20px;
+  background-image: url('background.png');
+}
+
+#secondBody{
+  height: 700px;
+  width: 1000px;
+  margin: 0 auto;
+  background: #F0B537;
+  opacity: 0.5;
+}
+
+#header{
+  width: 1200px;
+  margin: 0 auto;
+  background: url('2c22.jpg');
+  border: 1px solid #5A1F1F;
+  height: 42px;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+#header li{
+  width: 150px;
+  text-align: center;
+  color:  #FDE8B2;
+}
+
+#header a{
+  color: #FDE8B2;
+  font-weight: bold;
+}
+
+#header a:hover{
+  color: #9f0905;
+  font-weight: bold;
+  background: #F0B537;
+  border:none;
+}
+
+#logo{
+  background: url("nomnom.png");
+  background-position: 0 -12px;
+  margin: 0 auto;
+  background-repeat: no-repeat;
+  height: 155px;
+  width: 690px;
+}
+
+#logoBox{
+  height: 155px;
+  margin: 0 auto;
+  width: 1200px;
+  background: rgb(255, 234, 208);
+  opacity: 0.87;
+}
+
+#loginAs{
+  margin: 10px auto;
+  width: 150px;
+  height: 20px;
+  text-align: center;
+}
+
+#buttons{
+  margin:0 auto;
+}
+
+#quoteBody{
+
+  background-color: #F0B537;
+  height: 200px;
+  margin: 0 auto;
+  width: 1200px;
+}
+
+#quote{
+  font-size: 17px;
+  font-style: italic;
+  padding: 90px;
+  text-align: center;
+}
+#firstBox {
+  height: 400px;
+  margin: 0 auto;
+  width: 1000px;
+}
+
+#secondBox {
+  height: auto;
+  margin: 0 auto;
+  width: 1000px;
+  padding: 0px 0 50px;
+}
+
+#recipePhoto {
+  height: 300px;
+  border-radius: 10px;
+  width: 400px;
+  float: left;
+}
+
+#recipePhotoBox {
+  border-radius: 10px;
+  height: 300px;
+  width: 400px;
+  float: left;
+  box-shadow: 0 0 4px 3px #8F5618;
+
+}
+
+#recipeIngredients {
+  border-radius: 10px;
+  float: left;
+  font-family: "Lucida Sans Unicode";
+  font-size: 17px;
+  font-style: italic;
+  height: auto;
+  margin: 0 auto;
+  width: 500px;
+  padding: 10px;
+  -moz-column-width: 250px;
+  -webkit-column-width: 250px;
+}
+
+#recipeIngredients ul {
+  list-style: none;
+  text-align: left;
+  height: 380px;
+}
+
+#recipeIngredients li {
+  list-style: none;
+  text-align: left;
+  width: 200px;
+}
+
+#recipePortion {
+
+  border-radius: 10px;
+  float: right;
+  height: 75px;
+  margin: 0 auto;
+  width: 396px;
+}
+
+#recipeInstructions {
+  border-radius: 10px;
+  box-shadow: 0 0 4px 3px #8F5618;
+  background: rgb(214, 130, 23);
+  font-family: "Lucida Sans Unicode";
+  font-size: 18px;
+  font-style: italic;
+  height: auto;
+  padding: 50px;
+  width: 900px;
+  margin: 0 auto;
+}
+
+h2 {
+  text-align: center;
+  font-family: "Lucida Sans Unicode";
+  font-style: italic;
+  font-size: 30px;
+
+}
+
+.info {
+  float: left;
+  height: 62px;
+  margin: 15px 0;
+  text-align: left;
+  vertical-align: middle;
+  width: 70px;
+  font-size: 18px;
+  font-family: "Lucida Sans Unicode";
+  font-style: italic;
+}
+
+#logo1 {
+  float: left;
+  height: 40px;
+  width: 40px;
+  margin: 10px;
+}
+
+#logo2 {
+  background-size: 100% auto;
+  float: left;
+  height: 60px;
+  margin: 0;
+  width: 60px;
+}
+
+#logo3 {
+  float: left;
+  height: 40px;
+  margin: 10px 10px 10px 0;
+  width: 40px;
+}
+
+h4 {
+  height: 20px;
+  margin: 20px 0 0 60px;
+  width: 60px;
+  vertical-align: middle;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+}
+
+#imgInfo {
+  float: left;
+  height: auto;
+  margin: 0 auto;
+  width: 400px;
+}
+
+#backgroundRecipe{
+  background: #F0B537;
+  width: 1200px;
+  margin: 0 auto;
+  height: auto;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+}
+
+#recipeBoxSmall {
+  height: 325px;
+  width: 250px;
+  float: left;
+  margin: 40px;
+  box-shadow: 3px -3px 17px -3px black;
+  border-radius: 5px;
+}
+
+#recipePhotoBoxSmall {
+  height: 250px;
+  width: 250px;
+  background-size: auto 250px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 5px 5px 0 0;
+  float: none;
+}
+
+#main {
+  width: 1000px;
+  height: 1200px;
+  margin: 0 auto;
+
+}
+
+
+h2 {
+  font-size: 45px;
+  text-align: center;
+  font-family: "Lucida Sans Unicode";
+  font-style: italic;
+  margin: 0;
+  padding: 50px;
+}
+
+#textBox {
+  height: 55px;
+  margin: 10px;
+  text-align: center;
+  width: 230px;
+  font-size: 20px;
+  font-style: italic;
+  font-family: "Lucida Sans Unicode";
+  color: black;
+}
+/*
+a {
+    color: transparent;
+    text-decoration: none;
+}*/
+
+#pagination{
+  text-align: center;
+  margin: 20px;
+}
+
+#pagination a{
+  color:black;
+  font-size: 16px;
+}
+
+#backgroundRecipeList {
+  background: #F0B537;
+  width: 1200px;
+  margin: 0 auto;
+  height: 1400px;
+}
+/*
+Version: 3.4.6 Timestamp: Sat Mar 22 22:30:15 EDT 2014
+*/
+.select2-container {
+  margin: 0;
+  position: relative;
+  display: inline-block;
+  /* inline-block for ie7 */
+  zoom: 1;
+  *display: inline;
+  vertical-align: middle;
+}
+
+.select2-container,
+.select2-drop,
+.select2-search,
+.select2-search input {
+  /*
+    Force border-box so that % widths fit the parent
+    container without overlap because of margin/padding.
+    More Info : http://www.quirksmode.org/css/box.html
+  */
+  -webkit-box-sizing: border-box; /* webkit */
+  -moz-box-sizing: border-box; /* firefox */
+  box-sizing: border-box; /* css3 */
+}
+
+.select2-container .select2-choice {
+  display: block;
+  height: 26px;
+  padding: 0 0 0 8px;
+  overflow: hidden;
+  position: relative;
+
+  border: 1px solid #aaa;
+  white-space: nowrap;
+  line-height: 26px;
+  color: #444;
+  text-decoration: none;
+
+  border-radius: 4px;
+
+  background-clip: padding-box;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  background-color: #fff;
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eee), color-stop(0.5, #fff));
+  background-image: -webkit-linear-gradient(center bottom, #eee 0%, #fff 50%);
+  background-image: -moz-linear-gradient(center bottom, #eee 0%, #fff 50%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee', GradientType=0);
+  background-image: linear-gradient(to top, #eee 0%, #fff 50%);
+}
+
+.select2-container.select2-drop-above .select2-choice {
+  border-bottom-color: #aaa;
+
+  border-radius: 0 0 4px 4px;
+
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eee), color-stop(0.9, #fff));
+  background-image: -webkit-linear-gradient(center bottom, #eee 0%, #fff 90%);
+  background-image: -moz-linear-gradient(center bottom, #eee 0%, #fff 90%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee', GradientType=0);
+  background-image: linear-gradient(to bottom, #eee 0%, #fff 90%);
+}
+
+.select2-container.select2-allowclear .select2-choice .select2-chosen {
+  margin-right: 42px;
+}
+
+.select2-container .select2-choice > .select2-chosen {
+  margin-right: 26px;
+  display: block;
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+  float: none;
+  width: auto;
+}
+
+.select2-container .select2-choice abbr {
+  display: none;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  right: 24px;
+  top: 8px;
+
+  font-size: 1px;
+  text-decoration: none;
+
+  border: 0;
+  background: url('select2.png') right top no-repeat;
+  cursor: pointer;
+  outline: 0;
+}
+
+.select2-container.select2-allowclear .select2-choice abbr {
+  display: inline-block;
+}
+
+.select2-container .select2-choice abbr:hover {
+  background-position: right -11px;
+  cursor: pointer;
+}
+
+.select2-drop-mask {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  min-height: 100%;
+  min-width: 100%;
+  height: auto;
+  width: auto;
+  opacity: 0;
+  z-index: 9998;
+  /* styles required for IE to work */
+  background-color: #fff;
+  filter: alpha(opacity=0);
+}
+
+.select2-drop {
+  width: 100%;
+  margin-top: -1px;
+  position: absolute;
+  z-index: 9999;
+  top: 100%;
+
+  background: #fff;
+  color: #000;
+  border: 1px solid #aaa;
+  border-top: 0;
+
+  border-radius: 0 0 4px 4px;
+
+  -webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, .15);
+  box-shadow: 0 4px 5px rgba(0, 0, 0, .15);
+}
+
+.select2-drop.select2-drop-above {
+  margin-top: 1px;
+  border-top: 1px solid #aaa;
+  border-bottom: 0;
+
+  border-radius: 4px 4px 0 0;
+
+  -webkit-box-shadow: 0 -4px 5px rgba(0, 0, 0, .15);
+  box-shadow: 0 -4px 5px rgba(0, 0, 0, .15);
+}
+
+.select2-drop-active {
+  border: 1px solid #5897fb;
+  border-top: none;
+}
+
+.select2-drop.select2-drop-above.select2-drop-active {
+  border-top: 1px solid #5897fb;
+}
+
+.select2-drop-auto-width {
+  border-top: 1px solid #aaa;
+  width: auto;
+}
+
+.select2-drop-auto-width .select2-search {
+  padding-top: 4px;
+}
+
+.select2-container .select2-choice .select2-arrow {
+  display: inline-block;
+  width: 18px;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  border-left: 1px solid #aaa;
+  border-radius: 0 4px 4px 0;
+
+  background-clip: padding-box;
+
+  background: #ccc;
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #ccc), color-stop(0.6, #eee));
+  background-image: -webkit-linear-gradient(center bottom, #ccc 0%, #eee 60%);
+  background-image: -moz-linear-gradient(center bottom, #ccc 0%, #eee 60%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#cccccc', GradientType=0);
+  background-image: linear-gradient(to top, #ccc 0%, #eee 60%);
+}
+
+.select2-container .select2-choice .select2-arrow b {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: url('select2.png') no-repeat 0 1px;
+}
+
+.select2-search {
+  display: inline-block;
+  width: 100%;
+  min-height: 26px;
+  margin: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+
+  position: relative;
+  z-index: 10000;
+
+  white-space: nowrap;
+}
+
+.select2-search input {
+  width: 100%;
+  height: auto !important;
+  min-height: 26px;
+  padding: 4px 20px 4px 5px;
+  margin: 0;
+
+  outline: 0;
+  font-family: sans-serif;
+  font-size: 1em;
+
+  border: 1px solid #aaa;
+  border-radius: 0;
+
+  -webkit-box-shadow: none;
+  box-shadow: none;
+
+  background: #fff url('select2.png') no-repeat 100% -22px;
+  background: url('select2.png') no-repeat 100% -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #fff), color-stop(0.99, #eee));
+  background: url('select2.png') no-repeat 100% -22px, -webkit-linear-gradient(center bottom, #fff 85%, #eee 99%);
+  background: url('select2.png') no-repeat 100% -22px, -moz-linear-gradient(center bottom, #fff 85%, #eee 99%);
+  background: url('select2.png') no-repeat 100% -22px, linear-gradient(to bottom, #fff 85%, #eee 99%) 0 0;
+}
+
+.select2-drop.select2-drop-above .select2-search input {
+  margin-top: 4px;
+}
+
+.select2-search input.select2-active {
+  background: #fff url('select2-spinner.gif') no-repeat 100%;
+  background: url('select2-spinner.gif') no-repeat 100%, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #fff), color-stop(0.99, #eee));
+  background: url('select2-spinner.gif') no-repeat 100%, -webkit-linear-gradient(center bottom, #fff 85%, #eee 99%);
+  background: url('select2-spinner.gif') no-repeat 100%, -moz-linear-gradient(center bottom, #fff 85%, #eee 99%);
+  background: url('select2-spinner.gif') no-repeat 100%, linear-gradient(to bottom, #fff 85%, #eee 99%) 0 0;
+}
+
+.select2-container-active .select2-choice,
+.select2-container-active .select2-choices {
+  border: 1px solid #5897fb;
+  outline: none;
+
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+}
+
+.select2-dropdown-open .select2-choice {
+  border-bottom-color: transparent;
+  -webkit-box-shadow: 0 1px 0 #fff inset;
+  box-shadow: 0 1px 0 #fff inset;
+
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+
+  background-color: #eee;
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #fff), color-stop(0.5, #eee));
+  background-image: -webkit-linear-gradient(center bottom, #fff 0%, #eee 50%);
+  background-image: -moz-linear-gradient(center bottom, #fff 0%, #eee 50%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#ffffff', GradientType=0);
+  background-image: linear-gradient(to top, #fff 0%, #eee 50%);
+}
+
+.select2-dropdown-open.select2-drop-above .select2-choice,
+.select2-dropdown-open.select2-drop-above .select2-choices {
+  border: 1px solid #5897fb;
+  border-top-color: transparent;
+
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(0.5, #eee));
+  background-image: -webkit-linear-gradient(center top, #fff 0%, #eee 50%);
+  background-image: -moz-linear-gradient(center top, #fff 0%, #eee 50%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#ffffff', GradientType=0);
+  background-image: linear-gradient(to bottom, #fff 0%, #eee 50%);
+}
+
+.select2-dropdown-open .select2-choice .select2-arrow {
+  background: transparent;
+  border-left: none;
+  filter: none;
+}
+
+.select2-dropdown-open .select2-choice .select2-arrow b {
+  background-position: -18px 1px;
+}
+
+.select2-hidden-accessible {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/* results */
+.select2-results {
+  max-height: 200px;
+  padding: 0 0 0 4px;
+  margin: 4px 4px 4px 0;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.select2-results ul.select2-result-sub {
+  margin: 0;
+  padding-left: 0;
+}
+
+.select2-results ul.select2-result-sub > li .select2-result-label {
+  padding-left: 20px
+}
+
+.select2-results ul.select2-result-sub ul.select2-result-sub > li .select2-result-label {
+  padding-left: 40px
+}
+
+.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label {
+  padding-left: 60px
+}
+
+.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label {
+  padding-left: 80px
+}
+
+.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label {
+  padding-left: 100px
+}
+
+.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label {
+  padding-left: 110px
+}
+
+.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label {
+  padding-left: 120px
+}
+
+.select2-results li {
+  list-style: none;
+  display: list-item;
+  background-image: none;
+}
+
+.select2-results li.select2-result-with-children > .select2-result-label {
+  font-weight: bold;
+}
+
+.select2-results .select2-result-label {
+  padding: 3px 7px 4px;
+  margin: 0;
+  cursor: pointer;
+
+  min-height: 1em;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.select2-results .select2-highlighted {
+  background: #3875d7;
+  color: #fff;
+}
+
+.select2-results li em {
+  background: #feffde;
+  font-style: normal;
+}
+
+.select2-results .select2-highlighted em {
+  background: transparent;
+}
+
+.select2-results .select2-highlighted ul {
+  background: #fff;
+  color: #000;
+}
+
+.select2-results .select2-no-results,
+.select2-results .select2-searching,
+.select2-results .select2-selection-limit {
+  background: #f4f4f4;
+  display: list-item;
+  padding-left: 5px;
+}
+
+/*
+disabled look for disabled choices in the results dropdown
+*/
+.select2-results .select2-disabled.select2-highlighted {
+  color: #666;
+  background: #f4f4f4;
+  display: list-item;
+  cursor: default;
+}
+
+.select2-results .select2-disabled {
+  background: #f4f4f4;
+  display: list-item;
+  cursor: default;
+}
+
+.select2-results .select2-selected {
+  display: none;
+}
+
+.select2-more-results.select2-active {
+  background: #f4f4f4 url('select2-spinner.gif') no-repeat 100%;
+}
+
+.select2-more-results {
+  background: #f4f4f4;
+  display: list-item;
+}
+
+/* disabled styles */
+
+.select2-container.select2-container-disabled .select2-choice {
+  background-color: #f4f4f4;
+  background-image: none;
+  border: 1px solid #ddd;
+  cursor: default;
+}
+
+.select2-container.select2-container-disabled .select2-choice .select2-arrow {
+  background-color: #f4f4f4;
+  background-image: none;
+  border-left: 0;
+}
+
+.select2-container.select2-container-disabled .select2-choice abbr {
+  display: none;
+}
+
+/* multiselect */
+
+.select2-container-multi .select2-choices {
+  height: auto !important;
+  height: 1%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+
+  border: 1px solid #aaa;
+  cursor: text;
+  overflow: hidden;
+
+  background-color: #fff;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(1%, #eee), color-stop(15%, #fff));
+  background-image: -webkit-linear-gradient(top, #eee 1%, #fff 15%);
+  background-image: -moz-linear-gradient(top, #eee 1%, #fff 15%);
+  background-image: linear-gradient(to bottom, #eee 1%, #fff 15%);
+}
+
+.select2-locked {
+  padding: 3px 5px 3px 5px !important;
+}
+
+.select2-container-multi .select2-choices {
+  min-height: 26px;
+}
+
+.select2-container-multi.select2-container-active .select2-choices {
+  border: 1px solid #5897fb;
+  outline: none;
+
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+}
+
+.select2-container-multi .select2-choices li {
+  float: left;
+  list-style: none;
+}
+
+html[dir="rtl"] .select2-container-multi .select2-choices li {
+  float: right;
+}
+
+.select2-container-multi .select2-choices .select2-search-field {
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+
+.select2-container-multi .select2-choices .select2-search-field input {
+  padding: 5px;
+  margin: 1px 0;
+
+  font-family: sans-serif;
+  font-size: 100%;
+  color: #666;
+  outline: 0;
+  border: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background: transparent !important;
+}
+
+.select2-container-multi .select2-choices .select2-search-field input.select2-active {
+  background: #fff url('select2-spinner.gif') no-repeat 100% !important;
+}
+
+.select2-default {
+  color: #999 !important;
+}
+
+.select2-container-multi .select2-choices .select2-search-choice {
+  padding: 3px 5px 3px 18px;
+  margin: 3px 0 3px 5px;
+  position: relative;
+
+  line-height: 13px;
+  color: #333;
+  cursor: default;
+  border: 1px solid #aaaaaa;
+
+  border-radius: 3px;
+
+  -webkit-box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+
+  background-clip: padding-box;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  background-color: #e4e4e4;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#f4f4f4', GradientType=0);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(20%, #f4f4f4), color-stop(50%, #f0f0f0), color-stop(52%, #e8e8e8), color-stop(100%, #eee));
+  background-image: -webkit-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+  background-image: -moz-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+  background-image: linear-gradient(to top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+}
+
+html[dir="rtl"] .select2-container-multi .select2-choices .select2-search-choice {
+  margin-left: 0;
+  margin-right: 5px;
+}
+
+.select2-container-multi .select2-choices .select2-search-choice .select2-chosen {
+  cursor: default;
+}
+
+.select2-container-multi .select2-choices .select2-search-choice-focus {
+  background: #d4d4d4;
+}
+
+.select2-search-choice-close {
+  display: block;
+  width: 12px;
+  height: 13px;
+  position: absolute;
+  right: 3px;
+  top: 4px;
+
+  font-size: 1px;
+  outline: none;
+  background: url('select2.png') right top no-repeat;
+}
+
+html[dir="rtl"] .select2-search-choice-close {
+  right: auto;
+  left: 3px;
+}
+
+.select2-container-multi .select2-search-choice-close {
+  left: 3px;
+}
+
+.select2-container-multi .select2-choices .select2-search-choice .select2-search-choice-close:hover {
+  background-position: right -11px;
+}
+
+.select2-container-multi .select2-choices .select2-search-choice-focus .select2-search-choice-close {
+  background-position: right -11px;
+}
+
+/* disabled styles */
+.select2-container-multi.select2-container-disabled .select2-choices {
+  background-color: #f4f4f4;
+  background-image: none;
+  border: 1px solid #ddd;
+  cursor: default;
+}
+
+.select2-container-multi.select2-container-disabled .select2-choices .select2-search-choice {
+  padding: 3px 5px 3px 5px;
+  border: 1px solid #ddd;
+  background-image: none;
+  background-color: #f4f4f4;
+}
+
+.select2-container-multi.select2-container-disabled .select2-choices .select2-search-choice .select2-search-choice-close {
+  display: none;
+  background: none;
+}
+
+/* end multiselect */
+
+.select2-result-selectable .select2-match,
+.select2-result-unselectable .select2-match {
+  text-decoration: underline;
+}
+
+.select2-offscreen, .select2-offscreen:focus {
+  clip: rect(0 0 0 0) !important;
+  width: 1px !important;
+  height: 1px !important;
+  border: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  outline: 0 !important;
+  left: 0px !important;
+  top: 0px !important;
+}
+
+.select2-display-none {
+  display: none;
+}
+
+.select2-measure-scrollbar {
+  position: absolute;
+  top: -10000px;
+  left: -10000px;
+  width: 100px;
+  height: 100px;
+  overflow: scroll;
+}
+
+/* Retina-ize icons */
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 2dppx) {
+  .select2-search input,
+  .select2-search-choice-close,
+  .select2-container .select2-choice abbr,
+  .select2-container .select2-choice .select2-arrow b {
+    background-image: url('select2x2.png') !important;
+    background-repeat: no-repeat !important;
+    background-size: 60px 40px !important;
+  }
+
+  .select2-search input {
+    background-position: 100% -21px !important;
+  }
+}
+
