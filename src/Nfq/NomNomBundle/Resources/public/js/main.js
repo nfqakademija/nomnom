@@ -1,32 +1,32 @@
-function addGenemuFunctionality($obj) {
-    $($obj).val(["AL", "AZ"])
+function addGenemuFunctionality(obj) {
+    jQuery(obj).val(["AL", "AZ"])
         .select2()
         .select2({width: 'resolve'})
         .click(function () {
-            $($obj).select2();
+            jQuery(obj).select2();
         });
-    $("#wait_tags_destroy").click(function () {
-        $("#wait_").select2("destroy");
+    jQuery("#wait_tags_destroy").click(function () {
+        jQuery("#wait_").select2("destroy");
     });
 }
 
 function addRemoveButtonListener(removeButton) {
-    $(removeButton).on('click', function (e) {
+    jQuery(removeButton).on('click', function (e) {
         // prevent the link from creating a "#" on the URL
         e.preventDefault();
 
         // add a new tag form (see next code block)
-        $(this).parent().remove();
+        jQuery(this).parent().remove();
     });
 }
 
-function addProductForm($collectionHolder) {
+function addProductForm(collectionHolder) {
 
     // Get the data-prototype explained earlier
-    var prototype = $collectionHolder.data('prototype');
+    var prototype = collectionHolder.data('prototype');
 
     // get the new index
-    var index = $collectionHolder.data('index');
+    var index = collectionHolder.data('index');
 
     //so that recipe products start from 1 not from 0
     if (index == 0) index++;
@@ -38,8 +38,8 @@ function addProductForm($collectionHolder) {
         replace(/__name__/g, index).substring(5);
 
     // increase the index with one for the next item
-    $collectionHolder.data('index', index + 1);
-    $collectionHolder.append(newForm);
+    collectionHolder.data('index', index + 1);
+    collectionHolder.append(newForm);
     //adding genemufunctionality to newly created form element
     var myProduct = "#createrecipe_myRecipeProducts_" + index + "_myProduct";
     var quantityMeasure = "#createrecipe_myRecipeProducts_" + index + "_quantityMeasure";

@@ -166,7 +166,7 @@ class RecipesController extends Controller
     public function createRecipeAction(Request $request)
     {
         $user = $this->getUser();
-        if ($user) {
+        if (true) {
             $recipe = new MyRecipe();
 
             $form = $this->createForm(new CreateRecipeType(), $recipe);
