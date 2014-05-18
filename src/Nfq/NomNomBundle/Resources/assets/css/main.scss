@@ -1353,4 +1353,40 @@ html[dir="rtl"] .select2-search-choice-close {
     background-position: 100% -21px !important;
   }
 }
+/* for thumbnails */
+.thumb-box {
+  padding: 1.4em 0 1em;
+  margin-left: -1%;
+  width: 102%; }
+
+.thumb-box .thumbs {
+  overflow: hidden;
+  list-style-type: none;
+  *zoom: 1; }
+
+.thumb-box .thumbs li {
+  float: left;
+  width: 16%;
+  text-align: center;
+  padding: 0 1%; }
+
+.thumb-box .thumbs li img {
+  width: 100%;
+  opacity: .8;
+  -webkit-transition: opacity 0.32s;
+  -moz-transition: opacity 0.32s;
+  -o-transition: opacity 0.32s;
+  transition: opacity 0.32s;
+  border-bottom: 4px solid transparent; }
+
+.thumb-box .thumbs li img.active {
+  border-color: #31ace2;
+  opacity: 1; }
+
+.thumb-box .thumbs li:hover img {
+  opacity: 1;
+  -webkit-transition: opacity 0.2s;
+  -moz-transition: opacity 0.2s;
+  -o-transition: opacity 0.2s;
+  transition: opacity 0.2s; }
 

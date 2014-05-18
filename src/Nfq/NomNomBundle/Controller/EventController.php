@@ -82,44 +82,48 @@ class EventController extends Controller
 
     public function createEventAction(Request $request)
     {
-        $event = new MyEvent();
-        $form = $this->createForm(new EventType(), $event);
-        $form->get('eventDate')->setData(new \DateTime());
+        $user = $this->getUser();
+        if ($user) {
+            $event = new MyEvent();
+            $form = $this->createForm(new EventType(), $event);
+            $form->get('eventDate')->setData(new \DateTime());
 
-        if ($request->isMethod("POST")) {
-            $form->submit($request);
-            if ($form->isValid()) {
-                //setting default event fields
-                $event->setEventPhase(0);
-                $event->setDateCreated(new \DateTime());
-                $em = $this->getDoctrine()->getManager();
+            if ($request->isMethod("POST")) {
+                $form->submit($request);
+                if ($form->isValid()) {
+                    //setting default event fields
+                    $event->setEventPhase(0);
+                    $event->setDateCreated(new \DateTime());
+                    $em = $this->getDoctrine()->getManager();
 
-                //getting registredUser role_id
-                $registeredUserRole = $em->getRepository('NfqNomNomBundle:MyRole')
-                    ->findOneBy(
-                        array('roleName' => 'registeredUser')
-                    );
+                    //getting registredUser role_id
+                    $registeredUserRole = $em->getRepository('NfqNomNomBundle:MyRole')
+                        ->findOneBy(
+                            array('roleName' => 'registeredUser')
+                        );
 
-                //creating new user event with current user and registeredUser role
-                $eventUser = new MyUserEvent();
-                $eventUser->setMyUser($this->getUser());
-                $eventUser->setInvitationStatus(0);
-                $eventUser->setMyEvent($event);
-                $eventUser->setMyRole($registeredUserRole);
-                $eventUser->setReadyToPhaseTwo(0);
-                $eventUser->setReadyToPhaseThree(0);
+                    //creating new user event with current user and registeredUser role
+                    $eventUser = new MyUserEvent();
+                    $eventUser->setMyUser($this->getUser());
+                    $eventUser->setInvitationStatus(0);
+                    $eventUser->setMyEvent($event);
+                    $eventUser->setMyRole($registeredUserRole);
+                    $eventUser->setReadyToPhaseTwo(0);
+                    $eventUser->setReadyToPhaseThree(0);
 
-                $em->persist($eventUser);
-                $em->persist($event);
-                $em->flush();
+                    $em->persist($eventUser);
+                    $em->persist($event);
+                    $em->flush();
 
-                return $this->redirect($this->generateUrl('Nfq_nom_nom_event_manager'));
+                    return $this->redirect($this->generateUrl('Nfq_nom_nom_event_manager'));
+                }
             }
-        }
 
-        return $this->render('NfqNomNomBundle:Event:createevent.html.twig',
-            array('forma' => $form->createView(),
-                'error' => ''));
+            return $this->render('NfqNomNomBundle:Event:createevent.html.twig',
+                array('forma' => $form->createView(),
+                    'error' => ''));
+        }
+        return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'log in  first'));
     }
 
     public function addUsersToEventAction($eventId, Request $request)

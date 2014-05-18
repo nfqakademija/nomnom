@@ -15,6 +15,27 @@
         <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
 
+        <script>
+            jQuery(document).ready(function () {
+                var thumbs = jQuery('#thumbnails').slippry({
+                    // general elements & wrapper
+                    slippryWrapper: '<div class="slippry_box thumbnails" />',
+                    // options
+                    transition: 'fade',
+                    speed: 1000,
+                onSlideBefore: function (el, index_old, index_new) {
+                    jQuery('.thumbs a img').removeClass('active');
+                    jQuery('img', jQuery('.thumbs a')[index_new]).addClass('active');
+                }
+            });
+
+            jQuery('.thumbs a').click(function () {
+                thumbs.goToSlide($(this).data('slide'));
+                return false;
+            });
+            });
+
+        </script>
         <div id="logoBox">
             <div id="logo">
 
@@ -70,10 +91,26 @@
 
                 ― George Bernard Shaw
             </div>
-
         </div>
-
-
-
+        <section style="width: 50%; margin: 0 auto" id="demo_wrapper">
+                <ul id="thumbnails">
+                    <li><a href="#slide1"><img src="/web/images/food1.jpg" alt="words"></a></li>
+                    <li><a href="#slide2"><img src="/web/images/food2.jpg" alt="words2"></a></li>
+                    <li><a href="#slide3"><img src="/web/images/food3.jpg" alt="words3"></a></li>
+                    <li><a href="#slide4"><img src="/web/images/food4.jpg" alt="words4"></a></li>
+                    <li><a href="#slide5"><img src="/web/images/food5.jpg" alt="words5"></a></li>
+                    <li><a href="#slide6"><img src="/web/images/food6.jpg" alt="words6"></a></li>
+                </ul>
+                <div class="thumb-box">
+                    <ul class="thumbs">
+                        <li><a href="#1" data-slide="1"><img src="/web/images/food1.jpg" alt="words1"></a></li>
+                        <li><a href="#2" data-slide="2"><img src="/web/images/food2.jpg" alt="words2"></a></li>
+                        <li><a href="#3" data-slide="3"><img src="/web/images/food3.jpg" alt="words3"></a></li>
+                        <li><a href="#4" data-slide="4"><img src="/web/images/food4.jpg" alt="words4"></a></li>
+                        <li><a href="#5" data-slide="5"><img src="/web/images/food5.jpg" alt="words5"></a></li>
+                        <li><a href="#6" data-slide="6"><img src="/web/images/food6.jpg" alt="words6"></a></li>
+                    </ul>
+                </div>
+        </section>
     {% endblock %}
 {% endblock %}
