@@ -186,7 +186,7 @@ class RecipesController extends Controller
                     return $this->redirect($this->generateUrl('nfq_nom_nom_recipe_list'));
                 }
             }
-            return $this->render('NfqNomNomBundle:recipes:createrecipe.html.twig',
+            return $this->render('NfqNomNomBundle:recipes:createRecipe.html.twig',
                 array('error' => '',
                     'forma' => $form->createView()
                 ));
