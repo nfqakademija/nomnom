@@ -11,48 +11,49 @@
 
         <style>
 
-            #right-area{
+            #right-area {
                 float: right;
                 height: 100%;
-                padding:40px;
+                padding: 40px;
                 min-width: 20%;
-                overflow:hidden;
-                margin-top:42px;
-                margin-right:50px;
-                margin-left:30%;
-                border-radius:20px;
+                overflow: hidden;
+                margin-top: 42px;
+                margin-right: 50px;
+                margin-left: 30%;
+                border-radius: 20px;
                 background-color: #eeeeee;
                 right: 0;
                 top: 0;
-                position:absolute;
+                position: absolute;
             }
 
-            #left-area{
-                float:left;
+            #left-area {
+                float: left;
                 height: 100%;
                 padding: 40px;
                 min-width: 55%;
-                overflow:hidden;
-                margin-top:42px;
-                margin-left:50px;
-                border-radius:20px;
+                overflow: hidden;
+                margin-top: 42px;
+                margin-left: 50px;
+                border-radius: 20px;
                 background-color: #eeeeee;
-                margin-right:60%;
+                margin-right: 60%;
                 top: 0;
-                position:absolute;
+                position: absolute;
             }
 
             #element_to_pop_up {
-                background-color:#fff;
-                border-radius:15px;
-                color:#000;
-                display:none;
-                padding:20px;
-                min-width:400px;
+                background-color: #fff;
+                border-radius: 15px;
+                color: #000;
+                display: none;
+                padding: 20px;
+                min-width: 400px;
                 min-height: 180px;
                 margin-right: 440px;
 
             }
+
             .b-close {
                 border-radius: 7px;
                 font: bold 131% sans-serif;
@@ -66,10 +67,10 @@
                 right: -7px;
                 top: -7px;
             }
+
             .b-close:hover {
                 background-color: #1e1e1e;
             }
-
 
 
         </style>
@@ -77,91 +78,86 @@
         {{ error }}
 
         <div class="eventBox">
-        <h2>
-            {{ event.eventName }}
-        </h2>
+            <h2>
+                {{ event.eventName }}
+            </h2>
 
-        <div class="DateBox">
-            <div class="createdDate">
-                <div>Event creation date:</div>
-                {{ event.dateCreated.date }}
+            <div class="DateBox">
+                <div class="createdDate">
+                    <div>Event planning end date:</div>
+                    {{ event.eventPlanningDueDate.date }}
+                </div>
+                <div class="eventDate">
+                    <div>Event date:</div>
+                    {{ event.eventDate.date }}
+                </div>
             </div>
-            <div class="eventDate">
-                <div>Event date:</div>
-                {{ event.eventDate.date }}
+
+            <div class="infoBox">You can start inviting people and suggesting recipes:</div>
+            <div id="actionBox">
+                <div class="personsBox">
+                    <a class="buttonBox" href="{{ path('Nfq_nom_nom_add_user_to_event',
+                    {'eventId': event.id}) }}">Add a person</a>
+
+                    <div>Host of the event:</div>
+                    <div>{{ host.myUser.username }}</div>
+
+                    <div> people invited:</div>
+                    {% for userEvent in invitedUE %}
+                        <div> {{ userEvent.myUser.username }}</div>
+                    {% endfor %}
+
+                    <hr>
+                    <div> people accepted invitations:</div>
+                    {% for userEvent in acceptedUE %}
+                        <div> {{ userEvent.myUser.username }}</div>
+                    {% endfor %}
+                </div>
+                <hr>
+                <div class="recipesBox">
+                    <a class="buttonBox" href="{{ path('Nfq_nom_nom_add_recipe_to_event',
+                    {'eventId': event.id}) }}">Add a recipe</a>
+
+                    <div> recipes included:</div>
+                    {% for eventRecipe in eventRecipes %}
+                        <a href="{{ path('nfq_nom_nom_recipe', {'id':eventRecipe.myRecipe.id}) }}">
+                            {{ eventRecipe.myRecipe.recipeName }}
+                            ( Servings: {{ eventRecipe.myRecipe.numberOfServings }} )
+                        </a>
+                        <br>
+                        <a class="buttonBox" href="{{ path('Nfq_nom_nom_upvote_recipe',
+                        {'eventRecipeId':eventRecipe.id,
+                        'userEventId':currentUserEvent.id}) }}">
+                            I would like.
+                        </a>
+
+                        <a class="buttonBox" href="{{ path('Nfq_nom_nom_downvote_recipe',
+                        {'eventRecipeId':eventRecipe.id,
+                        'userEventId':currentUserEvent.id}) }}">
+                            I wouldn't like.
+                        </a>
+                        <span>Total people wants this dish: {{ eventRecipe.totalUpvote }}</span>
+
+                        <br>
+                    {% endfor %}
+                    {% if isHost %}
+                    <hr>
+                </div>
             </div>
-        </div>
-
-        <div class="infoBox">You can start inviting people and suggesting recipes:</div>
-        <div id="actionBox">
-            <div class="personsBox">
-                <a class="buttonBox" href="{{ path('Nfq_nom_nom_add_user_to_event',
-                {'eventId': event.id}) }}">Add a person</a>
-
-    <hr>
-    <a class="btn btn-info" href="{{ path('Nfq_nom_nom_add_user_to_event',
-    {'eventId': event.id}) }}">Add a person</a>
-
-    <hr>
-    <div>Host of the event:</div>
-    <div>{{ host.myUser.username }}</div>
-
-                <div>Host of the event:</div>
-                <div>{{ host.myUser.username }}</div>
-<hr>
-
-                <div> people invited:</div>
-                {% for userEvent in invitedUE %}
-                    <div> {{ userEvent.myUser.username }}</div>
-                {% endfor %}
+            <div class="endPhase">
+                <a class="buttonBox" href="{{ path('Nfq_nom_nom_progress_event',
+                {'eventId': event.id}) }}">End Recipe Suggestion</a>
+                {% elseif currentUserEvent.readyToPhaseTwo == 0 %}
 
                 <hr>
-                <div> people accepted invitations:</div>
-                {% for userEvent in acceptedUE %}
-                    <div> {{ userEvent.myUser.username }}</div>
-                {% endfor %}
+                <div class="readyBox">
+                    <a class="buttonBox" href="{{ path('Nfq_nom_nom_ready_to_progress',
+                    {'eventId': event.id}) }}">Ready To progress</a>
+                    {% endif %}
+                    <div class="circle" title="people ready to progress"> {{ readyPeople['ready'] }}
+                        / {{ readyPeople['all'] }}</div>
+                    {#generated content displaying#}
+                </div>
             </div>
-<hr>
-            <div class="recipesBox">
-                <a class="buttonBox" href="{{ path('Nfq_nom_nom_add_recipe_to_event',
-                {'eventId': event.id}) }}">Add a recipe</a>
-
-                <div> recipes included:</div>
-                {% for eventRecipe in eventRecipes %}
-                <a href="{{ path('nfq_nom_nom_recipe', {'id':eventRecipe.myRecipe.id}) }}">
-                    {{ eventRecipe.myRecipe.recipeName }}
-                    ( Servings: {{ eventRecipe.myRecipe.numberOfServings }} )
-                </a>
-                <br>
-                <a class="buttonBox" href="{{ path('Nfq_nom_nom_upvote_recipe',
-                {'eventRecipeId':eventRecipe.id,
-                'userEventId':currentUserEvent.id}) }}">
-                    I would like.
-                </a>
-
-                <a class="buttonBox" href="{{ path('Nfq_nom_nom_downvote_recipe',
-                {'eventRecipeId':eventRecipe.id,
-                'userEventId':currentUserEvent.id}) }}">
-                    I wouldn't like.
-                </a>
-                <span>Total people wants this dish: {{ eventRecipe.totalUpvote }}</span>
-
-            <br>
-            {% endfor %}
-            {% if isHost %}
-            <hr>  </div></div>
-            <div class="endPhase">
-            <a class="buttonBox" href="{{ path('Nfq_nom_nom_progress_event',
-            {'eventId': event.id}) }}">End Recipe Suggestion</a>
-            {% elseif currentUserEvent.readyToPhaseTwo == 0 %}
-
-        <hr>
-        <div class="readyBox">
-            <a class="buttonBox" href="{{ path('Nfq_nom_nom_ready_to_progress',
-            {'eventId': event.id}) }}">Ready To progress</a>
-            {% endif %}
-            <div class="circle" title="people ready to progress"> {{ readyPeople['ready'] }}
-                / {{ readyPeople['all'] }}</div>
-            {#generated content displaying#}
-        </div></div></div>
+        </div>
     {% endblock %}

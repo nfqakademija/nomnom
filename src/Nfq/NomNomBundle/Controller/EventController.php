@@ -473,16 +473,16 @@ class EventController extends Controller
 
                         $otherUsersProductQuantity = $repUP->getUsersProductQuantity($eventIds, $recipeProduct->getId());
 
-                        $fieldsKey = 'userProduct'.$userEvent->getId().'_'.$recipeProduct->getId();
+                        $fieldsKey = 'userProduct' . $userEvent->getId() . '_' . $recipeProduct->getId();
                         $requestFields = $request->request->get($fieldsKey);
-                        $fullQuantity = $r->getQuantity() * round($totalVotes/$recipe->getNumberOfServings());
-                        $preferredQuantityToBring = (int) $requestFields['quantity'];
+                        $fullQuantity = $r->getQuantity() * round($totalVotes / $recipe->getNumberOfServings());
+                        $preferredQuantityToBring = (int)$requestFields['quantity'];
 
-                        if ($preferredQuantityToBring < 0){
+                        if ($preferredQuantityToBring < 0) {
                             $newQuantity = 0;
-                        } else if ($otherUsersProductQuantity + $preferredQuantityToBring >= $fullQuantity){
+                        } else if ($otherUsersProductQuantity + $preferredQuantityToBring >= $fullQuantity) {
                             $newQuantity = $fullQuantity - $otherUsersProductQuantity;
-                        } else if($otherUsersProductQuantity + $preferredQuantityToBring < $fullQuantity && $otherUsersProductQuantity != null) {
+                        } else if ($otherUsersProductQuantity + $preferredQuantityToBring < $fullQuantity && $otherUsersProductQuantity != null) {
                             $newQuantity = $preferredQuantityToBring;
                         } else {
                             $newQuantity = $preferredQuantityToBring;
@@ -491,16 +491,16 @@ class EventController extends Controller
                         $bringersUP->setQuantity($newQuantity);
 
                         if ($form->isValid()) {
-                            if($bringersUP->getQuantity() == 0){
+                            if ($bringersUP->getQuantity() == 0) {
                                 $em->remove($bringersUP);
-                            } else{
+                            } else {
                                 $em->persist($bringersUP);
                             }
                             $em->flush();
                             //reconstruction could be changed with  pre_submit methid but this is faster but
                             //we losee errors
-                            $uType= new UserProductType($userEvent->getId(), $recipeProduct->getId(), $hidden_field);
-                            $form = $this->createForm($uType,$bringersUP);
+                            $uType = new UserProductType($userEvent->getId(), $recipeProduct->getId(), $hidden_field);
+                            $form = $this->createForm($uType, $bringersUP);
                             $this->redirect($this->generateUrl('Nfq_nom_nom_events', array('eventId' => $eventId)));
                         }
                     }
@@ -603,18 +603,20 @@ class EventController extends Controller
             $AllEventUsers = $repUE->findUsersByEvent($myEvent->getId());
             $i = 0;
             $userEventsIds = $repUE->getUserEventIdsByEvent($eventId);
+            $notificationName = 'assignedProduct';
+
             foreach ($recipeProducts as $recipeProduct) {
                 /** @var MyRecipeProduct $r */
                 $r = $recipeProduct;
 
-                $fullQuantity = $r->getQuantity() * round($totalVotes/$recipe->getNumberOfServings());
+                $fullQuantity = $r->getQuantity() * round($totalVotes / $recipe->getNumberOfServings());
                 $otherUsersProductQuantity = $repUP->getUsersProductQuantity($userEventsIds, $recipeProduct->getId());
                 $quantityLeft = $fullQuantity - $otherUsersProductQuantity;
                 $eventUsers = $em->getRepository('NfqNomNomBundle:MyUserEvent');
 
                 $userEvent = $repUE->find($userEventsIds[$i]);
 
-               if ($quantityLeft > 0 ){
+                if ($quantityLeft > 0) {
                     // we first assign left product
                     $newProduct = new MyUserProduct();
                     $newProduct->setMyUserEvent($userEvent);
@@ -622,23 +624,22 @@ class EventController extends Controller
                     $newProduct->setQuantity($quantityLeft);
 
                     //now we set notification
-                   $newNotification = new MyNotification();
-                   $newNotification->setMyNotificationName('assignedProduct');
-                   $newNotification->setMyUserEvent($userEvent);
-                   $newNotification->setUnread(true);
+                    if (!Utilities::hasNotification($userEvent, $notificationName)) {
+                        $newNotification = new MyNotification();
+                        $newNotification->setMyNotificationName($notificationName);
+                        $newNotification->setMyUserEvent($userEvent);
+                        $newNotification->setUnread(true);
+                        $em->persist($newNotification);
+                    }
 
-                   if ($i-1 < count($userEventsIds))
-                   {
-                       $i++;
-                   }
-                   else
-                   {
-                       $i=0;
-                   }
+                    if ($i - 1 < count($userEventsIds)) {
+                        $i++;
+                    } else {
+                        $i = 0;
+                    }
 
-                   $em->persist($newProduct);
-                   $em->persist($newNotification);
-                   $em->flush();
+                    $em->persist($newProduct);
+                    $em->flush();
                 }
 
                 $myUserProducts = $repUP->findByEventAndRecipeProduct($userEvent->getMyEvent(), $recipeProduct);

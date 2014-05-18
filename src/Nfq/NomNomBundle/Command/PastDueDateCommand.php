@@ -68,7 +68,7 @@ class PastDueDateCommand extends ContainerAwareCommand
 
                 $notificationName = 'endPlanning';
                 foreach ($userEventsThatNeedNotification as $userEvent) {
-                    if (!$this->hasNotification($userEvent, $notificationName)) {
+                    if (Utilities::hasNotification($userEvent, $notificationName)) {
                         $notification = new MyNotification();
                         $notification->setMyUserEvent($userEvent);
                         $notification->setMyNotificationName($notificationName);
@@ -84,7 +84,7 @@ class PastDueDateCommand extends ContainerAwareCommand
 
                     $notificationName = 'soonEndPlanning';
                     foreach ($userEventsThatNeedNotification as $userEvent) {
-                        if (!$this->hasNotification($userEvent, $notificationName)) {
+                        if (Utilities::hasNotification($userEvent, $notificationName)) {
                             $notification = new MyNotification();
                             $notification->setMyUserEvent($userEvent);
                             $notification->setMyNotificationName($notificationName);
@@ -96,18 +96,5 @@ class PastDueDateCommand extends ContainerAwareCommand
             }
             $em->flush();
         }
-    }
-
-    protected function hasNotification($userEvent, $notificationName)
-    {
-        /** @var MyUserEvent $userEvent */
-        $notifications = $userEvent->getMyNotifications();
-        foreach ($notifications as $notification) {
-            /** @var MyNotification $notification */
-            if ($notification->getMyNotificationName() == $notificationName) {
-                return true;
-            }
-        }
-        return false;
     }
 }

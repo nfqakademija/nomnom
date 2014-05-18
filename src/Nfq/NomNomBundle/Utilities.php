@@ -94,4 +94,17 @@ class Utilities
 
         return array('time' => round($time), 'measure' => $measure);
     }
+
+    public static function hasNotification($userEvent, $notificationName)
+    {
+        /** @var MyUserEvent $userEvent */
+        $notifications = $userEvent->getMyNotifications();
+        foreach ($notifications as $notification) {
+            /** @var MyNotification $notification */
+            if ($notification->getMyNotificationName() == $notificationName) {
+                return true;
+            }
+        }
+        return false;
+    }
 } 
