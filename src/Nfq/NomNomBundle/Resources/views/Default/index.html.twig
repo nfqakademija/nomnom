@@ -94,21 +94,69 @@
         </div>
         <section style="width: 50%; margin: 0 auto" id="demo_wrapper">
                 <ul id="thumbnails">
-                    <li><a href="#slide1"><img src="/web/images/food1.jpg" alt="words"></a></li>
-                    <li><a href="#slide2"><img src="/web/images/food2.jpg" alt="words2"></a></li>
-                    <li><a href="#slide3"><img src="/web/images/food3.jpg" alt="words3"></a></li>
-                    <li><a href="#slide4"><img src="/web/images/food4.jpg" alt="words4"></a></li>
-                    <li><a href="#slide5"><img src="/web/images/food5.jpg" alt="words5"></a></li>
-                    <li><a href="#slide6"><img src="/web/images/food6.jpg" alt="words6"></a></li>
+                    <li><a href="#slide1">
+                            {% image '@NfqNomNomBundle/Resources/public/images/food1.jpg' %}
+                            <img src="{{ asset_url }}" alt="Example"/>
+                            {% endimage %}
+                        </a></li>
+                    <li><a href="#slide2">
+                            {% image '@NfqNomNomBundle/Resources/public/images/food2.jpg' %}
+                            <img src="{{ asset_url }}" alt="Example"/>
+                            {% endimage %}
+                        </a></li>
+                    <li><a href="#slide3">
+                            {% image '@NfqNomNomBundle/Resources/public/images/food3.jpg' %}
+                            <img src="{{ asset_url }}" alt="Example"/>
+                            {% endimage %}
+                        </a></li>
+                    <li><a href="#slide4">
+                            {% image '@NfqNomNomBundle/Resources/public/images/food4.jpg' %}
+                            <img src="{{ asset_url }}" alt="Example"/>
+                            {% endimage %}
+                        </a></li>
+                    <li><a href="#slide5">
+                            {% image '@NfqNomNomBundle/Resources/public/images/food5.jpg' %}
+                            <img src="{{ asset_url }}" alt="Example"/>
+                            {% endimage %}
+                        </a></li>
+                    <li><a href="#slide6">
+                            {% image '@NfqNomNomBundle/Resources/public/images/food6.jpg' %}
+                            <img src="{{ asset_url }}" alt="Example"/>
+                            {% endimage %}
+                        </a></li>
                 </ul>
                 <div class="thumb-box">
                     <ul class="thumbs">
-                        <li><a href="#1" data-slide="1"><img src="/web/images/food1.jpg" alt="words1"></a></li>
-                        <li><a href="#2" data-slide="2"><img src="/web/images/food2.jpg" alt="words2"></a></li>
-                        <li><a href="#3" data-slide="3"><img src="/web/images/food3.jpg" alt="words3"></a></li>
-                        <li><a href="#4" data-slide="4"><img src="/web/images/food4.jpg" alt="words4"></a></li>
-                        <li><a href="#5" data-slide="5"><img src="/web/images/food5.jpg" alt="words5"></a></li>
-                        <li><a href="#6" data-slide="6"><img src="/web/images/food6.jpg" alt="words6"></a></li>
+                        <li><a href="#1" data-slide="1">
+                                {% image '@NfqNomNomBundle/Resources/public/images/food1.jpg' %}
+                                <img src="{{ asset_url }}" alt="Example"/>
+                                {% endimage %}
+                            </a></li>
+                        <li><a href="#2" data-slide="2">
+                                {% image '@NfqNomNomBundle/Resources/public/images/food2.jpg' %}
+                                <img src="{{ asset_url }}" alt="Example"/>
+                                {% endimage %}
+                            </a></li>
+                        <li><a href="#3" data-slide="3">
+                                {% image '@NfqNomNomBundle/Resources/public/images/food3.jpg' %}
+                                <img src="{{ asset_url }}" alt="Example"/>
+                                {% endimage %}
+                            </a></li>
+                        <li><a href="#4" data-slide="4">
+                                {% image '@NfqNomNomBundle/Resources/public/images/food4.jpg' %}
+                                <img src="{{ asset_url }}" alt="Example"/>
+                                {% endimage %}
+                            </a></li>
+                        <li><a href="#5" data-slide="5">
+                                {% image '@NfqNomNomBundle/Resources/public/images/food5.jpg' %}
+                                <img src="{{ asset_url }}" alt="Example"/>
+                                {% endimage %}
+                            </a></li>
+                        <li><a href="#6" data-slide="6">
+                                {% image '@NfqNomNomBundle/Resources/public/images/food6.jpg' %}
+                                <img src="{{ asset_url }}" alt="Example"/>
+                                {% endimage %}
+                            </a></li>
                     </ul>
                 </div>
         </section>
