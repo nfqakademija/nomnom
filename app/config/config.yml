@@ -29,6 +29,11 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
 
+parameters:
+    # Assetic
+    assetic.filter.compass.images_dir: %kernel.root_dir%/../web/img
+    assetic.filter.compass.http_path:  /img
+
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
