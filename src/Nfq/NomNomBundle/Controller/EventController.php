@@ -62,15 +62,15 @@ class EventController extends Controller
 
             if (Utilities::hasUserPermissionToEvent($myEvent, $user, $em)) {
                 switch ($myEvent->getEventPhase()) {
-                    case 0:
+                    case MyEvent::PHASE_SUGGESTION:
                         return $this->processPhaseOne($eventId, $request);
-                    case 1:
+                    case MyEvent::PHASE_VOTE:
                         return $this->processPhaseTwo($eventId, $request);
-                    case 2:
+                    case MyEvent::PHASE_ENDED:
                         return $this->processPhaseThree($eventId);
                     case 3:
-                        //for now we render ended event as finalized event
-                        //but in event manager link they are separated
+                        //whe should remove this phase because it no longer exist ,
+                        // but we leave it so that nothing breaks
                         return $this->processPhaseThree($eventId);
                 }
             } else {
@@ -558,8 +558,6 @@ class EventController extends Controller
 
     public function processPhaseThree($eventId, $error = "")
     {
-
-
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         /**@var $myEvent MyEvent */
@@ -588,7 +586,6 @@ class EventController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-
         foreach ($eventRecipes as $eventRecipe) {
             /** @var MyRecipe $recipe */
             $recipe = $eventRecipe->getMyRecipe();
@@ -598,7 +595,6 @@ class EventController extends Controller
             if ($totalVotes < ($recipe->getNumberOfServings()) / 2) {
                 continue;
             }
-
 
             $recipeProducts = $recipe->getMyRecipeProducts();
             $inner = array();
@@ -611,7 +607,6 @@ class EventController extends Controller
                 /** @var MyRecipeProduct $r */
                 $r = $recipeProduct;
 
-
                 $fullQuantity = $r->getQuantity() * round($totalVotes/$recipe->getNumberOfServings());
                 $otherUsersProductQuantity = $repUP->getUsersProductQuantity($userEventsIds, $recipeProduct->getId());
                 $quantityLeft = $fullQuantity - $otherUsersProductQuantity;
@@ -619,13 +614,19 @@ class EventController extends Controller
 
                 $userEvent = $repUE->find($userEventsIds[$i]);
 
-
                if ($quantityLeft > 0 ){
-
+                    // we first assign left product
                     $newProduct = new MyUserProduct();
                     $newProduct->setMyUserEvent($userEvent);
                     $newProduct->setMyRecipeProduct($recipeProduct);
                     $newProduct->setQuantity($quantityLeft);
+
+                    //now we set notification
+                   $newNotification = new MyNotification();
+                   $newNotification->setMyNotificationName('assignedProduct');
+                   $newNotification->setMyUserEvent($userEvent);
+                   $newNotification->setUnread(true);
+
                    if ($i-1 < count($userEventsIds))
                    {
                        $i++;
@@ -636,12 +637,9 @@ class EventController extends Controller
                    }
 
                    $em->persist($newProduct);
+                   $em->persist($newNotification);
                    $em->flush();
-                // var_dump( $newProduct->setMyProduct($userEvents));
-
-
                 }
-
 
                 $myUserProducts = $repUP->findByEventAndRecipeProduct($userEvent->getMyEvent(), $recipeProduct);
                 $bringers = array();

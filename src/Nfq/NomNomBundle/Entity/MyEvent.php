@@ -16,6 +16,21 @@ use Nfq\NomNomBundle\Validator\Constraints as NfqAssert;
  */
 class MyEvent
 {
+    /*
+     * In this phase we can suggest recipes and add people
+     */
+    const PHASE_SUGGESTION = 0;
+
+    /*
+     * In this phase we vote what recipes we want to eat
+     */
+    const PHASE_VOTE = 1;
+
+    /*
+     * In this phase we can see some of the information but the event has ended
+     */
+    const PHASE_ENDED = 2;
+
     /**
      * @var integer
      *
@@ -47,7 +62,6 @@ class MyEvent
      */
     private $eventDate;
 
-    //TODO Add a constraint that checks if the event is further in time than event planing due date
     /**
      * @var \DateTime
      * @Assert\NotBlank()

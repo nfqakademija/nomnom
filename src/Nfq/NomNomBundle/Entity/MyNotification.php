@@ -27,6 +27,7 @@ class MyNotification
      * soonEndPlanning
      * endPlanning
      * gotInvitation
+     * assignedProduct
      *
      * @var string
      *

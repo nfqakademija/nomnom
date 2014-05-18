@@ -35,7 +35,7 @@ class MyUserEventRepository extends EntityRepository
     {
         return $this->getEntityManager()
             ->createQuery('SELECT m FROM NfqNomNomBundle:MyUserEvent m
-            WHERE m.myEvent = :myevent AND m.invitationStatus = 0')
+            WHERE m.myEvent = :myevent AND m.invitationStatus = '. MyUserEvent::INVITATION_STATUS_CREATOR)
             ->setParameter('myevent', $eventId)
             ->getResult();
     }
@@ -44,7 +44,7 @@ class MyUserEventRepository extends EntityRepository
     {
         return $this->getEntityManager()
             ->createQuery('SELECT m FROM NfqNomNomBundle:MyUserEvent m
-            WHERE m.myEvent = :myevent AND m.invitationStatus = 1')
+            WHERE m.myEvent = :myevent AND m.invitationStatus = '. MyUserEvent::INVITATION_STATUS_PENDING)
             ->setParameter('myevent', $eventId)
             ->getResult();
     }
@@ -53,7 +53,7 @@ class MyUserEventRepository extends EntityRepository
     {
         return $this->getEntityManager()
             ->createQuery('SELECT m FROM NfqNomNomBundle:MyUserEvent m
-            WHERE m.myEvent = :myevent AND m.invitationStatus = 2')
+            WHERE m.myEvent = :myevent AND m.invitationStatus = '. MyUserEvent::INVITATION_STATUS_ACCEPTED)
             ->setParameter('myevent', $eventId)
             ->getResult();
     }
@@ -62,7 +62,7 @@ class MyUserEventRepository extends EntityRepository
     {
         return $this->getEntityManager()
             ->createQuery('SELECT m FROM NfqNomNomBundle:MyUserEvent m
-            WHERE m.myUser = :myuser AND m.invitationStatus = 0')
+            WHERE m.myUser = :myuser AND m.invitationStatus = '. MyUserEvent::INVITATION_STATUS_CREATOR)
             ->setParameter('myuser', $userId)
             ->getResult();
     }
@@ -71,7 +71,7 @@ class MyUserEventRepository extends EntityRepository
     {
         return $this->getEntityManager()
             ->createQuery('SELECT m FROM NfqNomNomBundle:MyUserEvent m
-            WHERE m.myUser = :myuser AND m.invitationStatus = 1')
+            WHERE m.myUser = :myuser AND m.invitationStatus = '. MyUserEvent::INVITATION_STATUS_PENDING)
             ->setParameter('myuser', $userId)
             ->getResult();
     }
@@ -80,7 +80,7 @@ class MyUserEventRepository extends EntityRepository
     {
         return $this->getEntityManager()
             ->createQuery('SELECT m FROM NfqNomNomBundle:MyUserEvent m
-            WHERE m.myUser = :myuser AND m.invitationStatus = 2')
+            WHERE m.myUser = :myuser AND m.invitationStatus = '. MyUserEvent::INVITATION_STATUS_ACCEPTED)
             ->setParameter('myuser', $userId)
             ->getResult();
     }
@@ -90,13 +90,14 @@ class MyUserEventRepository extends EntityRepository
         //we will count only accepted users
         $ready = $this->getEntityManager()
             ->createQuery('SELECT COUNT(m.readyToPhaseTwo) FROM NfqNomNomBundle:MyUserEvent m
-            WHERE m.myEvent = :myevent AND m.readyToPhaseTwo = 1 AND m.invitationStatus = 2')
+            WHERE m.myEvent = :myevent AND m.readyToPhaseTwo = ' . MyEvent::PHASE_VOTE .
+            ' AND m.invitationStatus = '. MyUserEvent::INVITATION_STATUS_ACCEPTED)
             ->setParameter('myevent', $eventId)
             ->getScalarResult()['0']['1'];
 
         $all = $this->getEntityManager()
             ->createQuery('SELECT COUNT(m.readyToPhaseTwo) FROM NfqNomNomBundle:MyUserEvent m
-            WHERE m.myEvent = :myevent AND m.invitationStatus = 2')
+            WHERE m.myEvent = :myevent AND m.invitationStatus = '. MyUserEvent::INVITATION_STATUS_ACCEPTED)
             ->setParameter('myevent', $eventId)
             ->getScalarResult()['0']['1'];
 
@@ -109,13 +110,14 @@ class MyUserEventRepository extends EntityRepository
         //we will count only accepted users
         $ready = $this->getEntityManager()
             ->createQuery('SELECT COUNT(m.readyToPhaseThree) FROM NfqNomNomBundle:MyUserEvent m
-            WHERE m.myEvent = :myevent AND m.readyToPhaseThree = 1 AND m.invitationStatus = 2')
+            WHERE m.myEvent = :myevent AND m.readyToPhaseThree = ' . MyEvent::PHASE_VOTE .
+            'AND m.invitationStatus = '. MyUserEvent::INVITATION_STATUS_ACCEPTED)
             ->setParameter('myevent', $eventId)
             ->getScalarResult()['0']['1'];
 
         $all = $this->getEntityManager()
             ->createQuery('SELECT COUNT(m.readyToPhaseThree) FROM NfqNomNomBundle:MyUserEvent m
-            WHERE m.myEvent = :myevent AND m.invitationStatus = 2')
+            WHERE m.myEvent = :myevent AND m.invitationStatus = '. MyUserEvent::INVITATION_STATUS_ACCEPTED)
             ->setParameter('myevent', $eventId)
             ->getScalarResult()['0']['1'];
 

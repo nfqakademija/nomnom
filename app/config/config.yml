@@ -29,11 +29,6 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
 
-parameters:
-    # Assetic
-    assetic.filter.compass.images_dir: %kernel.root_dir%/../web/img
-    assetic.filter.compass.http_path:  /img
-
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
@@ -95,7 +90,7 @@ knp_gaufrette:
     adapters:
         recipe_adapter:
             local:
-                directory: %kernel.root_dir%/../web/images/recipe
+                directory: %gaufrette_url%
 
     filesystems:
         recipe_image_fs:
@@ -107,6 +102,6 @@ vich_uploader:
     storage: vich_uploader.storage.gaufrette
     mappings:
             recipe_image:
-                uri_prefix:         /web/images/recipe
+                uri_prefix:         %vich_uploader_prefix%
                 upload_destination: recipe_image_fs
                 namer:              vich_uploader.namer_uniqid

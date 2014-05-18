@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityManager;
 use Nfq\NomNomBundle\Entity\MyEvent;
 use Nfq\NomNomBundle\Entity\MyEventRepository;
 use Nfq\NomNomBundle\Entity\MyNotification;
-use Nfq\NomNomBundle\Entity\MyNotificationRepository;
+use Nfq\NomNomBundle\Entity\MyUserEvent;
 use Nfq\NomNomBundle\Entity\MyUserEventRepository;
 use Nfq\NomNomBundle\Utilities;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -35,8 +35,6 @@ class PastDueDateCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine')->getEntityManager();
         /** @var MyEventRepository $myEventRepository */
         $myEventRepository = $em->getRepository('NfqNomNomBundle:MyEvent');
-        /** @var MyNotificationRepository $myNotificationRepository */
-        $myNotificationRepository = $em->getRepository('NfqNomNomBundle:MyNotification');
         /** @var MyUserEventRepository $myUserEventRepository */
         $myUserEventRepository = $em->getRepository('NfqNomNomBundle:MyUserEvent');
         $events = $myEventRepository->findAll();
@@ -61,71 +59,55 @@ class PastDueDateCommand extends ContainerAwareCommand
             //set defaulttimezone by location.
             //something is woring buggy
             if ($endPlanningDate < $now) {
-                $notifications = $myNotificationRepository->findByEvent($event);
-                //if there are no notifications create new ones
-                // this can happen when people accept invitations between notifiing and before ending
-                if (empty($notifications)) {
+                //that  means that we have to force the event to end
+                if ($event->getEventPhase() != MyEvent::PHASE_ENDED) {
+                    $event->setEventPhase(MyEvent::PHASE_ENDED);
+                }
+                $userEventsThatNeedNotification = $myUserEventRepository
+                    ->findByEvent($event);
 
-                    $userEventsThatNeedNotification = $myUserEventRepository
-                        ->findByEvent($event);
-
-                    foreach ($userEventsThatNeedNotification as $userEvent) {
-                        /** @var MyNotification $notification */
+                $notificationName = 'endPlanning';
+                foreach ($userEventsThatNeedNotification as $userEvent) {
+                    if (!$this->hasNotification($userEvent, $notificationName)) {
                         $notification = new MyNotification();
                         $notification->setMyUserEvent($userEvent);
-                        $notification->setMyNotificationName('endPlanning');
+                        $notification->setMyNotificationName($notificationName);
                         $notification->setUnread(true);
                         $em->persist($notification);
                     }
-
-                    $em->flush();
-                } else {
-                    foreach ($notifications as $notification) {
-                        /** @var MyNotification $notification */
-                        //we have to show this notification again, but the last notification disappears
-                        //this way you have less notifications. that is is you haven't logged in when the
-                        //notification was sent you will not see it just the second notification
-                        if($notification->getMyNotificationName() != 'gotInvitation'){
-                        $notification->setUnread(true);
-                        $notification->setMyNotificationName('endPlanning');
-                        }
-                    }
-                    $em->flush();
                 }
-                //TODO add end of event planning logic. We should place dispense all products function here
-
             } else {
                 //check if remaining time is less than 10 percent
                 if ($nowToPlanningSeconds < $notificationTime) {
-                    //if there are no notifications for this event we have to create new notifications
-                    //but if there is then we have to do nothing
-                    $notifications = $myNotificationRepository->findByEvent($event);
-                    if (empty($notifications)) {
-                        //there should always be notification before this time.
-                        //because we will notify when the invitation was sent
-                        //but just in case
-                        $userEventsThatNeedNotification = $myUserEventRepository
-                            ->findByEvent($event);
+                    $userEventsThatNeedNotification = $myUserEventRepository
+                        ->findByEvent($event);
 
-                        foreach ($userEventsThatNeedNotification as $userEvent) {
-                            /** @var MyNotification $notification */
+                    $notificationName = 'soonEndPlanning';
+                    foreach ($userEventsThatNeedNotification as $userEvent) {
+                        if (!$this->hasNotification($userEvent, $notificationName)) {
                             $notification = new MyNotification();
                             $notification->setMyUserEvent($userEvent);
-                            $notification->setMyNotificationName('soonEndPlanning');
+                            $notification->setMyNotificationName($notificationName);
                             $notification->setUnread(true);
                             $em->persist($notification);
                         }
-                    } else {
-                        foreach ($notifications as $notification) {
-                            if($notification->getMyNotificationName() != 'gotInvitation'){
-                            $notification->setUnread(true);
-                            $notification->setMyNotificationName('soonEndPlanning');
-                            }
-                        }
                     }
-                    $em->flush();
                 }
             }
+            $em->flush();
         }
+    }
+
+    protected function hasNotification($userEvent, $notificationName)
+    {
+        /** @var MyUserEvent $userEvent */
+        $notifications = $userEvent->getMyNotifications();
+        foreach ($notifications as $notification) {
+            /** @var MyNotification $notification */
+            if ($notification->getMyNotificationName() == $notificationName) {
+                return true;
+            }
+        }
+        return false;
     }
 }

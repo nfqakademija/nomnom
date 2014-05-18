@@ -12,6 +12,21 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class MyUserEvent
 {
+    /*
+     * creator can not get an invitation , his status is different from others
+     */
+    const INVITATION_STATUS_CREATOR = 0;
+
+    /*
+     * invitation has been sent that is it is pending
+     */
+    const INVITATION_STATUS_PENDING = 1;
+
+    /*
+     * Invitation has been accepted
+     */
+    const INVITATION_STATUS_ACCEPTED = 2;
+
     /**
      * @var integer
      *
@@ -50,6 +65,10 @@ class MyUserEvent
     /**
      * @var integer
      *
+     * 0 for event creator
+     * 1 for pending
+     * 2 for accepted
+     *
      * @ORM\Column(name="invitationStatus", type="smallint")
      */
     private $invitationStatus;
@@ -69,9 +88,6 @@ class MyUserEvent
 
 
     /**
-     * 0 for event creator
-     * 1 for pending
-     * 2 for accepted
      *
      * @ORM\OneToMany(targetEntity="MyRecipeVote", mappedBy="myUserEvent")
      */
