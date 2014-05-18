@@ -1,10 +1,5 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
-{% block stylesheets %}
-    {{ parent() }}
-    {% stylesheets '@NfqNomNomBundle/Resources/public/css/event.css' %}
-    <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
-    {% endstylesheets %}
-{% endblock %}
+
 {% block content %}
     {{ error }}
     <div class="eventBox">

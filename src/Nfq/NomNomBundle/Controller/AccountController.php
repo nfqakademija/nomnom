@@ -83,7 +83,7 @@ class AccountController extends Controller
 
     public function changePasswordAction(Request $request)
     {
-
+        $user = $this->container->get('security.context')->getToken()->getUser();
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->container->get('event_dispatcher');
 

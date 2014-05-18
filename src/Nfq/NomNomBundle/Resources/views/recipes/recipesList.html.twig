@@ -1,11 +1,5 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    {% stylesheets '@NfqNomNomBundle/Resources/public/css/recipesList.css' %}
-    <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
-    {% endstylesheets %}
-{% endblock %}
 
 {% block content %}
 <div id="backgroundRecipeList">

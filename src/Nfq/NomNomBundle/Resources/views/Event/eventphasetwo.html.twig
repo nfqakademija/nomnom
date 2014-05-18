@@ -2,8 +2,9 @@
 {% block content %}
     {{ error }}
     <div class="eventBox">
-        <h2>{{ event.eventName }}</h2>
+    <h2>{{ event.eventName }}</h2>
 
+    <div id="leftArea">
         <div class="DateBox">
             <div class="createdDate">
                 <div>Event creation date:</div>
@@ -17,117 +18,82 @@
 
         <div class="infoBox">You can choose which products you want to bring.</div>
         <hr>
-        <div id="actionBox">
-    <div class="personsBox">
         <div>Host of the event:</div>
+
         <div>{{ host.myUser.username }}</div>
-
-                <div> people invited:</div>
-                {% for userEvent in invitedUE %}
-                    <div> {{ userEvent.myUser.username }}</div>
-                {% endfor %}
-
-                <hr>
-                <div> people accepted invitations:</div>
-                {% for userEvent in acceptedUE %}
-                    <div> {{ userEvent.myUser.username }}</div>
-                {% endfor %}
-                <hr>
-            </div>
-            <div class="recipesBox">
-                <div> recipes included:</div>
-                {% for recipeName, recipe in information %}
-                    <a href="{{ path('nfq_nom_nom_recipe', {'id':recipe['id']}) }}">
-                        {{ recipeName }}
-                    </a>
-                    <span>People eating: {{ recipe['totalUpvote'] }}</span>
-                    <div id="recipeIngredients{{ recipe['id'] }}">
-                        <ul class="listGroup">
-                            {% for product in recipe['products'] %}
-                                <li class="listGroup2">
-                                    {{ product['quantityDisplay'] }}
-                                    {{ product['quantityMeasure'] ? product['quantityMeasure'] : '' }}
-                                    {{ product['productName'] }}
-                                    <p>
-                            {% endfor %}
-
-                {% endfor %}
-
-    <hr>
-    <div> people invited:</div>
-    {% for userEvent in invitedUE %}
-        <div> {{ userEvent.myUser.username }}</div>
-    {% endfor %}
-
-    <hr>
-    <div> people accepted invitations:</div>
-    {% for userEvent in acceptedUE %}
-        <div> {{ userEvent.myUser.username }}</div>
-    {% endfor %}
-    <hr>
-
-    <div> recipes included:</div>
-    {% for recipeName, recipe in information %}
-        <a href="{{ path('nfq_nom_nom_recipe', {'id':recipe['id']}) }}">
-            {{ recipeName }}
-        </a>
-        <span>People eating: {{ recipe['totalUpvote'] }}</span>
-        <div id="recipeIngredients{{ recipe['id'] }}">
-            <ul class="list-group">
-                {% for product in recipe['products'] %}
-                    <li class="list-group-item">
-                        {{ product['quantityDisplay'] }}
-                        {{ product['quantityMeasure'] ? product['quantityMeasure'] : '' }}
-                        {{ product['productName'] }}
-                        <p>
-                            <span> BRINGING: </span>
-                            {% for bringer in product['bringers'] %}
-
-                        <p>
-                            <span> {{ bringer['name'] }} </span>
-                            {% if (bringer['quantity']!=0) %}
-                                <span>  ({{ bringer['quantity'] }} {{ product['quantityMeasure'] }})</span>
-                            {% endif %}
-                        </p>
-                            {% endfor %}
-                        {{ form_start(product['forma']) }}
-                        {{ form_widget(product['forma']) }}
-                        {{ form_rest(product['forma']) }}
-                        {{ form_end(product['forma']) }}
-                    </li>
-                {% endfor %}
-
-                <hr>
-            </ul>
-        </div>
-        {% endfor %}
-    <div class="endPhase">
-        {% if isHost %}
-            <a class="buttonBox" href="{{ path('Nfq_nom_nom_regress_event',
-            {'eventId': event.id}) }}">Go back to Recipe suggestion</a>
-            <a class="buttonBox" href="{{ path('Nfq_nom_nom_progress_event',
-            {'eventId': event.id}) }}">Finalize event</a>
-        {% elseif currentUserEvent.readyToPhaseThree == 0 %}
-            <hr>
-            <a class="buttonBox" href="{{ path('Nfq_nom_nom_ready_to_progress',
-            {'eventId': event.id}) }}">Ready To Finalize Event</a>
-        {% endif %}
-        <div class="circle" title="people ready to progress"> {{ readyPeople['ready'] }}/{{ readyPeople['all'] }}</div>
-        {#generated content displaying#}
-
-
-    <hr>
-    {% if isHost %}
-        <a class="btn btn-large btn-primary" href="{{ path('Nfq_nom_nom_regress_event',
-        {'eventId': event.id}) }}">Go back to Recipe suggestion</a>
-        <a class="btn btn-large btn-primary" href="{{ path('Nfq_nom_nom_progress_event',
-        {'eventId': event.id}) }}">Finalize event</a>
-    {% elseif currentUserEvent.readyToPhaseThree == 0 %}
         <hr>
-        <a class="btn btn-large btn-primary" href="{{ path('Nfq_nom_nom_ready_to_progress',
-        {'eventId': event.id}) }}">Ready To Finalize Event</a>
-    {% endif %}
-    <div class="circle" title="people ready to progress"> {{ readyPeople['ready'] }}/{{ readyPeople['all'] }}</div>
-    {#generated content displaying#}
+        <div class="endPhase">
+            Ready:
+            <div class="circle" title="people ready to progress"> {{ readyPeople['ready'] }}
+                /{{ readyPeople['all'] }}</div>
+            {% if isHost %}
+                <div class="but">
+                    <a class="buttonBox" href="{{ path('Nfq_nom_nom_regress_event',
+                    {'eventId': event.id}) }}">Go back to Recipe suggestion</a></div>
+                <div class="but">
+                    <a class="buttonBox" href="{{ path('Nfq_nom_nom_progress_event',
+                    {'eventId': event.id}) }}">Finalize event</a></div>
+
+            {% elseif currentUserEvent.readyToPhaseThree == 0 %}
+                <hr>
+                <a class="buttonBox" href="{{ path('Nfq_nom_nom_ready_to_progress',
+                {'eventId': event.id}) }}">Ready To Finalize Event</a>
+            {% endif %}
+
+            {#generated content displaying#}
+        </div>
+    </div>
+    <div id="rightArea">
+        <div id="actionBox">
+
+            <hr>
+            <div><h5>People invited:</h5></div>
+            {% for userEvent in invitedUE %}
+                <div> {{ userEvent.myUser.username }}</div>
+            {% endfor %}
+
+            <hr>
+            <div> people accepted invitations:</div>
+            {% for userEvent in acceptedUE %}
+                <div> {{ userEvent.myUser.username }}</div>
+            {% endfor %}
+            <hr>
+
+            <div> recipes included:</div>
+            {% for recipeName, recipe in information %}
+                <a href="{{ path('nfq_nom_nom_recipe', {'id':recipe['id']}) }}">
+                    {{ recipeName }}
+                </a>
+                <span>People eating: {{ recipe['totalUpvote'] }}</span>
+                <div id="recipeIngredients{{ recipe['id'] }}">
+                    <ul class="list-group" style="background: #F0B537">
+                        {% for product in recipe['products'] %}
+                            <li class="list-group-item">
+                                {{ product['quantityDisplay'] }}
+                                {{ product['quantityMeasure'] ? product['quantityMeasure'] : '' }}
+                                {{ product['productName'] }}
+                                <p>
+                                    <span> BRINGING: </span>
+                                    {% for bringer in product['bringers'] %}
+
+                                <p>
+                                    <span> {{ bringer['name'] }} </span>
+                                    {% if (bringer['quantity']!=0) %}
+                                        <span>  ({{ bringer['quantity'] }} {{ product['quantityMeasure'] }})</span>
+                                    {% endif %}
+                                </p>
+                                {% endfor %}
+                                {{ form_start(product['forma']) }}
+                                {{ form_widget(product['forma']) }}
+                                {{ form_rest(product['forma']) }}
+                                {{ form_end(product['forma']) }}
+                            </li>
+                        {% endfor %}
+
+                        <hr>
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

@@ -1,12 +1,7 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
 
 {% trans_default_domain 'FOSUserBundle' %}
-{% block stylesheets %}
-    {% stylesheets filter="compass"
-    "@NfqNomNomBundle/Resources/public/css/account.css" %}
-    <link rel="stylesheet" href="{{ asset_url }}"/>
-    {% endstylesheets %}
-{% endblock %}
+
 {% block content %}
     <div id="profileBox">
         <div id="dataBox">
