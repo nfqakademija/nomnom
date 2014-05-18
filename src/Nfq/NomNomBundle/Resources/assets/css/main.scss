@@ -7,6 +7,7 @@
   line-height: 100px;
   text-align: center;
   color: #00aa00;
+  margin:0 auto;
 }
 
 //TODO a tag ar invisible unless yyou hover over them, this is a temporar fix
@@ -156,7 +157,6 @@ label {
 .buttonBox{
   background: #830C0C;
   padding: 6px;
-
   border-radius: 10px;
   color: rgb(255, 234, 208);
   width: 155px;
@@ -169,33 +169,32 @@ label {
 }
 
 .createdDate{
-  float: left;
-  width: 560px;
+  width: 123px;
   height: 40px;
-  text-align: center;
-
+  margin: 0 auto;
 }
 .eventDate{
-  width: 560px;
+  width: 123px;
   height: 40px;
-  float: right;
-  text-align: center;
-
+  margin: 0 auto;
 }
 .DateBox{
   padding:10px;
 
 }
 .personsBox{
-  width: 1200px;
+
   padding: 40px;
   background: none repeat scroll 0 0 #F0B537;
 
 }
 .recipesBox{
-  width: 1200px;
-  padding: 0 40px;
+
   background: none repeat scroll 0 0 #F0B537;
+}
+
+.recipesBox a{
+  color: white;
 }
 .infoBox{
   text-align: center;
@@ -208,14 +207,14 @@ label {
 }
 
 #actionBox{
-  width:1200px;
+
   height:auto;
   background: none repeat scroll 0 0 #F0B537;
 }
 
 
 .endPhase{
-  width:1200px;
+  width:299px;
   height:auto;
   background: none repeat scroll 0 0 #F0B537;
   padding: 20px;
@@ -277,14 +276,14 @@ label {
   margin: 0 auto;
 }
 
-#activeEvent{
+.activeEvent{
   width: 600px;
   height: 400px;
   float: left;
 
 }
 
-#activeEvent a{
+.activeEvent a{
   color: #6e2b00;
   text-decoration: solid ;
 
@@ -296,15 +295,18 @@ label {
   margin: 2px;
   padding: 2px;
   text-align: center;
+  width:200px;
 }
 
-#endedEvent{
+.endedEvent{
   width: 600px;
   height: 400px;
   float:right;
 }
-
-#endedEvent a{
+#eventManagerBox hr{
+  width:300px;
+}
+.endedEvent a{
   color:#6e2b00;
   text-decoration: solid ;
 }
@@ -423,7 +425,6 @@ body{
   background: #F0B537;
   border:none;
 }
-
 
 
 #logo{
@@ -613,7 +614,7 @@ h4 {
 
 
 #recipeBoxSmall {
-  height: 325px;
+  height: 355px;
   width: 250px;
   float: left;
   margin: 40px;
@@ -649,7 +650,7 @@ h2 {
 }
 
 #textBox {
-  height: 55px;
+  height: 85px;
   margin: 10px;
   text-align: center;
   width: 230px;
@@ -1390,3 +1391,126 @@ html[dir="rtl"] .select2-search-choice-close {
   -o-transition: opacity 0.2s;
   transition: opacity 0.2s; }
 
+#forgetPass a  {
+  color: white;
+  text-decoration: none;
+}
+
+#forgetPass a:hover{
+  color: #7E0E05;
+  text-decoration: none;
+}
+
+#forgetPass{
+  width: 127px;
+  padding: 5px;
+  margin: 5px 0;
+}
+
+a {
+
+}
+
+a:hover{
+  background: white;
+  color:#7E0E05;
+  text-decoration: none;
+  border-color: #7E0E05 ;
+  border:solid 1px;
+}
+
+.column{
+  width:600px;
+}
+
+.hour {
+  padding:5px;
+}
+
+
+.minute {
+  padding:5px;
+}
+
+.eventName{
+  margin: 0 auto;
+  width: 200px;
+}
+
+#leftArea{
+  width:300px;
+  float: left;
+  background: #F0B537;
+  text-align: center;
+  border-right: 1px solid #7E0E05;
+  border-bottom: 1px solid #7E0E05;
+  ;
+}
+
+#rightArea{
+  width:900px;
+  background: #F0B537;
+  float: left;
+  padding: 0 50px;
+  text-align: center;
+}
+
+#rightArea hr{
+  width:200px;
+}
+
+.recipeButtonBox{
+  padding: 40px;
+}
+
+#leftArea br{
+  width:10px;
+}
+.but{
+  margin:10px;
+}
+.list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+}
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  background-color: #F0B537;
+}
+.list-group-item:first-child {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.list-group-item > .badge {
+  float: right;
+}
+.list-group-item > .badge + .badge {
+  margin-right: 5px;
+}
+a.list-group-item {
+  color: #555;
+}
+a.list-group-item .list-group-item-heading {
+  color: #333;
+}
+a.list-group-item:hover,
+a.list-group-item:focus {
+  text-decoration: none;
+  background-color: #f5f5f5;
+}
+a.list-group-item.active,
+a.list-group-item.active:hover,
+a.list-group-item.active:focus {
+  z-index: 2;
+  color: #fff;
+  background-color: #428bca;
+  border-color: #428bca;
+}

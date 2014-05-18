@@ -2,12 +2,7 @@
 
 
 {% trans_default_domain 'FOSUserBundle' %}
-{% block stylesheets %}
-    {% stylesheets filter="compass"
-    "@NfqNomNomBundle/Resources/public/css/account.css" %}
-    <link rel="stylesheet" href="{{ asset_url }}"/>
-    {% endstylesheets %}
-{% endblock %}
+
 {% block content %}
     <div id="loginBox">
 
@@ -26,7 +21,9 @@
                 </label>
                 <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}"/>
             </form>
-            <a href="{{ path('Nfq_forgot_password') }}">Recover password</a>
+            <div id="forgetPass">
+                <a href="{{ path('Nfq_forgot_password') }}">Recover password</a>
+            </div>
         </div>
     </div>
 {% endblock content %}
