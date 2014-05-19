@@ -54,9 +54,9 @@ class TestController extends Controller
                     $form->getData()['deserts'],
                     $form->getData()['soups'],
                     $form->getData()['servfrom'],
-                    $form->getData()['servto']
-                    //$form->getData()['prepfrom'],
-                    //$form->getData()['prepto']
+                    $form->getData()['servto'],
+                    $form->getData()['prepfrom'],
+                    $form->getData()['prepto']
                 );
 
                 return $this->render ('NfqNomNomBundle:Default:test.html.twig', array('error' => '', 'forma' => $form->createView(), 'recipes' => $ret));

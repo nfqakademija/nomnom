@@ -51,3 +51,13 @@ services:
                     class: Nfq\NomNomBundle\Form\Type\AddToBrowseRecipesType
                     tags:
                         - { name: form.type, alias: addtobrowserecipes }
+
+     nfq_nom_nom.form.type.displaysearch:
+                         class: Nfq\NomNomBundle\Form\Type\DisplaySearchType
+                         tags:
+                             - { name: form.type, alias: displaysearch }
+
+     nfq_nom_nom.form.type.displayrecipe:
+                              class: Nfq\NomNomBundle\Form\Type\DisplayRecipeType
+                              tags:
+                                  - { name: form.type, alias: displayrecipe }
