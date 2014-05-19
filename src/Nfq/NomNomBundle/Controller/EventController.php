@@ -636,7 +636,7 @@ class EventController extends Controller
                         $em->persist($newNotification);
                     }
 
-                    if ($i - 1 < count($userEventsIds)) {
+                    if ($i + 1 < count($userEventsIds)) {
                         $i++;
                     } else {
                         $i = 0;
