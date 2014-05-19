@@ -176,4 +176,28 @@ class MyUserEventRepository extends EntityRepository
 
         return $myUserEventIds;
     }
+
+    public function getActiveUserEventIdsByEvent($eventId)
+    {
+
+        $myUserEvents =  $this->getEntityManager()
+            ->createQuery('
+                SELECT mue
+                FROM NfqNomNomBundle:MyUserEvent mue
+                WHERE
+                  mue.myEvent = :myEvent AND
+                  (mue.invitationStatus = 0 OR mue.invitationStatus = 2)
+            ')
+            ->setParameter('myEvent', $eventId);
+
+        $myUserEvents = $myUserEvents->getResult();
+
+        $myUserEventIds = array();
+
+        foreach($myUserEvents as $myUserEvent) {
+            $myUserEventIds[] = $myUserEvent->getId();
+        }
+
+        return $myUserEventIds;
+    }
 }

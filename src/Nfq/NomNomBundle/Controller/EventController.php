@@ -606,7 +606,7 @@ class EventController extends Controller
 
             $AllEventUsers = $repUE->findUsersByEvent($myEvent->getId());
             $i = 0;
-            $userEventsIds = $repUE->getUserEventIdsByEvent($eventId);
+            $userEventsIds = $repUE->getActiveUserEventIdsByEvent($eventId);
             $notificationName = 'assignedProduct';
 
             foreach ($recipeProducts as $recipeProduct) {
