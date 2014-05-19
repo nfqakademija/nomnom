@@ -209,6 +209,7 @@ label {
 }
 .readyBox{
   width: 100%;
+  margin: 20px 0;
 }
 
 #actionBox{
@@ -425,7 +426,6 @@ body{
   width: 1200px;
   margin: 0 auto;
   background-image: url($image_path + '2c22.jpg');
-  /*border: 1px solid #5A1F1F;*/
   height: 42px;
   background-repeat: no-repeat;
   background-size: cover;
@@ -1504,9 +1504,10 @@ a {
   position: relative;
   display: block;
   padding: 10px 15px;
-  margin-bottom: -1px;
   background-color: #F0B537;
   text-decoration: none;
+  width: 280px;
+  margin: 0 auto;
 }
 .list-group-item:first-child {
   border-top-left-radius: 4px;
@@ -1707,7 +1708,7 @@ h5 {
 }
 
 .required{
-  text-align: center;
+  text-align: left;
   margin: 0 auto;
   width: 870px;
 }
@@ -1760,4 +1761,10 @@ h5 {
 .nearEndList a, .planEndingList a, .invitationList a, .assignList a{
   text-decoration: none;
   color:black;
+}
+
+.required2 {
+  text-align: left;
+  margin: 0 auto;
+  width: 870px;
 }
