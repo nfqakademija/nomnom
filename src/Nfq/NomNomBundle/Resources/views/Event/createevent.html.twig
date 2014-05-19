@@ -7,8 +7,8 @@
     {{ form_javascript(forma) }}
 {% endblock %}
 {% block content %}
-    {{ error }}
     <div id="myEvent">
+        {{ error }}
         {{ form_start(forma) }}
         {{ form_errors(forma) }}
         {{ form_row(forma.eventName) }}
