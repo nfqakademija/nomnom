@@ -5,11 +5,12 @@
         {% javascripts '@NfqNomNomBundle/Resources/public/js/select2.js'
                        '@NfqNomNomBundle/Resources/public/js/main.js'
                        '@NfqNomNomBundle/Resources/public/js/slippry.min.js'
-                       '@NfqNomNomBundle/Resources/public/js/jquery.timepicker.min.js'%}
+                       '@NfqNomNomBundle/Resources/public/js/jquery.timepicker.min.js'
+                       '@NfqNomNomBundle/Resources/public/js/jquery.simple-dtpicker.js'%}
         <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
 
-        {% stylesheets 'css/*' filter='cssrewrite' %}
+        {% stylesheets 'bundles/nfqnomnom/css/*' filter='cssrewrite' %}
         <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
 

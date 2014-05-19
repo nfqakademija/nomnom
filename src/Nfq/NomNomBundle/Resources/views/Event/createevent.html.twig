@@ -1,9 +1,5 @@
 {% extends "NfqNomNomBundle:Default:index.html.twig" %}
 
-{% block javascripts %}
-    {{ parent() }}
-    {{ form_javascript(forma) }}
-{% endblock %}
 {% block content %}
     <div id="myEvent">
         {{ error }}
@@ -18,4 +14,14 @@
         {{ form_end(forma) }}
     </div>
     {#generated content displaying#}
+    <script>
+        jQuery(document).ready(function(){
+            jQuery('#event_eventDate').appendDtpicker({
+                "minuteInterval": 15
+            });
+            jQuery('#event_eventPlanningDueDate').appendDtpicker({
+                "minuteInterval": 15
+            });
+        });
+    </script>
 {% endblock %}
