@@ -50,7 +50,18 @@
     {% endembed %}
 
 </div>
+
     {% for recipe in recipes %}
-        <a href='{{ path('nfq_nom_nom_recipe', {'id': recipe.getId()}) }}'>{{ recipe.recipeName }}</a><br />
+        <a href="{{ path('nfq_nom_nom_recipe', {'id': recipe.getId()}) }}">
+            <div id="recipeBoxSmall">
+                <div id="recipePhotoBoxSmall"
+                     style="background-image: url({{ vich_uploader_asset(recipe, 'image') }})">
+                </div>
+                <div id="textBox">
+                    {{ recipe.getRecipeName() }}
+                </div>
+            </div>
+        </a>
     {% endfor %}
+
 {% endblock content %}
