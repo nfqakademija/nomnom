@@ -53,17 +53,18 @@
             {% endfor %}
 
             <hr>
-            <div> people accepted invitations:</div>
+            <div><h5>People accepted invitations:</h5> </div>
             {% for userEvent in acceptedUE %}
                 <div> {{ userEvent.myUser.username }}</div>
             {% endfor %}
             <hr>
 
-            <div> recipes included:</div>
+            <div><h5>Recipes included:</h5> </div>
             {% for recipeName, recipe in information %}
                 <a href="{{ path('nfq_nom_nom_recipe', {'id':recipe['id']}) }}">
                     {{ recipeName }}
                 </a>
+                <br>
                 <span>People eating: {{ recipe['totalUpvote'] }}</span>
                 <div id="recipeIngredients{{ recipe['id'] }}">
                     <ul class="list-group" style="background: #F0B537">
@@ -79,7 +80,7 @@
                                 <p>
                                     <span> {{ bringer['name'] }} </span>
                                     {% if (bringer['quantity']!=0) %}
-                                        <span>  ({{ bringer['quantity'] }} {{ product['quantityMeasure'] }})</span>
+                                        <span>  ({{ bringer['quantity'] }}{{ product['quantityMeasure']}})</span>
                                     {% endif %}
                                 </p>
                                 {% endfor %}

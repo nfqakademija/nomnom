@@ -79,6 +79,7 @@ label {
 
 #profileButton{
   margin: 0 20px;
+  text-decoration: none;
 }
 
 #loginBox{
@@ -107,6 +108,7 @@ label {
   padding: 6px;
   border-radius: 10px;
   color: white;
+  text-decoration: none;
 }
 
 .profileButton a{
@@ -132,7 +134,7 @@ label {
 
   margin: 0 auto;
   width: 1200px;
-  background: #fdf59a;
+  background: #F0B537;
 }
 
 #createdRecipe{
@@ -160,6 +162,7 @@ label {
   border-radius: 10px;
   color: rgb(255, 234, 208);
   width: 155px;
+  text-decoration: none;
 }
 
 .eventBox{
@@ -169,12 +172,12 @@ label {
 }
 
 .createdDate{
-  width: 123px;
+  width: 150px;
   height: 40px;
   margin: 0 auto;
 }
 .eventDate{
-  width: 123px;
+  width: 150px;
   height: 40px;
   margin: 0 auto;
 }
@@ -195,6 +198,7 @@ label {
 
 .recipesBox a{
   color: white;
+  text-decoration: none;
 }
 .infoBox{
   text-align: center;
@@ -214,14 +218,14 @@ label {
 
 
 .endPhase{
-  width:299px;
+  width:260px;
   height:auto;
   background: none repeat scroll 0 0 #F0B537;
   padding: 20px;
 }
 
 .addNew{
-  width:1200px;
+  width: 1160px;
   height:auto;
   background: none repeat scroll 0 0 #F0B537;
   padding: 20px;
@@ -262,7 +266,9 @@ label {
 .eventButton{
 
   width: 200px;
+  height: 25px;
   margin: 0 auto;
+  padding: 10px;
 }
 
 .eventButton a{
@@ -278,14 +284,21 @@ label {
 
 .activeEvent{
   width: 600px;
-  height: 400px;
+  height: auto;
   float: left;
-
+  background: #F0B537;
 }
 
 .activeEvent a{
   color: #6e2b00;
-  text-decoration: solid ;
+  text-decoration: none ;
+
+}
+
+.activeEvent a:hover{
+  color: #6e2b00;
+  text-decoration: none ;
+  background: #ffce1b;
 
 }
 
@@ -298,10 +311,20 @@ label {
   width:200px;
 }
 
+.endedEventBox{
+  border: 1px solid;
+  border-radius: 10px;
+  margin: 2px;
+  padding: 2px;
+  text-align: center;
+  width:200px;
+}
+
 .endedEvent{
   width: 600px;
-  height: 400px;
+  height: auto;
   float:right;
+  background: #F0B537;
 }
 #eventManagerBox hr{
   width:300px;
@@ -401,7 +424,7 @@ body{
   width: 1200px;
   margin: 0 auto;
   background-image: url($image_path + '2c22.jpg');
-  border: 1px solid #5A1F1F;
+  /*border: 1px solid #5A1F1F;*/
   height: 42px;
   background-repeat: no-repeat;
   background-size: cover;
@@ -504,12 +527,15 @@ body{
   font-family: "Lucida Sans Unicode";
   font-size: 17px;
   font-style: italic;
-  height: auto;
+  height: 360px;
   margin: 0 auto;
-  width: 500px;
   padding: 10px;
   -moz-column-width: 250px;
   -webkit-column-width: 250px;
+  -webkit-column-gap:20px; /* Chrome, Safari, Opera */
+  -moz-column-gap:20px; /* Firefox */
+  column-gap:20px;
+
 }
 
 #recipeIngredients ul {
@@ -634,7 +660,7 @@ h4 {
 
 #main {
   width: 1000px;
-  height: 1200px;
+  height: 1275px;
   margin: 0 auto;
 
 }
@@ -667,19 +693,20 @@ a {
 
 #pagination{
   text-align: center;
-  margin: 20px;
+  margin: 30px;
 }
 
 #pagination a{
   color:black;
   font-size: 16px;
+  text-decoration: none;
 }
 
 #backgroundRecipeList {
   background: #F0B537;
   width: 1200px;
   margin: 0 auto;
-  height: 1400px;
+  height: 1525px;
 }
 /*
 Version: 3.4.6 Timestamp: Sat Mar 22 22:30:15 EDT 2014
@@ -1415,13 +1442,7 @@ a {
 
 }
 
-a:hover{
-  background: white;
-  color:#7E0E05;
-  text-decoration: none;
-  border-color: #7E0E05 ;
-  border:solid 1px;
-}
+
 
 .column{
   width:600px;
@@ -1452,11 +1473,11 @@ a:hover{
 }
 
 #rightArea{
-  width:900px;
+  width:899px;
   background: #F0B537;
   float: left;
-  padding: 0 50px;
   text-align: center;
+  margin: 0 0 10px;
 }
 
 #rightArea hr{
@@ -1471,7 +1492,7 @@ a:hover{
   width:10px;
 }
 .but{
-  margin:10px;
+  margin:20px;
 }
 .list-group {
   padding-left: 0;
@@ -1625,4 +1646,65 @@ ul, ol {
   margin-bottom: 10px;
   margin-top: 0;
 }
+/*
+a:hover{
+  background: white;
+  color:#7E0E05;
+  text-decoration: none;
+  border-color: #7E0E05 ;
+  border:solid 1px;
+}*/
 
+#demo_wrapper{
+  width: 1200px;
+  margin: 0 auto;
+  background: #F0B537;
+}
+
+.text-center{
+  margin: 0 auto;
+  width: 122px;
+}
+
+.CRbuttonBox{
+  background-color: #830C0C;
+  border-color: #420606;
+  padding: 4px;
+  border-radius: 10px;
+  color: white;
+  text-decoration: none;
+  width: 200px;
+  margin: 10px;
+}
+
+#createrecipe_myRecipeProducts{
+  margin:0 auto;
+  padding: 2px;
+}
+
+#product_form_1,#product_form_2,#product_form_3,#product_form_4,#product_form_5,#product_form_6,#product_form_7,#product_form_8,
+#product_form_9,#product_form_10,#product_form_11,#product_form_12,
+#product_form_13,#product_form_14,#product_form_15,#product_form_16,#product_form_17,#product_form_18,#product_form_19,#product_form_20{
+  border: 1px solid;
+  padding: 1px 5px;
+  text-decoration: none;
+  background: #830C0C;
+  color: white;
+  border-radius: 5px;
+}
+
+h5 {
+  display: block;
+  font-size: 1em;
+  -webkit-margin-before: 1.67em;
+  -webkit-margin-after: 1.67em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  font-weight: bold;
+}
+
+.required{
+  text-align: center;
+  margin: 0 auto;
+  width: 870px;
+}
