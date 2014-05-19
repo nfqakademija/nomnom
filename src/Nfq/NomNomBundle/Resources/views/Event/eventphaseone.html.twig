@@ -79,9 +79,9 @@
 
             <div id="leftArea">
                 <div class="DateBox">
-                    <div class="createdDate">
-                        <div>Event creation date:</div>
-                        {{ event.dateCreated.date }}
+                    <div class="endPlanningDate">
+                        <div>Event planning end date:</div>
+                        {{ event.eventPlanningDueDate.date }}
                     </div>
                     <div class="eventDate">
                         <div>Event date:</div>
@@ -95,7 +95,7 @@
                 </div>
                 <div class="infoBox">You can start inviting people and suggesting recipes:</div>
 
-                Ready:
+                <span>Ready:</span>
 
                 {% if isHost %}
                 <div class="circle" title="people ready to progress"> {{ readyPeople['ready'] }}
