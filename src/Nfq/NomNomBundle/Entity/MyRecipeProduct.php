@@ -36,8 +36,12 @@ class MyRecipeProduct
     private $myProduct;
 
     /**
-     * @var float
      *
+     * @Assert\Range(
+     *      min = 0.1,
+     *      max = 10000
+     * )
+     * @var float
      *
      * @ORM\Column(name="quantity", type="float")
      */
