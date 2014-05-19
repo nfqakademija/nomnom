@@ -2,35 +2,28 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {% stylesheets '@NfqNomNomBundle/Resources/public/css/createRecipe.css' %}
-    <link rel="stylesheet" href="{{ asset_url }}" type="text/css"/>
-    {% endstylesheets %}
 {% endblock %}
 {% block content %}
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    {% javascripts '@NfqNomNomBundle/Resources/public/js/*' %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
     <script>
-        var $addTagLink = $('<a href="#" class="add_product_link">Add a product</a>');
-        var $object = "#createrecipe_myRecipeCategory";
-        var $collectionHolder;
-        var $timePickingElementId = '#createrecipe_preparationTime';
-        var $numberOfServingsElementId = '#createrecipe_numberOfServings';
+        var addTagLink = '<a href="#" class="add_product_link">Add a product</a>';
+        var object = "#createrecipe_myRecipeCategory";
+        var collectionHolder;
+        var timePickingElementId = '#createrecipe_preparationTime';
+        var numberOfServingsElementId = '#createrecipe_numberOfServings';
 
-        $(document).ready(function () {
-            $collectionHolder = $("#createrecipe_myRecipeProducts");
-            $collectionHolder.prepend($addTagLink);
-            $collectionHolder.data('index', $collectionHolder.find(':input').length);
-            addGenemuFunctionality($object);
-            $('button , .add_product_link ').addClass("btn btn-primary");
-            $('#createrecipe_preparationTime').attr('placeholder', 'hh:mm');
+        jQuery(document).ready(function () {
+            collectionHolder = jQuery("#createrecipe_myRecipeProducts");
+            collectionHolder.prepend(addTagLink);
+            collectionHolder.data('index', collectionHolder.find(':input').length);
+            addGenemuFunctionality(object);
+            jQuery('button , .add_product_link ').addClass("btn btn-primary");
+            jQuery('#createrecipe_preparationTime').attr('placeholder', 'hh:mm');
 
-            $($timePickingElementId).timepicker({ 'timeFormat': 'G:i',
+            jQuery(timePickingElementId).timepicker({ 'timeFormat': 'G:i',
                 'step': '1',
                 'minTime': '0:00'});
 
-            $($numberOfServingsElementId)
+            jQuery(numberOfServingsElementId)
                     .attr('type', "number")
                     .attr('min', '1')
                     .timepicker({ 'timeFormat': 'G',
@@ -38,12 +31,12 @@
                         'minTime': '1:00',
                         'maxTime': '20:00'});
 
-            $addTagLink.on('click', function (e) {
+            jQuery('.add_product_link').on('click', function (e) {
                 // prevent the link from creating a "#" on the URL
                 e.preventDefault();
 
                 // add a new tag form (see next code block)
-                addProductForm($collectionHolder);
+                addProductForm(collectionHolder);
             });
         });
     </script>

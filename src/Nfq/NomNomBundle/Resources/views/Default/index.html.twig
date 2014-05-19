@@ -2,7 +2,10 @@
 {% block body %}
     {% block header %}
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-        {% javascripts '@NfqNomNomBundle/Resources/public/js/*' %}
+        {% javascripts '@NfqNomNomBundle/Resources/public/js/select2.js'
+                       '@NfqNomNomBundle/Resources/public/js/main.js'
+                       '@NfqNomNomBundle/Resources/public/js/slippry.min.js'
+                       '@NfqNomNomBundle/Resources/public/js/jquery.timepicker.min.js'%}
         <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
 
@@ -15,27 +18,7 @@
         <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
 
-        <script>
-            jQuery(document).ready(function () {
-                var thumbs = jQuery('#thumbnails').slippry({
-                    // general elements & wrapper
-                    slippryWrapper: '<div class="slippry_box thumbnails" />',
-                    // options
-                    transition: 'fade',
-                    speed: 1000,
-                onSlideBefore: function (el, index_old, index_new) {
-                    jQuery('.thumbs a img').removeClass('active');
-                    jQuery('img', jQuery('.thumbs a')[index_new]).addClass('active');
-                }
-            });
 
-            jQuery('.thumbs a').click(function () {
-                thumbs.goToSlide($(this).data('slide'));
-                return false;
-            });
-            });
-
-        </script>
         <div id="logoBox">
             <div id="logo">
 
@@ -84,6 +67,27 @@
 
     {% block content %}
         {{ error }}
+        <script>
+        jQuery(document).ready(function () {
+            var thumbs = jQuery('#thumbnails').slippry({
+                // general elements & wrapper
+                slippryWrapper: '<div class="slippry_box thumbnails" />',
+                // options
+                transition: 'fade',
+                speed: 1000,
+                onSlideBefore: function (el, index_old, index_new) {
+                    jQuery('.thumbs a img').removeClass('active');
+                    jQuery('img', jQuery('.thumbs a')[index_new]).addClass('active');
+                }
+            });
+
+            jQuery('.thumbs a').click(function () {
+                thumbs.goToSlide($(this).data('slide'));
+                return false;
+            });
+        });
+
+    </script>
         <div id="quoteBody">
             <div id="quote">
 
@@ -96,32 +100,32 @@
                 <ul id="thumbnails">
                     <li><a href="#slide1">
                             {% image '@NfqNomNomBundle/Resources/public/images/food1.jpg' %}
-                            <img src="{{ asset_url }}" alt="Example"/>
+                            <img src="{{ asset_url }}"/>
                             {% endimage %}
                         </a></li>
                     <li><a href="#slide2">
                             {% image '@NfqNomNomBundle/Resources/public/images/food2.jpg' %}
-                            <img src="{{ asset_url }}" alt="Example"/>
+                            <img src="{{ asset_url }}" />
                             {% endimage %}
                         </a></li>
                     <li><a href="#slide3">
                             {% image '@NfqNomNomBundle/Resources/public/images/food3.jpg' %}
-                            <img src="{{ asset_url }}" alt="Example"/>
+                            <img src="{{ asset_url }}" />
                             {% endimage %}
                         </a></li>
                     <li><a href="#slide4">
                             {% image '@NfqNomNomBundle/Resources/public/images/food4.jpg' %}
-                            <img src="{{ asset_url }}" alt="Example"/>
+                            <img src="{{ asset_url }}"/>
                             {% endimage %}
                         </a></li>
                     <li><a href="#slide5">
                             {% image '@NfqNomNomBundle/Resources/public/images/food5.jpg' %}
-                            <img src="{{ asset_url }}" alt="Example"/>
+                            <img src="{{ asset_url }}" />
                             {% endimage %}
                         </a></li>
                     <li><a href="#slide6">
                             {% image '@NfqNomNomBundle/Resources/public/images/food6.jpg' %}
-                            <img src="{{ asset_url }}" alt="Example"/>
+                            <img src="{{ asset_url }}"/>
                             {% endimage %}
                         </a></li>
                 </ul>
@@ -129,32 +133,32 @@
                     <ul class="thumbs">
                         <li><a href="#1" data-slide="1">
                                 {% image '@NfqNomNomBundle/Resources/public/images/food1.jpg' %}
-                                <img src="{{ asset_url }}" alt="Example"/>
+                                <img src="{{ asset_url }}" />
                                 {% endimage %}
                             </a></li>
                         <li><a href="#2" data-slide="2">
                                 {% image '@NfqNomNomBundle/Resources/public/images/food2.jpg' %}
-                                <img src="{{ asset_url }}" alt="Example"/>
+                                <img src="{{ asset_url }}"/>
                                 {% endimage %}
                             </a></li>
                         <li><a href="#3" data-slide="3">
                                 {% image '@NfqNomNomBundle/Resources/public/images/food3.jpg' %}
-                                <img src="{{ asset_url }}" alt="Example"/>
+                                <img src="{{ asset_url }}" />
                                 {% endimage %}
                             </a></li>
                         <li><a href="#4" data-slide="4">
                                 {% image '@NfqNomNomBundle/Resources/public/images/food4.jpg' %}
-                                <img src="{{ asset_url }}" alt="Example"/>
+                                <img src="{{ asset_url }}" />
                                 {% endimage %}
                             </a></li>
                         <li><a href="#5" data-slide="5">
                                 {% image '@NfqNomNomBundle/Resources/public/images/food5.jpg' %}
-                                <img src="{{ asset_url }}" alt="Example"/>
+                                <img src="{{ asset_url }}"/>
                                 {% endimage %}
                             </a></li>
                         <li><a href="#6" data-slide="6">
                                 {% image '@NfqNomNomBundle/Resources/public/images/food6.jpg' %}
-                                <img src="{{ asset_url }}" alt="Example"/>
+                                <img src="{{ asset_url }}"/>
                                 {% endimage %}
                             </a></li>
                     </ul>
