@@ -20,7 +20,7 @@
                     <div id="recipePhotoBoxSmall"
                          style="background-image: url({{ vich_uploader_asset(recipe, 'image') }})">
                     </div>
-                    <div id="textBox">
+                    <div id="textBox" title="{{ recipe.getRecipeName }}">
                         {{ recipe.getRecipeName() }}
                     </div>
                 </div>

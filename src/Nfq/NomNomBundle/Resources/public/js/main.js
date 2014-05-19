@@ -49,3 +49,18 @@ function addProductForm(collectionHolder) {
     addRemoveButtonListener(removeButton);
 }
 
+function animateForward(obj){
+    jQuery( obj ).animate({
+        opacity: 0
+    }, 500, function() {
+        animateBackward(obj)
+    });
+}
+
+function animateBackward(obj){
+    jQuery( obj ).animate({
+        opacity: 1
+    }, 500, function() {
+        animateForward(obj)
+    });
+}

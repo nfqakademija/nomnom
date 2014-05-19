@@ -41,12 +41,15 @@
                         <li>
                             {% if notificationCheck(app.user) is empty %}
                                 <a {% if app.request.attributes.get('_route') == 'Nfq_nom_nom_notifications' %} class="active"{% endif %} href="{{ path('Nfq_nom_nom_notifications') }}">
-                                    <span class="glyphicon glyphicon-envelope "
-                                          title="there are new notifications"></span>
+                                    {% image '@NfqNomNomBundle/Resources/public/images/newbell.png' %}
+                                    <img class='notifications' src="{{ asset_url }}" />
+                                    {% endimage %}
                                 </a>
                             {% else %}
                                 <a {% if app.request.attributes.get('_route') == 'Nfq_nom_nom_notifications' %} class="active"{% endif %} href="{{ path('Nfq_nom_nom_notifications') }}">
-                                    <span class="glyphicon glyphicon-envelope new-notifications"></span>
+                                    {% image '@NfqNomNomBundle/Resources/public/images/newbell.png' %}
+                                    <img class='new-notifications' src="{{ asset_url }}" />
+                                    {% endimage %}
                                 </a>
                             {% endif %}
 
@@ -69,6 +72,8 @@
         {{ error }}
         <script>
         jQuery(document).ready(function () {
+
+                animateForward(".new-notifications");
             var thumbs = jQuery('#thumbnails').slippry({
                 // general elements & wrapper
                 slippryWrapper: '<div class="slippry_box thumbnails" />',

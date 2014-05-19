@@ -29,8 +29,9 @@ label {
   margin: 0 auto;
 }
 //for notification button
-.new-notifications {
-  color: #ffd157;
+.notifications, .new-notifications{
+  width: 18px;
+  height: 18px;
 }
 //new-sub-notifications for notifications links
 .ns-notifications{
@@ -676,7 +677,7 @@ h2 {
 }
 
 #textBox {
-  height: 85px;
+  height: 60px;
   margin: 10px;
   text-align: center;
   width: 230px;
@@ -684,6 +685,7 @@ h2 {
   font-style: italic;
   font-family: "Lucida Sans Unicode";
   color: black;
+  text-overflow: ellipsis;
 }
 /*
 a {
