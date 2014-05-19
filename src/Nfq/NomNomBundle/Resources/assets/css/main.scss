@@ -249,11 +249,11 @@ label {
 }
 
 #notificationsBox{
-  width:1200px;
-  height:auto;
+  width: 1000px;
+  height: auto;
   background: none repeat scroll 0 0 #F0B537;
-  padding: 20px;
-  margin:0 auto;
+  padding: 100px;
+  margin: 0 auto;
 }
 
 #eventManagerBox{
@@ -488,7 +488,7 @@ body{
 }
 
 #quote{
-  font-size: 17px;
+  font-size: 22px;
   font-style: italic;
   padding: 90px;
   text-align: center;
@@ -1506,6 +1506,7 @@ a {
   padding: 10px 15px;
   margin-bottom: -1px;
   background-color: #F0B537;
+  text-decoration: none;
 }
 .list-group-item:first-child {
   border-top-left-radius: 4px;
@@ -1709,4 +1710,54 @@ h5 {
   text-align: center;
   margin: 0 auto;
   width: 870px;
+}
+.notifField{
+  text-align: center;
+  width: 800px;
+  margin: 0 auto;
+}
+
+.nearEndList{
+  text-decoration: none;
+  border: 1px solid;
+  width: 600px !important;
+  margin: 0 auto;
+  padding: 20px;
+  color: black;
+  background: #fbfff0;
+}
+
+.planEndingList{
+  text-decoration: none;
+  border: 1px solid;
+  width: 600px !important;
+  margin: 0 auto;
+  padding: 20px;
+  color: black;
+  background: #d8d7a8;
+}
+
+.invitationList{
+  text-decoration: none;
+  border: 1px solid;
+  width: 600px !important;
+  margin: 0 auto;
+  padding: 20px;
+  color: black;
+  background: #ad9d3b;
+}
+
+.assignList{
+  text-decoration: none;
+  border: 1px solid;
+  width: 600px !important;
+  margin: 0 auto;
+  padding: 20px;
+  color: black;
+  background: #b3781e;
+}
+
+.nearEndList a, .planEndingList a, .invitationList a, .assignList a{
+  text-decoration: none;
+  color:black;
 }
