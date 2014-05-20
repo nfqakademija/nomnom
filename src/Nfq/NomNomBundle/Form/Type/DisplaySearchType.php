@@ -4,6 +4,8 @@
 namespace Nfq\NomNomBundle\Form\Type;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Nfq\NomNomBundle\Form\EventListener\AddFieldNumberSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -21,10 +23,7 @@ class DisplaySearchType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('displayrecipe', 'collection',
-        array('type' => new DisplayRecipeType(),
-            'allow_add' => true,
-            'allow_delete' => true,))
-        ->add('create', 'submit');
+        $builder->addEventSubscriber(new AddFieldNumberSubscriber());
+        $builder->add('selectSELECT', 'submit');
     }
 }

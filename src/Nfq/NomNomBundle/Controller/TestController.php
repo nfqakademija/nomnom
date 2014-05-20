@@ -11,6 +11,7 @@ namespace Nfq\NomNomBundle\Controller;
 use Nfq\NomNomBundle\Entity\MyNotification;
 use Nfq\NomNomBundle\Entity\MyNotificationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -39,14 +40,12 @@ class TestController extends Controller
 
 
 
-
         $form = $this->createForm('browserecipes');
 
         $form->handleRequest($request);
         $repository = $this->getDoctrine()->getRepository('NfqNomNomBundle:MyRecipe');
         $ret = NULL;
-        var_dump($form->getData()['servfrom']);
-        var_dump($form->getData()['servto']);
+
             if ($form->isSubmitted()) {
                 $ret = $repository->filterByCategory(
                     $form->getData()['side'],
@@ -59,11 +58,22 @@ class TestController extends Controller
                     $form->getData()['prepto']
                 );
 
-                return $this->render ('NfqNomNomBundle:Default:test.html.twig', array('error' => '', 'forma' => $form->createView(), 'recipes' => $ret));
+                return $this->render ('NfqNomNomBundle:Event:addrecipetoevent.html.twig', array(
+                    'error' => '',
+                    'forma' => $form->createView(),
+                    'recipes' => $ret,
+
+                ));
 
             }
 
-        return $this->render('NfqNomNomBundle:Default:test.html.twig', array('error' => '', 'forma' => $form->createView(),'recipes'=>$ret));
+        return $this->render('NfqNomNomBundle:Event:addrecipetoevent.html.twig', array(
+            'error' => '',
+            'forma' => $form->createView(),
+            'recipes'=>$ret,
+
+
+        ));
 
 
     }

@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class MyProductRepository extends EntityRepository
 {
+    public function checkExistence($name){
+        return $this->getEntityManager()->createQuery(
+            'SELECT p
+             FROM NfqNomNomBundle:MyProduct AS p
+             WHERE p.productName = :name
+            '
+        )->setParameter('name', $name)
+         ->getResult();
+    }
 }

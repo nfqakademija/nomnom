@@ -61,3 +61,8 @@ services:
                               class: Nfq\NomNomBundle\Form\Type\DisplayRecipeType
                               tags:
                                   - { name: form.type, alias: displayrecipe }
+
+     nfq_nom_nom.form.type.createproduct:
+                                   class: Nfq\NomNomBundle\Form\Type\CreateProductType
+                                   tags:
+                                       - { name: form.type, alias: createproduct }

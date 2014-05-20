@@ -10,11 +10,13 @@ namespace Nfq\NomNomBundle\Controller;
 
 use Nfq\NomNomBundle\Entity\MyRecipe;
 use Nfq\NomNomBundle\Entity\MyRecipeProduct;
+use Nfq\NomNomBundle\Form\Type\CreateproductType;
 use Nfq\NomNomBundle\Form\Type\CreateRecipeType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Nfq\NomNomBundle\Entity\MyUserEvent;
 use Nfq\NomNomBundle\Entity\MyEventRecipe;
 use Nfq\NomNomBundle\Entity\MyRecipeVote;
+use Nfq\NomNomBundle\Entity\MyProduct;
 use Symfony\Component\HttpFoundation\Request;
 
 class RecipesController extends Controller
@@ -187,6 +189,40 @@ class RecipesController extends Controller
                 }
             }
             return $this->render('NfqNomNomBundle:recipes:createRecipe.html.twig',
+                array('error' => '',
+                    'forma' => $form->createView()
+                ));
+        }
+        return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'log  in first'));
+    }
+
+    public function createProductAction(Request $request)
+    {
+        $user = $this->getUser();
+        if ($user) {
+            $product = new MyProduct();
+
+            $form = $this->createForm(new CreateProductType());
+            if ($request->isMethod("POST")) {
+                $form->submit($request);
+                if ($form->isValid()) {
+                    $em = $this->getDoctrine()->getManager();
+                    $repository = $this->getDoctrine()->getRepository('NfqNomNomBundle:MyProduct');
+                    $prod = ucfirst($form["productName"]->getData());
+                    if (!$repository->checkExistence($prod)){
+
+
+                        $product->setProductName($prod);
+                        $em->persist($product);
+                        $em->flush();
+                    }
+                    return $this->render('NfqNomNomBundle:recipes:createProduct.html.twig',
+                        array('error' => '',
+                            'forma' => $form->createView()
+                        ));
+                }
+            }
+            return $this->render('NfqNomNomBundle:recipes:createProduct.html.twig',
                 array('error' => '',
                     'forma' => $form->createView()
                 ));
