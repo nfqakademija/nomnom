@@ -67,7 +67,7 @@ class MyUserProductRepository extends EntityRepository
             $quantity = 0;
         }
 
-        return (int)$quantity;
+        return $quantity;
 
     }
 
