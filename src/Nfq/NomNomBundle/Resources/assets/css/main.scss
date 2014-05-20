@@ -165,6 +165,16 @@ label {
   width: 155px;
   text-decoration: none;
 }
+.buttonBox2{
+  background: #830C0C;
+  padding: 4px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: rgb(255, 234, 208);
+  display: block;
+  margin: 0 auto;
+
+}
 
 .eventBox{
   width: 1200px;
@@ -711,6 +721,12 @@ a {
 }
 
 #backgroundRecipeList {
+  background: #F0B537;
+  width: 1200px;
+  margin: 0 auto;
+  height: 1525px;
+}
+#backgroundRecipeList2 {
   background: #F0B537;
   width: 1200px;
   margin: 0 auto;
@@ -1674,6 +1690,11 @@ a:hover{
 .text-center{
   margin: 0 auto;
   width: 122px;
+}
+.text-center2{
+  margin: 0 auto;
+  width: 222px;
+  text-align: center;
 }
 
 .CRbuttonBox{

@@ -58,7 +58,7 @@ class TestController extends Controller
                     $form->getData()['prepto']
                 );
 
-                return $this->render ('NfqNomNomBundle:Event:addrecipetoevent.html.twig', array(
+                return $this->render ('NfqNomNomBundle:Default:test.html.twig', array(
                     'error' => '',
                     'forma' => $form->createView(),
                     'recipes' => $ret,
@@ -67,7 +67,7 @@ class TestController extends Controller
 
             }
 
-        return $this->render('NfqNomNomBundle:Event:addrecipetoevent.html.twig', array(
+        return $this->render('NfqNomNomBundle:Default:test.html.twig', array(
             'error' => '',
             'forma' => $form->createView(),
             'recipes'=>$ret,

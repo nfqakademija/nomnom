@@ -62,7 +62,9 @@
     });
 </script>
 <!-- Button that triggers the popup -->
-<button id="my-button">POP IT UP</button>
+    <div id="backgroundRecipeList2">
+
+    <button class="buttonBox" id="my-button">Filter Recipes</button>
 <!-- Element to pop up -->
 <div id="element_to_pop_up">
     <a class="b-close">x</a>
@@ -76,26 +78,28 @@
     {% endembed %}
 
 </div>
+
     {% if recipes !=false %}
     {% for recipe in recipes %}
 
 
+        <a href="{{ path('nfq_nom_nom_recipe', {'id': recipe.getId()}) }}">
             <div id="recipeBoxSmall">
                 <div id="recipePhotoBoxSmall"
                      style="background-image: url({{ vich_uploader_asset(recipe, 'image') }})">
                 </div>
-                <div id="textBox">
+                <div id="textBox" title="{{ recipe.getRecipeName }}">
                     {{ recipe.getRecipeName() }}
                 </div>
-
-                <label>SELECT:<input type="checkbox" name="{{ recipe.getId() }}"></label>
             </div>
+        </a>
 
 
     {% endfor %}
-        <button id="addrecipes">SUBMIT</button>
 
-        {{ form(forma2)}}
+
+
 
     {% endif %}
+    </div>
 {% endblock content %}

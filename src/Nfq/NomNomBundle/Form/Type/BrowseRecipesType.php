@@ -39,17 +39,21 @@ class BrowseRecipesType extends AbstractType
             ))
             ->add('servfrom', 'integer', array(
                 'label'     => 'Number of servings from',
+                'required'  => false,
             ))
             ->add('servto', 'integer', array(
                 'label'     => 'to',
+                'required'  => false,
             ))
             ->add('prepfrom', 'time', array(
                 'label'     => 'Preparation time from',
                 'input'     => 'string',
+
             ))
             ->add('prepto', 'time', array(
                 'label'     => 'to',
                 'input'     => 'string',
+
             ))
             ->add('Browse', 'submit')
             ;

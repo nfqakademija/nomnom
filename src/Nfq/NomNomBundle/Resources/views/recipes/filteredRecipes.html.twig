@@ -1,0 +1,25 @@
+{% extends "NfqNomNomBundle:Default:index.html.twig" %}
+{% block content %}
+{% if recipes !=false %}
+    {% for recipe in recipes %}
+
+
+        <div id="recipeBoxSmall">
+            <div id="recipePhotoBoxSmall"
+                 style="background-image: url({{ vich_uploader_asset(recipe, 'image') }})">
+            </div>
+            <div id="textBox">
+                {{ recipe.getRecipeName() }}
+            </div>
+
+            <label>SELECT:<input type="checkbox" name="{{ recipe.getId() }}"></label>
+        </div>
+
+
+    {% endfor %}
+    <button id="addrecipes">SUBMIT</button>
+
+    {{ form(forma2)}}
+
+{% endif %}
+{% endblock content %}

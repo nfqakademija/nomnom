@@ -48,6 +48,17 @@ class MyRecipeRepository extends EntityRepository
         $id3 = $id3 ? 'Deserts' : ' ';
         $id4 = $id4 ? 'Soups' : ' ';
 
+        if ($servfrom === NULL){
+            $servfrom = 0;
+        }
+        if ($servto === NULL){
+            $servto = 9999;
+        }
+
+
+        if ($prepto === '00:00:00'){
+            $prepto = '23:59:59';
+        }
         $query = $this->getEntityManager()
             ->createQuery(
                 'SELECT p

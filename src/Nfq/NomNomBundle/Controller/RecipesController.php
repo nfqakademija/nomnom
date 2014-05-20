@@ -215,9 +215,13 @@ class RecipesController extends Controller
                         $product->setProductName($prod);
                         $em->persist($product);
                         $em->flush();
+                        return $this->render('NfqNomNomBundle:recipes:createProduct.html.twig',
+                            array('error' => 'Product added.',
+                                'forma' => $form->createView()
+                            ));
                     }
                     return $this->render('NfqNomNomBundle:recipes:createProduct.html.twig',
-                        array('error' => '',
+                        array('error' => 'Product with this name already exists.',
                             'forma' => $form->createView()
                         ));
                 }
@@ -228,5 +232,48 @@ class RecipesController extends Controller
                 ));
         }
         return $this->render('NfqNomNomBundle:Default:index.html.twig', array('error' => 'log  in first'));
+    }
+
+    public function filterAction (Request $request) {
+
+
+
+
+        $form = $this->createForm('browserecipes');
+
+        $form->handleRequest($request);
+        $repository = $this->getDoctrine()->getRepository('NfqNomNomBundle:MyRecipe');
+        $ret = NULL;
+
+        if ($form->isSubmitted()) {
+            $ret = $repository->filterByCategory(
+                $form->getData()['side'],
+                $form->getData()['main'],
+                $form->getData()['deserts'],
+                $form->getData()['soups'],
+                $form->getData()['servfrom'],
+                $form->getData()['servto'],
+                $form->getData()['prepfrom'],
+                $form->getData()['prepto']
+            );
+
+            return $this->render ('NfqNomNomBundle:recipes:filteredRecipes.html.twig', array(
+                'error' => '',
+                'forma' => $form->createView(),
+                'recipes' => $ret,
+
+            ));
+
+        }
+
+        return $this->render('NfqNomNomBundle:recipes:recipe.html.twig', array(
+            'error' => '',
+            'forma' => $form->createView(),
+            'recipes'=>$ret,
+
+
+        ));
+
+
     }
 }

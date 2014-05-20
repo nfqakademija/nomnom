@@ -9,10 +9,11 @@
 namespace Nfq\NomNomBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class RecipesListController extends Controller
 {
-    public function recipeListAction($page)
+    public function recipeListAction(Request $request, $page)
     {
         $numberInPage = 9;
         $repository = $this->getDoctrine()->getRepository('NfqNomNomBundle:MyRecipe');
@@ -35,13 +36,41 @@ class RecipesListController extends Controller
 
         $name = "Recipes";
 
+        $form = $this->createForm('browserecipes');
+
+        $form->handleRequest($request);
+        $repository = $this->getDoctrine()->getRepository('NfqNomNomBundle:MyRecipe');
+        $ret = NULL;
+
+        if ($form->isSubmitted()) {
+            $ret = $repository->filterByCategory(
+                $form->getData()['side'],
+                $form->getData()['main'],
+                $form->getData()['deserts'],
+                $form->getData()['soups'],
+                $form->getData()['servfrom'],
+                $form->getData()['servto'],
+                $form->getData()['prepfrom'],
+                $form->getData()['prepto']
+            );
+
+            return $this->render ('NfqNomNomBundle:Default:test.html.twig', array(
+                'error' => '',
+                'forma' => $form->createView(),
+                'recipes' => $ret,
+
+            ));
+
+        }
+
         return $this->render(
             'NfqNomNomBundle:recipes:recipesList.html.twig',
             array(
                 'recipes' => $recipes,
                 'name' => $name,
                 'numberOfPages' => $pagesCount,
-                'page' => $page
+                'page' => $page,
+                'forma' => $form->createView()
             )
         );
     }
