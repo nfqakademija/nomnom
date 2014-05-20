@@ -10,7 +10,7 @@ namespace Nfq\NomNomBundle\Controller;
 
 use Nfq\NomNomBundle\Entity\MyRecipe;
 use Nfq\NomNomBundle\Entity\MyRecipeProduct;
-use Nfq\NomNomBundle\Form\Type\CreateproductType;
+use Nfq\NomNomBundle\Form\Type\CreateProductType;
 use Nfq\NomNomBundle\Form\Type\CreateRecipeType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Nfq\NomNomBundle\Entity\MyUserEvent;
