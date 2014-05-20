@@ -41,11 +41,11 @@
         {{ name }}
     </h2>
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        <div class="text-center2">
-            <a href="{{ path('Nfq_nom_nom_create_recipe') }}" class="buttonBox2">
+        <div class="text-centerEdit">
+            <a href="{{ path('Nfq_nom_nom_create_recipe') }}" class="buttonBoxEdit">
                 Create new recipe
             </a>
-            <a href="{{ path('Nfq_nom_nom_create_product') }}" class="buttonBox2">
+            <a href="{{ path('Nfq_nom_nom_create_product') }}" class="buttonBoxEdit">
                 Create new product
             </a>
         </div>
